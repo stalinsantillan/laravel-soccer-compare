@@ -8,11 +8,6 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.users.index') }}">
-                            {{ trans('cruds.user.title_singular') }}
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item">
                         <a href="{{ route('admin.permissions.index') }}">
                             {{ trans('cruds.permission.title_singular') }}
                         </a>

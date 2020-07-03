@@ -24,6 +24,7 @@ class StoreRolesRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:roles,name,'.$this->route('name'),
+            'permission' => 'required'
         ];
     }
 }
