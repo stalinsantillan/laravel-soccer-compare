@@ -2,12 +2,26 @@
 
 @extends('layouts.admin')
 @section('content')
-
-<div class="card">
-    <div class="card-header">
-        Change password
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            {{-- <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('admin.users.index') }}">
+                            {{ trans('cruds.user.title_singular') }}
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active">{{ trans('global.create') }}</li>
+                </ol>
+            </div> --}}
+            <h4 class="page-title">&NonBreakingSpace;</h4>
+        </div>
     </div>
-
+</div>
+<!-- end page title -->
+<div class="card">
     <div class="card-body">
         <form action="{{ route('auth.change_password') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -15,28 +29,28 @@
             <div class="form-group {{ $errors->has('current_password') ? 'has-error' : '' }}">
                 <label for="current_password">Current password *</label>
                 <input type="password" id="current_password" name="current_password" class="form-control" required>
-                @if($errors->has('current_password'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('current_password') }}
-                    </em>
+                @if($errors->first() == "Current password is incorrect")
+                    <div class="mt-1" style="color: #e6334d; font-weight: 500;">
+                        {{ $errors->first() }}
+                    </div>
                 @endif
             </div>
             <div class="form-group {{ $errors->has('new_password') ? 'has-error' : '' }}">
                 <label for="new_password">New password *</label>
                 <input type="password" id="new_password" name="new_password" class="form-control" required>
                 @if($errors->has('new_password'))
-                    <em class="invalid-feedback">
+                    <div class="mt-1" style="color: #e6334d; font-weight: 500;">
                         {{ $errors->first('new_password') }}
-                    </em>
+                    </div>
                 @endif
             </div>
             <div class="form-group {{ $errors->has('new_password_confirmation') ? 'has-error' : '' }}">
                 <label for="new_password_confirmation">New password confirmation *</label>
                 <input type="password" id="new_password_confirmation" name="new_password_confirmation" class="form-control" required>
                 @if($errors->has('new_password_confirmation'))
-                    <em class="invalid-feedback">
+                    <div class="mt-1" style="color: #e6334d; font-weight: 500;">
                         {{ $errors->first('new_password_confirmation') }}
-                    </em>
+                    </div>
                 @endif
             </div>
             <div>

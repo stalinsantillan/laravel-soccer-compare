@@ -8,11 +8,11 @@
         <meta content="Coderthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{ asset('admin_assets/images/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('user_assets/images/favicon.ico') }}">
         <!-- App css -->
-        <link href="{{ asset('admin_assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('admin_assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('admin_assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('user_assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('user_assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('user_assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
         @yield('styles')
     </head>
     <body>
@@ -20,13 +20,13 @@
         <header id="topnav">
             <!-- Topbar Start -->
             <div class="navbar-custom">
-              @include('partials.admin.topbar')
+              @include('partials.user.topbar')
             </div>
             <!-- end Topbar -->
 
             <!-- Menubar Start -->
             <div class="topbar-menu">
-              @include('partials.admin.menubar')
+              @include('partials.user.menubar')
             </div>            
             <!-- end Topbar -->
         </header>
@@ -46,13 +46,13 @@
 
         <!-- Footer Start -->
         <footer class="footer">
-          @include('partials.admin.footerbar')
+          @include('partials.user.footerbar')
         </footer>
         <!-- end Footer -->
 
         <!-- Right Sidebar -->
         <div class="right-bar">
-          @include('partials.admin.rightbar')
+          @include('partials.user.rightbar')
         </div>
         <!-- /Right-bar -->
 
@@ -64,9 +64,9 @@
         </form>
 
         <!-- Vendor js -->
-        <script src="{{ asset('admin_assets/js/vendor.min.js') }}"></script>
+        <script src="{{ asset('user_assets/js/vendor.min.js') }}"></script>
         <!-- App js-->
-        <script src="{{ asset('admin_assets/js/app.min.js') }}"></script>
+        <script src="{{ asset('user_assets/js/app.min.js') }}"></script>
         @yield('scripts')
     </body>
 </html>

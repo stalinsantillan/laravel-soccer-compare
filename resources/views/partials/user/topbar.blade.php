@@ -36,7 +36,7 @@
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item active">
                         <div class="notify-icon">
-                            <img src="{{ asset('admin_assets/images/users/standard.png') }}" class="img-fluid rounded-circle" alt="" /> </div>
+                            <img src="{{ asset('user_assets/images/users/standard.png') }}" class="img-fluid rounded-circle" alt="" /> </div>
                         <p class="notify-details">Cristina Pride</p>
                         <p class="text-muted mb-0 user-msg">
                             <small>Hi, How are you? What about our next meeting</small>
@@ -56,7 +56,7 @@
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <div class="notify-icon">
-                            <img src="{{ asset('admin_assets/images/users/standard.png') }}" class="img-fluid rounded-circle" alt="" /> </div>
+                            <img src="{{ asset('user_assets/images/users/standard.png') }}" class="img-fluid rounded-circle" alt="" /> </div>
                         <p class="notify-details">Karen Robinson</p>
                         <p class="text-muted mb-0 user-msg">
                             <small>Wow ! this admin looks good and awesome design</small>
@@ -106,9 +106,9 @@
 
         <li class="dropdown notification-list">
             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                <img src="{{ asset('admin_assets/images/users/standard.png') }}" alt="user-image" class="rounded-circle">
+                <img src="{{ asset('user_assets/images/users/standard.png') }}" alt="user-image" class="rounded-circle">
                 <span class="pro-user-name ml-1">
-                    Geneva <i class="mdi mdi-chevron-down"></i> 
+                    {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i> 
                 </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
@@ -152,12 +152,12 @@
     <div class="logo-box">
         <a href="/" class="logo text-center">
             <span class="logo-lg">
-                <img src="{{ asset('admin_assets/images/logo-light.png') }}" alt="" height="18">
+                <img src="{{ asset('user_assets/images/logo-light.png') }}" alt="" height="18">
                 <!-- <span class="logo-lg-text-light">UBold</span> -->
             </span>
             <span class="logo-sm">
                 <!-- <span class="logo-sm-text-dark">U</span> -->
-                <img src="{{ asset('admin_assets/images/logo-sm.png') }}" alt="" height="24">
+                <img src="{{ asset('user_assets/images/logo-sm.png') }}" alt="" height="24">
             </span>
         </a>
     </div>
