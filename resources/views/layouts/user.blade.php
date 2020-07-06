@@ -14,6 +14,11 @@
         <link href="{{ asset('user_assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('user_assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('user_assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+        <style>
+          .user-photo {
+            border-radius: 8px;
+          }
+        </style>
     </head>
     <body>
         <!-- Navigation Bar-->

@@ -20,7 +20,7 @@
             background: #36A2EB;
         }
         .rangeslider__handle {
-            background: #3C4853;
+            background: #adb5b2;
             border: #bfced0;
         }
         .rangeslider {
@@ -146,8 +146,8 @@
         <form role="form" class="parsley-examples">
             <div class="row">
                 <div class="form-group col-md-6 row">
-                    <label for="cur_team" required class="col-md-4 col-form-label text-right">
-                        Current Team<span class="text-danger">*
+                    <label for="cur_team" class="col-md-4 col-form-label text-right">
+                        Current Team<span class="text-danger">*</span>
                     </label>
                     <div class="col-md-7">
                         <input type="text" required class="form-control" id="cur_team" name="cur_team">

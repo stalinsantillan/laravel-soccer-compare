@@ -6,6 +6,7 @@ return [
     ],
     'player' => [
         'title' => 'Player',
+        'profile' => 'Player Profile',
     ],
     'userManagement' => [
         'title'          => 'User management',

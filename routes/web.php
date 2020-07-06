@@ -25,4 +25,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 Route::group(['middleware' => ['auth'], 'prefix' => 'user', 'as' => 'user.'], function () {
     Route::get('dashboard', 'User\DashboardController@index')->name('dashboard');
     Route::get('add_player', 'User\PlayerController@add_player')->name('add_player');
+    Route::get('player_profile', 'User\PlayerController@player_profile')->name('player_profile');
 });

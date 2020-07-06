@@ -1,72 +1,49 @@
-@extends('layouts.app')
-@section('content')
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card-group">
-            <div class="card p-4">
-                <div class="card-body">
-                    @if(\Session::has('message'))
-                        <p class="alert alert-info">
-                            {{ \Session::get('message') }}
-                        </p>
-                    @endif
-                    <form method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-                        <h1>{{ env('APP_NAME', 'Permissions Manager') }}</h1>
-                        <p class="text-muted">Login</p>
-
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-user"></i>
-                                </span>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" >
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('login_assets/style.css') }}">
+    </head>
+    <body>
+        <div class="container-fluid bg-layer" id="userLogSection">
+            <div class="row">
+                <div class="col-12">
+                    <form class="jumbotron" role="form" method="POST" action="{{ url('login') }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <h2 class="text-center mb-4">Soccer Compare</h2>
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger" id="alertMessage" role="alert">
+                                @foreach ($errors->all() as $error)
+                                    {{ $error }}
+                                @endforeach
                             </div>
-                            <input name="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required autofocus placeholder="Email" value="{{ old('email', null) }}">
-                            @if($errors->has('email'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('email') }}
-                                </div>
-                            @endif
+                        @endif
+                        <img src="{{ asset('login_assets/bg/user_start.jpg') }}" class="heading-avatar-icon" />
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                         </div>
-
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-lock"></i></span>
-                            </div>
-                            <input name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required placeholder="Password">
-                            @if($errors->has('password'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('password') }}
-                                </div>
-                            @endif
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                         </div>
-
-                        <div class="input-group mb-4">
-                            <div class="form-check checkbox">
-                                <input class="form-check-input" name="remember" type="checkbox" id="remember" style="vertical-align: middle;" />
-                                <label class="form-check-label" for="remember" style="vertical-align: middle;">
-                                    Remember me
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary px-4">
-                                    Login
-                                </button>
-                            </div>
-                            <div class="col-6 text-right">
-                                <a class="btn btn-link px-0" href="{{ route('password.request') }}">
-                                    Forgot your password?
-                                </a>
-
-                            </div>
-                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-@endsection
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+    </body>
+</html>

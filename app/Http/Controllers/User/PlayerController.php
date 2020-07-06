@@ -21,12 +21,22 @@ class PlayerController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the add player.
      *
      * @return \Illuminate\Http\Response
      */
     public function add_player()
     {
         return view('user.add_player');
+    }
+
+    /**
+     * Show the add player.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function player_profile()
+    {
+        return view('user.player_profile');
     }
 }
