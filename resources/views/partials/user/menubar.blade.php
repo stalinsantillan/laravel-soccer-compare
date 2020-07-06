@@ -2,10 +2,10 @@
     <div id="navigation">
         <!-- Navigation Menu-->
         <ul class="navigation-menu">
-
-            <li class="has-submenu">
+            {{-- <li class="has-submenu">
                 <a href="#">
-                    <i class="fa-fw fas fa-users"></i>{{ trans('cruds.userManagement.title') }} <div class="arrow-down"></div></a>
+                    <i class="fa-fw fas fa-users"></i>{{ trans('cruds.userManagement.title') }} <div class="arrow-down"></div>
+                </a>
                 <ul class="submenu">
                     <li>
                         <a href="{{ route('admin.permissions.index') }}">
@@ -26,6 +26,12 @@
                         </a>
                     </li>
                 </ul>
+            </li> --}}
+            <li>
+                <a href="{{ route('user.add_player') }}">
+                    <i class="mdi mdi-soccer"></i>
+                    {{ trans('global.add') }} {{ trans('cruds.player.title') }}
+                </a>
             </li>
 
         </ul>

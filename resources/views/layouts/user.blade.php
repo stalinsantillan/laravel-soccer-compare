@@ -9,11 +9,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ asset('user_assets/images/favicon.ico') }}">
+        @yield('styles')
         <!-- App css -->
         <link href="{{ asset('user_assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('user_assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('user_assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
-        @yield('styles')
     </head>
     <body>
         <!-- Navigation Bar-->
@@ -46,7 +46,7 @@
 
         <!-- Footer Start -->
         <footer class="footer">
-          @include('partials.user.footerbar')
+          {{-- @include('partials.user.footerbar') --}}
         </footer>
         <!-- end Footer -->
 
@@ -65,8 +65,8 @@
 
         <!-- Vendor js -->
         <script src="{{ asset('user_assets/js/vendor.min.js') }}"></script>
+        @yield('scripts')
         <!-- App js-->
         <script src="{{ asset('user_assets/js/app.min.js') }}"></script>
-        @yield('scripts')
     </body>
 </html>

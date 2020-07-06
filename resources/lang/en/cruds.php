@@ -4,6 +4,9 @@ return [
     'menuGroup' => [
         'system' => 'SYSTEM',
     ],
+    'player' => [
+        'title' => 'Player',
+    ],
     'userManagement' => [
         'title'          => 'User management',
         'title_singular' => 'User management',
