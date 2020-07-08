@@ -112,7 +112,7 @@
     </div>
 </div>
 <!-- end page title -->
-<form role="form" method="post" action="{{ route('user.store_player') }}">
+<form role="form" method="post" action="{{ route('user.store_player') }}" enctype="multipart/form-data">
     @csrf
     <div class="card">
         <div class="card-header font-16">
