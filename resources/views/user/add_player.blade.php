@@ -112,7 +112,7 @@
     </div>
 </div>
 <!-- end page title -->
-<form role="form" method="post" action="{{ route('user.store_player') }}">
+<form role="form" method="post">
     @csrf
     <div class="card">
         <div class="card-header font-16">
@@ -164,7 +164,8 @@
                                 Height<span class="text-danger">*</span>
                             </label>
                             <div class="col-md-7">
-                                <input type="text" required class="form-control" id="height" name="height">
+                                <select class="custom-select mr-sm-2" required id="height" name="height">
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row col-md-6">
@@ -172,7 +173,8 @@
                                 Weight<span class="text-danger">*</span>
                             </label>
                             <div class="col-md-7">
-                                <input type="text" required class="form-control" id="weight" name="weight">
+                                <select class="custom-select mr-sm-2" required id="weight" name="weight">
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -182,7 +184,11 @@
                                 Foot<span class="text-danger">*</span>
                             </label>
                             <div class="col-md-7">
-                                <input type="text" required class="form-control" id="foot" name="foot">
+                                <select class="custom-select mr-sm-2" required id="foot" name="foot">
+                                    <option value="left">Left</option>
+                                    <option value="right">Right</option>
+                                    <option value="both">Both</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -815,6 +821,35 @@
                     "x-rapidapi-key": "596585807fmsh94116d249e0cd64p1d139cjsn6b7b5407af9b"
                 }
             }
+            for(var i = 100; i < 211; i++)
+            {
+                $('#height').append($("<option></option>").text(i + "cm").attr("value", i));
+            }
+            $('#height').select2({
+                allowClear: false,
+                dropdownAutoWidth: true,
+                width: 'element',
+                minimumResultsForSearch: 20, //prevent filter input
+                maximumSelectionSize: 20 // prevent scrollbar
+            });
+            for(var i = 50; i < 81; i++)
+            {
+                $('#weight').append($("<option></option>").text(i + "kg").attr("value", i));
+            }
+            $('#weight').select2({
+                allowClear: false,
+                dropdownAutoWidth: true,
+                width: 'element',
+                minimumResultsForSearch: 20, //prevent filter input
+                maximumSelectionSize: 20 // prevent scrollbar
+            });
+            $('#foot').select2({
+                allowClear: false,
+                dropdownAutoWidth: true,
+                width: 'element',
+                minimumResultsForSearch: 20, //prevent filter input
+                maximumSelectionSize: 20 // prevent scrollbar
+            });
             $.ajax(settings).done(function (response) {
                 for(ind in response)
                 {
@@ -883,19 +918,19 @@
                 {
                     for (let i = 0; i < arrDefender.length; i++)
                     {
-                        $('#sec_pos').append($("<option></option>").text(arrDefender[i]));
+                        $('#sec_pos').append($("<option></option>").text(arrDefender[i]).attr("value", arrDefender[i]));
                     }
                 } else if (main_pos == "Midfielder")
                 {
                     for (let i = 0; i < arrMidfielder.length; i++)
                     {
-                        $('#sec_pos').append($("<option></option>").text(arrMidfielder[i]));
+                        $('#sec_pos').append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
                     }
                 } else if (main_pos == "Forward")
                 {
                     for (let i = 0; i < arrForward.length; i++)
                     {
-                        $('#sec_pos').append($("<option></option>").text(arrForward[i]));
+                        $('#sec_pos').append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
                     }
                 }
             });
@@ -918,21 +953,21 @@
                     for (let i = 0; i < arrDefender.length; i++)
                     {
                         if (sec_pos != arrDefender[i])
-                            $('#third_pos').append($("<option></option>").text(arrDefender[i]));
+                            $('#third_pos').append($("<option></option>").text(arrDefender[i]).attr("value", arrDefender[i]));
                     }
                 } else if (main_pos == "Midfielder")
                 {
                     for (let i = 0; i < arrMidfielder.length; i++)
                     {
                         if (sec_pos != arrMidfielder[i])
-                            $('#third_pos').append($("<option></option>").text(arrMidfielder[i]));
+                            $('#third_pos').append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
                     }
                 } else if (main_pos == "Forward")
                 {
                     for (let i = 0; i < arrForward.length; i++)
                     {
                         if (sec_pos != arrForward[i])
-                            $('#third_pos').append($("<option></option>").text(arrForward[i]));
+                            $('#third_pos').append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
                     }
                 }
             });
@@ -952,21 +987,21 @@
                     for (let i = 0; i < arrDefender.length; i++)
                     {
                         if (sec_pos != arrDefender[i] && third_pos != arrDefender[i])
-                            $('#fourth_pos').append($("<option></option>").text(arrDefender[i]));
+                            $('#fourth_pos').append($("<option></option>").text(arrDefender[i]).attr("value", arrDefender[i]));
                     }
                 } else if (main_pos == "Midfielder")
                 {
                     for (let i = 0; i < arrMidfielder.length; i++)
                     {
                         if (sec_pos != arrMidfielder[i] && third_pos != arrMidfielder[i])
-                            $('#fourth_pos').append($("<option></option>").text(arrMidfielder[i]));
+                            $('#fourth_pos').append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
                     }
                 } else if (main_pos == "Forward")
                 {
                     for (let i = 0; i < arrForward.length; i++)
                     {
                         if (sec_pos != arrForward[i] && third_pos != arrForward[i])
-                            $('#fourth_pos').append($("<option></option>").text(arrForward[i]));
+                            $('#fourth_pos').append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
                     }
                 }
             });
@@ -984,21 +1019,21 @@
                     for (let i = 0; i < arrDefender.length; i++)
                     {
                         if (sec_pos != arrDefender[i] && third_pos != arrDefender[i] && fourth_pos != arrDefender[i])
-                            $('#fifth_pos').append($("<option></option>").text(arrDefender[i]));
+                            $('#fifth_pos').append($("<option></option>").text(arrDefender[i]).attr("value", arrDefender[i]));
                     }
                 } else if (main_pos == "Midfielder")
                 {
                     for (let i = 0; i < arrMidfielder.length; i++)
                     {
                         if (sec_pos != arrMidfielder[i] && third_pos != arrMidfielder[i] && fourth_pos != arrMidfielder[i])
-                            $('#fifth_pos').append($("<option></option>").text(arrMidfielder[i]));
+                            $('#fifth_pos').append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
                     }
                 } else if (main_pos == "Forward")
                 {
                     for (let i = 0; i < arrForward.length; i++)
                     {
                         if (sec_pos != arrForward[i] && third_pos != arrForward[i] && fourth_pos != arrForward[i])
-                            $('#fifth_pos').append($("<option></option>").text(arrForward[i]));
+                            $('#fifth_pos').append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
                     }
                 }
             });
