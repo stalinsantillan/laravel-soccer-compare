@@ -145,7 +145,7 @@
                                 Nationality<span class="text-danger">*</span>
                             </label>
                             <div class="col-md-7">
-                                <select class="custom-select mr-sm-2" id="touch_country">
+                                <select class="custom-select mr-sm-2" id="nationality" name="nationality">
                                 </select>
                             </div>
                         </div>
@@ -853,9 +853,9 @@
             $.ajax(settings).done(function (response) {
                 for(ind in response)
                 {
-                    $('#touch_country').append($("<option></option>").text(response[ind].name).attr("value", response[ind].name));
+                    $('#nationality').append($("<option></option>").text(response[ind].name).attr("value", response[ind].name));
                 }
-                $('#touch_country').select2({
+                $('#nationality').select2({
                     allowClear: false,
                     dropdownAutoWidth: true,
                     width: 'element',
