@@ -255,7 +255,7 @@
                         Third Position
                     </label>
                     <div class="col-md-7">
-                        <select class="custom-select mr-sm-2" required id="third_pos" name="third_pos">
+                        <select class="custom-select mr-sm-2" id="third_pos" name="third_pos">
                         </select>
                     </div>
                 </div>
@@ -266,7 +266,7 @@
                         Fourth Position
                     </label>
                     <div class="col-md-7">
-                        <select class="custom-select mr-sm-2" required id="fourth_pos" name="fourth_pos">
+                        <select class="custom-select mr-sm-2" id="fourth_pos" name="fourth_pos">
                         </select>
                     </div>
                 </div>
@@ -275,7 +275,7 @@
                         Fifth Position
                     </label>
                     <div class="col-md-7">
-                        <select class="custom-select mr-sm-2" required id="fifth_pos" name="fifth_pos">
+                        <select class="custom-select mr-sm-2" id="fifth_pos" name="fifth_pos">
                         </select>
                     </div>
                 </div>
