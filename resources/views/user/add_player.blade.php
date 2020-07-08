@@ -113,6 +113,7 @@
 </div>
 <!-- end page title -->
 <form role="form" method="post" action="{{ route('user.store_player') }}">
+    @csrf
     <div class="card">
         <div class="card-header font-16">
             Profile
