@@ -43,7 +43,7 @@ class PlayerController extends Controller
 
         $player->name = $request->name;
         $player->surename = $request->surename;
-        $player->naciality = $request->nationality;
+        $player->nationality = $request->nationality;
         $player->birth_date = $request->birthdate;
         $player->height = $request->height;
         $player->weight = $request->weight;

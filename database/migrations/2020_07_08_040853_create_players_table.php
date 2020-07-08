@@ -15,14 +15,14 @@ class CreatePlayersTable extends Migration
     {
         Schema::create('players', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 100);
-            $table->string('surename', 100)->nullable();
-            $table->string('naciality', 100);
+            $table->string('name');
+            $table->string('surename')->nullable();
+            $table->string('nationality');
             $table->date('birth_date');
             $table->integer('height');
             $table->integer('weight');
             $table->string('foot');
-            $table->string('photo', 100)->nullable();
+            $table->string('photo')->nullable();
             $table->string('current_team');
 
             $table->string('main_pos');
