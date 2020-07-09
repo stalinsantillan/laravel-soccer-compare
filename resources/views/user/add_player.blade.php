@@ -832,7 +832,7 @@
                 minimumResultsForSearch: 20, //prevent filter input
                 maximumSelectionSize: 20 // prevent scrollbar
             });
-            for(var i = 50; i < 81; i++)
+            for(var i = 30; i < 101; i++)
             {
                 $('#weight').append($("<option></option>").text(i + "kg").attr("value", i));
             }
