@@ -436,14 +436,14 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-6 row">
-                    <label for="tacking" class="col-md-3 col-form-label text-right">
-                        Tacking
+                    <label for="tackling" class="col-md-3 col-form-label text-right">
+                        Tackling
                     </label>
                     <div class="col-md-4">
-                        <input type="text" attrtype="range_input" class="form-control" id="tacking" name="tacking">
+                        <input type="text" attrtype="range_input" class="form-control" id="tackling" name="tackling">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="10" step="0.1"  match="tacking" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="tackling" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
