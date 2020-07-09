@@ -112,7 +112,7 @@
     </div>
 </div>
 <!-- end page title -->
-<form role="form" method="post" action="{{ route('user.store_player') }}" enctype="multipart/form-data">
+<form role="form" id="add_player_form" method="post" action="{{ route('user.store_player') }}" enctype="multipart/form-data">
     @csrf
     <div class="card">
         <div class="card-header font-16">
@@ -299,7 +299,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="corners" name="corners">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1" match="corners" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1" match="corners" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -310,7 +310,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="crossing" name="crossing">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="crossing" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="crossing" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -323,7 +323,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="dribbling" name="dribbling">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="dribbling" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="dribbling" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -334,7 +334,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="finishing" name="finishing">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="finishing" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="finishing" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -347,7 +347,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="first_touch" name="first_touch">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="first_touch" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="first_touch" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -358,7 +358,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="free_kick" name="free_kick">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="free_kick" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="free_kick" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -371,7 +371,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="heading" name="heading">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="heading" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="heading" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -382,7 +382,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="long_shots" name="long_shots">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="long_shots" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="long_shots" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -395,7 +395,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="long_throws" name="long_throws">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="long_throws" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="long_throws" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -406,7 +406,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="marking" name="marking">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="marking" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="marking" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -419,7 +419,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="passing" name="passing">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="passing" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="passing" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -430,7 +430,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="penalty_taking" name="penalty_taking">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="penalty_taking" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="penalty_taking" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -443,7 +443,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="tacking" name="tacking">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="tacking" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="tacking" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -454,7 +454,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="technique" name="technique">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="technique" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="technique" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -471,7 +471,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="aggression" name="aggression">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1" match="aggression" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1" match="aggression" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -482,7 +482,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="articipation" name="articipation">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="articipation" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="articipation" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -495,7 +495,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="bravery" name="bravery">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="bravery" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="bravery" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -506,7 +506,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="composure" name="composure">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="composure" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="composure" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -519,7 +519,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="concentration" name="concentration">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="concentration" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="concentration" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -530,7 +530,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="decisions" name="decisions">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="decisions" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="decisions" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -543,7 +543,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="determination" name="determination">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="determination" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="determination" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -554,7 +554,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="flair" name="flair">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="flair" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="flair" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -567,7 +567,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="leadership" name="leadership">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="leadership" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="leadership" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -578,7 +578,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="off_ball" name="off_ball">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="off_ball" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="off_ball" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -591,7 +591,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="positioning" name="positioning">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="positioning" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="positioning" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -602,7 +602,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="teamwork" name="teamwork">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="teamwork" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="teamwork" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -615,7 +615,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="vision" name="vision">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="vision" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="vision" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -626,7 +626,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="work_rate" name="work_rate">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="work_rate" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="work_rate" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -642,7 +642,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="acceleration" name="acceleration">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1" match="acceleration" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1" match="acceleration" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -653,7 +653,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="agility" name="agility">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="agility" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="agility" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -666,7 +666,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="balance" name="balance">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="balance" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="balance" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -677,7 +677,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="jumping_reach" name="jumping_reach">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="jumping_reach" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="jumping_reach" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -690,7 +690,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="natural_fitness" name="natural_fitness">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="natural_fitness" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="natural_fitness" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -701,7 +701,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="pace" name="pace">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="pace" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="pace" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -714,7 +714,7 @@
                         <input type="text" attrtype="range_input" class="form-control" id="stamina" name="stamina">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="stamina" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="stamina" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -725,18 +725,18 @@
                         <input type="text" attrtype="range_input" class="form-control" id="strength" name="strength">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="100" step="0.1"  match="strength" data-rangeslider>
+                        <input type="range" min="0" value="0" max="10" step="0.1"  match="strength" data-rangeslider>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 offset-3">
-                    <button type="submit" class="btn btn-block btn-danger waves-effect waves-light">Save</button>
                 </div>
             </div>
         </div>
     </div> <!-- end card-box-->
 </form>
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <button type="button" onclick="submitForm()" class="btn btn-block btn-danger waves-effect waves-light">Save</button>
+    </div>
+</div>
 
 @endsection
 @section('scripts')
@@ -1038,5 +1038,58 @@
                 }
             });
         })
+        function submitForm() {
+            if ($("#name").val() == "")
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must enter name",
+                    "top-right",
+                    "#da8609",
+                    "info");
+                return;
+            }
+            if ($("#birthdate").val() == "")
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must enter date of birth",
+                    "top-right",
+                    "#da8609",
+                    "info");
+                return;
+            }
+            if ($("#cur_team").val() == "")
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must enter team",
+                    "top-right",
+                    "#da8609",
+                    "info");
+                return;
+            }
+            if ($("#main_pos").val() == "")
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must enter main position",
+                    "top-right",
+                    "#da8609",
+                    "info");
+                return;
+            }
+            if ($("#sec_pos").val() == "")
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must secondary position",
+                    "top-right",
+                    "#da8609",
+                    "info");
+                return;
+            }
+            $("#add_player_form").submit();
+        }
     </script>
 @endsection
