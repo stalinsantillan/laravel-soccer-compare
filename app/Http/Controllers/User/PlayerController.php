@@ -78,7 +78,7 @@ class PlayerController extends Controller
         $player->marking = $request->marking;
         $player->passing = $request->passing;
         $player->penalty_taking = $request->penalty_taking;
-        $player->tacking = $request->tacking;
+        $player->tackling = $request->tackling;
         $player->technique = $request->technique;
         $player->aggression = $request->aggression;
         $player->articipation = $request->articipation;

@@ -43,7 +43,7 @@ class CreatePlayersTable extends Migration
             $table->double('marking');
             $table->double('passing');
             $table->double('penalty_taking');
-            $table->double('tacking');
+            $table->double('tackling');
             $table->double('technique');
             $table->double('aggression');
             $table->double('articipation');
