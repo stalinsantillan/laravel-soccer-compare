@@ -9,6 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ asset('user_assets/images/favicon.ico') }}">
+        <link href="{{ asset('user_assets/libs/jquery-toast/jquery.toast.min.css') }}" rel="stylesheet" type="text/css" />
         @yield('styles')
         <!-- App css -->
         <link href="{{ asset('user_assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -70,6 +71,7 @@
 
         <!-- Vendor js -->
         <script src="{{ asset('user_assets/js/vendor.min.js') }}"></script>
+        <script src="{{ asset('user_assets/libs/jquery-toast/jquery.toast.min.js') }}"></script>
         @yield('scripts')
         <!-- App js-->
         <script src="{{ asset('user_assets/js/app.min.js') }}"></script>
