@@ -72,6 +72,7 @@
         <!-- Vendor js -->
         <script src="{{ asset('user_assets/js/vendor.min.js') }}"></script>
         <script src="{{ asset('user_assets/libs/jquery-toast/jquery.toast.min.js') }}"></script>
+        <script src="{{ asset('user_assets/js/pages/toastr.init.js') }}"></script>
         @yield('scripts')
         <!-- App js-->
         <script src="{{ asset('user_assets/js/app.min.js') }}"></script>
