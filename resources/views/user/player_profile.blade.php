@@ -47,8 +47,8 @@
                 <div class="row">
                     <div class="col-md-6 row">
                         <div class="col-md-auto">
-                            <img src="{{ asset('user_assets/images/users/standard.png') }}" class="user-photo ml-5" height="100px" alt="">
-                            <div class="card text-white text-center bg-primary text-xs-center mt-1 mb-0 ml-5" style="width: 100px">
+                            <img src="{{ asset('user_assets/images/users/standard.png') }}" class="user-photo ml-5" height="130px" alt="">
+                            <div class="card text-white text-center bg-primary text-xs-center mt-1 mb-0 ml-5" style="width: 130px">
                                 <p class="mb-0 mt-1" style="line-height: 15px">General</p>
                                 <p class="mb-0" style="line-height: 15px">average</p>
                                 <p class="mb-0 font-18 font-weight-bold">7.6</p>
@@ -78,19 +78,326 @@
                 </div>
             </div>
         </div> <!-- end card-box-->
+        <div class="card mt-2">
+            <div class="card-header font-16">
+                Attribute
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card-title font-15 font-weight-bold">
+                            Technical
+                        </div>
+                        <div class="form-group">
+                            <label for="corners">Corners</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="crossing">Crossing</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dribbling">Dribbling</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="finishing">Finishing</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="first_touch">First Touch</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="free_kick">Free Kick Taking</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="heading">Heading</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="long_shots">Long Shots</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="long_throws">Long Throws</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="marking">Marking</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="passing">Passing</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="penalty_taking">Penalty Taking</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tacking">Tacking</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="technique">Technique</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-title font-15 font-weight-bold">
+                            Mental
+                        </div>
+                        <div class="form-group">
+                            <label for="aggression">Aggression</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="articipation">Articipation</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bravery">Bravery</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="composure">Composure</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="concentration">Concentration</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="decisions">Decisions</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="determination">Determination</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="flair">Flair</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="leadership">Leadership</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="off_ball">Off The Ball</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="positioning">Positioning</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="teamwork">Teamwork</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="vision">Vision</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="work_rate">Work Rate</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-title font-15 font-weight-bold">
+                            Physical
+                        </div>
+                        <div class="form-group">
+                            <label for="acceleration">Acceleration</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="agility">Agility</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="balance">Balance</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="jumping_reach">Jumping Reach</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="natural_fitness">Natural Fitness</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pace">Pace</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="stamina">Stamina</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="strength">Strength</label>
+                            <div class="progress mb-2 progress-lg">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="dropdown-divider"></div>
+                        <div class="card-title font-15 font-weight-bold">
+                            Technical average
+                        </div>
+                        <div class="mt-2 chartjs-chart">
+                            <canvas id="technical-radar" height="150"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="dropdown-divider"></div>
+                        <div class="card-title font-15 font-weight-bold">
+                            Mental average
+                        </div>
+                        <div class="mt-2 chartjs-chart">
+                            <canvas id="mental-radar" height="150"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="dropdown-divider"></div>
+                        <div class="card-title font-15 font-weight-bold">
+                            Physical average
+                        </div>
+                        <div class="mt-2 chartjs-chart">
+                            <canvas id="physical-radar" height="150"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end card-box-->
     </div>
     <div class="col-md-4">
-        <div class="card mb-0" style="height: 100%">
+        <div class="card mb-2">
             <div class="card-body">
                 <div class="card-title font-15 font-weight-bold">
                     General average
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="mt-2 chartjs-chart">
-                    <canvas id="radar-chart-example" height="150"></canvas>
+                    <canvas id="general-radar" height="150"></canvas>
                 </div>
             </div>
         </div>
+        <div class="card-box">
+            <ul class="nav nav-tabs nav-bordered">
+                <li class="nav-item">
+                    <a href="#report" data-toggle="tab" aria-expanded="false" class="nav-link active">
+                        REPORT
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#injuries" data-toggle="tab" aria-expanded="true" class="nav-link">
+                        INJURIES
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#physical-structure" data-toggle="tab" aria-expanded="false" class="nav-link">
+                        PHYSICAL STRUCTURE
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#strengths-weeknesses" data-toggle="tab" aria-expanded="false" class="nav-link">
+                        STRENGTHS & WEEKNESSES
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane show active" id="report">
+                    <form role="form" method="post" action="">
+                        <textarea class="form-control" id="report-area" rows="5"></textarea>
+                        <button type="submit" class="btn btn-info waves-effect waves-light">Save</button>
+                    </form>
+                </div>
+                <div class="tab-pane" id="injuries">
+                </div>
+                <div class="tab-pane" id="physical-structure">
+                </div>
+                <div class="tab-pane" id="strengths-weeknesses">
+                </div>
+            </div>
+        </div> <!-- end card-box-->
     </div>
 </div>
 
@@ -148,20 +455,20 @@
             $("#soccerfield").soccerfield(data,options);
             Chart.defaults.global.defaultFontColor = "rgba(255,255,255,0.5)";
             Chart.defaults.scale.gridLines.color = "rgba(255,255,255,0.05)";
-            var myRadarChart = new Chart(document.getElementById("radar-chart-example").getContext("2d"), {
+            new Chart(document.getElementById("general-radar").getContext("2d"), {
                 type: 'radar',
                 data: {
-                    labels: ['Running', 'Swimming', 'Eating', 'Cycling', 'Cycling', 'Cycling'],
+                    labels: ['Corners', 'Crossing', 'Dribbling', 'Finishing', 'First Touch', 'Free Kick Taking', 'Heading', 'Long Shots'],
                     datasets: [{
-                        label: "Desktops", 
-                        backgroundColor: "rgba(57,175,209,0.2)", 
-                        borderColor: "#39afd1", 
-                        pointBackgroundColor: "#39afd1", 
-                        pointBorderColor: "#fff", 
-                        pointHoverBackgroundColor: "#fff", 
-                        pointHoverBorderColor: "#39afd1", 
-                        data: [17, 16, 17, 18, 19, 18]
-                    }]
+                        label: "Desktops",
+                        backgroundColor: "rgba(57,175,209,0.2)",
+                        borderColor: "#39afd1",
+                        pointBackgroundColor: "#39afd1",
+                        pointBorderColor: "#fff",
+                        pointHoverBackgroundColor: "#fff",
+                        pointHoverBorderColor: "#39afd1",
+                        data: [8, 8, 8, 8.5, 7.5, 7.5, 7, 7 ]
+                    },]
                 },
                 options: {
                     legend: {
@@ -176,8 +483,110 @@
                         }
                         ,ticks: {
                             backdropColor: '#2C3840',
-                            suggestedMin: 10,
-                            suggestedMax: 20
+                            suggestedMin: 0,
+                            suggestedMax: 10
+                        }
+                    }
+                }
+            });
+            new Chart(document.getElementById("technical-radar").getContext("2d"), {
+                type: 'radar',
+                data: {
+                    labels: ['Corners', 'Crossing', 'Dribbling', 'Finishing', 'First Touch', 'Free Kick Taking', 'Heading', 'Long Shots'],
+                    datasets: [{
+                        label: "Desktops",
+                        backgroundColor: "rgba(57,175,209,0.2)",
+                        borderColor: "#39afd1",
+                        pointBackgroundColor: "#39afd1",
+                        pointBorderColor: "#fff",
+                        pointHoverBackgroundColor: "#fff",
+                        pointHoverBorderColor: "#39afd1",
+                        data: [8, 8, 8, 8.5, 7.5, 7.5, 7, 7 ]
+                    },]
+                },
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    // tooltips: {
+                    //     enabled: false
+                    // },
+                    scale: {
+                        angleLines: {
+                            display: false
+                        }
+                        ,ticks: {
+                            backdropColor: '#2C3840',
+                            suggestedMin: 0,
+                            suggestedMax: 10
+                        }
+                    }
+                }
+            });
+            new Chart(document.getElementById("mental-radar").getContext("2d"), {
+                type: 'radar',
+                data: {
+                    labels: ['Corners', 'Crossing', 'Dribbling', 'Finishing', 'First Touch', 'Free Kick Taking', 'Heading', 'Long Shots'],
+                    datasets: [{
+                        label: "Desktops",
+                        backgroundColor: "rgba(57,175,209,0.2)",
+                        borderColor: "#39afd1",
+                        pointBackgroundColor: "#39afd1",
+                        pointBorderColor: "#fff",
+                        pointHoverBackgroundColor: "#fff",
+                        pointHoverBorderColor: "#39afd1",
+                        data: [8, 8, 8, 8.5, 7.5, 7.5, 7, 7 ]
+                    },]
+                },
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    // tooltips: {
+                    //     enabled: false
+                    // },
+                    scale: {
+                        angleLines: {
+                            display: false
+                        }
+                        ,ticks: {
+                            backdropColor: '#2C3840',
+                            suggestedMin: 0,
+                            suggestedMax: 10
+                        }
+                    }
+                }
+            });
+            new Chart(document.getElementById("physical-radar").getContext("2d"), {
+                type: 'radar',
+                data: {
+                    labels: ['Corners', 'Crossing', 'Dribbling', 'Finishing', 'First Touch', 'Free Kick Taking', 'Heading', 'Long Shots'],
+                    datasets: [{
+                        label: "Desktops",
+                        backgroundColor: "rgba(57,175,209,0.2)",
+                        borderColor: "#39afd1",
+                        pointBackgroundColor: "#39afd1",
+                        pointBorderColor: "#fff",
+                        pointHoverBackgroundColor: "#fff",
+                        pointHoverBorderColor: "#39afd1",
+                        data: [8, 8, 8, 8.5, 7.5, 7.5, 7, 7 ]
+                    },]
+                },
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    // tooltips: {
+                    //     enabled: false
+                    // },
+                    scale: {
+                        angleLines: {
+                            display: false
+                        }
+                        ,ticks: {
+                            backdropColor: '#2C3840',
+                            suggestedMin: 0,
+                            suggestedMax: 10
                         }
                     }
                 }
