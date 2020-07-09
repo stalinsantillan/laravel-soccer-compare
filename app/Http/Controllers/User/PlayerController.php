@@ -108,10 +108,11 @@ class PlayerController extends Controller
     /**
      * Show the add player.
      *
+     * @param  \App\Models\User\Player  $player
      * @return \Illuminate\Http\Response
      */
-    public function player_profile()
+    public function player_profile(Player $player)
     {
-        return view('user.player_profile');
+        return view('user.player_profile')->with('data', $player);
     }
 }

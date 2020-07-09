@@ -33,13 +33,6 @@
                     {{ trans('global.add') }} {{ trans('cruds.player.title') }}
                 </a>
             </li>
-            <li>
-                <a href="{{ route('user.player_profile') }}">
-                    <i class="mdi mdi-soccer"></i>
-                    {{ trans('cruds.player.profile') }}
-                </a>
-            </li>
-
         </ul>
         <!-- End navigation menu -->
 
