@@ -101,6 +101,7 @@ class PlayerController extends Controller
         $player->pace = $request->pace;
         $player->stamina = $request->stamina;
         $player->strength = $request->strength;
+        $player->agility = $request->agility;
 
         $player->save();
     }

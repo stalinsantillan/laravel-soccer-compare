@@ -66,6 +66,7 @@ class CreatePlayersTable extends Migration
             $table->double('pace');
             $table->double('stamina');
             $table->double('strength');
+            $table->double('agility');
 
             $table->timestamps();
         });
