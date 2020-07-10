@@ -134,7 +134,9 @@ class PlayerController extends Controller
         
         $data = Player::where('name', 'LIKE', "%$name%")
             ->get();
-        dd($data);
+        
+        return view('user.filter')
+            ->with('data', $data);
     }
 
     /**
