@@ -861,7 +861,7 @@
             });
             $("#main_pos").change(function (e) {
                 let main_pos = $( "#main_pos option:selected" ).text();
-                $("[name=position]").each(function( index ) {
+                $("[identi=position]").each(function( index ) {
                     $(this).parent().parent().parent().remove();
                 });
                 curCounter = 2;
@@ -895,7 +895,7 @@
             if (curCounter > 9) return;
             let selectedPosition = [];
             selectedPosition.push($("#position2").val());
-            $("[name=position]").each(function( index ) {
+            $("[identi=position]").each(function( index ) {
                 selectedPosition.push($( this ).val());
             });
             let main_pos = $( "#main_pos option:selected" ).text();
@@ -911,7 +911,7 @@
                 '                            ' + arrCounterLabels[curCounter] + ' Position\n' +
                 '                        </label>\n' +
                 '                        <div class="col-md-7">\n' +
-                '                            <select class="custom-select mr-sm-2" required id="position' + (curCounter + 1) + '" counter = "' + (curCounter + 1) + '" name="position[]">\n' +
+                '                            <select class="custom-select mr-sm-2" required id="position' + (curCounter + 1) + '" counter = "' + (curCounter + 1) + '" identi="position" name="position[]">\n' +
                 '                            </select>\n' +
                 '                        </div>\n' +
                 '                    </div>\n' +
@@ -950,7 +950,7 @@
             ++curCounter;
             $('#position' + (curCounter)).change(function () {
                 curCounter = $(this).attr("counter");
-                $("[name=position]").each(function(index) {
+                $("[identi=position]").each(function(index) {
                     $counter = $(this).attr("counter");
                     if (parseInt($counter) > curCounter)
                     {
@@ -959,7 +959,7 @@
                 });
             });
             $('#position2').change(function () {
-                $("[name=position]").each(function(index) {
+                $("[identi=position]").each(function(index) {
                     $counter = $(this).attr("counter");
                     $(this).parent().parent().parent().remove();
                     curCounter = 2;
