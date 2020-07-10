@@ -16,10 +16,12 @@ class Player extends Model
     {
         $arr_data = array();
         foreach ($subpositions as $subposition) {
+            if (!isset($subposition)) continue;
             $data = new Subposition();
             $data->position = $subposition;
             array_push($arr_data, $data);
         }
-        $this->subpositions()->saveMany($arr_data);
+        if (sizeof($arr_data) > 0)
+            $this->subpositions()->saveMany($arr_data);
     }
 }
