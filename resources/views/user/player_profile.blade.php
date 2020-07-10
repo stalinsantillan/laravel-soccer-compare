@@ -493,24 +493,7 @@
                     }
                 }
             };
-            var data = [
-                // {name: 'GK', position: 'C_GK'},//Goalkeeper
-                // {name: 'SW', position: 'C_SW'},//Sweeper
-                // {name: 'LB', position: 'L_B'},//Left Full-back
-                // {name: 'CB', position: 'C_B'},//Centre-back
-                // {name: 'RB', position: 'R_B'},//Right Full-back
-                // {name: 'LWB', position: 'L_WB'},//Left Wing-back
-                // {name: 'RWB', position: 'R_WB'},//Right Wing-back
-                // {name: 'DM', position: 'C_DM'},//Defensive midfield
-                // {name: 'LM', position: 'L_M'},//Left Wide midfield
-                // {name: 'CM', position: 'C_M'},//Centre midfield
-                // {name: 'RM', position: 'R_M'},//Right Wide midfield
-                // {name: 'AM', position: 'C_AM'},//Attacking midfield
-                // {name: 'LW', position: 'L_W'},//Left Winger
-                // {name: 'SS', position: 'C_W'},//Second striker
-                // {name: 'RW', position: 'R_W'},//Right Winger
-                // {name: 'CF', position: 'C_F'},//Centre forward
-            ];
+            var data = [];
             var mainposition = "{{ $data->main_pos }}";
             if (mainposition == "Goalkeeper")
             {
