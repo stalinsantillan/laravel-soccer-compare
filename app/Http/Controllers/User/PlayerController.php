@@ -58,13 +58,11 @@ class PlayerController extends Controller
 
         // Position
         $player->main_pos = $request->main_pos;
-        $player->sec_pos = $request->sec_pos;
-        if ($request->third_pos)
-            $player->third_pos = null;
-        if ($request->fourth_pos)
-            $player->fourth_pos = null;
-        if ($request->fifth_pos)
-            $player->fifth_pos = null;
+        
+        $subpositions = array();
+        if ($request->position)
+            $subpositions = $request->position;
+        array_unshift($subpositions, $request->position2);
 
         $player->corners = $request->corners;
         $player->crossing = $request->crossing;
@@ -102,12 +100,16 @@ class PlayerController extends Controller
         $player->stamina = $request->stamina;
         $player->strength = $request->strength;
         $player->agility = $request->agility;
-
+        
         $player->save();
+
+        $player->storePositions($subpositions);
+
+        dd(Player::find(1)->subpositions);
     }
 
     /**
-     * Show the add player.
+     * Show the player.
      *
      * @param  \App\Models\User\Player  $player
      * @return \Illuminate\Http\Response
@@ -115,5 +117,22 @@ class PlayerController extends Controller
     public function player_profile(Player $player)
     {
         return view('user.player_profile')->with('data', $player);
+    }
+
+    /**
+     * Filter the players
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function filter_player(Request $request)
+    {
+        $name = '';
+        
+        if ($request->name)
+            $name = $request->name;
+        
+        $data = Player::where('name', 'LIKE', "%$name%")
+            ->get();
+        dd($data);
     }
 }
