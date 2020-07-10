@@ -75,6 +75,7 @@
                                     {{ $one->name }}
                                 </a>
                             </td>
+
                             <td>
                                 @if($one->main_pos != 'Goalkeeper')
                                     @php $subone = 1; @endphp
