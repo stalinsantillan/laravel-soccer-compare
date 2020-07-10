@@ -13,7 +13,7 @@
             margin-top: 6px !important;
             margin-left: 8px !important;
             border : none !important;
-            background : linear-gradient(to left, #00c6ff, #000000) !important;
+            background : white; /*linear-gradient(to left, #00c6ff, #000000) !important;*/
         }
         @media (max-width: 576px) {
             .soccerfield-field
