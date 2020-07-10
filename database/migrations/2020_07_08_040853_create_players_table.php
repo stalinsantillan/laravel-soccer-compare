@@ -26,11 +26,7 @@ class CreatePlayersTable extends Migration
             $table->string('current_team');
 
             $table->string('main_pos');
-            $table->string('sec_pos');
-            $table->string('third_pos')->nullable();
-            $table->string('fourth_pos')->nullable();
-            $table->string('fifth_pos')->nullable();
-
+            
             $table->double('corners');
             $table->double('crossing');
             $table->double('dribbling');
