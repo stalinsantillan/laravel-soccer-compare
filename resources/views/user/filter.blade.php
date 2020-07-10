@@ -61,11 +61,13 @@
                         <tr>
                             <td>{{ ++$no }}</td>
                             <td>
-                                @if(isset($one->photo))
-                                    <img src="{{ asset('storage').'/'.$one->photo }}" class="user-photo" height="50px" width="50px" alt="">
-                                @else
-                                    <img src="{{ asset('user_assets/images/users/standard.png') }}" class="user-photo" height="50px" width="50px" alt="">
-                                @endif
+                                <a href="{{ route('user.player_profile', $one->id) }}" target="_blank">
+                                    @if(isset($one->photo))
+                                        <img src="{{ asset('storage').'/'.$one->photo }}" class="user-photo" height="50px" width="50px" alt="">
+                                    @else
+                                        <img src="{{ asset('user_assets/images/users/standard.png') }}" class="user-photo" height="50px" width="50px" alt="">
+                                    @endif
+                                </a>
                             </td>
                             <td>
                                 <a href="{{ route('user.player_profile', $one->id) }}" class="text-white-50" target="_blank"
