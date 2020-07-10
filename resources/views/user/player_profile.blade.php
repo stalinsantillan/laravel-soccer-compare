@@ -13,6 +13,7 @@
             margin-top: 6px !important;
             margin-left: 8px !important;
             border : none !important;
+            background : linear-gradient(to left, #00c6ff, #000000) !important;
         }
         @media (max-width: 576px) {
             .soccerfield-field
@@ -493,23 +494,50 @@
                 }
             };
             var data = [
-                {name: 'GK', position: 'C_GK'},//Goalkeeper
-                {name: 'SW', position: 'C_SW'},//Sweeper
-                {name: 'LB', position: 'L_B'},//Left Full-back
-                {name: 'CB', position: 'C_B'},//Centre-back
-                {name: 'RB', position: 'R_B'},//Right Full-back
-                {name: 'LWB', position: 'L_WB'},//Left Wing-back
-                {name: 'RWB', position: 'R_WB'},//Right Wing-back
-                {name: 'DM', position: 'C_DM'},//Defensive midfield
-                {name: 'LM', position: 'L_M'},//Left Wide midfield
-                {name: 'CM', position: 'C_M'},//Centre midfield
-                {name: 'RM', position: 'R_M'},//Right Wide midfield
-                {name: 'AM', position: 'C_AM'},//Attacking midfield
-                {name: 'LW', position: 'L_W'},//Left Winger
-                {name: 'SS', position: 'C_W'},//Second striker
-                {name: 'RW', position: 'R_W'},//Right Winger
-                {name: 'CF', position: 'C_F'},//Centre forward
+                // {name: 'GK', position: 'C_GK'},//Goalkeeper
+                // {name: 'SW', position: 'C_SW'},//Sweeper
+                // {name: 'LB', position: 'L_B'},//Left Full-back
+                // {name: 'CB', position: 'C_B'},//Centre-back
+                // {name: 'RB', position: 'R_B'},//Right Full-back
+                // {name: 'LWB', position: 'L_WB'},//Left Wing-back
+                // {name: 'RWB', position: 'R_WB'},//Right Wing-back
+                // {name: 'DM', position: 'C_DM'},//Defensive midfield
+                // {name: 'LM', position: 'L_M'},//Left Wide midfield
+                // {name: 'CM', position: 'C_M'},//Centre midfield
+                // {name: 'RM', position: 'R_M'},//Right Wide midfield
+                // {name: 'AM', position: 'C_AM'},//Attacking midfield
+                // {name: 'LW', position: 'L_W'},//Left Winger
+                // {name: 'SS', position: 'C_W'},//Second striker
+                // {name: 'RW', position: 'R_W'},//Right Winger
+                // {name: 'CF', position: 'C_F'},//Centre forward
             ];
+            var mainposition = "{{ $data->main_pos }}";
+            if (mainposition == "Goalkeeper")
+            {
+                data.push({name: ' ', position: 'C_GK'});
+            } else {
+                var subpositions = @php echo $data->subpositions; @endphp;
+                for (one in subpositions)
+                {
+                    var position = subpositions[one].position;
+                    if (position == "Sweeper") data.push({name: ' ', position: 'C_SW'});
+                    if (position == "Left Full-back") data.push({name: ' ', position: 'L_B'});
+                    if (position == "Centre-back") data.push({name: ' ', position: 'C_B'});
+                    if (position == "Right Full-back") data.push({name: ' ', position: 'R_B'});
+                    if (position == "Left Wing-back") data.push({name: ' ', position: 'L_WB'});
+                    if (position == "Right Wing-back") data.push({name: ' ', position: 'R_WB'});
+                    if (position == "Defensive midfield") data.push({name: ' ', position: 'C_DM'});
+                    if (position == "Left Wide midfield") data.push({name: ' ', position: 'L_M'});
+                    if (position == "Centre midfield") data.push({name: ' ', position: 'C_M'});
+                    if (position == "Right Wide midfield") data.push({name: ' ', position: 'R_M'});
+                    if (position == "Attacking midfield") data.push({name: ' ', position: 'C_AM'});
+                    if (position == "Left Winger") data.push({name: ' ', position: 'L_W'});
+                    if (position == "Second striker") data.push({name: ' ', position: 'C_W'});
+                    if (position == "Right Winger") data.push({name: ' ', position: 'R_W'});
+                    if (position == "Centre forward") data.push({name: ' ', position: 'C_F'});
+                }
+            }
+            console.log(data);
             $("#soccerfield").soccerfield(data,options);
             Chart.defaults.global.defaultFontColor = "rgba(255,255,255,0.5)";
             Chart.defaults.scale.gridLines.color = "rgba(255,255,255,0.05)";
