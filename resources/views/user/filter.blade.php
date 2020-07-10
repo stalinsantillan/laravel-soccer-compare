@@ -4,6 +4,11 @@
     <link href="{{ asset('user_assets/libs/datatables/responsive.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('user_assets/libs/datatables/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('user_assets/libs/datatables/select.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+    <style>
+        .table td, .table th {
+            vertical-align: middle !important;
+        }
+    </style>
 @endsection
 @section('content')
 <!-- start page title -->
@@ -23,49 +28,90 @@
 <!-- end page title -->
 <div class="card">
     <div class="card-body">
-        <h4 class="header-title"></h4>
-{{--        <div class="responsive-table-plugin">--}}
-{{--            <div class="table-rep-plugin">--}}
-{{--                <div class="table-responsive" data-pattern="priority-columns">--}}
-                    <table id="filter-table" class="table nowrap table-striped table-responsive">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>General average</th>
-                                <th>Year</th>
-                                <th>Height</th>
-                                <th>Nationality</th>
-                                <th>League</th>
-                                <th>Tactical average</th>
-                                <th>Physical average</th>
-                                <th>Technical average</th>
-                                <th>Goalkeeper average</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                            </tr>
-                        </tbody>
-                    </table>
-{{--                </div> <!-- end card body-->--}}
-{{--            </div> <!-- end card body-->--}}
-{{--        </div> <!-- end card body-->--}}
+        <div class="row">
+            <form role="form" method="get" action="{{ route('user.filter_player') }}">
+                <div class="form-group col-md-auto">
+                    <label for="name">Player name</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ $filter['name'] ?? '' }}">
+                </div>
+            </form>
+        </div>
+        <table id="filter-table" class="table nowrap table-responsive">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th style="background-color: #3f4a56">General average</th>
+                    <th>Date of birth</th>
+                    <th>Height</th>
+                    <th>Nationality</th>
+                    <th>League</th>
+                    <th>Tactical average</th>
+                    <th>Physical average</th>
+                    <th>Technical average</th>
+                    <th>Goalkeeper average</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(isset($data))
+                    @php $no = 0; @endphp
+                    @foreach($data as $one)
+                        <tr>
+                            <td>{{ ++$no }}</td>
+                            <td>
+                                @if(isset($one->photo))
+                                    <img src="{{ asset('storage').'/'.$one->photo }}" class="user-photo" height="50px" width="50px" alt="">
+                                @else
+                                    <img src="{{ asset('user_assets/images/users/standard.png') }}" class="user-photo" height="50px" width="50px" alt="">
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('user.player_profile', $one->id) }}" class="text-white-50" target="_blank"
+                                   style="border-bottom: rgba(255,255,255,.5) dashed 1px;">
+                                    {{ $one->name }}
+                                </a>
+                            </td>
+                            <td>
+                                @if($one->main_pos != 'Goalkeeper')
+                                    @php $subone = 1; @endphp
+                                    @foreach($one->subpositions as $onesubposition)
+                                        @if($subone > 1)
+                                            <br>
+                                        @endif
+                                        <span class="badge badge-primary">{{ $onesubposition['position'] }}</span>
+                                        @php ++$subone; @endphp
+                                    @endforeach
+                                @else
+                                    <span class="badge badge-primary">{{ $one->main_pos }}</span>
+                                @endif
+                            </td>
+                            @php
+                                $technical_avg = ($one->corners + $one->crossing + $one->dribbling + $one->finishing +
+                                $one->first_touch + $one->free_kick + $one->heading + $one->long_shots + $one->long_throws +
+                                $one->marking + $one->passing + $one->penalty_taking + $one->tackling + $one->technique) / 14;
+                                $mental_avg = ($one->aggression + $one->articipation + $one->bravery + $one->composure +
+                                $one->concentration + $one->decisions + $one->determination + $one->flair + $one->leadership +
+                                $one->off_ball + $one->positioning + $one->teamwork + $one->vision + $one->work_rate) / 14;
+                                $physical_avg = ($one->acceleration + $one->agility + $one->balance + $one->jumping_reach +
+                                $one->natural_fitness + $one->pace + $one->stamina + $one->strength) / 8;
+                                $general_avg = ($one->marking + $one->passing + $one->technique + $one->vision + $one->tackling) / 5;
+                            @endphp
+                            <td style="background-color: #3f4a56">{{ round($general_avg, 1) }}</td>
+                            <td>{{ $one->birth_date }}</td>
+                            <td>{{ $one->height }}cm</td>
+                            <td>{{ $one->nationality }}</td>
+                            <td></td>
+                            <td>{{ round($mental_avg, 1) }}</td>
+                            <td>{{ round($physical_avg, 1) }}</td>
+                            <td>{{ round($technical_avg, 1) }}</td>
+                            <td></td>
+                        </tr>
+                    @endforeach
+                @endif
+            </tbody>
+        </table>
     </div> <!-- end card body-->
 </div> <!-- end card -->
 @endsection

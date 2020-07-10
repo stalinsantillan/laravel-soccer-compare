@@ -136,6 +136,7 @@ class PlayerController extends Controller
             ->get();
         
         return view('user.filter')
+            ->with('filter', $request->all())
             ->with('data', $data);
     }
 
