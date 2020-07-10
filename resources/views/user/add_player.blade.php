@@ -901,9 +901,11 @@
             let main_pos = $( "#main_pos option:selected" ).text();
             if (main_pos == "Defender" && selectedPosition.length == arrDefender.length)
                 return;
-            else if (main_pos == "Midfielder" && selectedPosition.length == arrMidfielder.length)
+            if (main_pos == "Midfielder" && selectedPosition.length == arrMidfielder.length)
                 return;
-            else if (main_pos == "Forward" && selectedPosition.length == arrForward.length)
+            if (main_pos == "Forward" && selectedPosition.length == arrForward.length)
+                return;
+            if (main_pos == "Goalkeeper")
                 return;
             $element = '<div class="col-md-6">\n' +
                 '                    <div class="form-group row">\n' +
@@ -928,14 +930,14 @@
             {
                 for (let i = 0; i < arrMidfielder.length; i++)
                 {
-                    if (!selectedPosition.includes(arrDefender[i]))
+                    if (!selectedPosition.includes(arrMidfielder[i]))
                         $('#position' + (curCounter + 1)).append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
                 }
             } else if (main_pos == "Forward")
             {
                 for (let i = 0; i < arrForward.length; i++)
                 {
-                    if (!selectedPosition.includes(arrDefender[i]))
+                    if (!selectedPosition.includes(arrForward[i]))
                         $('#position' + (curCounter + 1)).append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
                 }
             }
