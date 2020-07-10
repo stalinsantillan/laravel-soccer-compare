@@ -218,65 +218,43 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="form-group col-md-6 row">
-                    <label for="cur_team" class="col-md-4 col-form-label text-right">
-                        Current Team<span class="text-danger">*</span>
-                    </label>
-                    <div class="col-md-7">
-                        <input type="text" required class="form-control" id="cur_team" name="cur_team">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="cur_team" class="col-md-4 col-form-label text-right">
+                            Current Team<span class="text-danger">*</span>
+                        </label>
+                        <div class="col-md-7">
+                            <input type="text" required class="form-control" id="cur_team" name="cur_team">
+                        </div>
                     </div>
                 </div>
-                <div class="form-group col-md-6 row">
-                    <label for="main_pos" class="col-md-4 col-form-label text-right">
-                        Main Position<span class="text-danger">*</span>
-                    </label>
-                    <div class="col-md-7">
-                        <select class="custom-select mr-sm-2" required id="main_pos" name="main_pos">
-                            <option>Defender</option>
-                            <option>Midfielder</option>
-                            <option>Forward</option>
-                            <option>Goalkeeper</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-6 row">
-                    <label for="sec_pos" class="col-md-4 col-form-label text-right">
-                        Secondary Position
-                    </label>
-                    <div class="col-md-7">
-                        <select class="custom-select mr-sm-2" required id="sec_pos" name="sec_pos">
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group col-md-6 row third_pos" style="display: none;">
-                    <label for="third_pos" class="col-md-4 col-form-label text-right">
-                        Third Position
-                    </label>
-                    <div class="col-md-7">
-                        <select class="custom-select mr-sm-2" id="third_pos" name="third_pos">
-                        </select>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="main_pos" class="col-md-4 col-form-label text-right">
+                            Main Position<span class="text-danger">*</span>
+                        </label>
+                        <div class="col-md-7">
+                            <select class="custom-select mr-sm-2" required id="main_pos" name="main_pos">
+                                <option>Defender</option>
+                                <option>Midfielder</option>
+                                <option>Forward</option>
+                                <option>Goalkeeper</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-6 row fourth_pos" style="display: none;">
-                    <label for="fourth_pos" class="col-md-4 col-form-label text-right">
-                        Fourth Position
-                    </label>
-                    <div class="col-md-7">
-                        <select class="custom-select mr-sm-2" id="fourth_pos" name="fourth_pos">
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group col-md-6 row fifth_pos" style="display: none;">
-                    <label for="fifth_pos" class="col-md-4 col-form-label text-right">
-                        Fifth Position
-                    </label>
-                    <div class="col-md-7">
-                        <select class="custom-select mr-sm-2" id="fifth_pos" name="fifth_pos">
-                        </select>
+            <div class="row position-panel">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="position2" class="col-md-4 col-form-label text-right">
+                            Secondary Position
+                        </label>
+                        <div class="col-md-7">
+                            <select class="custom-select mr-sm-2" required id="position2">
+                            </select>
+                            <a href="javascript:addnewposition()" class="text-white-50" style="line-height: 30px">Add new position</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -748,6 +726,10 @@
 
     <script src="{{ asset('erp_assets/select2/select2.js') }}"></script>
     <script>
+        let curCounter = 2;
+        let arrDefender = ["Centre-back", "Sweeper", "Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back"];
+        let arrMidfielder = ["Centre midfield", "Defensive midfield", "Attacking midfield", "Left Wide midfield", "Right Wide midfield"];
+        let arrForward = ["Centre forward", "Second striker", "Left Winger", "Right Winger"];
         $(document).ready(function(){
             var inputs = document.querySelectorAll( '.custom-file-input' );
             Array.prototype.forEach.call( inputs, function( input )
@@ -870,174 +852,120 @@
                 minimumResultsForSearch: 20, //prevent filter input
                 maximumSelectionSize: 20 // prevent scrollbar
             });
-            $("#sec_pos").select2({
+            $("#position2").select2({
                 allowClear: false,
                 dropdownAutoWidth: true,
                 width: 'element',
                 minimumResultsForSearch: 20, //prevent filter input
                 maximumSelectionSize: 20 // prevent scrollbar
             });
-            $("#third_pos").select2({
-                allowClear: false,
-                dropdownAutoWidth: true,
-                width: 'element',
-                minimumResultsForSearch: 20, //prevent filter input
-                maximumSelectionSize: 20 // prevent scrollbar
-            });
-            $("#fourth_pos").select2({
-                allowClear: false,
-                dropdownAutoWidth: true,
-                width: 'element',
-                minimumResultsForSearch: 20, //prevent filter input
-                maximumSelectionSize: 20 // prevent scrollbar
-            });
-            $("#fifth_pos").select2({
-                allowClear: false,
-                dropdownAutoWidth: true,
-                width: 'element',
-                minimumResultsForSearch: 20, //prevent filter input
-                maximumSelectionSize: 20 // prevent scrollbar
-            });
-            let arrDefender = ["Centre-back", "Sweeper", "Full-back", "Wing-back"];
-            let arrMidfielder = ["Centre midfield", "Defensive midfield", "Attacking midfield", "Wide midfield"];
-            let arrForward = ["Centre forward", "Second striker", "Winger"];
             $("#main_pos").change(function (e) {
                 let main_pos = $( "#main_pos option:selected" ).text();
-                $("#sec_pos option").remove();
-                $('#sec_pos').select2('val', null);
-                $("#third_pos option").remove();
-                $('#third_pos').select2('val', null);
-                $("#fourth_pos option").remove();
-                $('#fourth_pos').select2('val', null);
-                $("#fifth_pos option").remove();
-                $('#fifth_pos').select2('val', null);
-                $(".third_pos").css("display", "none");
-                $(".fourth_pos").css("display", "none");
-                $(".fifth_pos").css("display", "none");
+                $("[name=position]").each(function( index ) {
+                    $(this).parent().parent().parent().remove();
+                });
+                curCounter = 2;
+                $("#position2 option").remove();
+                $('#position2').select2('val', null);
                 if (main_pos == "Defender")
                 {
                     for (let i = 0; i < arrDefender.length; i++)
                     {
-                        $('#sec_pos').append($("<option></option>").text(arrDefender[i]).attr("value", arrDefender[i]));
+                        $('#position2').append($("<option></option>").text(arrDefender[i]).attr("value", arrDefender[i]));
                     }
                 } else if (main_pos == "Midfielder")
                 {
                     for (let i = 0; i < arrMidfielder.length; i++)
                     {
-                        $('#sec_pos').append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
+                        $('#position2').append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
                     }
                 } else if (main_pos == "Forward")
                 {
                     for (let i = 0; i < arrForward.length; i++)
                     {
-                        $('#sec_pos').append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
+                        $('#position2').append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
                     }
                 }
+                $("#position2").trigger("change");
             });
             $("#main_pos").trigger("change");
-            $("#sec_pos").change(function (e) {
-                let main_pos = $( "#main_pos option:selected" ).text();
-                let sec_pos = $( "#sec_pos option:selected" ).text();
-                if (sec_pos == null && sec_pos == "") return;
-                $("#third_pos option").remove();
-                $('#third_pos').select2('val', null);
-                $("#fourth_pos option").remove();
-                $('#fourth_pos').select2('val', null);
-                $("#fifth_pos option").remove();
-                $('#fifth_pos').select2('val', null);
-                $(".fourth_pos").css("display", "none");
-                $(".fifth_pos").css("display", "none");
-                $(".third_pos").css("display", "flex");
-                if (main_pos == "Defender")
-                {
-                    for (let i = 0; i < arrDefender.length; i++)
-                    {
-                        if (sec_pos != arrDefender[i])
-                            $('#third_pos').append($("<option></option>").text(arrDefender[i]).attr("value", arrDefender[i]));
-                    }
-                } else if (main_pos == "Midfielder")
-                {
-                    for (let i = 0; i < arrMidfielder.length; i++)
-                    {
-                        if (sec_pos != arrMidfielder[i])
-                            $('#third_pos').append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
-                    }
-                } else if (main_pos == "Forward")
-                {
-                    for (let i = 0; i < arrForward.length; i++)
-                    {
-                        if (sec_pos != arrForward[i])
-                            $('#third_pos').append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
-                    }
-                }
-            });
-            $("#third_pos").change(function (e) {
-                let main_pos = $( "#main_pos option:selected" ).text();
-                let sec_pos = $( "#sec_pos option:selected" ).text();
-                let third_pos = $( "#third_pos option:selected" ).text();
-                if (third_pos == null && third_pos == "") return;
-                $("#fourth_pos option").remove();
-                $('#fourth_pos').select2('val', null);
-                $("#fifth_pos option").remove();
-                $('#fifth_pos').select2('val', null);
-                $(".fourth_pos").css("display", "flex");
-                $(".fifth_pos").css("display", "none");
-                if (main_pos == "Defender")
-                {
-                    for (let i = 0; i < arrDefender.length; i++)
-                    {
-                        if (sec_pos != arrDefender[i] && third_pos != arrDefender[i])
-                            $('#fourth_pos').append($("<option></option>").text(arrDefender[i]).attr("value", arrDefender[i]));
-                    }
-                } else if (main_pos == "Midfielder")
-                {
-                    for (let i = 0; i < arrMidfielder.length; i++)
-                    {
-                        if (sec_pos != arrMidfielder[i] && third_pos != arrMidfielder[i])
-                            $('#fourth_pos').append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
-                    }
-                } else if (main_pos == "Forward")
-                {
-                    for (let i = 0; i < arrForward.length; i++)
-                    {
-                        if (sec_pos != arrForward[i] && third_pos != arrForward[i])
-                            $('#fourth_pos').append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
-                    }
-                }
-            });
-            $("#fourth_pos").change(function (e) {
-                let main_pos = $( "#main_pos option:selected" ).text();
-                let sec_pos = $( "#sec_pos option:selected" ).text();
-                let third_pos = $( "#third_pos option:selected" ).text();
-                let fourth_pos = $( "#fourth_pos option:selected" ).text();
-                if (fourth_pos == null && fourth_pos == "") return;
-                $("#fifth_pos option").remove();
-                $('#fifth_pos').select2('val', null);
-                $(".fifth_pos").css("display", "flex");
-                if (main_pos == "Defender")
-                {
-                    for (let i = 0; i < arrDefender.length; i++)
-                    {
-                        if (sec_pos != arrDefender[i] && third_pos != arrDefender[i] && fourth_pos != arrDefender[i])
-                            $('#fifth_pos').append($("<option></option>").text(arrDefender[i]).attr("value", arrDefender[i]));
-                    }
-                } else if (main_pos == "Midfielder")
-                {
-                    for (let i = 0; i < arrMidfielder.length; i++)
-                    {
-                        if (sec_pos != arrMidfielder[i] && third_pos != arrMidfielder[i] && fourth_pos != arrMidfielder[i])
-                            $('#fifth_pos').append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
-                    }
-                } else if (main_pos == "Forward")
-                {
-                    for (let i = 0; i < arrForward.length; i++)
-                    {
-                        if (sec_pos != arrForward[i] && third_pos != arrForward[i] && fourth_pos != arrForward[i])
-                            $('#fifth_pos').append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
-                    }
-                }
-            });
         })
+        let arrCounterLabels = ['First', 'Secondary', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth'];
+        function addnewposition() {
+            if (curCounter > 9) return;
+            let selectedPosition = [];
+            selectedPosition.push($("#position2").val());
+            $("[name=position]").each(function( index ) {
+                selectedPosition.push($( this ).val());
+            });
+            let main_pos = $( "#main_pos option:selected" ).text();
+            if (main_pos == "Defender" && selectedPosition.length == arrDefender.length)
+                return;
+            else if (main_pos == "Midfielder" && selectedPosition.length == arrMidfielder.length)
+                return;
+            else if (main_pos == "Forward" && selectedPosition.length == arrForward.length)
+                return;
+            $element = '<div class="col-md-6">\n' +
+                '                    <div class="form-group row">\n' +
+                '                        <label for="position' + (curCounter + 1) + '" class="col-md-4 col-form-label text-right">\n' +
+                '                            ' + arrCounterLabels[curCounter] + ' Position\n' +
+                '                        </label>\n' +
+                '                        <div class="col-md-7">\n' +
+                '                            <select class="custom-select mr-sm-2" required id="position' + (curCounter + 1) + '" counter = "' + (curCounter + 1) + '" name="position">\n' +
+                '                            </select>\n' +
+                '                        </div>\n' +
+                '                    </div>\n' +
+                '                </div>';
+            $(".position-panel").append($element);
+            if (main_pos == "Defender")
+            {
+                for (let i = 0; i < arrDefender.length; i++)
+                {
+                    if (!selectedPosition.includes(arrDefender[i]))
+                        $('#position' + (curCounter + 1)).append($("<option></option>").text(arrDefender[i]).attr("value", arrDefender[i]));
+                }
+            } else if (main_pos == "Midfielder")
+            {
+                for (let i = 0; i < arrMidfielder.length; i++)
+                {
+                    if (!selectedPosition.includes(arrDefender[i]))
+                        $('#position' + (curCounter + 1)).append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
+                }
+            } else if (main_pos == "Forward")
+            {
+                for (let i = 0; i < arrForward.length; i++)
+                {
+                    if (!selectedPosition.includes(arrDefender[i]))
+                        $('#position' + (curCounter + 1)).append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
+                }
+            }
+            $('#position' + (curCounter + 1)).select2({
+                allowClear: false,
+                dropdownAutoWidth: true,
+                width: 'element',
+                minimumResultsForSearch: 20, //prevent filter input
+                maximumSelectionSize: 20 // prevent scrollbar
+            });
+            $('#position' + (curCounter + 1)).trigger("change");
+            ++curCounter;
+            $('#position' + (curCounter)).change(function () {
+                curCounter = $(this).attr("counter");
+                $("[name=position]").each(function(index) {
+                    $counter = $(this).attr("counter");
+                    if (parseInt($counter) > curCounter)
+                    {
+                        $(this).parent().parent().parent().remove();
+                    }
+                });
+            });
+            $('#position2').change(function () {
+                $("[name=position]").each(function(index) {
+                    $counter = $(this).attr("counter");
+                    $(this).parent().parent().parent().remove();
+                    curCounter = 2;
+                });
+            });
+        }
         function submitForm() {
             if ($("#name").val() == "")
             {
@@ -1079,7 +1007,7 @@
                     "info");
                 return;
             }
-            if ($("#sec_pos").val() == "")
+            if ($("#position2").val() == "")
             {
                 $.NotificationApp.send(
                     "Warning",
