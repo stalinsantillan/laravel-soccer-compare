@@ -8,6 +8,9 @@ return [
         'title' => 'Player',
         'profile' => 'Player Profile',
     ],
+    'filter' => [
+        'title'          => 'Filter',
+    ],
     'userManagement' => [
         'title'          => 'User management',
         'title_singular' => 'User management',
