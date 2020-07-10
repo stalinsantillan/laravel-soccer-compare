@@ -911,7 +911,7 @@
                 '                            ' + arrCounterLabels[curCounter] + ' Position\n' +
                 '                        </label>\n' +
                 '                        <div class="col-md-7">\n' +
-                '                            <select class="custom-select mr-sm-2" required id="position' + (curCounter + 1) + '" counter = "' + (curCounter + 1) + '" name="position">\n' +
+                '                            <select class="custom-select mr-sm-2" required id="position' + (curCounter + 1) + '" counter = "' + (curCounter + 1) + '" name="position[]">\n' +
                 '                            </select>\n' +
                 '                        </div>\n' +
                 '                    </div>\n' +
