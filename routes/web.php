@@ -25,8 +25,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 Route::group(['middleware' => ['auth'], 'prefix' => 'user', 'as' => 'user.'], function () {
     Route::get('dashboard', 'User\DashboardController@index')->name('dashboard');
 
+    // Player
     Route::get('add_player', 'User\PlayerController@add_player')->name('add_player');
     Route::post('store_player', 'User\PlayerController@store_player')->name('store_player');
     Route::get('filter_player', 'User\PlayerController@filter_player')->name('filter_player');
+    Route::get('filter_show', 'User\PlayerController@filter_show')->name('filter_show');
     Route::get('player_profile/{player}', 'User\PlayerController@player_profile')->name('player_profile');
 });

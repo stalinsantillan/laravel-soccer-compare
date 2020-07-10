@@ -33,7 +33,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('user.filter') }}">
+                <a href="{{ route('user.filter_show') }}">
                     {{ trans('cruds.filter.title') }}
                 </a>
             </li>

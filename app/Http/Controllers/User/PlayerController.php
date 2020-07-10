@@ -122,6 +122,7 @@ class PlayerController extends Controller
     /**
      * Filter the players
      * 
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function filter_player(Request $request)
@@ -134,5 +135,15 @@ class PlayerController extends Controller
         $data = Player::where('name', 'LIKE', "%$name%")
             ->get();
         dd($data);
+    }
+
+    /**
+     * Show filter page
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function filter_show()
+    {
+        return view("user.filter");
     }
 }
