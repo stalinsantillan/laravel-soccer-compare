@@ -251,7 +251,7 @@
                             Secondary Position
                         </label>
                         <div class="col-md-7">
-                            <select class="custom-select mr-sm-2" required id="position2">
+                            <select class="custom-select mr-sm-2" required id="position2" name="position2">
                             </select>
                             <a href="javascript:addnewposition()" class="text-white-50" style="line-height: 30px">Add new position</a>
                         </div>
