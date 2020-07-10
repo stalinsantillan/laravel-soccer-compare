@@ -23,8 +23,16 @@
     left: 5%
 }
 
+.soccerfield-player.posX-SW {
+    left: 12%
+}
+
 .soccerfield-player.posX-B {
     left: 20%
+}
+
+.soccerfield-player.posX-WB {
+    left: 30%
 }
 
 .soccerfield-player.posX-DM {
@@ -32,11 +40,15 @@
 }
 
 .soccerfield-player.posX-M {
-    left: 50%
+    left: 46%
 }
 
 .soccerfield-player.posX-AM {
-    left: 65%
+    left: 56%
+}
+
+.soccerfield-player.posX-W {
+    left: 70%
 }
 
 .soccerfield-player.posX-F {

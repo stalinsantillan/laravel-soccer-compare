@@ -29,8 +29,12 @@
             </li> --}}
             <li>
                 <a href="{{ route('user.add_player') }}">
-                    <i class="mdi mdi-soccer"></i>
                     {{ trans('global.add') }} {{ trans('cruds.player.title') }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('user.filter') }}">
+                    {{ trans('cruds.filter.title') }}
                 </a>
             </li>
         </ul>

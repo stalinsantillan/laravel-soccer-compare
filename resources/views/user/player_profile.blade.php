@@ -14,7 +14,13 @@
             margin-left: 8px !important;
             border : none !important;
         }
-        .rotated { 
+        @media (max-width: 576px) {
+            .soccerfield-field
+            {
+                width: 280px !important;
+            }
+        }
+        .rotated {
             -webkit-transform: rotate(90deg);
             -moz-transform: rotate(90deg);
             -o-transform: rotate(90deg);
@@ -460,19 +466,6 @@
     <!-- Init js -->
     {{-- <script src="{{ asset('user_assets/js/pages/chartjs.init.js') }}"></script> --}}
     <script>
-        var data = [
-            {name: '1', position: 'C_GK'},
-            {name: '2', position: 'LC_B'},
-            {name: '3', position: 'C_B'},
-            {name: '4', position: 'RC_B'},
-            {name: '5', position: 'C_DM'},
-            {name: '6', position: 'L_M'},
-            {name: '7', position: 'LC_M'},
-            {name: '8', position: 'RC_M'},
-            {name: '9', position: 'R_M'},
-            {name: '10', position: 'LC_F'},
-            {name: '11', position: 'RC_F'},
-        ];
         $(document).ready(function () {
             var options =  {
                 field: {
@@ -499,6 +492,24 @@
                     }
                 }
             };
+            var data = [
+                {name: 'GK', position: 'C_GK'},//Goalkeeper
+                {name: 'SW', position: 'C_SW'},//Sweeper
+                {name: 'LB', position: 'L_B'},//Left Full-back
+                {name: 'CB', position: 'C_B'},//Centre-back
+                {name: 'RB', position: 'R_B'},//Right Full-back
+                {name: 'LWB', position: 'L_WB'},//Left Wing-back
+                {name: 'RWB', position: 'R_WB'},//Right Wing-back
+                {name: 'DM', position: 'C_DM'},//Defensive midfield
+                {name: 'LM', position: 'L_M'},//Left Wide midfield
+                {name: 'CM', position: 'C_M'},//Centre midfield
+                {name: 'RM', position: 'R_M'},//Right Wide midfield
+                {name: 'AM', position: 'C_AM'},//Attacking midfield
+                {name: 'LW', position: 'L_W'},//Left Winger
+                {name: 'SS', position: 'C_W'},//Second striker
+                {name: 'RW', position: 'R_W'},//Right Winger
+                {name: 'CF', position: 'C_F'},//Centre forward
+            ];
             $("#soccerfield").soccerfield(data,options);
             Chart.defaults.global.defaultFontColor = "rgba(255,255,255,0.5)";
             Chart.defaults.scale.gridLines.color = "rgba(255,255,255,0.05)";
