@@ -62,9 +62,9 @@
                     <div class="col-md-auto row">
                         <div class="col-md-auto">
                             @if(isset($data->photo))
-                                <img src="{{ asset('storage').'/'.$data->photo }}" class="user-photo ml-5" height="130px" alt="">
+                                <img src="{{ asset('storage').'/'.$data->photo }}" class="user-photo ml-5" height="130px" width="130px" alt="">
                             @else
-                                <img src="{{ asset('user_assets/images/users/standard.png') }}" class="user-photo ml-5" height="130px" alt="">
+                                <img src="{{ asset('user_assets/images/users/standard.png') }}" class="user-photo ml-5" height="130px" width="130px" alt="">
                             @endif
                             <div class="card text-white text-center bg-primary text-xs-center mt-1 mb-0 ml-5" style="width: 130px">
                                 <p class="mb-0 mt-1" style="line-height: 15px">General</p>
@@ -406,7 +406,7 @@
         <div class="card mb-2">
             <div class="card-body">
                 <div class="card-title font-15 font-weight-bold">
-                    General average: <span id="general_avg"></span>
+                    General average
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="mt-2 chartjs-chart">
@@ -525,14 +525,6 @@
             Chart.defaults.global.defaultFontColor = "rgba(255,255,255,0.5)";
             Chart.defaults.scale.gridLines.color = "rgba(255,255,255,0.05)";
             let general_radar_data = ['{{ $data->marking }}', '{{ $data->passing }}', '{{ $data->technique }}', '{{ $data->vision }}', '{{ $data->tackling }}'];
-            let general_sum = 0;
-            for (let i = 0; i < general_radar_data.length; i++)
-            {
-                general_sum += parseFloat(general_radar_data[i]==''?0:general_radar_data[i]);
-            }
-            let general_avg = (general_sum / general_radar_data.length).toFixed(1);
-            $("#general_average").text(general_avg);
-            $("#general_avg").text(general_avg);
             new Chart(document.getElementById("general-radar").getContext("2d"), {
                 type: 'radar',
                 data: {
@@ -701,6 +693,10 @@
                     }
                 }
             });
+
+            let general_sum = sum + physical_sum + mental_sum;
+            let general_avg = (general_sum / (technical_radar_data.length + mental_radar_data.length + physical_radar_data.length)).toFixed(1);
+            $("#general_average").text(general_avg);
         });
     </script>
 @endsection
