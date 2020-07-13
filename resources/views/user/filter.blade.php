@@ -32,7 +32,14 @@
             <form role="form" method="get" action="{{ route('user.filter_player') }}">
                 <div class="form-group col-md-auto">
                     <label for="name">Player name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ $filter['name'] ?? '' }}">
+                    <div class="row">
+                        <div class="col-md-auto">
+                            <input type="text" class="form-control" id="name" name="name" value="{{ $filter['name'] ?? '' }}">
+                        </div>
+                        <div class="col-md-auto">
+                            <button class="btn btn-primary" type="submit"><i class="fe-search"> Search</i></button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
