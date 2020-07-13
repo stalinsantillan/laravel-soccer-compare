@@ -105,7 +105,7 @@ class PlayerController extends Controller
 
         $player->storePositions($subpositions);
 
-        dd(Player::find(1)->subpositions);
+        return redirect('user/filter_show');
     }
 
     /**
