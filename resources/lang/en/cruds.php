@@ -4,6 +4,9 @@ return [
     'menuGroup' => [
         'system' => 'SYSTEM',
     ],
+    'paramsetting' => [
+        'title' => 'Parameters Setting',
+    ],
     'player' => [
         'title' => 'Player',
         'profile' => 'Player Profile',
