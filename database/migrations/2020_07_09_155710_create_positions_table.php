@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubpositionsTable extends Migration
+class CreatePositionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateSubpositionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subpositions', function (Blueprint $table) {
+        Schema::create('positions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('player_id')->unsigned();
             $table->string('position');
+            $table->string('specify');
             $table->timestamps();
 
             $table->foreign('player_id')
@@ -35,6 +36,6 @@ class CreateSubpositionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subpositions');
+        Schema::dropIfExists('positions');
     }
 }

@@ -128,11 +128,20 @@ class PlayerController extends Controller
     public function filter_player(Request $request)
     {
         $name = '';
-        
+        $nationality = array();
+        $position = array();
+
         if ($request->name)
             $name = $request->name;
+        if ($request->nationality)
+            $nationality = $request->nationality;
+        if ($request->position)
+            $position = $request->position;
         
+        dd($position);
         $data = Player::where('name', 'LIKE', "%$name%")
+            ->whereIn('nationality', $nationality)
+            ->orWhere('surename', 'LIKE', "$$name$")
             ->get();
         
         return view('user.filter')

@@ -2,26 +2,27 @@
 
 namespace App\Models\User;
 
-use App\Models\User\Subposition;
+use App\Models\User\Position;
 use Illuminate\Database\Eloquent\Model;
 
 class Player extends Model
 {
-    public function subpositions()
+    public function positions()
     {
-        return $this->hasMany('App\Models\User\Subposition');
+        return $this->hasMany('App\Models\User\Position');
     }
 
-    public function storePositions($subpositions)
+    public function storePositions($positions)
     {
         $arr_data = array();
-        foreach ($subpositions as $subposition) {
-            if (!isset($subposition)) continue;
-            $data = new Subposition();
-            $data->position = $subposition;
+        foreach ($positions as $position) {
+            if (!isset($position)) continue;
+            $data = new Position();
+            $data->position = $position;
+            $data->specify = $position;
             array_push($arr_data, $data);
         }
         if (sizeof($arr_data) > 0)
-            $this->subpositions()->saveMany($arr_data);
+            $this->positions()->saveMany($arr_data);
     }
 }

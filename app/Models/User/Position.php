@@ -4,7 +4,7 @@ namespace App\Models\User;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Subposition extends Model
+class Position extends Model
 {
     public function player()
     {
