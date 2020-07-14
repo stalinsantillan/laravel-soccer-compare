@@ -12,6 +12,6 @@ class ParamsettingSeed extends Seeder
      */
     public function run()
     {
-        $user = Paramsetting::create();
+        $paramsetting = Paramsetting::create();
     }
 }
