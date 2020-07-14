@@ -727,6 +727,10 @@
         let arrMidfielder = ["Centre midfield", "Defensive midfield", "Attacking midfield", "Left Wide midfield", "Right Wide midfield"];
         let arrForward = ["Centre forward", "Second striker", "Left Winger", "Right Winger"];
         let arrGoalkeeper = ["Goalkeeper"];
+        let arrDefenderPos = ["Centre-back", "Sweeper", "Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back"
+                                , "Defensive midfield", "Attacking midfield", "Left Wide midfield", "Right Wide midfield"];
+        let arrAttackingPos = ["Centre midfield", "Centre forward", "Second striker", "Left Winger", "Right Winger"];
+        let arrGoalkeeperPos = ["Goalkeeper"];
         $(document).ready(function(){
             var inputs = document.querySelectorAll( '.custom-file-input' );
             Array.prototype.forEach.call( inputs, function( input )
@@ -885,10 +889,21 @@
                         $('#position2').append($("<option></option>").text(arrGoalkeeper[i]).attr("value", arrGoalkeeper[i]));
                     }
                 }
+                $("#position2").change(function (e) {
+                    changeAttributes();
+                });
                 $("#position2").trigger("change");
             });
             $("#main_pos").trigger("change");
         })
+        function changeAttributes() {
+            $("#position2").each(function () {
+                console.log($(this).val());
+            })
+            $("[identi=spec_position]").each(function () {
+                console.log($(this).val());
+            })
+        }
         function deleteposition(count) {
             $("#main_position" + count).parent().parent().parent().remove();
             $("#spec_position" + count).parent().parent().parent().remove();
@@ -925,6 +940,9 @@
                 '                </div>';
             $(".position-panel").append($element_main);
             $(".position-panel").append($element_spec);
+            $('#spec_position' + (curCounter + 1)).change(function (e) {
+                changeAttributes();
+            });
             $('#main_position' + (curCounter + 1)).change(function () {
                 let $curCounter = $(this).attr("counter");
                 let cur_main_pos = $('#main_position' + ($curCounter)).val();
