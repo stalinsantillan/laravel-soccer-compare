@@ -75,8 +75,6 @@
                         <input type="range" min="0" value="{{ $data->crossing }}" max="100"step="0.1"  match="crossing" data-rangeslider>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-6 row">
                     <label for="dribbling" class="col-md-3 col-form-label text-right">
                         Dribbling
@@ -99,8 +97,50 @@
                         <input type="range" min="0" value="{{ $data->finishing }}" max="100"step="0.1"  match="finishing" data-rangeslider>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+                <div class="form-group col-md-6 row">
+                    <label for="areial_reach" class="col-md-3 col-form-label text-right">
+                        Aerial Reach
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="areial_reach" name="areial_reach">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->areial_reach }}" max="100"step="0.1"  match="areial_reach" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="command_of_area" class="col-md-3 col-form-label text-right">
+                        Command Of Area
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="command_of_area" name="command_of_area">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->command_of_area }}" max="100"step="0.1"  match="command_of_area" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="communication" class="col-md-3 col-form-label text-right">
+                        Communication
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="communication" name="communication">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->communication }}" max="100"step="0.1"  match="communication" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="eccentricity" class="col-md-3 col-form-label text-right">
+                        Eccentricity
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="eccentricity" name="eccentricity">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->eccentricity }}" max="100"step="0.1"  match="eccentricity" data-rangeslider>
+                    </div>
+                </div>
                 <div class="form-group col-md-6 row">
                     <label for="first_touch" class="col-md-3 col-form-label text-right">
                         First Touch
@@ -110,6 +150,50 @@
                     </div>
                     <div class="col-md-5">
                         <input type="range" min="0" value="{{ $data->first_touch }}" max="100"step="0.1"  match="first_touch" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="handling" class="col-md-3 col-form-label text-right">
+                        Handling
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="handling" name="handling">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->handling }}" max="100"step="0.1"  match="handling" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="kicking" class="col-md-3 col-form-label text-right">
+                        Kicking
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="kicking" name="kicking">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->kicking }}" max="100"step="0.1"  match="kicking" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="one_on_ones" class="col-md-3 col-form-label text-right">
+                        One On Ones
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="one_on_ones" name="one_on_ones">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->one_on_ones }}" max="100"step="0.1"  match="one_on_ones" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="feet_playing" class="col-md-3 col-form-label text-right">
+                        Feet playing
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="feet_playing" name="feet_playing">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->feet_playing }}" max="100"step="0.1"  match="feet_playing" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -123,8 +207,6 @@
                         <input type="range" min="0" value="{{ $data->free_kick }}" max="100"step="0.1"  match="free_kick" data-rangeslider>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-6 row">
                     <label for="heading" class="col-md-3 col-form-label text-right">
                         Heading
@@ -134,6 +216,17 @@
                     </div>
                     <div class="col-md-5">
                         <input type="range" min="0" value="{{ $data->heading }}" max="100"step="0.1"  match="heading" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="shots" class="col-md-3 col-form-label text-right">
+                        Shots
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="shots" name="shots">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->shots }}" max="100"step="0.1"  match="shots" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -147,8 +240,6 @@
                         <input type="range" min="0" value="{{ $data->long_shots }}" max="100"step="0.1"  match="long_shots" data-rangeslider>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-6 row">
                     <label for="long_throws" class="col-md-3 col-form-label text-right">
                         Long Throws
@@ -171,8 +262,6 @@
                         <input type="range" min="0" value="{{ $data->marking }}" max="100"step="0.1"  match="marking" data-rangeslider>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-6 row">
                     <label for="passing" class="col-md-3 col-form-label text-right">
                         Passing
@@ -182,6 +271,50 @@
                     </div>
                     <div class="col-md-5">
                         <input type="range" min="0" value="{{ $data->passing }}" max="100"step="0.1"  match="passing" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="punching" class="col-md-3 col-form-label text-right">
+                        Punching
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="punching" name="punching">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->punching }}" max="100"step="0.1"  match="punching" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="reflexes" class="col-md-3 col-form-label text-right">
+                        Reflexes
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="reflexes" name="reflexes">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->reflexes }}" max="100"step="0.1"  match="reflexes" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="rushing_out" class="col-md-3 col-form-label text-right">
+                        Rushing Out
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="rushing_out" name="rushing_out">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->rushing_out }}" max="100"step="0.1"  match="rushing_out" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="throwing" class="col-md-3 col-form-label text-right">
+                        Throwing
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="throwing" name="throwing">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->throwing }}" max="100"step="0.1"  match="throwing" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -195,8 +328,6 @@
                         <input type="range" min="0" value="{{ $data->penalty_taking }}" max="100"step="0.1"  match="penalty_taking" data-rangeslider>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-6 row">
                     <label for="tackling" class="col-md-3 col-form-label text-right">
                         Tackling
@@ -217,6 +348,28 @@
                     </div>
                     <div class="col-md-5">
                         <input type="range" min="0" value="{{ $data->technique }}" max="100"step="0.1"  match="technique" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="offensive" class="col-md-3 col-form-label text-right">
+                        1 VS 1 Offensive
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="offensive" name="offensive">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->offensive }}" max="100"step="0.1"  match="offensive" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="deffense" class="col-md-3 col-form-label text-right">
+                        1 VS 1 Deffense
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="deffense" name="deffense">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->deffense }}" max="100"step="0.1"  match="deffense" data-rangeslider>
                     </div>
                 </div>
             </div>
@@ -247,8 +400,6 @@
                         <input type="range" min="0" value="{{ $data->articipation }}" max="100"step="0.1"  match="articipation" data-rangeslider>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-6 row">
                     <label for="bravery" class="col-md-3 col-form-label text-right">
                         Bravery
@@ -271,8 +422,6 @@
                         <input type="range" min="0" value="{{ $data->composure }}" max="100"step="0.1"  match="composure" data-rangeslider>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-6 row">
                     <label for="concentration" class="col-md-3 col-form-label text-right">
                         Concentration
@@ -295,8 +444,6 @@
                         <input type="range" min="0" value="{{ $data->decisions }}" max="100"step="0.1"  match="decisions" data-rangeslider>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-6 row">
                     <label for="determination" class="col-md-3 col-form-label text-right">
                         Determination
@@ -319,8 +466,6 @@
                         <input type="range" min="0" value="{{ $data->flair }}" max="100"step="0.1"  match="flair" data-rangeslider>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-6 row">
                     <label for="leadership" class="col-md-3 col-form-label text-right">
                         Leadership
@@ -343,8 +488,6 @@
                         <input type="range" min="0" value="{{ $data->off_ball }}" max="100"step="0.1"  match="off_ball" data-rangeslider>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-6 row">
                     <label for="positioning" class="col-md-3 col-form-label text-right">
                         Positioning
@@ -367,8 +510,6 @@
                         <input type="range" min="0" value="{{ $data->teamwork }}" max="100"step="0.1"  match="teamwork" data-rangeslider>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-6 row">
                     <label for="vision" class="col-md-3 col-form-label text-right">
                         Vision
@@ -408,6 +549,17 @@
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
+                    <label for="aerial_duels" class="col-md-3 col-form-label text-right">
+                        Aerial Duels
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="aerial_duels" name="aerial_duels">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->aerial_duels }}" max="100"step="0.1" match="aerial_duels" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
                     <label for="agility" class="col-md-3 col-form-label text-right">
                         Agility
                     </label>
@@ -418,8 +570,6 @@
                         <input type="range" min="0" value="{{ $data->agility }}" max="100"step="0.1"  match="agility" data-rangeslider>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-6 row">
                     <label for="balance" class="col-md-3 col-form-label text-right">
                         Balance
@@ -442,8 +592,6 @@
                         <input type="range" min="0" value="{{ $data->jumping_reach }}" max="100"step="0.1"  match="jumping_reach" data-rangeslider>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-6 row">
                     <label for="natural_fitness" class="col-md-3 col-form-label text-right">
                         Natural Fitness
@@ -466,8 +614,28 @@
                         <input type="range" min="0" value="{{ $data->pace }}" max="100"step="0.1"  match="pace" data-rangeslider>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+                <div class="form-group col-md-6 row">
+                    <label for="reaction" class="col-md-3 col-form-label text-right">
+                        Reaction
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="reaction" name="reaction">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->reaction }}" max="100"step="0.1"  match="reaction" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="sprint_speed" class="col-md-3 col-form-label text-right">
+                        Sprint Speed
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="sprint_speed" name="sprint_speed">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->sprint_speed }}" max="100"step="0.1"  match="sprint_speed" data-rangeslider>
+                    </div>
+                </div>
                 <div class="form-group col-md-6 row">
                     <label for="stamina" class="col-md-3 col-form-label text-right">
                         Stamina
