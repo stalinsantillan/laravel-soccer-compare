@@ -15,7 +15,9 @@ class SettingsController extends Controller
      */
     public function paramsetting_show()
     {
-        return view('user.paramsetting');
+        $data = Paramsetting::first()->get();
+        return view('user.paramsetting')
+            ->with('data', $data);
     }
 
     /**
