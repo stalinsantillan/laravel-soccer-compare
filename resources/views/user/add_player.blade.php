@@ -191,6 +191,14 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group row col-md-6">
+                            <label for="cur_team" class="col-md-4 col-form-label text-right">
+                                Current Team<span class="text-danger">*</span>
+                            </label>
+                            <div class="col-md-7">
+                                <input type="text" required class="form-control" id="cur_team" name="cur_team">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -217,17 +225,7 @@
             Technical features
         </div>
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group row">
-                        <label for="cur_team" class="col-md-4 col-form-label text-right">
-                            Current Team<span class="text-danger">*</span>
-                        </label>
-                        <div class="col-md-7">
-                            <input type="text" required class="form-control" id="cur_team" name="cur_team">
-                        </div>
-                    </div>
-                </div>
+            <div class="row position-panel">
                 <div class="col-md-6">
                     <div class="form-group row">
                         <label for="main_pos" class="col-md-4 col-form-label text-right">
@@ -240,20 +238,18 @@
                                 <option>Forward</option>
                                 <option>Goalkeeper</option>
                             </select>
+                            <a href="javascript:addnewposition()" class="text-white-50" style="line-height: 30px">Add new position</a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row position-panel">
                 <div class="col-md-6">
                     <div class="form-group row">
                         <label for="position2" class="col-md-4 col-form-label text-right">
-                            Secondary Position
+                            Specify Position
                         </label>
                         <div class="col-md-7">
                             <select class="custom-select mr-sm-2" required id="position2" name="position2">
                             </select>
-                            <a href="javascript:addnewposition()" class="text-white-50" style="line-height: 30px">Add new position</a>
                         </div>
                     </div>
                 </div>
@@ -726,10 +722,11 @@
 
     <script src="{{ asset('erp_assets/select2/select2.js') }}"></script>
     <script>
-        let curCounter = 2;
+        let curCounter = 1;
         let arrDefender = ["Centre-back", "Sweeper", "Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back"];
         let arrMidfielder = ["Centre midfield", "Defensive midfield", "Attacking midfield", "Left Wide midfield", "Right Wide midfield"];
         let arrForward = ["Centre forward", "Second striker", "Left Winger", "Right Winger"];
+        let arrGoalkeeper = ["Goalkeeper"];
         $(document).ready(function(){
             var inputs = document.querySelectorAll( '.custom-file-input' );
             Array.prototype.forEach.call( inputs, function( input )
@@ -861,10 +858,6 @@
             });
             $("#main_pos").change(function (e) {
                 let main_pos = $( "#main_pos option:selected" ).text();
-                $("[identi=position]").each(function( index ) {
-                    $(this).parent().parent().parent().remove();
-                });
-                curCounter = 2;
                 $("#position2 option").remove();
                 $('#position2').select2('val', null);
                 if (main_pos == "Defender")
@@ -885,88 +878,100 @@
                     {
                         $('#position2').append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
                     }
+                } else
+                {
+                    for (let i = 0; i < arrGoalkeeper.length; i++)
+                    {
+                        $('#position2').append($("<option></option>").text(arrGoalkeeper[i]).attr("value", arrGoalkeeper[i]));
+                    }
                 }
-                $("#position2").trigger("change");
             });
             $("#main_pos").trigger("change");
         })
-        let arrCounterLabels = ['First', 'Secondary', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth'];
+        function deleteposition(count) {
+            $("#main_position" + count).parent().parent().parent().remove();
+            $("#spec_position" + count).parent().parent().parent().remove();
+        }
         function addnewposition() {
-            if (curCounter > 9) return;
-            let selectedPosition = [];
-            selectedPosition.push($("#position2").val());
-            $("[identi=position]").each(function( index ) {
-                selectedPosition.push($( this ).val());
-            });
-            let main_pos = $( "#main_pos option:selected" ).text();
-            if (main_pos == "Defender" && selectedPosition.length == arrDefender.length)
-                return;
-            if (main_pos == "Midfielder" && selectedPosition.length == arrMidfielder.length)
-                return;
-            if (main_pos == "Forward" && selectedPosition.length == arrForward.length)
-                return;
-            if (main_pos == "Goalkeeper")
-                return;
-            $element = '<div class="col-md-6">\n' +
+            $element_main = '<div class="col-md-6">\n' +
                 '                    <div class="form-group row">\n' +
                 '                        <label for="position' + (curCounter + 1) + '" class="col-md-4 col-form-label text-right">\n' +
-                '                            ' + arrCounterLabels[curCounter] + ' Position\n' +
+                '                            Other Position\n' +
                 '                        </label>\n' +
                 '                        <div class="col-md-7">\n' +
-                '                            <select class="custom-select mr-sm-2" required id="position' + (curCounter + 1) + '" counter = "' + (curCounter + 1) + '" identi="position" name="position[]">\n' +
+                '                            <select class="custom-select mr-sm-2" required id="main_position' + (curCounter + 1) + '" counter = "' + (curCounter + 1) + '" identi="main_position" name="main_position[]">\n' +
+                '                                <option>Defender</option>\n' +
+                '                                <option>Midfielder</option>\n' +
+                '                                <option>Forward</option>\n' +
+                '                                <option>Goalkeeper</option>\n' +
                 '                            </select>\n' +
                 '                        </div>\n' +
                 '                    </div>\n' +
                 '                </div>';
-            $(".position-panel").append($element);
-            if (main_pos == "Defender")
-            {
-                for (let i = 0; i < arrDefender.length; i++)
+            $element_spec = '<div class="col-md-6">\n' +
+                '                    <div class="form-group row">\n' +
+                '                        <label for="position' + (curCounter + 1) + '" class="col-md-4 col-form-label text-right">\n' +
+                '                            Specify Position\n' +
+                '                        </label>\n' +
+                '                        <div class="col-md-7">\n' +
+                '                            <select class="custom-select mr-sm-2" required id="spec_position' + (curCounter + 1) + '" counter = "' + (curCounter + 1) + '" identi="spec_position" name="spec_position[]">\n' +
+                '                            </select>\n' +
+                '                        </div>\n' +
+                '                        <div class="col-md-1" style="padding-top: 10px;">\n' +
+                '                            <span style="cursor: pointer" onclick="deleteposition(' + (curCounter + 1) + ')">x</span>\n' +
+                '                        </div>\n' +
+                '                    </div>\n' +
+                '                </div>';
+            $(".position-panel").append($element_main);
+            $(".position-panel").append($element_spec);
+            $('#main_position' + (curCounter + 1)).change(function () {
+                let $curCounter = $(this).attr("counter");
+                let cur_main_pos = $('#main_position' + ($curCounter)).val();
+                $('#spec_position' + ($curCounter) + ' option').remove();
+                $('#spec_position' + ($curCounter)).select2('val', null);
+                if (cur_main_pos == "Defender")
                 {
-                    if (!selectedPosition.includes(arrDefender[i]))
-                        $('#position' + (curCounter + 1)).append($("<option></option>").text(arrDefender[i]).attr("value", arrDefender[i]));
-                }
-            } else if (main_pos == "Midfielder")
-            {
-                for (let i = 0; i < arrMidfielder.length; i++)
+                    for (let i = 0; i < arrDefender.length; i++)
+                    {
+                        $('#spec_position' + ($curCounter)).append($("<option></option>").text(arrDefender[i]).attr("value", arrDefender[i]));
+                    }
+                } else if (cur_main_pos == "Midfielder")
                 {
-                    if (!selectedPosition.includes(arrMidfielder[i]))
-                        $('#position' + (curCounter + 1)).append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
-                }
-            } else if (main_pos == "Forward")
-            {
-                for (let i = 0; i < arrForward.length; i++)
+                    for (let i = 0; i < arrMidfielder.length; i++)
+                    {
+                        $('#spec_position' + ($curCounter)).append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
+                    }
+                } else if (cur_main_pos == "Forward")
                 {
-                    if (!selectedPosition.includes(arrForward[i]))
-                        $('#position' + (curCounter + 1)).append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
+                    for (let i = 0; i < arrForward.length; i++)
+                    {
+                        $('#spec_position' + ($curCounter)).append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
+                    }
+                } else
+                {
+                    for (let i = 0; i < arrGoalkeeper.length; i++)
+                    {
+                        $('#spec_position' + ($curCounter)).append($("<option></option>").text(arrGoalkeeper[i]).attr("value", arrGoalkeeper[i]));
+                    }
                 }
-            }
-            $('#position' + (curCounter + 1)).select2({
+                $('#spec_position' + ($curCounter)).trigger('change');
+            });
+            $('#main_position' + (curCounter + 1)).select2({
                 allowClear: false,
                 dropdownAutoWidth: true,
                 width: 'element',
                 minimumResultsForSearch: 20, //prevent filter input
                 maximumSelectionSize: 20 // prevent scrollbar
             });
-            $('#position' + (curCounter + 1)).trigger("change");
+            $('#spec_position' + (curCounter + 1)).select2({
+                allowClear: false,
+                dropdownAutoWidth: true,
+                width: 'element',
+                minimumResultsForSearch: 20, //prevent filter input
+                maximumSelectionSize: 20 // prevent scrollbar
+            });
+            $('#main_position' + (curCounter + 1)).trigger("change");
             ++curCounter;
-            $('#position' + (curCounter)).change(function () {
-                curCounter = $(this).attr("counter");
-                $("[identi=position]").each(function(index) {
-                    $counter = $(this).attr("counter");
-                    if (parseInt($counter) > curCounter)
-                    {
-                        $(this).parent().parent().parent().remove();
-                    }
-                });
-            });
-            $('#position2').change(function () {
-                $("[identi=position]").each(function(index) {
-                    $counter = $(this).attr("counter");
-                    $(this).parent().parent().parent().remove();
-                    curCounter = 2;
-                });
-            });
         }
         function submitForm() {
             if ($("#name").val() == "")
