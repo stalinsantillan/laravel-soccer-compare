@@ -885,6 +885,7 @@
                         $('#position2').append($("<option></option>").text(arrGoalkeeper[i]).attr("value", arrGoalkeeper[i]));
                     }
                 }
+                $("#position2").trigger("change");
             });
             $("#main_pos").trigger("change");
         })
