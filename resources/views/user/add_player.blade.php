@@ -232,7 +232,7 @@
                             Main Position<span class="text-danger">*</span>
                         </label>
                         <div class="col-md-7">
-                            <select class="custom-select mr-sm-2" required id="main_pos" name="main_pos">
+                            <select class="custom-select mr-sm-2" required id="main_pos" name="main_position[]">
                                 <option>Defender</option>
                                 <option>Midfielder</option>
                                 <option>Forward</option>
@@ -248,7 +248,7 @@
                             Specify Position
                         </label>
                         <div class="col-md-7">
-                            <select class="custom-select mr-sm-2" required id="position2" name="position2">
+                            <select class="custom-select mr-sm-2" required id="position2" name="spec_position[]">
                             </select>
                         </div>
                     </div>
