@@ -15,7 +15,7 @@ class SettingsController extends Controller
      */
     public function paramsetting_show()
     {
-        $data = Paramsetting::first()->get();
+        $data = Paramsetting::find(1);
         return view('user.paramsetting')
             ->with('data', $data);
     }
@@ -28,7 +28,7 @@ class SettingsController extends Controller
      */
     public function paramsetting_store(Request $request)
     {
-        $paramsetting = Paramsetting::first();
+        $paramsetting = Paramsetting::find(1);
 
         $paramsetting->corners = $request->corners;
         $paramsetting->crossing = $request->crossing;
@@ -68,5 +68,7 @@ class SettingsController extends Controller
         $paramsetting->agility = $request->agility;
 
         $paramsetting->save();
+
+        return redirect('user/setting/paramsetting_show');
     }
 }

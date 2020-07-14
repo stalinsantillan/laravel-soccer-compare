@@ -14,6 +14,7 @@ class CreateParamsettingsTable extends Migration
     public function up()
     {
         Schema::create('paramsettings', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->double('corners')->default(10);
             $table->double('crossing')->default(10);
             $table->double('dribbling')->default(10);
