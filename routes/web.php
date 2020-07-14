@@ -31,4 +31,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'user', 'as' => 'user.'], fu
     Route::get('filter_player', 'User\PlayerController@filter_player')->name('filter_player');
     Route::get('filter_show', 'User\PlayerController@filter_show')->name('filter_show');
     Route::get('player_profile/{player}', 'User\PlayerController@player_profile')->name('player_profile');
+
+    Route::get('setting/paramsetting_show', 'User\SettingsController@paramsetting_show')->name('paramsetting_show');
+    Route::post('setting/paramsetting_store', 'User\SettingsController@paramsetting_store')->name('paramsetting_store');
 });
