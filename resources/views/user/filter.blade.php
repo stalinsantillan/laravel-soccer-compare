@@ -83,18 +83,14 @@
                                 </a>
                             </td>
                             <td>
-                                @if($one->main_pos != 'Goalkeeper')
-                                    @php $subone = 1; @endphp
-                                    @foreach($one->subpositions as $onesubposition)
-                                        @if($subone > 1)
-                                            <br>
-                                        @endif
-                                        <span class="badge badge-primary">{{ $onesubposition['position'] }}</span>
-                                        @php ++$subone; @endphp
-                                    @endforeach
-                                @else
-                                    <span class="badge badge-primary">{{ $one->main_pos }}</span>
-                                @endif
+                                @php $subone = 1; @endphp
+                                @foreach($one->positions as $position)
+                                    @if($subone > 1)
+                                        <br>
+                                    @endif
+                                    <span class="badge badge-primary">{{ $position->specify }}</span>
+                                    @php ++$subone; @endphp
+                                @endforeach
                             </td>
                             @php
                                 $technical_avg = ($one->corners + $one->crossing + $one->dribbling + $one->finishing +

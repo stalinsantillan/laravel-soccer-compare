@@ -152,7 +152,6 @@ class PlayerController extends Controller
         $data = $data->orWhere('surename', 'LIKE', "%$name%")
             ->get();
 
-
         return view('user.filter')
             ->with('filter', $request->all())
             ->with('data', $data);
