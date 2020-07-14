@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 use App\Models\User\Player;
+use App\Models\User\Paramsetting;
 
 class PlayerController extends Controller
 {
@@ -28,7 +30,9 @@ class PlayerController extends Controller
      */
     public function add_player()
     {
-        return view('user.add_player');
+        $paramsetting = Paramsetting::find(1);
+        return view('user.add_player')
+            ->with('paramsetting', $paramsetting);
     }
 
     /**
@@ -133,17 +137,22 @@ class PlayerController extends Controller
 
         if ($request->name)
             $name = $request->name;
-        if ($request->nationality)
+
+        $data = Player::where('name', 'LIKE', "%$name%");
+
+        if ($request->nationality) {
             $nationality = $request->nationality;
-        if ($request->position)
+            $data = $data->whereIn('nationality', $nationality);
+        }
+
+        if ($request->position) {
             $position = $request->position;
+        }
         
-        dd($position);
-        $data = Player::where('name', 'LIKE', "%$name%")
-            ->whereIn('nationality', $nationality)
-            ->orWhere('surename', 'LIKE', "$$name$")
+        $data = $data->orWhere('surename', 'LIKE', "%$name%")
             ->get();
-        
+
+
         return view('user.filter')
             ->with('filter', $request->all())
             ->with('data', $data);
