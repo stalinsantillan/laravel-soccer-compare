@@ -91,7 +91,7 @@
                         </div>
                     </div>
                     <div class="col-md-auto">
-                        <div id="soccerfield"></div>
+                        <div id="soccerfield" class="rotated"></div>
                     </div>
                 </div>
             </div>
@@ -109,99 +109,204 @@
                         <div class="form-group">
                             <label for="corners">Corners</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->corners * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->corners * 10 }}%" aria-valuenow="7" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->corners }} / {{ $paramsetting->corners }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->corners * 10 }}%" aria-valuenow="{{ $data->latestParam->corners }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->corners }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="crossing">Crossing</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->crossing * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->crossing * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->crossing }} / {{ $paramsetting->crossing }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->crossing * 10 }}%"  aria-valuenow="{{ $data->latestParam->crossing }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->crossing }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="dribbling">Dribbling</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->dribbling * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->dribbling * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->dribbling }} / {{ $paramsetting->dribbling }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->dribbling * 10 }}%"  aria-valuenow="{{ $data->latestParam->dribbling }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->dribbling }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="finishing">Finishing</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->finishing * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->finishing * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->finishing }} / {{ $paramsetting->finishing }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->finishing * 10 }}%"  aria-valuenow="{{ $data->latestParam->finishing }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->finishing }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="areial_reach">Aerial Reach</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->areial_reach }} / {{ $paramsetting->areial_reach }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->areial_reach * 10 }}%"  aria-valuenow="{{ $data->latestParam->areial_reach }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->areial_reach }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="command_of_area">Command Of Area</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->command_of_area }} / {{ $paramsetting->command_of_area }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->command_of_area * 10 }}%"  aria-valuenow="{{ $data->latestParam->command_of_area }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->command_of_area }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="communication">Communication</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->communication }} / {{ $paramsetting->communication }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->communication * 10 }}%"  aria-valuenow="{{ $data->latestParam->communication }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->communication }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="eccentricity">Eccentricity</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->eccentricity }} / {{ $paramsetting->eccentricity }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->eccentricity * 10 }}%"  aria-valuenow="{{ $data->latestParam->eccentricity }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->eccentricity }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="first_touch">First Touch</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->first_touch * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->first_touch * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->first_touch }} / {{ $paramsetting->first_touch }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->first_touch * 10 }}%"  aria-valuenow="{{ $data->latestParam->first_touch }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->first_touch }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="handling">Handling</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->handling }} / {{ $paramsetting->handling }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->handling * 10 }}%"  aria-valuenow="{{ $data->latestParam->handling }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->handling }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="kicking">Kicking</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->kicking }} / {{ $paramsetting->kicking }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->kicking * 10 }}%"  aria-valuenow="{{ $data->latestParam->kicking }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->kicking }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="one_on_ones">One On Ones</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->one_on_ones }} / {{ $paramsetting->one_on_ones }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->one_on_ones * 10 }}%"  aria-valuenow="{{ $data->latestParam->one_on_ones }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->one_on_ones }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="feet_playing">Feet playing</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->feet_playing }} / {{ $paramsetting->feet_playing }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->feet_playing * 10 }}%"  aria-valuenow="{{ $data->latestParam->feet_playing }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->feet_playing }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="free_kick">Free Kick Taking</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->free_kick * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->free_kick * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->free_kick }} / {{ $paramsetting->free_kick }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->free_kick * 10 }}%"  aria-valuenow="{{ $data->latestParam->free_kick }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->free_kick }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="heading">Heading</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->heading * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->heading * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->heading }} / {{ $paramsetting->heading }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->heading * 10 }}%"  aria-valuenow="{{ $data->latestParam->heading }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->heading }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="shots">Shots</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->shots }} / {{ $paramsetting->shots }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->shots * 10 }}%"  aria-valuenow="{{ $data->latestParam->shots }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->shots }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="long_shots">Long Shots</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->long_shots * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->long_shots * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->long_shots }} / {{ $paramsetting->long_shots }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->long_shots * 10 }}%"  aria-valuenow="{{ $data->latestParam->long_shots }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->long_shots }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="long_throws">Long Throws</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->long_throws * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->long_throws * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->long_throws }} / {{ $paramsetting->long_throws }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->long_throws * 10 }}%"  aria-valuenow="{{ $data->latestParam->long_throws }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->long_throws }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="marking">Marking</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->marking * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->marking * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->marking }} / {{ $paramsetting->marking }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->marking * 10 }}%"  aria-valuenow="{{ $data->latestParam->marking }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->marking }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="passing">Passing</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->passing * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->passing * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->passing }} / {{ $paramsetting->passing }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->passing * 10 }}%"  aria-valuenow="{{ $data->latestParam->passing }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->passing }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="punching">Punching</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->punching }} / {{ $paramsetting->punching }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->punching * 10 }}%"  aria-valuenow="{{ $data->latestParam->punching }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->punching }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="reflexes">Reflexes</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->reflexes }} / {{ $paramsetting->reflexes }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->reflexes * 10 }}%"  aria-valuenow="{{ $data->latestParam->reflexes }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->reflexes }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="rushing_out">Rushing Out</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->rushing_out }} / {{ $paramsetting->rushing_out }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->rushing_out * 10 }}%"  aria-valuenow="{{ $data->latestParam->rushing_out }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->rushing_out }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="throwing">Throwing</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->throwing }} / {{ $paramsetting->throwing }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->throwing * 10 }}%"  aria-valuenow="{{ $data->latestParam->throwing }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->throwing }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="penalty_taking">Penalty Taking</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->penalty_taking * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->penalty_taking * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->penalty_taking }} / {{ $paramsetting->penalty_taking }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->penalty_taking * 10 }}%"  aria-valuenow="{{ $data->latestParam->penalty_taking }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->penalty_taking }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="tackling">Tackling</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->tackling * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->tackling * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->tackling }} / {{ $paramsetting->tackling }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->tackling * 10 }}%"  aria-valuenow="{{ $data->latestParam->tackling }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->tackling }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="technique">Technique</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->technique * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->technique * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->technique }} / {{ $paramsetting->technique }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->technique * 10 }}%"  aria-valuenow="{{ $data->latestParam->technique }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->technique }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="offensive">1 VS 1 Offensive</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->offensive }} / {{ $paramsetting->offensive }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->offensive * 10 }}%"  aria-valuenow="{{ $data->latestParam->offensive }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->offensive }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="deffense">1 VS 1 Deffense</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->deffense }} / {{ $paramsetting->deffense }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->deffense * 10 }}%"  aria-valuenow="{{ $data->latestParam->deffense }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->deffense }}"></div>
                             </div>
                         </div>
                     </div>
@@ -212,99 +317,99 @@
                         <div class="form-group">
                             <label for="aggression">Aggression</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->aggression * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->aggression * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->aggression }} / {{ $paramsetting->aggression }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->aggression * 10 }}%"  aria-valuenow="{{ $data->latestParam->aggression }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->aggression }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="articipation">Articipation</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->articipation * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->articipation * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->articipation }} / {{ $paramsetting->articipation }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->articipation * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="bravery">Bravery</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->bravery * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->bravery * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->bravery }} / {{ $paramsetting->bravery }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->bravery * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="composure">Composure</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->composure * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->composure * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->composure }} / {{ $paramsetting->composure }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->composure * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="concentration">Concentration</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->concentration * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->concentration * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->concentration }} / {{ $paramsetting->concentration }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->concentration * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="decisions">Decisions</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->decisions * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->decisions * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->decisions }} / {{ $paramsetting->decisions }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->decisions * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="determination">Determination</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->determination * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->determination * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->determination }} / {{ $paramsetting->determination }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->determination * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="flair">Flair</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->flair * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->flair * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->flair }} / {{ $paramsetting->flair }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->flair * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="leadership">Leadership</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->leadership * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->leadership * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->leadership }} / {{ $paramsetting->leadership }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->leadership * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="off_ball">Off The Ball</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->off_ball * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->off_ball * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->off_ball }} / {{ $paramsetting->off_ball }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->off_ball * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="positioning">Positioning</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->positioning * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->positioning * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->positioning }} / {{ $paramsetting->positioning }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->positioning * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="teamwork">Teamwork</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->teamwork * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->teamwork * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->teamwork }} / {{ $paramsetting->teamwork }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->teamwork * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="vision">Vision</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->vision * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->vision * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->vision }} / {{ $paramsetting->vision }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->vision * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="work_rate">Work Rate</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->work_rate * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->work_rate * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->work_rate }} / {{ $paramsetting->work_rate }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->work_rate * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                     </div>
@@ -315,57 +420,78 @@
                         <div class="form-group">
                             <label for="acceleration">Acceleration</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->acceleration * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->acceleration * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->acceleration }} / {{ $paramsetting->acceleration }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->acceleration * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="aerial_duels">Aerial Duels</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->aerial_duels }} / {{ $paramsetting->aerial_duels }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->aerial_duels * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="agility">Agility</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->agility * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->agility * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->agility }} / {{ $paramsetting->agility }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->agility * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="balance">Balance</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->balance * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->balance * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->balance }} / {{ $paramsetting->balance }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->balance * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="jumping_reach">Jumping Reach</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->jumping_reach * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->jumping_reach * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->jumping_reach }} / {{ $paramsetting->jumping_reach }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->jumping_reach * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="natural_fitness">Natural Fitness</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->natural_fitness * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->natural_fitness * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->natural_fitness }} / {{ $paramsetting->natural_fitness }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->natural_fitness * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="pace">Pace</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->pace * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->pace * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->pace }} / {{ $paramsetting->pace }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->pace * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="reaction">Reaction</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->reaction }} / {{ $paramsetting->reaction }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->reaction * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sprint_speed">Sprint Speed</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->sprint_speed }} / {{ $paramsetting->sprint_speed }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->sprint_speed * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="stamina">Stamina</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->stamina * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->stamina * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->stamina }} / {{ $paramsetting->stamina }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->stamina * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="strength">Strength</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->strength * 10 }}%</span>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->strength * 10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="10"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->strength }} / {{ $paramsetting->strength }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $data->latestParam->strength * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
                     </div>
@@ -470,7 +596,7 @@
         $(document).ready(function () {
             var options =  {
                 field: {
-                    width: "320px",
+                    width: "220px",
                     height: "200px",
                     img: "{{ asset('soccer_field/img/soccerfield_green.png') }} ",
                     startHidden: true,
