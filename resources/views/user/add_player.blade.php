@@ -603,7 +603,7 @@
                 </div>
                 <div class="form-group col-md-6 row">
                     <label for="articipation" class="col-md-3 col-form-label text-right">
-                        Articipation
+                        Anticipation
                     </label>
                     <div class="col-md-4">
                         <input type="text" attrtype="range_input" class="form-control" id="articipation" name="articipation">
@@ -900,14 +900,14 @@
         let arrAttackingPos = ["Centre midfield", "Centre forward", "Second striker", "Left Winger", "Right Winger"];
         let arrGoalkeeperPos = ["Goalkeeper"];
         let arrDefenderAttr = ["crossing", "dribbling", "finishing", "first_touch", "heading", "long_shots", "long_throws", "marking", "passing", "tackling"
-                            , "technique", "aggression", "anticipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
+                            , "technique", "aggression", "articipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
                             , "off_ball", "positioning", "teamwork", "vision", "work_rate", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
                             , "stamina", "strength", "shots", "offensive", "deffense", "aerial_duels", "reaction", "sprint_speed"];
         let arrAttackingAttr = ["crossing", "dribbling", "finishing", "first_touch", "heading", "long_shots", "long_throws", "marking", "passing", "tackling"
-                            , "technique", "aggression", "anticipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
+                            , "technique", "aggression", "articipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
                             , "off_ball", "positioning", "teamwork", "vision", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
                             , "stamina", "strength", "shots", "offensive", "aerial_duels", "reaction", "sprint_speed"];
-        let arrGoalkeeperAttr = ["aggression", "anticipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
+        let arrGoalkeeperAttr = ["aggression", "articipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
             , "off_ball", "positioning", "teamwork", "vision", "work_rate", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
             , "stamina", "strength", "aerial_duels", "reaction", "sprint_speed", "areial_reach", "command_of_area", "communication"
             , "eccentricity", "first_touch", "handling", "kicking", "one_on_ones", "feet_playing", "passing", "punching", "reflexes", "rushing_out", "throwing"];
