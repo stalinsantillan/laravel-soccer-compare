@@ -25,44 +25,10 @@ class CreatePlayersTable extends Migration
             $table->string('photo')->nullable();
             $table->string('current_team');
 
-            $table->string('main_pos');
-            
-            $table->double('corners');
-            $table->double('crossing');
-            $table->double('dribbling');
-            $table->double('finishing');
-            $table->double('first_touch');
-            $table->double('free_kick');
-            $table->double('heading');
-            $table->double('long_shots');
-            $table->double('long_throws');
-            $table->double('marking');
-            $table->double('passing');
-            $table->double('penalty_taking');
-            $table->double('tackling');
-            $table->double('technique');
-            $table->double('aggression');
-            $table->double('articipation');
-            $table->double('bravery');
-            $table->double('composure');
-            $table->double('concentration');
-            $table->double('decisions');
-            $table->double('determination');
-            $table->double('flair');
-            $table->double('leadership');
-            $table->double('off_ball');
-            $table->double('positioning');
-            $table->double('teamwork');
-            $table->double('vision');
-            $table->double('work_rate');
-            $table->double('acceleration');
-            $table->double('balance');
-            $table->double('jumping_reach');
-            $table->double('natural_fitness');
-            $table->double('pace');
-            $table->double('stamina');
-            $table->double('strength');
-            $table->double('agility');
+            $table->double('tecnical_average')->default(0);
+            $table->double('mental_average')->default(0);
+            $table->double('physical_average')->default(0);
+            $table->double('general_average')->default(0);
 
             $table->timestamps();
         });

@@ -92,32 +92,14 @@
                                     @php ++$subone; @endphp
                                 @endforeach
                             </td>
-                            @php
-                                $technical_avg = ($one->corners + $one->crossing + $one->dribbling + $one->finishing +
-                                $one->first_touch + $one->free_kick + $one->heading + $one->long_shots + $one->long_throws +
-                                $one->marking + $one->passing + $one->penalty_taking + $one->tackling + $one->technique) / 14;
-                                $mental_avg = ($one->aggression + $one->articipation + $one->bravery + $one->composure +
-                                $one->concentration + $one->decisions + $one->determination + $one->flair + $one->leadership +
-                                $one->off_ball + $one->positioning + $one->teamwork + $one->vision + $one->work_rate) / 14;
-                                $physical_avg = ($one->acceleration + $one->agility + $one->balance + $one->jumping_reach +
-                                $one->natural_fitness + $one->pace + $one->stamina + $one->strength) / 8;
-                                $general_avg = ($one->corners + $one->crossing + $one->dribbling + $one->finishing +
-                                $one->first_touch + $one->free_kick + $one->heading + $one->long_shots + $one->long_throws +
-                                $one->marking + $one->passing + $one->penalty_taking + $one->tackling + $one->technique +
-                                $one->aggression + $one->articipation + $one->bravery + $one->composure +
-                                $one->concentration + $one->decisions + $one->determination + $one->flair + $one->leadership +
-                                $one->off_ball + $one->positioning + $one->teamwork + $one->vision + $one->work_rate +
-                                $one->acceleration + $one->agility + $one->balance + $one->jumping_reach +
-                                $one->natural_fitness + $one->pace + $one->stamina + $one->strength) / 36;
-                            @endphp
-                            <td style="background-color: #3f4a56">{{ round($general_avg, 1) }}</td>
+                            <td style="background-color: #3f4a56">{{ round($one->general_average, 1) }}</td>
                             <td>{{ $one->birth_date }}</td>
                             <td>{{ $one->height }}cm</td>
                             <td>{{ $one->nationality }}</td>
                             <td></td>
-                            <td>{{ round($mental_avg, 1) }}</td>
-                            <td>{{ round($physical_avg, 1) }}</td>
-                            <td>{{ round($technical_avg, 1) }}</td>
+                            <td>{{ round($one->mental_average, 1) }}</td>
+                            <td>{{ round($one->physical_average, 1) }}</td>
+                            <td>{{ round($one->technical_average, 1) }}</td>
                             @if($one->main_pos != 'Goalkeeper')
                                 <td></td>
                             @else

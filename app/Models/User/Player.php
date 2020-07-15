@@ -3,6 +3,8 @@
 namespace App\Models\User;
 
 use App\Models\User\Position;
+use App\Models\User\Parameter;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Player extends Model
@@ -12,17 +14,38 @@ class Player extends Model
         return $this->hasMany('App\Models\User\Position');
     }
 
+    public function parameters()
+    {
+        return $this->hasMany('App\Models\User\Parameter');
+    }
+
+    public function latestParam()
+    {
+        return $this->hasOne('\App\Models\User\Parameter')->latest();
+    }
+
     public function storePositions($positions)
     {
         $arr_data = array();
         foreach ($positions as $position) {
-            if (!isset($position)) continue;
             $data = new Position();
-            $data->position = $position;
-            $data->specify = $position;
+            $data->position = $position['position'];
+            $data->specify = $position['specify'];
             array_push($arr_data, $data);
         }
         if (sizeof($arr_data) > 0)
             $this->positions()->saveMany($arr_data);
+    }
+
+    public function storeParameters($parameters)
+    {
+        $parameter = new Parameter();
+        $keys = array_keys($parameters);
+
+        foreach ($keys as $key) {
+            $parameter->$key = $parameters[$key];
+        }
+
+        $this->parameters()->save($parameter);
     }
 }
