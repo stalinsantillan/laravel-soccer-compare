@@ -25,10 +25,11 @@ class CreatePlayersTable extends Migration
             $table->string('photo')->nullable();
             $table->string('current_team');
 
-            $table->double('tecnical_average')->default(0);
+            $table->double('technical_average')->default(0);
             $table->double('mental_average')->default(0);
             $table->double('physical_average')->default(0);
             $table->double('general_average')->default(0);
+            $table->double('goalkeeper_average')->default(0);
 
             $table->timestamps();
         });

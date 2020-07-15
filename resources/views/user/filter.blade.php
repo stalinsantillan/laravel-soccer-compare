@@ -100,11 +100,7 @@
                             <td>{{ round($one->mental_average, 1) }}</td>
                             <td>{{ round($one->physical_average, 1) }}</td>
                             <td>{{ round($one->technical_average, 1) }}</td>
-                            @if($one->main_pos != 'Goalkeeper')
-                                <td></td>
-                            @else
-                                <td>{{ round($general_avg, 1) }}</td>
-                            @endif
+                            <td>{{ round($one->goalkeeper_average, 1) }}</td>
                         </tr>
                     @endforeach
                 @endif
