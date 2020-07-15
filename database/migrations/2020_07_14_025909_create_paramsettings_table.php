@@ -51,6 +51,25 @@ class CreateParamsettingsTable extends Migration
             $table->double('stamina')->default(10);
             $table->double('strength')->default(10);
             $table->double('agility')->default(10);
+
+            $table->double('shots')->default(10);
+            $table->double('offensive')->default(10);
+            $table->double('deffense')->default(10);
+            $table->double('aerial_duels')->default(10);
+            $table->double('reaction')->default(10);
+            $table->double('sprint_speed')->default(10);
+            $table->double('areial_reach')->default(10);
+            $table->double('command_of_area')->default(10);
+            $table->double('communication')->default(10);
+            $table->double('eccentricity')->default(10);
+            $table->double('handling')->default(10);
+            $table->double('kicking')->default(10);
+            $table->double('one_on_ones')->default(10);
+            $table->double('feet_playing')->default(10);
+            $table->double('punching')->default(10);
+            $table->double('reflexes')->default(10);
+            $table->double('rushing_out')->default(10);
+            $table->double('throwing')->default(10);
             $table->timestamps();
         });
     }
