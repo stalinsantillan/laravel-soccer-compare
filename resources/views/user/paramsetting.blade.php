@@ -391,7 +391,7 @@
                 </div>
                 <div class="form-group col-md-6 row">
                     <label for="articipation" class="col-md-3 col-form-label text-right">
-                        Articipation
+                        Anticipation
                     </label>
                     <div class="col-md-4">
                         <input type="text" attrtype="range_input" class="form-control" id="articipation" name="articipation">
