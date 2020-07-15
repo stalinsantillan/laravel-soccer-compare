@@ -445,7 +445,10 @@ class PlayerController extends Controller
      */
     public function player_profile(Player $player)
     {
-        return view('user.player_profile')->with('data', $player);
+        $paramsetting = Paramsetting::find(1);
+        return view('user.player_profile')
+            ->with('data', $player)
+            ->with('paramsetting', $paramsetting);
     }
 
     /**
