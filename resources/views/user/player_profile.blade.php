@@ -22,11 +22,11 @@
             }
         }
         .rotated {
-            -webkit-transform: rotate(90deg);
-            -moz-transform: rotate(90deg);
-            -o-transform: rotate(90deg);
-            -ms-transform: rotate(90deg);
-            transform: rotate(90deg);
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            transform: rotate(-90deg);
         }
         .progress-lg {
             height: 18px !important;
@@ -49,49 +49,128 @@
                     <li class="breadcrumb-item active">{{ trans('cruds.player.profile') }}</li>
                 </ol>
             </div>
-            <h4 class="page-title">{{ trans('cruds.player.profile') }}</h4>
+            <h4 class="page-title">{{ $data->name }}</h4>
         </div>
     </div>
 </div>
 <!-- end page title --> 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="card mb-0">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-auto row">
-                        <div class="col-md-auto">
+                    <div class="col-md-3 text">
+                        <div class="row">
+                            <div class="col-md-8 offset-md-3">
                             @if(isset($data->photo))
-                                <img src="{{ asset('storage').'/'.$data->photo }}" class="user-photo ml-5" height="130px" width="130px" alt="">
+                                <img src="{{ asset('storage').'/'.$data->photo }}" class="user-photo" height="180px" width="180px" alt="">
                             @else
-                                <img src="{{ asset('user_assets/images/users/standard.png') }}" class="user-photo ml-5" height="130px" width="130px" alt="">
+                                <img src="{{ asset('user_assets/images/users/standard.png') }}" class="user-photo" height="180px" width="180px" alt="">
                             @endif
-                            <div class="card text-white text-center bg-primary text-xs-center mt-1 mb-0 ml-5" style="width: 130px">
-                                <p class="mb-0 mt-1" style="line-height: 15px">General</p>
-                                <p class="mb-0" style="line-height: 15px">average</p>
-                                <p class="mb-0 font-18 font-weight-bold" id="general_average"></p>
                             </div>
+                            {{--                            <div class="card text-white text-center bg-primary text-xs-center mt-1 mb-0 ml-5" style="width: 130px">--}}
+                            {{--                                <p class="mb-0 mt-1" style="line-height: 15px">General</p>--}}
+                            {{--                                <p class="mb-0" style="line-height: 15px">average</p>--}}
+                            {{--                                <p class="mb-0 font-18 font-weight-bold" id="general_average"></p>--}}
+                            {{--                            </div>--}}
                         </div>
-                        <div class="col-md-auto">
-                            <p class="font-weight-bold font-17 mt-1 mb-1">{{ $data->name }}</p>
-                            <p>
-                                <i class="fas fa-calendar font-weight-bold"></i><span class="ml-1">{{ $data->birth_date }}</span>
-                                <i class="fas fa-arrows-alt-v font-weight-bold ml-2"></i><span class="ml-1">{{ $data->height }}cm</span>
-                                <i class="fas fa-flag font-weight-bold ml-2"></i><span class="ml-1">{{ $data->nationality }}</span>
-                            </p>
-                            <p class="mt-2 mb-0">
-                                <span class="font-weight-bold">Current Team</span> {{ $data->current_team }}
-                            </p>
-                            <p class="mt-0">
-                                <span class="font-weight-bold">League</span> Flamengo-Brazil(BR)
-                            </p>
-                            <p class="mt-2">
-                                <span class="font-weight-bold">Prefered foot</span> {{ $data->foot }}
-                            </p>
+                        <div class="row">
+                            <div class="col-md-8 offset-lg-3">
+                                <p class="mt-1 mb-0">
+                                    <span class="font-weight-bold">Nation</span> <i class="fas fa-flag font-weight-bold ml-2 mr-1"></i><span class="">{{ $data->nationality }}</span>
+                                </p>
+                                <p class="mt-1 mb-0">
+                                    <span class="font-weight-bold">League</span> <i class="font-weight-bold ml-2 mr-1"></i><span class="">Flamengo-Brazil(BR)</span>
+                                </p>
+                                <p class="mt-1 mb-0">
+                                    <span class="font-weight-bold">Current Team</span> <i class="font-weight-bold ml-2 mr-1"></i><span class="">{{ $data->current_team }}</span>
+                                </p>
+                                <p class="mt-1 mb-0">
+                                    @php
+                                        $year = date("Y", strtotime($data->birth_date));
+                                        $age = (date('Y') - $year);
+                                    @endphp
+                                    <span class="font-weight-bold">Age</span> <i class="font-weight-bold ml-2 mr-1"></i><span class="">{{ $data->birth_date }} ({{ $age }} years old)</span>
+                                </p>
+                                <p class="mt-1 mb-0">
+                                    <span class="font-weight-bold">Height</span> <i class="font-weight-bold ml-2 mr-1"></i><span class="">{{ $data->height }}cm</span>
+                                </p>
+                                <p class="mt-1 mb-0">
+                                    <span class="font-weight-bold">Weight</span> <i class="font-weight-bold ml-2 mr-1"></i><span class="">{{ $data->weight }}kg</span>
+                                </p>
+                                <p class="mt-1 mb-0">
+                                    <span class="font-weight-bold">Prefered foot</span> <i class="font-weight-bold ml-2 mr-1"></i><span class="">{{ $data->foot }}</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-auto">
-                        <div id="soccerfield" class="rotated"></div>
+                        <div class="mt-2 chartjs-chart"  style="height: 250px !important; width: 250px !important;">
+                            <canvas id="general-radar"  style="height: 180px !important; width: 180px !important;"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <div id="soccerfield" style="width: 320px; height: 200px; margin-top: 80px; margin-left: -60px;" class="rotated"></div>
+                    </div>
+                    <div class="col-md-auto row">
+                        <table class="table table-centered mb-0 col-md-5 mt-3">
+                            <thead>
+                            <tr>
+                                <th colspan="2">Best Attributes</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody_best">
+                            <tr>
+                                <td>Agility</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>Agility</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>Agility</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>Agility</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>Agility</td>
+                                <td>16</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-centered mb-0 col-md-5 ml-2 mt-3">
+                            <thead>
+                            <tr>
+                                <th colspan="2">Worst Attributes</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody_worst">
+                            <tr>
+                                <td>Agility</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>Agility</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>Agility</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>Agility</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>Agility</td>
+                                <td>16</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -528,57 +607,6 @@
             </div>
         </div> <!-- end card-box-->
     </div>
-    <div class="col-md-4">
-        <div class="card mb-2">
-            <div class="card-body">
-                <div class="card-title font-15 font-weight-bold">
-                    General average
-                </div>
-                <div class="dropdown-divider"></div>
-                <div class="mt-2 chartjs-chart">
-                    <canvas id="general-radar" height="150"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="card-box">
-            <ul class="nav nav-tabs nav-bordered">
-                <li class="nav-item">
-                    <a href="#report" data-toggle="tab" aria-expanded="false" class="nav-link active">
-                        REPORT
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#injuries" data-toggle="tab" aria-expanded="true" class="nav-link">
-                        INJURIES
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#physical-structure" data-toggle="tab" aria-expanded="false" class="nav-link">
-                        PHYSICAL STRUCTURE
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#strengths-weeknesses" data-toggle="tab" aria-expanded="false" class="nav-link">
-                        STRENGTHS & WEEKNESSES
-                    </a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane show active" id="report">
-                    <form role="form" method="post" action="">
-                        <textarea class="form-control" id="report-area" rows="5"></textarea>
-                        <button type="submit" class="btn btn-info waves-effect waves-light mt-1">Save</button>
-                    </form>
-                </div>
-                <div class="tab-pane" id="injuries">
-                </div>
-                <div class="tab-pane" id="physical-structure">
-                </div>
-                <div class="tab-pane" id="strengths-weeknesses">
-                </div>
-            </div>
-        </div> <!-- end card-box-->
-    </div>
 </div>
 
 @endsection
@@ -596,7 +624,7 @@
         $(document).ready(function () {
             var options =  {
                 field: {
-                    width: "220px",
+                    width: "320px",
                     height: "200px",
                     img: "{{ asset('soccer_field/img/soccerfield_green.png') }} ",
                     startHidden: true,
@@ -825,6 +853,16 @@
                 ranking_data.push({name: $(this).parent().parent().find("label").text(), value: $(this).attr("aria-valuenow")});
             })
             ranking_data.sort(function(a, b){return b.value - a.value});
+            $("#tbody_best").empty();
+            for (let i = 0; i < 5; i++)
+            {
+                $("#tbody_best").append($("<tr></tr>").append($("<td style='min-width: 120px;'></td>").html(ranking_data[i].name)).append($("<td></td>").html(ranking_data[i].value)));
+            }
+            $("#tbody_worst").empty();
+            for (let i = ranking_data.length - 1; i > ranking_data.length - 6; i--)
+            {
+                $("#tbody_worst").append($("<tr></tr>").append($("<td style='min-width: 120px;'></td>").html(ranking_data[i].name)).append($("<td></td>").html(ranking_data[i].value)));
+            }
             let physical_sum = 0;
             for (let i = 0; i < physical_radar_data.length; i++)
             {
