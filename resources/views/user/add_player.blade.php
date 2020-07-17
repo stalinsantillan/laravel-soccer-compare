@@ -5,7 +5,7 @@
     <link href="{{ asset('user_assets/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('erp_assets/rangeslider-2.3.0/rangeslider.css') }}" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('erp_assets/select2/select2.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('erp_assets/select/css/select2.css') }}" rel="stylesheet" type="text/css" />
     <style>
         .rangeslider--horizontal {
             height: 15px;
@@ -28,70 +28,9 @@
         .rangeslider {
             background: #adb5bd;
         }
-
-        .custom-select
-        {
-            padding: 0 !important;
-        }
-        .select2-choice
-        {
-            padding-left: 17px !important;
-            padding-top: 5px !important;
-            height: 38px !important;
-            color: #d2d9dc !important;
-            border: 1px solid #3c4853 !important;
-            background-image: linear-gradient(to top, #3c4853 0%, #3c4853 0%) !important;
-        }
-        .select2-arrow
-        {
-            padding-top: 5px !important;
-            background-image: linear-gradient(to top, #3c4853 0%, #3c4853 0%) !important;
-            border-left: none !important;
-        }
-        .select2-dropdown-open .select2-choice {
-            color: #f3f4f4;
-            border-bottom-color: #485561 !important;
-            -webkit-box-shadow: 0 0px 0 #485561 inset;
-            box-shadow: 0 0px 0 #485561 inset;
-        }
-        .select2-container.form-control
-        {
-            padding: 0 !important;
-            border: none;
-        }
-        .select2-drop.select2-display-none.select2-with-searchbox.select2-drop-auto-width.select2-drop-active
-        {
-            width: 200px;
-            z-index: 9999;
-            max-height: 355px !important;
-            overflow-y: auto;
-            background: #485561;
+        .select2-container--default .select2-results__option--selected {
+            background-color: #4c5a67;
             color: white;
-        }
-        .select2-drop.select2-display-none.select2-drop-auto-width.select2-drop-active
-        {
-            width: 200px;
-            z-index: 9999;
-            max-height: 355px !important;
-            overflow-y: auto;
-            background: #485561;
-            color: white;
-        }
-        .select2-search
-        {
-            background: #485561 !important;
-        }
-        .select2-results .select2-no-results, .select2-results .select2-searching, .select2-results .select2-ajax-error, .select2-results .select2-selection-limit
-        {
-            background: #485561 !important;
-        }
-        .select2-drop-mask
-        {
-            /* z-index: -1 !important; */
-        }
-        .custom-select
-        {
-            width: 100% !important;
         }
     </style>
 @endsection
@@ -196,7 +135,8 @@
                                 Current Team<span class="text-danger">*</span>
                             </label>
                             <div class="col-md-7">
-                                <input type="text" required class="form-control" id="cur_team" name="cur_team">
+                                <select class="custom-select mr-sm-2" required id="cur_team" name="cur_team">
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -888,7 +828,7 @@
     <script src="{{ asset('user_assets/libs/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ asset('erp_assets/rangeslider-2.3.0/rangeslider.js') }}"></script>
 
-    <script src="{{ asset('erp_assets/select2/select2.js') }}"></script>
+    <script src="{{ asset('erp_assets/select/js/select2.js') }}"></script>
     <script>
         let curCounter = 1;
         let arrDefender = ["Centre-back", "Sweeper", "Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back"];
@@ -911,7 +851,62 @@
             , "off_ball", "positioning", "teamwork", "vision", "work_rate", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
             , "stamina", "strength", "aerial_duels", "reaction", "sprint_speed", "areial_reach", "command_of_area", "communication"
             , "eccentricity", "first_touch", "handling", "kicking", "one_on_ones", "feet_playing", "passing", "punching", "reflexes", "rushing_out", "throwing"];
+        function formatRepo (repo) {
+            if (repo.loading) {
+                return repo.text;
+            }
+
+            var $container = $(
+                "<p class='title mb-0'></p>"
+            ).text(repo.name);
+
+            return $container;
+        }
+
+        function formatRepoSelection (repo) {
+            return repo.name;
+        }
         $(document).ready(function(){
+            $('#cur_team').select2({
+                ajax: {
+                    type: "POST",
+                    beforeSend: function(request) {
+                        request.setRequestHeader("x-auth-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0YWxpbi5zYW50aWxsYW5AaW5zdGF0c3BvcnQuY29tIiwidG9rZW4iOiIxYWYyOTMwZGMwNjkzYTg4NGY4OTAzMWViMDFiMDA2NCIsImlhdCI6MTU5NDkxNDAzMX0.R8K9tG9M1oxS0NPuYCCd4g_hlmI9ppbwDRxv7asGtQ4");
+                    },
+                    url: "https://api-football.instatscout.com/data",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        let result = {"proc":"tmp_euh_scout_get_players_teams_by_params","params":{"_ps_any_text":params.term,"_p_include_type":[2],"_p_get_short_names":1}}
+                        return result;
+                    },
+                    processResults: function (data, params) {
+                        // parse the results into the format expected by Select2
+                        // since we are using custom formatting functions we do not need to
+                        // alter the remote JSON data, except to indicate that infinite
+                        // scrolling can be used
+                        let results = [];
+                        let items = data.data[0].tmp_euh_scout_get_players_teams_by_params.teams;
+                        console.log(items)
+                        for (let i = 0; i < items.length; i++)
+                        {
+                            results.push({id: items[i].name_eng, name: items[i].name_eng});
+                        }
+                        params.page = params.page || 1;
+                        return {
+                            results: results
+                            // pagination: {
+                            //     more: (params.page * 5) < data.total_count
+                            // }
+                        };
+                    },
+                    cache: true
+                },
+                placeholder: 'Search for a team',
+                minimumInputLength: 3,
+                templateResult: formatRepo,
+                templateSelection: formatRepoSelection
+            });
             var inputs = document.querySelectorAll( '.custom-file-input' );
             Array.prototype.forEach.call( inputs, function( input )
             {
