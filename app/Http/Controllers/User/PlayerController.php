@@ -459,13 +459,12 @@ class PlayerController extends Controller
      */
     public function filter_player(Request $request)
     {
-        $name = '';
+        $name = ''; $min_age=0; $max_age = 0;
         $nationality = array();
         $position = array();
 
         if ($request->name)
             $name = $request->name;
-
         $data = Player::where('name', 'LIKE', "%$name%");
 
         if ($request->nationality) {
@@ -475,6 +474,12 @@ class PlayerController extends Controller
 
         if ($request->position) {
             $position = $request->position;
+        }
+
+
+        if ($request->min_age) {
+            $min_age = $request->min_age;
+            $max_age = $request->max_age;
         }
         
         $data = $data->orWhere('surename', 'LIKE', "%$name%")
@@ -496,5 +501,19 @@ class PlayerController extends Controller
 
         return view("user.filter")
             ->with('data', $data);
+    }
+
+    /**
+     * Year calc
+     * 
+     * @param String $birthday
+     * @return Int $age
+     */
+    public function calcAge(String $birthday)
+    {
+        $birth_year = date('Y', strtotime($birthday));
+        $cur_year = date('Y');
+
+        return $cur_year - $birth_year;
     }
 }
