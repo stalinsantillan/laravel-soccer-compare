@@ -31,8 +31,46 @@ class PlayerController extends Controller
     public function add_player()
     {
         $paramsetting = Paramsetting::find(1);
+//        dd($this->getToken());
+        $_token = array("user"=>array("token"=>"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0YWxpbi5zYW50aWxsYW5AaW5zdGF0c3BvcnQuY29tIiwidG9rZW4iOiJlNzFkNGJlNTU4MThmY2E3NWMxNGRlYzg1OGRmYmUwNiIsImlhdCI6MTU5NDk3NzM0M30.se9CGcDhiQE0yHyMwaTRdIzV3c4Za7LjBPaZjF5Tr68")); //json_encode($this->getToken());
         return view('user.add_player')
-            ->with('paramsetting', $paramsetting);
+            ->with('paramsetting', $paramsetting)
+            ->with('_token', json_encode($_token));
+    }
+
+    public function getToken()
+    {
+        $url = "https://api-football.instatscout.com/users/login";
+        $value = array (
+            'accepted_terms' => false,
+            'force' => false,
+            'user' =>
+                array (
+                    'email' => 'stalin.santillan@instatsport.com',
+                    'password' => '1718750274',
+                ),
+        );
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($value),
+            CURLOPT_HTTPHEADER => array(
+//                "Authorization: Bearer $access_token",
+                "Content-Type: application/json"
+            ),
+        ));
+
+        $result = curl_exec($curl);
+        curl_close($curl);
+        $response = json_decode($result, true);
+        return $response;
     }
 
     /**
