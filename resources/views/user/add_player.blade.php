@@ -867,11 +867,12 @@
             return repo.name;
         }
         $(document).ready(function(){
+            $_token = @php echo $_token; @endphp;
             $('#cur_team').select2({
                 ajax: {
                     type: "POST",
                     beforeSend: function(request) {
-                        request.setRequestHeader("x-auth-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0YWxpbi5zYW50aWxsYW5AaW5zdGF0c3BvcnQuY29tIiwidG9rZW4iOiIxYWYyOTMwZGMwNjkzYTg4NGY4OTAzMWViMDFiMDA2NCIsImlhdCI6MTU5NDkxNDAzMX0.R8K9tG9M1oxS0NPuYCCd4g_hlmI9ppbwDRxv7asGtQ4");
+                        request.setRequestHeader("x-auth-token", $_token.user.token);
                     },
                     url: "https://api-football.instatscout.com/data",
                     dataType: 'json',
