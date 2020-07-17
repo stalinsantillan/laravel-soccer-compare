@@ -20,57 +20,57 @@
 }
 
 .soccerfield-player.posX-GK {
-    left: 5%
+    bottom: 5%
 }
 
 .soccerfield-player.posX-SW {
-    left: 12%
+    bottom: 12%
 }
 
 .soccerfield-player.posX-B {
-    left: 20%
+    bottom: 20%
 }
 
 .soccerfield-player.posX-WB {
-    left: 30%
-}
-
-.soccerfield-player.posX-DM {
-    left: 35%
-}
-
-.soccerfield-player.posX-M {
-    left: 46%
-}
-
-.soccerfield-player.posX-AM {
-    left: 56%
-}
-
-.soccerfield-player.posX-W {
-    left: 70%
-}
-
-.soccerfield-player.posX-F {
-    left: 80%
-}
-
-.soccerfield-player.posY-L {
-    top: 5%
-}
-
-.soccerfield-player.posY-LC {
-    top: 25%
-}
-
-.soccerfield-player.posY-C {
-    top: 45%
-}
-
-.soccerfield-player.posY-RC {
     bottom: 30%
 }
 
+.soccerfield-player.posX-DM {
+    bottom: 35%
+}
+
+.soccerfield-player.posX-M {
+    bottom: 46%
+}
+
+.soccerfield-player.posX-AM {
+    bottom: 56%
+}
+
+.soccerfield-player.posX-W {
+    bottom: 70%
+}
+
+.soccerfield-player.posX-F {
+    bottom: 80%
+}
+
+.soccerfield-player.posY-L {
+    left: 5%
+}
+
+.soccerfield-player.posY-LC {
+    left: 25%
+}
+
+.soccerfield-player.posY-C {
+    left: 45%
+}
+
+.soccerfield-player.posY-RC {
+    right: 30%
+}
+
 .soccerfield-player.posY-R {
-    bottom: 10%
+    right: 10%
 }
