@@ -882,10 +882,6 @@
                         return result;
                     },
                     processResults: function (data, params) {
-                        // parse the results into the format expected by Select2
-                        // since we are using custom formatting functions we do not need to
-                        // alter the remote JSON data, except to indicate that infinite
-                        // scrolling can be used
                         let results = [];
                         let items = data.data[0].tmp_euh_scout_get_players_teams_by_params.teams;
                         console.log(items)
@@ -896,9 +892,6 @@
                         params.page = params.page || 1;
                         return {
                             results: results
-                            // pagination: {
-                            //     more: (params.page * 5) < data.total_count
-                            // }
                         };
                     },
                     cache: true
@@ -912,7 +905,6 @@
             Array.prototype.forEach.call( inputs, function( input )
             {
                 var labelVal = $( '.custom-file-label' ).text();
-
                 input.addEventListener( 'change', function( e )
                 {
                     var fileName = '';
