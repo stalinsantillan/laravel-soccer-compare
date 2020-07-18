@@ -117,7 +117,10 @@
                         </div>
                     </div>
                     <div class="col-md-7 row">
-                        <div id="soccerfield" class="col-md-4"></div>
+                        <div class="col-md-4 text-center">
+                            <a href="{{ route('user.edit_player', $data->id) }}" class="btn btn-outline-info waves-effect waves-light mb-2" style="margin: auto">Edit</a>
+                            <div id="soccerfield"></div>
+                        </div>
                         <div class="col-md-8">
 
                             <table class="table table-centered mb-0 mt-0">
