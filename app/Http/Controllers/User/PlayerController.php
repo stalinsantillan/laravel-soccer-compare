@@ -38,6 +38,22 @@ class PlayerController extends Controller
             ->with('_token', json_encode($_token));
     }
 
+    /**
+     * Show the edit player.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit_player(Player $player)
+    {
+        $paramsetting = Paramsetting::find(1);
+//        dd($this->getToken());
+        $_token = array("user"=>array("token"=>"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0YWxpbi5zYW50aWxsYW5AaW5zdGF0c3BvcnQuY29tIiwidG9rZW4iOiJlNzFkNGJlNTU4MThmY2E3NWMxNGRlYzg1OGRmYmUwNiIsImlhdCI6MTU5NDk3NzM0M30.se9CGcDhiQE0yHyMwaTRdIzV3c4Za7LjBPaZjF5Tr68")); //json_encode($this->getToken());
+        return view('user.edit_player')
+            ->with('data', $player)
+            ->with('paramsetting', $paramsetting)
+            ->with('_token', json_encode($_token));
+    }
+
     public function getToken()
     {
         $url = "https://api-football.instatscout.com/users/login";
