@@ -26,6 +26,7 @@ class Player extends Model
 
     public function storePositions($positions)
     {
+        $this->positions()->delete();
         $arr_data = array();
         foreach ($positions as $position) {
             $data = new Position();

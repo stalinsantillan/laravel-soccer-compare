@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'user', 'as' => 'user.'], fu
     // Player
     Route::get('add_player', 'User\PlayerController@add_player')->name('add_player');
     Route::get('edit_player/{player}', 'User\PlayerController@edit_player')->name('edit_player');
+    Route::post('store__edt_player/{player}', 'User\PlayerController@store__edt_player')->name('store__edt_player');
     Route::post('store_player', 'User\PlayerController@store_player')->name('store_player');
     Route::get('filter_player', 'User\PlayerController@filter_player')->name('filter_player');
     Route::get('filter_show', 'User\PlayerController@filter_show')->name('filter_show');

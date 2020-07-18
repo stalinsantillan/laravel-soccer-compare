@@ -55,7 +55,7 @@
     </div>
 </div>
 <!-- end page title -->
-<form role="form" id="add_player_form" method="post" action="{{ route('user.store_player') }}" enctype="multipart/form-data">
+<form role="form" id="edit_player_form" method="post" action="{{ route('user.store__edt_player', $data->id) }}" enctype="multipart/form-data">
     @csrf
     <div class="card">
         <div class="card-header font-16">
@@ -1291,7 +1291,7 @@
                     "info");
                 return;
             }
-            $("#add_player_form").submit();
+            $("#edit_player_form").submit();
         }
     </script>
 @endsection
