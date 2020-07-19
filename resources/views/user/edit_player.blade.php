@@ -904,7 +904,6 @@
                     processResults: function (data, params) {
                         let results = [];
                         let items = data.data[0].tmp_euh_scout_get_players_teams_by_params.teams;
-                        console.log(items)
                         for (let i = 0; i < items.length; i++)
                         {
                             results.push({id: items[i].name_eng, name: items[i].name_eng});
