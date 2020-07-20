@@ -37,6 +37,23 @@
                     {{ trans('cruds.filter.title') }}
                 </a>
             </li>
+            <li class="has-submenu">
+                <a href="#">
+                    <i class="fas fa-object-group"></i>{{ trans('cruds.menuGroup.my_team') }} <div class="arrow-down"></div>
+                </a>
+                <ul class="submenu">
+                    <li>
+                        <a href="{{ route('user.leagues.index') }}">
+                            {{ trans('cruds.league.title_singular') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('user.teams.index') }}">
+                            {{ trans('cruds.team.title_singular') }}
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <!-- End navigation menu -->
 
