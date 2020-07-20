@@ -39,7 +39,7 @@
             </li>
             <li class="has-submenu">
                 <a href="#">
-                    <i class="fas fa-object-group"></i>{{ trans('cruds.menuGroup.my_team') }} <div class="arrow-down"></div>
+                    {{ trans('cruds.menuGroup.my_team') }} <div class="arrow-down"></div>
                 </a>
                 <ul class="submenu">
                     <li>
