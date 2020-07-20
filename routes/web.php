@@ -37,4 +37,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'user', 'as' => 'user.'], fu
     // Setting
     Route::get('setting/paramsetting_show', 'User\SettingsController@paramsetting_show')->name('paramsetting_show');
     Route::post('setting/paramsetting_store', 'User\SettingsController@paramsetting_store')->name('paramsetting_store');
+
+    Route::resource('leagues', 'User\LeagueController');
+    Route::resource('teams', 'User\TeamController');
 });
