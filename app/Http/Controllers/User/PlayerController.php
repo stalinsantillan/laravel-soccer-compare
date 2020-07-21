@@ -102,7 +102,7 @@ class PlayerController extends Controller
         $sum = 0; $count = 0;
         
         $player->name = $request->name;
-        $player->surename = $request->surename;
+        $player->surename = $request->surname;
         $player->nationality = $request->nationality;
         $player->birth_date = $request->birthdate;
         $player->height = $request->height;
@@ -449,28 +449,28 @@ class PlayerController extends Controller
             $sum += $parameter;
             $count ++;
         }
-        $player->general_average = $sum / $count;
+        $count == 0 ? $player->general_average = 0 : $player->general_average = $sum / $count;
 
         $sum = 0; $count = 0;
         foreach ($technicals as $technical) {
             $sum += $technical;
             $count ++;
         }
-        $player->technical_average = $sum / $count;
+        $count == 0 ? $player->technical_average = 0 : $player->technical_average = $sum / $count;
 
         $sum = 0; $count = 0;
         foreach ($mentals as $mental) {
             $sum += $mental;
             $count ++;
         }
-        $player->mental_average = $sum / $count;
+        $count == 0 ? $player->mental_average = 0 : $player->mental_average = $sum / $count;
 
         $sum = 0; $count = 0;
         foreach ($physicals as $physical) {
             $sum += $physical;
             $count ++;
         }
-        $player->physical_average = $sum / $count;
+        $count == 0 ? $player->physical_average = 0 : $player->physical_average = $sum / $count;
 
         $sum = 0; $count = 0;
         foreach ($goalkeepers as $goalkeeper) {
@@ -478,7 +478,7 @@ class PlayerController extends Controller
             $count ++;
         }
         if (in_array('Goalkeeper', $spec_position)) {
-            $player->goalkeeper_average = $sum / $count;
+            $count == 0 ? $player->goalkeeper_average = 0 : $player->goalkeeper_average = $sum / $count;
         } else {
             $player->goalkeeper_average = 0;
         }
@@ -849,28 +849,28 @@ class PlayerController extends Controller
             $sum += $parameter;
             $count ++;
         }
-        $player->general_average = $sum / $count;
+        $count == 0 ? $player->general_average = 0 : $player->general_average = $sum / $count;
 
         $sum = 0; $count = 0;
         foreach ($technicals as $technical) {
             $sum += $technical;
             $count ++;
         }
-        $player->technical_average = $sum / $count;
+        $count == 0 ? $player->technical_average = 0 : $player->technical_average = $sum / $count;
 
         $sum = 0; $count = 0;
         foreach ($mentals as $mental) {
             $sum += $mental;
             $count ++;
         }
-        $player->mental_average = $sum / $count;
+        $count == 0 ? $player->mental_average = 0 : $player->mental_average = $sum / $count;
 
         $sum = 0; $count = 0;
         foreach ($physicals as $physical) {
             $sum += $physical;
             $count ++;
         }
-        $player->physical_average = $sum / $count;
+        $count == 0 ? $player->physical_average = 0 : $player->physical_average = $sum / $count;
 
         $sum = 0; $count = 0;
         foreach ($goalkeepers as $goalkeeper) {
@@ -878,7 +878,7 @@ class PlayerController extends Controller
             $count ++;
         }
         if (in_array('Goalkeeper', $spec_position)) {
-            $player->goalkeeper_average = $sum / $count;
+            $count == 0 ? $player->goalkeeper_average = 0 : $player->goalkeeper_average = $sum / $count;
         } else {
             $player->goalkeeper_average = 0;
         }
