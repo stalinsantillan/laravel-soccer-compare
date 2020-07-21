@@ -71,10 +71,10 @@
                         </div>
                         <div class="form-group row col-md-6">
                             <label for="surname" class="col-md-4 col-form-label text-right">
-                                Surname
+                                Surname<span class="text-danger">*</span>
                             </label>
                             <div class="col-md-7">
-                                <input type="text" class="form-control" id="surname" name="surname">
+                                <input type="text" required class="form-control" id="surname" name="surname">
                             </div>
                         </div>
                     </div>
@@ -1209,6 +1209,16 @@
                     "info");
                 return;
             }
+            if ($("#surname").val() == "")
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must enter surname",
+                    "top-right",
+                    "#da8609",
+                    "info");
+                return;
+            }
             if ($("#birthdate").val() == "")
             {
                 $.NotificationApp.send(
@@ -1219,7 +1229,7 @@
                     "info");
                 return;
             }
-            if ($("#cur_team").val() == "")
+            if ($("#cur_team").val() == "" || $("#cur_team").val() == null)
             {
                 $.NotificationApp.send(
                     "Warning",
