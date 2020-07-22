@@ -39,6 +39,131 @@ class PlayerController extends Controller
     }
 
     /**
+     * Show the add player.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function add_player_api()
+    {
+        $paramsetting = Paramsetting::find(1);
+//        dd($this->getToken());
+        $_token = array("user"=>array("token"=>"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0YWxpbi5zYW50aWxsYW5AaW5zdGF0c3BvcnQuY29tIiwidG9rZW4iOiJlNzFkNGJlNTU4MThmY2E3NWMxNGRlYzg1OGRmYmUwNiIsImlhdCI6MTU5NDk3NzM0M30.se9CGcDhiQE0yHyMwaTRdIzV3c4Za7LjBPaZjF5Tr68")); //json_encode($this->getToken());
+        return view('user.add_player_api')
+            ->with('paramsetting', $paramsetting)
+            ->with('_token', json_encode($_token));
+    }
+
+    /**
+     * Show the add player.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function get_player_list_api(Request $request)
+    {
+        $paramsetting = Paramsetting::find(1);
+//        dd($this->getToken());
+
+        return view("user.add_player_api_show")
+            ->with('paramsetting', $paramsetting);
+    }
+
+    public function get_player_list_api_data(Request $request)
+    {
+        $api_result = array();
+        if ($request->name)
+        {
+            $name = $request->name;
+            $page = $request->page;
+            $previous_page = $request->previous_page;
+            $callback_params = json_encode(array("page"=>$previous_page, "per_page"=>20, "full"=>1, "q"=>$name, "qp"=>array()));
+            $params = json_encode(array("page"=>$page));
+//            dd($callback_params);
+            $url = "https://int.soccerway.com/a/block_search_results_players?block_id=page_search_1_block_search_results_players_3&callback_params={$callback_params}&action=changePage&params={$params}";
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET"
+            ));
+
+            $result = json_decode(curl_exec($curl));
+            curl_close($curl);
+
+            $has_previous_page  = $result->commands[1]->parameters->attributes->has_previous_page;
+            $has_next_page      = $result->commands[1]->parameters->attributes->has_next_page;
+            $page               = $result->commands[2]->parameters->params->page;
+            $per_page           = $result->commands[2]->parameters->params->per_page;
+            $full               = $result->commands[2]->parameters->params->full;
+            $q                  = $result->commands[2]->parameters->params->q;
+            $qp                 = $result->commands[2]->parameters->params->qp;
+            $api_result['has_previous_page'] = $has_previous_page;
+            $api_result['has_next_page'] = $has_next_page;
+            $api_result['page'] = $page;
+            $api_result['per_page'] = $per_page;
+            $api_result['full'] = $full;
+            $api_result['q'] = $q;
+            $api_result['qp'] = $qp;
+
+            $table = $result->commands[0]->parameters->content;
+            $table_check = str_replace("\n", "", $table);
+            if ($table_check == "No results found.")
+            {
+                $api_result['html'] = '';
+            } else {
+                $doc = new \DOMDocument();
+                libxml_use_internal_errors(true);
+                $doc->loadHTML($table);
+
+                $xpath = new \DOMXpath($doc);
+                $trlist = $xpath->query("//tbody/tr");
+                $table_html = "";
+                foreach ($trlist as $tr)
+                {
+                    $table_html .= "<tr>";
+                    $tdlist = $tr->childNodes;
+                    foreach ($tdlist as $td)
+                    {
+                        $table_html .= "<td ";
+                        if ($td->getAttribute("class") == "player")
+                        {
+                            $a = $td->firstChild;
+                            $player_link = $a->getAttribute("href");
+                            $flag = $a->getAttribute("class");
+                            $table_html .= "link='" . $player_link . "'";
+                            $table_html .= "><span class='" . $flag . "'></span>" . $td->nodeValue . "</td>";
+                        } else {
+                            $table_html .= ">" . $td->nodeValue . "</td>";
+                        }
+                    }
+                    $table_html .= "</tr>";
+                }
+                $api_result['html'] = $table_html;
+            }
+        }
+        return json_encode($api_result);
+    }
+
+    /**
+     * Show the add player.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function add_player_excel()
+    {
+        $paramsetting = Paramsetting::find(1);
+//        dd($this->getToken());
+        $_token = array("user"=>array("token"=>"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0YWxpbi5zYW50aWxsYW5AaW5zdGF0c3BvcnQuY29tIiwidG9rZW4iOiJlNzFkNGJlNTU4MThmY2E3NWMxNGRlYzg1OGRmYmUwNiIsImlhdCI6MTU5NDk3NzM0M30.se9CGcDhiQE0yHyMwaTRdIzV3c4Za7LjBPaZjF5Tr68")); //json_encode($this->getToken());
+        return view('user.add_player_excel')
+            ->with('paramsetting', $paramsetting)
+            ->with('_token', json_encode($_token));
+    }
+
+    /**
      * Show the edit player.
      *
      * @return \Illuminate\Http\Response
