@@ -43,10 +43,10 @@
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="/">Soccer</a></li>
                     <li class="breadcrumb-item"><a href="javascript: void(0);">{{ trans('cruds.player.title') }}</a></li>
-                    <li class="breadcrumb-item active">{{ trans('global.add') }}</li>
+                    <li class="breadcrumb-item active">{{ trans('global.add') }}({{ trans('cruds.player.excel') }})</li>
                 </ol>
             </div>
-            <h4 class="page-title">{{ trans('global.add') }} {{ trans('cruds.player.title') }}({{ trans('cruds.player.manually') }})</h4>
+            <h4 class="page-title">{{ trans('global.add') }} {{ trans('cruds.player.title') }}</h4>
         </div>
     </div>
 </div>
