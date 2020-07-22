@@ -4,6 +4,9 @@
     <link href="{{ asset('user_assets/libs/datatables/responsive.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('user_assets/libs/datatables/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('user_assets/libs/datatables/select.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('popover_assets/css/bootstrap-popover-x.css') }}" media="all" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('erp_assets/nouislider/nouislider.css') }}" rel="stylesheet" type="text/css" />
+{{--    <link href="{{ asset('erp_assets/rangeslider-2.3.0/rangeslider.css') }}" rel="stylesheet" type="text/css" />--}}
     <style>
         .table td, .table th {
             vertical-align: middle !important;
@@ -28,21 +31,120 @@
 <!-- end page title -->
 <div class="card">
     <div class="card-body">
-        <div class="row">
-            <form role="form" method="get" action="{{ route('user.filter_player') }}">
-                <div class="form-group col-md-auto">
+        <form role="form" method="get" action="{{ route('user.filter_player') }}">
+            <div class="row mb-2">
+                <div class="col-md-auto">
                     <label for="name">Player name</label>
                     <div class="row">
                         <div class="col-md-auto">
                             <input type="text" class="form-control" id="name" name="name" value="{{ $filter['name'] ?? '' }}">
                         </div>
                         <div class="col-md-auto">
+                            <button type="button" class="btn btn-primary" id="btn_position">Position</button>
+                            <!-- PopoverX content -->
+                            <div id="popover_position" class="popover popover-x popover-default" style="min-width: 550px;">
+                                <div class="arrow"></div>
+                                <h3 class="popover-header popover-title">Select Position</h3>
+                                <div class="popover-body popover-content">
+                                    @php
+                                        $arrDefender = array("Centre-back", "Sweeper", "Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back");
+                                        $arrMidfielder = array("Centre midfield", "Defensive midfield", "Attacking midfield", "Left Wide midfield", "Right Wide midfield");
+                                        $arrForward = array("Centre forward", "Second striker", "Left Winger", "Right Winger");
+                                        $arrGoalkeeper = array("Goalkeeper");
+                                    @endphp
+                                    <div class="card-title font-15 font-weight-bold">
+                                        Defender
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10 offset-md-1 row">
+                                            @foreach($arrDefender as $defender)
+                                                <div class="checkbox checkbox-primary mb-2 col-md-6">
+                                                    <input id="{{ $defender }}" type="checkbox">
+                                                    <label for="{{ $defender }}">
+                                                        {{ $defender }}
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="card-title font-15 font-weight-bold">
+                                        Midfielder
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10 offset-md-1 row">
+                                            @foreach($arrMidfielder as $midfielder)
+                                                <div class="checkbox checkbox-primary mb-2 col-md-6">
+                                                    <input id="{{ $midfielder }}" type="checkbox">
+                                                    <label for="{{ $midfielder }}">
+                                                        {{ $midfielder }}
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="card-title font-15 font-weight-bold">
+                                        Forward
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10 offset-md-1 row">
+                                            @foreach($arrForward as $forward)
+                                                <div class="checkbox checkbox-primary mb-2 col-md-6">
+                                                    <input id="{{ $forward }}" type="checkbox">
+                                                    <label for="{{ $forward }}">
+                                                        {{ $forward }}
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="card-title font-15 font-weight-bold">
+                                        Goalkeeper
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10 offset-md-1 row">
+                                            @foreach($arrGoalkeeper as $goalkeeper)
+                                                <div class="checkbox checkbox-primary mb-2 col-md-6">
+                                                    <input id="{{ $goalkeeper }}" type="checkbox">
+                                                    <label for="{{ $goalkeeper }}">
+                                                        {{ $goalkeeper }}
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="popover-footer">
+                                    <button type="button" class="btn btn-sm btn-primary">Set</button>
+                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="popover-x">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-auto">
+                            <button type="button" class="btn btn-primary" id="btn_age">Age</button>
+                            <!-- PopoverX content -->
+                            <div id="popover_age" class="popover popover-x popover-default" style="min-width: 550px;">
+                                <div class="arrow"></div>
+                                <h3 class="popover-header popover-title">Age</h3>
+                                <div class="popover-body popover-content">
+                                    <div class="row mb-5 mt-5">
+                                        <div class="col-md-10 offset-md-1">
+                                            <div id="range"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="popover-footer">
+                                    <button type="button" class="btn btn-sm btn-primary">Set</button>
+                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="popover-x">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-auto">
                             <button class="btn btn-primary" type="submit"><i class="fe-search"> Search</i></button>
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
         <table id="filter-table" class="table nowrap table-responsive">
             <thead>
                 <tr>
@@ -127,6 +229,10 @@
     <script src="{{ asset('user_assets/libs/pdfmake/pdfmake.min.js') }}"></script>
     <script src="{{ asset('user_assets/libs/pdfmake/vfs_fonts.js') }}"></script>
     <script src="{{ asset('user_assets/js/pages/datatables.init.js') }}"></script>
+
+    <script src="{{ asset('popover_assets/js/bootstrap-popover-x.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('erp_assets/nouislider/nouislider.js') }}"></script>
+{{--    <script src="{{ asset('erp_assets/rangeslider-2.3.0/rangeslider.js') }}"></script>--}}
     <!-- third party js ends -->
     <script>
         $(document).ready(function () {
@@ -142,6 +248,67 @@
                     $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
                 }
             });
+            $('#btn_position').popoverButton({
+                target: '#popover_position',
+                placement: 'right'
+            });
+            $('#btn_age').popoverButton({
+                target: '#popover_age',
+                placement: 'right'
+            });
+            noUiSlider.create(document.getElementById('range'), {
+                start: [20, 80],// ... must be at least 300 apart
+                // margin: 300,
+                step: 1,
+                // ... but no more than 600
+                // limit: 600,
+
+                // Display colored bars between handles
+                connect: true,
+
+                // Put '0' at the bottom of the slider
+                // direction: 'rtl',
+                // orientation: 'vertical',
+
+                // Move handle on tap, bars are draggable
+                behaviour: 'tap-drag',
+                tooltips: true,
+                format: {
+                    // 'to' the formatted value. Receives a number.
+                    to: function (value) {
+                        return value;
+                    },
+                    // 'from' the formatted value.
+                    // Receives a string, should return a number.
+                    from: function (value) {
+                        return Number(value.replace(',-', ''));
+                    }
+                },
+
+                // Show a scale with the slider
+                // pips: {
+                //     mode: 'steps',
+                //     stepped: true,
+                //     density: 20
+                // },
+                range: {
+                    'min': 0,
+                    'max': 100
+                }
+            });
+            // $('[data-rangeslider]').rangeslider({
+            //     // Deactivate the feature detection
+            //     polyfill: false,
+            //     // Callback function
+            //     onInit: function() {
+            //     },
+            //     // Callback function
+            //     onSlide: function(position, value) {
+            //     },
+            //     // Callback function
+            //     onSlideEnd: function(position, value) {
+            //     }
+            // });
         })
     </script>
 @endsection
