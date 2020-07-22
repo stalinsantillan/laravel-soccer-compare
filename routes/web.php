@@ -27,6 +27,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'user', 'as' => 'user.'], fu
 
     // Player
     Route::get('add_player', 'User\PlayerController@add_player')->name('add_player');
+    Route::get('add_player_excel', 'User\PlayerController@add_player_excel')->name('add_player_excel');
+    Route::get('add_player_api', 'User\PlayerController@add_player_api')->name('add_player_api');
+    Route::get('get_player_list_api', 'User\PlayerController@get_player_list_api')->name('get_player_list_api');
+    Route::get('get_player_list_api_data', 'User\PlayerController@get_player_list_api_data')->name('get_player_list_api_data');
     Route::get('edit_player/{player}', 'User\PlayerController@edit_player')->name('edit_player');
     Route::post('store__edt_player/{player}', 'User\PlayerController@store__edt_player')->name('store__edt_player');
     Route::post('store_player', 'User\PlayerController@store_player')->name('store_player');
