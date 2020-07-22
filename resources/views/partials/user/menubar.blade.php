@@ -2,10 +2,27 @@
     <div id="navigation">
         <!-- Navigation Menu-->
         <ul class="navigation-menu">
-            <li>
-                <a href="{{ route('user.add_player') }}">
-                    {{ trans('global.add') }} {{ trans('cruds.player.title') }}
+            <li class="has-submenu">
+                <a href="#">
+                    {{ trans('global.add') }} {{ trans('cruds.player.title') }} <div class="arrow-down"></div>
                 </a>
+                <ul class="submenu">
+                    <li>
+                        <a href="{{ route('user.add_player') }}">
+                            {{ trans('cruds.player.manually') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('user.get_player_list_api') }}">
+                            {{ trans('cruds.player.api') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('user.add_player_excel') }}">
+                            {{ trans('cruds.player.excel') }}
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="{{ route('user.filter_show') }}">
