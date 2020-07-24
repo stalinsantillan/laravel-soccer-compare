@@ -139,6 +139,10 @@
                                 </select>
                             </div>
                         </div>
+                        <input type="hidden" name="team_id" />
+                        <input type="hidden" name="team_name" />
+                        <input type="hidden" name="team_link" />
+                        <input type="hidden" name="player_link" value="" />
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -856,50 +860,48 @@
                 return repo.text;
             }
 
+            let country_asset = "(" + repo.country_name + ")";
+            if (repo.country_name == "") country_asset = "";
             var $container = $(
                 "<p class='title mb-0'></p>"
-            ).text(repo.name);
-
+            ).text(repo.team_name).append($("<p class='title mb-0' style='font-size: 12px'></p>").text(country_asset));
             return $container;
         }
 
         function formatRepoSelection (repo) {
-            return repo.name;
+            return repo.team_name;
         }
         $(document).ready(function(){
-            $_token = @php echo $_token; @endphp;
             $('#cur_team').select2({
                 ajax: {
-                    type: "POST",
-                    beforeSend: function(request) {
-                        request.setRequestHeader("x-auth-token", $_token.user.token);
-                    },
-                    url: "https://api-football.instatscout.com/data",
+                    type: "GET",
+                    url: "{{ route('user.getteams') }}",
                     dataType: 'json',
                     delay: 250,
                     data: function (params) {
-                        let result = {"proc":"tmp_euh_scout_get_players_teams_by_params","params":{"_ps_any_text":params.term,"_p_include_type":[2],"_p_get_short_names":1}}
+                        let result = {"name":params.term};
                         return result;
                     },
                     processResults: function (data, params) {
-                        let results = [];
-                        let items = data.data[0].tmp_euh_scout_get_players_teams_by_params.teams;
-                        console.log(items)
-                        for (let i = 0; i < items.length; i++)
-                        {
-                            results.push({id: items[i].name_eng, name: items[i].name_eng});
-                        }
-                        params.page = params.page || 1;
                         return {
-                            results: results
+                            results:data
                         };
                     },
                     cache: true
                 },
+                tags: false,
                 placeholder: 'Search for a team',
                 minimumInputLength: 3,
                 templateResult: formatRepo,
                 templateSelection: formatRepoSelection
+            }).on('select2:select', function (e) {
+                let data = e.params.data;
+                $(this).children('[value="'+data.id+'"]').attr(
+                    {
+                        'team_link':data.team_link, //dynamic value from data array
+                        'team_name':data.team_name // fixed value
+                    }
+                );
             });
             var inputs = document.querySelectorAll( '.custom-file-input' );
             Array.prototype.forEach.call( inputs, function( input )
@@ -1199,6 +1201,12 @@
             ++curCounter;
         }
         function submitForm() {
+            let team_id = $("#cur_team option").last().attr("value");
+            let team_link = $("#cur_team option").last().attr("team_link");
+            let team_name = $("#cur_team option").last().attr("team_name");
+            $("[name=team_id]").val(team_id);
+            $("[name=team_link]").val(team_link);
+            $("[name=team_name]").val(team_name);
             if ($("#name").val() == "")
             {
                 $.NotificationApp.send(
