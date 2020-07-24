@@ -17,11 +17,11 @@
                             {{ trans('cruds.player.api') }}
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('user.add_player_excel') }}">
-                            {{ trans('cruds.player.excel') }}
-                        </a>
-                    </li>
+{{--                    <li>--}}
+{{--                        <a href="{{ route('user.add_player_excel') }}">--}}
+{{--                            {{ trans('cruds.player.excel') }}--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                 </ul>
             </li>
             <li>
