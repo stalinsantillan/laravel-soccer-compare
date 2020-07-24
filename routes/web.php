@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'user', 'as' => 'user.'], fu
     Route::get('dashboard', 'User\DashboardController@index')->name('dashboard');
 
     // Player
+    Route::get('getteams', 'User\PlayerController@getteams')->name('getteams');
     Route::get('add_player', 'User\PlayerController@add_player')->name('add_player');
     Route::get('add_player_excel', 'User\PlayerController@add_player_excel')->name('add_player_excel');
     Route::get('add_player_api', 'User\PlayerController@add_player_api')->name('add_player_api');
