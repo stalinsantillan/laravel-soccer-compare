@@ -61,6 +61,10 @@
                 </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td class="text-center" colspan='6'>No data available in table
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div> <!-- end card body-->
@@ -89,6 +93,11 @@
                 page = parseInt(page) - 1;
                 showTable();
             })
+            $("#name").on('keypress',function(e) {
+                if(e.which == 13) {
+                    showTable();
+                }
+            });
         })
         function add_player(link) {
             $("[name=link]").val(link);
@@ -96,6 +105,7 @@
         }
         function showTable() {
             let name = $("#name").val();
+            $("#player_table").find("tbody").html("<tr><td class='text-center' colspan='6'>Loading...</td></tr>");
             $.ajax({
                 url: "{{ route('user.get_player_list_api_data') }}",
                 data: {name: name, page: page, previous_page: previous_page},
@@ -103,9 +113,18 @@
                 dataType: 'json', // added data type
                 success: function(res) {
                     $("#player_table").find("tbody").html(res.html);
-                    page = parseInt(res.page);
-                    has_previous_page = parseInt(res.has_previous_page);
-                    has_next_page = parseInt(res.has_next_page);
+                    if(res.length == 0 || res.html == "")
+                    {
+                        $("#player_table").find("tbody").html("<tr><td class='text-center' colspan='6'>No data available in table\n</td></tr>");
+                        previous_page = 0;
+                        page = 0;
+                        has_previous_page = 0;
+                        has_next_page = 0;
+                    } else {
+                        page = parseInt(res.page);
+                        has_previous_page = parseInt(res.has_previous_page);
+                        has_next_page = parseInt(res.has_next_page);
+                    }
                     if (has_next_page == 1)
                     {
                         $("#btnNext").prop( "disabled", false );
@@ -118,6 +137,13 @@
                     } else {
                         $("#btnPrevious").prop( "disabled", false );
                     }
+                },
+                error: function (jqXHR, exception) {
+                    $("#player_table").find("tbody").html("<tr><td class='text-center' colspan='6'>No data available in table\n</td></tr>");
+                    previous_page = 0;
+                    page = 0;
+                    has_previous_page = 0;
+                    has_next_page = 0;
                 }
             });
         }
