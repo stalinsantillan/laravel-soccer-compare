@@ -15,7 +15,7 @@
         <div class="container-fluid bg-layer" id="userLogSection">
             <div class="row">
                 <div class="col-12">
-                    <form class="jumbotron" role="form" method="POST" action="{{ url('login') }}">
+                    <form class="jumbotron mt-5" role="form" method="POST" action="{{ url('login') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <h2 class="text-center mb-4">Soccer Compare</h2>
                         @if (count($errors) > 0)
