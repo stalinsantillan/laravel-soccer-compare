@@ -9,7 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\User\Player;
+use App\Models\User\ApiTeam;
+use App\Models\User\Team;
 use App\Models\User\Paramsetting;
+use Illuminate\Http\UploadedFile;
 
 class PlayerController extends Controller
 {
@@ -31,11 +34,55 @@ class PlayerController extends Controller
     public function add_player()
     {
         $paramsetting = Paramsetting::find(1);
-//        dd($this->getToken());
-        $_token = array("user"=>array("token"=>"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0YWxpbi5zYW50aWxsYW5AaW5zdGF0c3BvcnQuY29tIiwidG9rZW4iOiJlNzFkNGJlNTU4MThmY2E3NWMxNGRlYzg1OGRmYmUwNiIsImlhdCI6MTU5NDk3NzM0M30.se9CGcDhiQE0yHyMwaTRdIzV3c4Za7LjBPaZjF5Tr68")); //json_encode($this->getToken());
         return view('user.add_player')
-            ->with('paramsetting', $paramsetting)
-            ->with('_token', json_encode($_token));
+            ->with('paramsetting', $paramsetting);
+    }
+
+    /**
+     * Get all db and api teams.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getteams(Request $request)
+    {
+        $team_name = $request->name;
+        $db_teams = Team::query()->where("name", "like", "%" . $team_name . "%")->with('league')->get();
+        $api_teams = ApiTeam::query()->where("team_name", "like", "%" . $team_name . "%")->select("id", "team_link", "team_name", "competition_name", "country_name")->get()->toArray();
+        foreach ($db_teams as $team)
+        {
+            array_push($api_teams, array("id"=>$team->id."_db", "team_name"=>$team->name, "team_link"=>"", "competition_name"=>$team->league->name, "country_name"=>""));
+        }
+        return json_encode($api_teams);
+    }
+
+    public function getTeamByURL_API($team_url){
+        $url = "https://int.soccerway.com{$team_url}";
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET"
+        ));
+        $result = curl_exec($curl);
+        curl_close($curl);
+        $doc = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $doc->loadHTML('<?xml encoding="utf-8" ?>'.$result);
+
+        $xpath = new \DOMXpath($doc);
+        $team = $xpath->query("//div[@id='subheading']/h1")[0]->nodeValue;
+        $league = $xpath->query("//a[@id='page_team_1_block_team_matches_summary_7_1_2']")[0]->nodeValue;
+        return array("team" => $team, "league" => $league);
+    }
+
+    public function getTeamByURL($team_url){
+        $team = ApiTeam::query()->where("team_link", "https://int.soccerway.com".$team_url)->get();
+        return array("team" => $team[0]->team_name, "league" => $team[0]->competition_name, "id" => $team[0]->id);
     }
 
     /**
@@ -43,14 +90,66 @@ class PlayerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function add_player_api()
+    public function add_player_api(Request $request)
     {
         $paramsetting = Paramsetting::find(1);
-//        dd($this->getToken());
-        $_token = array("user"=>array("token"=>"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0YWxpbi5zYW50aWxsYW5AaW5zdGF0c3BvcnQuY29tIiwidG9rZW4iOiJlNzFkNGJlNTU4MThmY2E3NWMxNGRlYzg1OGRmYmUwNiIsImlhdCI6MTU5NDk3NzM0M30.se9CGcDhiQE0yHyMwaTRdIzV3c4Za7LjBPaZjF5Tr68")); //json_encode($this->getToken());
+        $link = $request->link;
+        $url = "https://int.soccerway.com{$link}";
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET"
+        ));
+        $result = curl_exec($curl);
+        curl_close($curl);
+
+        $doc = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $doc->loadHTML($result);
+
+        $xpath = new \DOMXpath($doc);
+        $data = array();
+        $data['short_name'] = $xpath->query("//div[@id='subheading']/h1")[0]->nodeValue ?? '';
+        $data['first_name'] = $xpath->query("//dd[@data-first_name='first_name']")[0]->nodeValue ?? '';
+        $data['last_name'] = $xpath->query("//dd[@data-last_name='last_name']")[0]->nodeValue ?? '';
+        $data['nationality'] = $xpath->query("//dd[@data-nationality='nationality']")[0]->nodeValue ?? '';
+        $data['date_of_birth'] = $xpath->query("//dd[@data-date_of_birth='date_of_birth']")[0]->nodeValue ?? '';
+        $data['age'] = $xpath->query("//dd[@data-age='age']")[0]->nodeValue ?? '';
+        $data['country_of_birth'] = $xpath->query("//dd[@data-country_of_birth='country_of_birth']")[0]->nodeValue ?? '';
+        $data['place_of_birth'] = $xpath->query("//dd[@data-place_of_birth='place_of_birth']")[0]->nodeValue ?? '';
+        $data['position'] = $xpath->query("//dd[@data-position='position']")[0]->nodeValue ?? '';
+        $data['height'] = $xpath->query("//dd[@data-height='height']")[0]->nodeValue ?? '';
+        $data['weight'] = $xpath->query("//dd[@data-weight='weight']")[0]->nodeValue ?? '';
+        $data['foot'] = $xpath->query("//dd[@data-foot='foot']")[0]->nodeValue ?? '';
+        $data['photo'] = $xpath->query("//div[@class='yui-u']/img")[0]->getAttribute("src") ?? '';
+        $details = $xpath->query("//div[@class='yui-b']/div[@class='redesign']");
+        $team = '';
+        $league = '';
+        $team_url = '';
+        $team_id = '';
+        if (intval($details->length) > 0)
+        {
+            $team_url = $xpath->query("//table[@class='playerstats career sortable table']/tbody/tr[1]/td[@class='team']/a")[0]->getAttribute('href');
+            $team_league = $this->getTeamByURL($team_url);
+//            $team_league = $this->getTeamByURL_API($team_url);
+            $team = $team_league['team'];
+            $league = $team_league['league'];
+            $team_id = $team_league['id'];
+        }
+        $data['team_url'] = "https://int.soccerway.com".$team_url;
+        $data['player_url'] = $url;
+        $data['team'] = $team;
+        $data['league'] = $league;
+        $data['team_id'] = $team_id;
         return view('user.add_player_api')
-            ->with('paramsetting', $paramsetting)
-            ->with('_token', json_encode($_token));
+            ->with('data', $data)
+            ->with('paramsetting', $paramsetting);
     }
 
     /**
@@ -58,10 +157,9 @@ class PlayerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function get_player_list_api(Request $request)
+    public function get_player_list_api()
     {
         $paramsetting = Paramsetting::find(1);
-//        dd($this->getToken());
 
         return view("user.add_player_api_show")
             ->with('paramsetting', $paramsetting);
@@ -79,6 +177,7 @@ class PlayerController extends Controller
             $params = json_encode(array("page"=>$page));
 //            dd($callback_params);
             $url = "https://int.soccerway.com/a/block_search_results_players?block_id=page_search_1_block_search_results_players_3&callback_params={$callback_params}&action=changePage&params={$params}";
+//            dd($url);
             $curl = curl_init();
             curl_setopt_array($curl, array(
                 CURLOPT_URL => $url,
@@ -117,7 +216,7 @@ class PlayerController extends Controller
             } else {
                 $doc = new \DOMDocument();
                 libxml_use_internal_errors(true);
-                $doc->loadHTML($table);
+                $doc->loadHTML('<?xml encoding="utf-8" ?>'.$table);
 
                 $xpath = new \DOMXpath($doc);
                 $trlist = $xpath->query("//tbody/tr");
@@ -134,8 +233,7 @@ class PlayerController extends Controller
                             $a = $td->firstChild;
                             $player_link = $a->getAttribute("href");
                             $flag = $a->getAttribute("class");
-                            $table_html .= "link='" . $player_link . "'";
-                            $table_html .= "><span class='" . $flag . "'></span>" . $td->nodeValue . "</td>";
+                            $table_html .= "><span class='" . $flag . " pr-1'></span><a class='text-white-50' href='javascript:add_player(\"".$player_link."\")'>" . $td->nodeValue . "</a></td>";
                         } else {
                             $table_html .= ">" . $td->nodeValue . "</td>";
                         }
@@ -156,11 +254,8 @@ class PlayerController extends Controller
     public function add_player_excel()
     {
         $paramsetting = Paramsetting::find(1);
-//        dd($this->getToken());
-        $_token = array("user"=>array("token"=>"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0YWxpbi5zYW50aWxsYW5AaW5zdGF0c3BvcnQuY29tIiwidG9rZW4iOiJlNzFkNGJlNTU4MThmY2E3NWMxNGRlYzg1OGRmYmUwNiIsImlhdCI6MTU5NDk3NzM0M30.se9CGcDhiQE0yHyMwaTRdIzV3c4Za7LjBPaZjF5Tr68")); //json_encode($this->getToken());
         return view('user.add_player_excel')
-            ->with('paramsetting', $paramsetting)
-            ->with('_token', json_encode($_token));
+            ->with('paramsetting', $paramsetting);
     }
 
     /**
@@ -171,47 +266,36 @@ class PlayerController extends Controller
     public function edit_player(Player $player)
     {
         $paramsetting = Paramsetting::find(1);
-//        dd($this->getToken());
-        $_token = array("user"=>array("token"=>"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0YWxpbi5zYW50aWxsYW5AaW5zdGF0c3BvcnQuY29tIiwidG9rZW4iOiJlNzFkNGJlNTU4MThmY2E3NWMxNGRlYzg1OGRmYmUwNiIsImlhdCI6MTU5NDk3NzM0M30.se9CGcDhiQE0yHyMwaTRdIzV3c4Za7LjBPaZjF5Tr68")); //json_encode($this->getToken());
         return view('user.edit_player')
             ->with('data', $player)
-            ->with('paramsetting', $paramsetting)
-            ->with('_token', json_encode($_token));
+            ->with('paramsetting', $paramsetting);
     }
 
-    public function getToken()
-    {
-        $url = "https://api-football.instatscout.com/users/login";
-        $value = array (
-            'accepted_terms' => false,
-            'force' => false,
-            'user' =>
-                array (
-                    'email' => 'stalin.santillan@instatsport.com',
-                    'password' => '1718750274',
-                ),
-        );
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => json_encode($value),
-            CURLOPT_HTTPHEADER => array(
-//                "Authorization: Bearer $access_token",
-                "Content-Type: application/json"
-            ),
-        ));
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function createFileObject($url){
 
-        $result = curl_exec($curl);
-        curl_close($curl);
-        $response = json_decode($result, true);
-        return $response;
+        $path_parts = pathinfo($url);
+
+        $newPath = $path_parts['dirname'] . '/tmp-files/';
+        if(!is_dir ($newPath)){
+            mkdir($newPath, 0777);
+        }
+
+        $newUrl = public_path() . "/" . $path_parts['basename'];
+        copy($url, $newUrl);
+        $imgInfo = getimagesize($newUrl);
+
+        $file = new UploadedFile(
+            $newUrl,
+            $path_parts['basename'],
+            $imgInfo['mime']
+        );
+
+        return $file;
     }
 
     /**
@@ -225,7 +309,9 @@ class PlayerController extends Controller
         $player = new Player();
         $parameters = array(); $technicals = array(); $physicals = array(); $mentals = array(); $goalkeepers = array(); $positions = array();
         $sum = 0; $count = 0;
-        
+
+        $player->user_id = $request->user()->id;
+        $player->short_name = $request->short_name ?? '';
         $player->name = $request->name;
         $player->surename = $request->surname;
         $player->nationality = $request->nationality;
@@ -233,11 +319,18 @@ class PlayerController extends Controller
         $player->height = $request->height;
         $player->weight = $request->weight;
         $player->foot = $request->foot;
-        $player->current_team = $request->cur_team;
-
+        $player->current_team = $request->team_name ?? '';
+        $player->current_team_id = str_replace("_db", "", $request->team_id) ?? '';
+        $player->current_team_link = $request->team_link ?? '';
+        $player->player_link = $request->player_link ?? '';
         // Photo
         if ($request->hasFile('photo')) {
             $player->photo = $request->file('photo')->store('avatars');
+        } else if ($player->player_link != "")
+        {
+            $photo_url = $request->photo_url;
+            $file = $this->createFileObject($photo_url);
+            $player->photo = $file->store('avatars');
         }
 
         // Positions
