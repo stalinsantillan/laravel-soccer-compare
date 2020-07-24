@@ -233,6 +233,11 @@ class PlayerController extends Controller
                             $a = $td->firstChild;
                             $player_link = $a->getAttribute("href");
                             $flag = $a->getAttribute("class");
+                            $player_rows = Player::query()->where("player_link", "https://int.soccerway.com".$player_link)->get()->toArray();
+                            if (sizeof($player_rows) > 0)
+                            {
+                                $player_link = "";
+                            }
                             $table_html .= "><span class='" . $flag . " pr-1'></span><a class='text-white-50' href='javascript:add_player(\"".$player_link."\")'>" . $td->nodeValue . "</a></td>";
                         } else {
                             $table_html .= ">" . $td->nodeValue . "</td>";
@@ -328,9 +333,12 @@ class PlayerController extends Controller
             $player->photo = $request->file('photo')->store('avatars');
         } else if ($player->player_link != "")
         {
-            $photo_url = $request->photo_url;
-            $file = $this->createFileObject($photo_url);
-            $player->photo = $file->store('avatars');
+            $photo_url = $request->photo_url ?? "";
+            if ($photo_url != "")
+            {
+                $file = $this->createFileObject($photo_url);
+                $player->photo = $file->store('avatars');
+            }
         }
 
         // Positions
@@ -719,18 +727,31 @@ class PlayerController extends Controller
     {
         $parameters = array(); $technicals = array(); $physicals = array(); $mentals = array(); $goalkeepers = array(); $positions = array();
         $sum = 0; $count = 0;
+
+        $player->user_id = $request->user()->id;
+        $player->short_name = $request->short_name ?? '';
         $player->name = $request->name;
-        $player->surename = $request->surename;
+        $player->surename = $request->surname;
         $player->nationality = $request->nationality;
         $player->birth_date = $request->birthdate;
         $player->height = $request->height;
         $player->weight = $request->weight;
         $player->foot = $request->foot;
-        $player->current_team = $request->cur_team;
-
+        $player->current_team = $request->team_name ?? '';
+        $player->current_team_id = str_replace("_db", "", $request->team_id) ?? '';
+        $player->current_team_link = $request->team_link ?? '';
+        $player->player_link = $request->player_link ?? '';
         // Photo
         if ($request->hasFile('photo')) {
             $player->photo = $request->file('photo')->store('avatars');
+        } else if ($player->player_link != "")
+        {
+            $photo_url = $request->photo_url ?? "";
+            if ($photo_url != "")
+            {
+                $file = $this->createFileObject($photo_url);
+                $player->photo = $file->store('avatars');
+            }
         }
 
         // Positions
