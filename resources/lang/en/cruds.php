@@ -11,9 +11,9 @@ return [
     'player' => [
         'title' => 'Player',
         'profile' => 'Player Profile',
-        'manually' => "Manually",
+        'new' => "New",
         'excel' => "From Excel",
-        'api' => "From API",
+        'existing' => "Existing",
     ],
     'filter' => [
         'title'          => 'Filter',
