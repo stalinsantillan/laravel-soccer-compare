@@ -94,7 +94,19 @@
                                             <td>Nation</td><td>{{ $data->nationality }}</td>
                                         </tr>
                                         <tr>
-                                        <td>League</td><td>Flamengo-Brazil(BR)</td>
+                                        @php
+                                            $league = '';
+                                            if ($data->current_team_link == "")
+                                            {
+                                                $league = App\Models\User\Team::findOrFail($data->current_team_id)->league->name;
+                                            }
+                                            else
+                                            {
+                                                $leagues = App\Models\User\ApiTeam::findOrFail($data->current_team_id);
+                                                $league = $leagues->competition_name ?? '';
+                                            }
+                                        @endphp
+                                        <td>League</td><td>{{$league}}</td>
                                         </tr>
                                         <tr>
                                         <td>Current Team</td><td>{{ $data->current_team }}</td>
