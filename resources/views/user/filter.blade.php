@@ -165,7 +165,9 @@
             </thead>
             <tbody>
                 @if(isset($data))
-                    @php $no = 0; @endphp
+                    @php
+                        $no = 0;
+                    @endphp
                     @foreach($data as $one)
                         <tr>
                             <td>{{ ++$no }}</td>
@@ -181,7 +183,11 @@
                             <td>
                                 <a href="{{ route('user.player_profile', $one->id) }}" class="text-white-50" target="_blank"
                                    style="border-bottom: rgba(255,255,255,.5) dashed 1px;">
-                                    {{ $one->name }}
+                                    @if($one->current_team_link == "")
+                                        {{ $one->name }}
+                                    @else
+                                        {{ $one->short_name }}
+                                    @endif
                                 </a>
                             </td>
                             <td>
@@ -198,7 +204,19 @@
                             <td>{{ $one->birth_date }}</td>
                             <td>{{ $one->height }}cm</td>
                             <td>{{ $one->nationality }}</td>
-                            <td></td>
+                            @php
+                                $league = '';
+                                if ($one->current_team_link == "")
+                                {
+                                    $league = App\Models\User\Team::findOrFail($one->current_team_id)->league->name;
+                                }
+                                else
+                                {
+                                    $leagues = App\Models\User\ApiTeam::findOrFail($one->current_team_id);
+                                    $league = $leagues->competition_name ?? '';
+                                }
+                            @endphp
+                            <td>{{ $league }}</td>
                             <td>{{ round($one->mental_average, 1) }}</td>
                             <td>{{ round($one->physical_average, 1) }}</td>
                             <td>{{ round($one->technical_average, 1) }}</td>
