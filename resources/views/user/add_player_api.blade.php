@@ -50,7 +50,7 @@
                         <li class="breadcrumb-item active">{{ trans('global.add') }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{ trans('global.add') }} {{ trans('cruds.player.title') }}({{ trans('cruds.player.api') }})</h4>
+                <h4 class="page-title">{{ trans('global.add') }} {{ trans('cruds.player.existing') }} {{ trans('cruds.player.title') }}</h4>
             </div>
         </div>
     </div>
@@ -1231,6 +1231,7 @@
         }
         function deletePhoto() {
             $("[attr=photo_i]").css("display", "none");
+            $("[name=photo_url]").val("");
             $(".dropify-wrapper").css("display", "block");
         }
         function submitForm() {
