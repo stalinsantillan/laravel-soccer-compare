@@ -15,7 +15,9 @@ class CreatePlayersTable extends Migration
     {
         Schema::create('players', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
             $table->string('name');
+            $table->string('short_name');
             $table->string('surename');
             $table->string('nationality');
             $table->date('birth_date');
@@ -24,6 +26,9 @@ class CreatePlayersTable extends Migration
             $table->string('foot');
             $table->string('photo')->nullable();
             $table->string('current_team');
+            $table->bigInteger('current_team_id');
+            $table->string('current_team_link');
+            $table->string('player_link');
 
             $table->double('technical_average')->default(0);
             $table->double('mental_average')->default(0);
