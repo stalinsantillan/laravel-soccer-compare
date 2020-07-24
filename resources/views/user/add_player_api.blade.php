@@ -32,6 +32,10 @@
             background-color: #4c5a67;
             color: white;
         }
+        .dropify-wrapper
+        {
+            display: none;
+        }
     </style>
 @endsection
 @section('content')
@@ -66,7 +70,7 @@
                                     Name<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7">
-                                    <input type="text" required class="form-control" id="name" name="name">
+                                    <input type="text" required class="form-control" id="name" name="name" value="{{ $data['first_name'] }}">
                                 </div>
                             </div>
                             <div class="form-group row col-md-6">
@@ -74,7 +78,7 @@
                                     Surname<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7">
-                                    <input type="text" required class="form-control" id="surname" name="surname">
+                                    <input type="text" required class="form-control" id="surname" name="surname" value="{{ $data['last_name'] }}">
                                 </div>
                             </div>
                         </div>
@@ -92,8 +96,12 @@
                                 <label for="birthdate" class="col-md-4 col-form-label text-right">
                                     Date of birth<span class="text-danger">*</span>
                                 </label>
+                                @php
+                                    $time = strtotime($data['date_of_birth']);
+                                    $date_of_birth = date('Y-m-d',$time);
+                                @endphp
                                 <div class="col-md-7">
-                                    <input type="text" required class="form-control" id="birthdate" name="birthdate">
+                                    <input type="text" required class="form-control" id="birthdate" name="birthdate" value="{{ $date_of_birth }}">
                                 </div>
                             </div>
                         </div>
@@ -139,6 +147,11 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <input type="hidden" name="team_id" />
+                            <input type="hidden" name="team_name" />
+                            <input type="hidden" name="team_link" />
+                            <input type="hidden" name="player_link" value="{{ $data['player_url'] }}" />
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -147,12 +160,13 @@
                                 Photo
                             </label>
                             <div class="col-md-7">
-                                {{-- <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="photo" id="photo">
-                                        <label class="custom-file-label" for="photo">Choose file</label>
-                                    </div>
-                                </div> --}}
+                                @if(isset($data['photo']))
+                                    <img src="{{ $data['photo'] }}" attr = "photo_i" class="user-photo" height="180px" width="180px" alt="">
+                                    <input type="hidden" name="photo_url" value="{{ $data['photo'] }}" />
+                                @else
+                                    <img src="{{ asset('user_assets/images/users/standard.png') }}" attr = "photo_i" class="user-photo" height="180px" width="180px" alt="">
+                                @endif
+                                <span onclick="deletePhoto();" attr = "photo_i" style="position: absolute; left: 200px; cursor: pointer;">X</span>
                                 <input type="file" id="photo" name="photo" class="dropify" data-max-file-size="1M" />
                             </div>
                         </div>
@@ -856,50 +870,50 @@
                 return repo.text;
             }
 
+            let country_asset = "(" + repo.country_name + ")";
+            if (repo.country_name == "") country_asset = "";
             var $container = $(
                 "<p class='title mb-0'></p>"
-            ).text(repo.name);
-
+            ).text(repo.team_name).append($("<p class='title mb-0' style='font-size: 12px'></p>").text(country_asset));
             return $container;
         }
 
         function formatRepoSelection (repo) {
-            return repo.name;
+            return repo.team_name || repo.text;
         }
         $(document).ready(function(){
-            $_token = @php echo $_token; @endphp;
+            var newOption = new Option("{{ $data['team'] }}", "{{ $data['team_id'] }}", false, false);
+            $('#cur_team').append(newOption).trigger('change');
             $('#cur_team').select2({
                 ajax: {
-                    type: "POST",
-                    beforeSend: function(request) {
-                        request.setRequestHeader("x-auth-token", $_token.user.token);
-                    },
-                    url: "https://api-football.instatscout.com/data",
+                    type: "GET",
+                    url: "{{ route('user.getteams') }}",
                     dataType: 'json',
                     delay: 250,
                     data: function (params) {
-                        let result = {"proc":"tmp_euh_scout_get_players_teams_by_params","params":{"_ps_any_text":params.term,"_p_include_type":[2],"_p_get_short_names":1}}
+                        let result = {"name":params.term};
                         return result;
                     },
                     processResults: function (data, params) {
-                        let results = [];
-                        let items = data.data[0].tmp_euh_scout_get_players_teams_by_params.teams;
-                        console.log(items)
-                        for (let i = 0; i < items.length; i++)
-                        {
-                            results.push({id: items[i].name_eng, name: items[i].name_eng});
-                        }
-                        params.page = params.page || 1;
                         return {
-                            results: results
+                            results:data
                         };
                     },
                     cache: true
                 },
+                tags: false,
                 placeholder: 'Search for a team',
                 minimumInputLength: 3,
                 templateResult: formatRepo,
                 templateSelection: formatRepoSelection
+            }).on('select2:select', function (e) {
+                let data = e.params.data;
+                $(this).children('[value="'+data.id+'"]').attr(
+                    {
+                        'team_link':data.team_link, //dynamic value from data array
+                        'team_name':data.team_name // fixed value
+                    }
+                );
             });
             var inputs = document.querySelectorAll( '.custom-file-input' );
             Array.prototype.forEach.call( inputs, function( input )
@@ -976,6 +990,8 @@
             {
                 $('#height').append($("<option></option>").text(i + "cm").attr("value", i));
             }
+            let curHeight = '{{ str_replace(' ', '', str_replace('cm', '', $data['height'])) }}';
+            $("#height").val(curHeight);
             $('#height').select2({
                 allowClear: false,
                 dropdownAutoWidth: true,
@@ -987,6 +1003,8 @@
             {
                 $('#weight').append($("<option></option>").text(i + "kg").attr("value", i));
             }
+            let curWeight = '{{ str_replace(' ', '', str_replace('kg', '', $data['weight'])) }}';
+            $("#weight").val(curWeight);
             $('#weight').select2({
                 allowClear: false,
                 dropdownAutoWidth: true,
@@ -994,6 +1012,8 @@
                 minimumResultsForSearch: 20, //prevent filter input
                 maximumSelectionSize: 20 // prevent scrollbar
             });
+            let foot = '{{ strtolower($data['foot']) }}';
+            $("#foot").val(foot);
             $('#foot').select2({
                 allowClear: false,
                 dropdownAutoWidth: true,
@@ -1006,6 +1026,7 @@
                 {
                     $('#nationality').append($("<option></option>").text(response[ind].name).attr("value", response[ind].name));
                 }
+                $("#nationality").val("{{ $data['nationality'] }}")
                 $('#nationality').select2({
                     allowClear: false,
                     dropdownAutoWidth: true,
@@ -1014,6 +1035,9 @@
                     maximumSelectionSize: 20 // prevent scrollbar
                 });
             });
+            let pos = "{{ $data['position'] }}";
+            if (pos == "Attacker") pos = "Forward";
+            $("#main_pos").val(pos);
             $("#main_pos").select2({
                 allowClear: false,
                 dropdownAutoWidth: true,
@@ -1198,7 +1222,19 @@
             $('#main_position' + (curCounter + 1)).trigger("change");
             ++curCounter;
         }
+        function deletePhoto() {
+            $("[attr=photo_i]").css("display", "none");
+            $(".dropify-wrapper").css("display", "block");
+        }
         function submitForm() {
+
+            let team_id = $("#cur_team option").last().attr("value");
+            let team_link = $("#cur_team option").last().attr("team_link");
+            let team_name = $("#cur_team option").last().attr("team_name");
+            $("[name=team_id]").val(team_id);
+            $("[name=team_link]").val(team_link);
+            $("[name=team_name]").val(team_name);
+
             if ($("#name").val() == "")
             {
                 $.NotificationApp.send(
