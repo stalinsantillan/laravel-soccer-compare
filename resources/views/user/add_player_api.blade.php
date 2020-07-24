@@ -81,6 +81,7 @@
                                     <input type="text" required class="form-control" id="surname" name="surname" value="{{ $data['last_name'] }}">
                                 </div>
                             </div>
+                            <input type="hidden" name="short_name" value="{{ $data['short_name'] }}">
                         </div>
                         <div class="row">
                             <div class="form-group row col-md-6">
@@ -148,9 +149,9 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" name="team_id" />
-                            <input type="hidden" name="team_name" />
-                            <input type="hidden" name="team_link" />
+                            <input type="hidden" name="team_id" id="team_id" />
+                            <input type="hidden" name="team_name" id="team_name" />
+                            <input type="hidden" name="team_link" id="team_link" />
                             <input type="hidden" name="player_link" value="{{ $data['player_url'] }}" />
                         </div>
                     </div>
@@ -884,6 +885,12 @@
         $(document).ready(function(){
             var newOption = new Option("{{ $data['team'] }}", "{{ $data['team_id'] }}", false, false);
             $('#cur_team').append(newOption).trigger('change');
+            $('#cur_team').children('[value="{{ $data['team_id'] }}"]').attr(
+                {
+                    'team_link':"{{ $data['team_url'] }}", //dynamic value from data array
+                    'team_name':"{{ $data['team'] }}" // fixed value
+                }
+            );
             $('#cur_team').select2({
                 ajax: {
                     type: "GET",
@@ -1230,10 +1237,11 @@
 
             let team_id = $("#cur_team option").last().attr("value");
             let team_link = $("#cur_team option").last().attr("team_link");
-            let team_name = $("#cur_team option").last().attr("team_name");
-            $("[name=team_id]").val(team_id);
-            $("[name=team_link]").val(team_link);
-            $("[name=team_name]").val(team_name);
+            let team_name = $("#cur_team option").last().text();
+
+            $("#team_id").val(team_id);
+            $("#team_link").val(team_link);
+            $("#team_name").val(team_name);
 
             if ($("#name").val() == "")
             {
