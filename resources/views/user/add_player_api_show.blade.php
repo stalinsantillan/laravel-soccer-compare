@@ -29,7 +29,7 @@
                         <li class="breadcrumb-item active">{{ trans('cruds.filter.title') }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{ trans('global.add') }} {{ trans('cruds.player.title') }}({{ trans('cruds.player.api') }})</h4>
+                <h4 class="page-title">{{ trans('global.add') }} {{ trans('cruds.player.existing') }} {{ trans('cruds.player.title') }}</h4>
             </div>
         </div>
     </div>
@@ -100,6 +100,16 @@
             });
         })
         function add_player(link) {
+            if (link == "")
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "This player already added.",
+                    "top-center",
+                    "#da8609",
+                    "info");
+                return;
+            }
             $("[name=link]").val(link);
             $("#add_player_form").submit();
         }
