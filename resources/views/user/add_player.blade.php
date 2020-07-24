@@ -46,7 +46,7 @@
                     <li class="breadcrumb-item active">{{ trans('global.add') }}</li>
                 </ol>
             </div>
-            <h4 class="page-title">{{ trans('global.add') }} {{ trans('cruds.player.title') }}({{ trans('cruds.player.manually') }})</h4>
+            <h4 class="page-title">{{ trans('global.add') }} {{ trans('cruds.player.new') }} {{ trans('cruds.player.title') }}</h4>
         </div>
     </div>
 </div>
