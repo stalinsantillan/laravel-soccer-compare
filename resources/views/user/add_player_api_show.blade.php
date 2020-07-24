@@ -11,7 +11,7 @@
     <style>
         .table td, .table th {
             vertical-align: middle !important;
-            padding: 0.65rem;
+            padding: 0.55rem;
         }
         .flag_16 {
             font-size: 12px;
@@ -65,6 +65,9 @@
             </table>
         </div> <!-- end card body-->
     </div> <!-- end card -->
+    <form role="form" id="add_player_form" method="get" action="{{ route('user.add_player_api') }}">
+        <input type="hidden" name="link" />
+    </form>
 @endsection
 
 @section('scripts')
@@ -87,6 +90,10 @@
                 showTable();
             })
         })
+        function add_player(link) {
+            $("[name=link]").val(link);
+            $("#add_player_form").submit();
+        }
         function showTable() {
             let name = $("#name").val();
             $.ajax({
