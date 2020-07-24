@@ -17,12 +17,7 @@ class CreateTeamsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->bigInteger('league_id')->unsigned();
-            $table->timestamps();
-            $table->foreign('league_id')
-                ->references('id')
-                ->on('players')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            $table->timestamps();;
         });
     }
 
