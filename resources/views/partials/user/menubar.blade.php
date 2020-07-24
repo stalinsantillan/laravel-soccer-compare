@@ -9,12 +9,12 @@
                 <ul class="submenu">
                     <li>
                         <a href="{{ route('user.add_player') }}">
-                            {{ trans('cruds.player.manually') }}
+                            {{ trans('cruds.player.new') }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('user.get_player_list_api') }}">
-                            {{ trans('cruds.player.api') }}
+                            {{ trans('cruds.player.existing') }}
                         </a>
                     </li>
 {{--                    <li>--}}
