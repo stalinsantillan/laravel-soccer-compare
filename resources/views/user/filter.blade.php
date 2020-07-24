@@ -184,7 +184,7 @@
                                 <a href="{{ route('user.player_profile', $one->id) }}" class="text-white-50" target="_blank"
                                    style="border-bottom: rgba(255,255,255,.5) dashed 1px;">
                                     @if($one->current_team_link == "")
-                                        {{ $one->name }}
+                                        {{ $one->name }} {{ $one->surename }}
                                     @else
                                         {{ $one->short_name }}
                                     @endif
