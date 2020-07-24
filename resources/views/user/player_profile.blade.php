@@ -52,7 +52,7 @@
                     <li class="breadcrumb-item active">{{ trans('cruds.player.profile') }}</li>
                 </ol>
             </div>
-            <h4 class="page-title">{{ $data->name }}</h4>
+            <h4 class="page-title">{{ $data->name }} {{ $data->surename }}</h4>
         </div>
     </div>
 </div>
