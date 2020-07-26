@@ -82,7 +82,7 @@
                                     <div class="col-md-10 offset-md-1 row">
                                         @foreach($arrDefender as $defender)
                                             <div class="checkbox checkbox-primary mb-2 col-md-6">
-                                                <input id="{{ $defender }}" name="position[]" type="checkbox">
+                                                <input id="{{ $defender }}" name="position[]" type="checkbox" {{ in_array($defender, $filter['position'] ?? array())==true?"checked":"" }}>
                                                 <label for="{{ $defender }}">
                                                     {{ $defender }}
                                                 </label>
@@ -97,7 +97,7 @@
                                     <div class="col-md-10 offset-md-1 row">
                                         @foreach($arrMidfielder as $midfielder)
                                             <div class="checkbox checkbox-primary mb-2 col-md-6">
-                                                <input id="{{ $midfielder }}" name="position[]" type="checkbox">
+                                                <input id="{{ $midfielder }}" name="position[]" type="checkbox" {{ in_array($midfielder, $filter['position'] ?? array())==true?"checked":"" }}>
                                                 <label for="{{ $midfielder }}">
                                                     {{ $midfielder }}
                                                 </label>
@@ -112,7 +112,7 @@
                                     <div class="col-md-10 offset-md-1 row">
                                         @foreach($arrForward as $forward)
                                             <div class="checkbox checkbox-primary mb-2 col-md-6">
-                                                <input id="{{ $forward }}" name="position[]" type="checkbox">
+                                                <input id="{{ $forward }}" name="position[]" type="checkbox" {{ in_array($forward, $filter['position'] ?? array())==true?"checked":"" }}>
                                                 <label for="{{ $forward }}">
                                                     {{ $forward }}
                                                 </label>
@@ -127,7 +127,7 @@
                                     <div class="col-md-10 offset-md-1 row">
                                         @foreach($arrGoalkeeper as $goalkeeper)
                                             <div class="checkbox checkbox-primary mb-2 col-md-6">
-                                                <input id="{{ $goalkeeper }}" name="position[]" type="checkbox">
+                                                <input id="{{ $goalkeeper }}" name="position[]" type="checkbox" {{ in_array($goalkeeper, $filter['position'] ?? array())==true?"checked":"" }}>
                                                 <label for="{{ $goalkeeper }}">
                                                     {{ $goalkeeper }}
                                                 </label>
@@ -219,59 +219,64 @@
                         $no = 0;
                     @endphp
                     @foreach($data as $one)
-                        <tr>
-                            <td>{{ ++$no }}</td>
-                            <td>
-                                <a href="{{ route('user.player_profile', $one->id) }}" target="_blank">
-                                    @if(isset($one->photo))
-                                        <img src="{{ asset('storage').'/'.$one->photo }}" class="user-photo" height="50px" width="50px" alt="">
-                                    @else
-                                        <img src="{{ asset('user_assets/images/users/standard.png') }}" class="user-photo" height="50px" width="50px" alt="">
-                                    @endif
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{{ route('user.player_profile', $one->id) }}" class="text-white-50" target="_blank"
-                                   style="border-bottom: rgba(255,255,255,.5) dashed 1px;">
-                                    @if($one->player_link == "")
-                                        {{ $one->name }} {{ $one->surename }}
-                                    @else
-                                        {{ $one->short_name }}
-                                    @endif
-                                </a>
-                            </td>
-                            <td>
-                                @php $subone = 1; @endphp
-                                @foreach($one->positions as $position)
-                                    @if($subone > 1)
-                                        <br>
-                                    @endif
-                                    <span class="badge badge-primary">{{ $position->specify }}</span>
-                                    @php ++$subone; @endphp
-                                @endforeach
-                            </td>
-                            <td style="background-color: #3f4a56">{{ round($one->general_average, 1) }}</td>
-                            <td>{{ $one->birth_date }}</td>
-                            <td>{{ $one->height }}cm</td>
-                            <td>{{ $one->nationality }}</td>
-                            @php
-                                $league = '';
-                                if ($one->current_team_link == "")
-                                {
-                                    $league = App\Models\User\Team::findOrFail($one->current_team_id)->league->name;
-                                }
-                                else
-                                {
-                                    $leagues = App\Models\User\ApiTeam::findOrFail($one->current_team_id);
-                                    $league = $leagues->competition_name ?? '';
-                                }
-                            @endphp
-                            <td>{{ $league }}</td>
-                            <td>{{ round($one->mental_average, 1) }}</td>
-                            <td>{{ round($one->physical_average, 1) }}</td>
-                            <td>{{ round($one->technical_average, 1) }}</td>
-                            <td>{{ round($one->goalkeeper_average, 1) }}</td>
-                        </tr>
+
+                        @foreach($one->positions as $position_one)
+                            @if(!isset($filter['position']) || in_array($position_one->specify, $filter['position'] ?? array()))
+                                <tr>
+                                    <td>{{ ++$no }}</td>
+                                    <td>
+                                        <a href="{{ route('user.player_profile', $one->id) }}" target="_blank">
+                                            @if(isset($one->photo))
+                                                <img src="{{ asset('storage').'/'.$one->photo }}" class="user-photo" height="50px" width="50px" alt="">
+                                            @else
+                                                <img src="{{ asset('user_assets/images/users/standard.png') }}" class="user-photo" height="50px" width="50px" alt="">
+                                            @endif
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('user.player_profile', $one->id) }}" class="text-white-50" target="_blank"
+                                           style="border-bottom: rgba(255,255,255,.5) dashed 1px;">
+                                            @if($one->player_link == "")
+                                                {{ $one->name }} {{ $one->surename }}
+                                            @else
+                                                {{ $one->short_name }}
+                                            @endif
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @php $subone = 1; @endphp
+                                        @foreach($one->positions as $position)
+                                            @if($subone > 1)
+                                                <br>
+                                            @endif
+                                            <span class="badge badge-primary">{{ $position->specify }}</span>
+                                            @php ++$subone; @endphp
+                                        @endforeach
+                                    </td>
+                                    <td style="background-color: #3f4a56">{{ round($one->general_average, 1) }}</td>
+                                    <td>{{ $one->birth_date }}</td>
+                                    <td>{{ $one->height }}cm</td>
+                                    <td>{{ $one->nationality }}</td>
+                                    @php
+                                        $league = '';
+                                        if ($one->current_team_link == "")
+                                        {
+                                            $league = App\Models\User\Team::findOrFail($one->current_team_id)->league->name;
+                                        }
+                                        else
+                                        {
+                                            $leagues = App\Models\User\ApiTeam::findOrFail($one->current_team_id);
+                                            $league = $leagues->competition_name ?? '';
+                                        }
+                                    @endphp
+                                    <td>{{ $league }}</td>
+                                    <td>{{ round($one->mental_average, 1) }}</td>
+                                    <td>{{ round($one->physical_average, 1) }}</td>
+                                    <td>{{ round($one->technical_average, 1) }}</td>
+                                    <td>{{ round($one->goalkeeper_average, 1) }}</td>
+                                </tr>
+                            @endif
+                        @endforeach
                     @endforeach
                 @endif
             </tbody>
@@ -320,9 +325,13 @@
                 }
             }
             $.ajax(settings).done(function (response) {
+                let nationality_selected = @php echo json_encode($filter['nationality'] ?? array()); @endphp;
                 for(ind in response)
                 {
-                    $('#nationality').append($("<option></option>").text(response[ind].name).attr("value", response[ind].name));
+                    if (nationality_selected.includes(response[ind].name))
+                        $('#nationality').append($("<option selected></option>").text(response[ind].name).attr("value", response[ind].name));
+                    else
+                        $('#nationality').append($("<option></option>").text(response[ind].name).attr("value", response[ind].name));
                 }
                 $('#nationality').select2({
                     allowClear: false,
@@ -354,8 +363,12 @@
                 placement: 'right'
             });
             range_age = document.getElementById('range_age');
+            let scope_age = [0, 100];
+            @if($filter['age'])
+                scope_age = [{{ $filter['age'][0] }}, {{ $filter['age'][1] }}]
+            @endif
             noUiSlider.create(range_age, {
-                start: [20, 80],// ... must be at least 300 apart
+                start: scope_age,// ... must be at least 300 apart
                 // margin: 300,
                 step: 1,
                 // ... but no more than 600
@@ -399,8 +412,12 @@
                 placement: 'right'
             });
             range_height = document.getElementById('range_height');
+            let scope_height = [100, 250];
+            @if($filter['height'])
+                scope_height = [{{ $filter['height'][0] }}, {{ $filter['height'][1] }}]
+            @endif
             noUiSlider.create(range_height, {
-                start: [160, 190],// ... must be at least 300 apart
+                start: scope_height,// ... must be at least 300 apart
                 // margin: 300,
                 step: 1,
                 // ... but no more than 600
