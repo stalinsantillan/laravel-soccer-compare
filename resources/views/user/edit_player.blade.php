@@ -78,7 +78,8 @@
                                 Surname
                             </label>
                             <div class="col-md-7">
-                                <input type="text" class="form-control" id="surname" name="surname" value="{{ $data->surname }}">
+                                <input type="text" class="form-control" id="surname" name="surname" value="{{ $data->surename }}">
+                                <input type="hidden" name="short_name" value="{{ $data['short_name'] }}">
                             </div>
                         </div>
                     </div>
@@ -143,6 +144,11 @@
                                 </select>
                             </div>
                         </div>
+
+                        <input type="hidden" name="team_id" id="team_id" />
+                        <input type="hidden" name="team_name" id="team_name" />
+                        <input type="hidden" name="team_link" id="team_link" />
+                        <input type="hidden" name="player_link" value="{{ $data->player_link }}" />
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -159,6 +165,7 @@
                             </div> --}}
                             @if(isset($data->photo))
                                 <img src="{{ asset('storage').'/'.$data->photo }}" attr = "photo_i" class="user-photo" height="180px" width="180px" alt="">
+                                <input type="hidden" name="photo_url" value="{{ asset('storage').'/'.$data->photo }}" />
                             @else
                                 <img src="{{ asset('user_assets/images/users/standard.png') }}" attr = "photo_i" class="user-photo" height="180px" width="180px" alt="">
                             @endif
@@ -871,54 +878,60 @@
                 return repo.text;
             }
 
+            let country_asset = "(" + repo.country_name + ")";
+            if (repo.country_name == "") country_asset = "";
             var $container = $(
                 "<p class='title mb-0'></p>"
-            ).text(repo.name);
-
+            ).text(repo.team_name).append($("<p class='title mb-0' style='font-size: 12px'></p>").text(country_asset));
             return $container;
+        }
+        function formatRepoSelection (repo) {
+            return repo.team_name || repo.text;
         }
         function deletePhoto() {
             $("[attr=photo_i]").css("display", "none");
+            $("[name=photo_url]").val("");
             $(".dropify-wrapper").css("display", "block");
         }
-        function formatRepoSelection (repo) {
-            return repo.name || repo.text;
-        }
         $(document).ready(function(){
-            $_token = @php echo $_token; @endphp;
-            $('#cur_team').append($("<option></option>").text("{{ $data->current_team }}").attr("value", "{{ $data->current_team }}"));
-            $("#cur_team").val("{{ $data->current_team }}");
+            var newOption = new Option("{{ $data->current_team }}", "{{ $data->current_team_id }}", false, false);
+            $('#cur_team').append(newOption).trigger('change');
+            $('#cur_team').children('[value="{{ $data->current_team_id }}"]').attr(
+                {
+                    'team_link':"{{ $data->current_team_link }}", //dynamic value from data array
+                    'team_name':"{{ $data->current_team }}" // fixed value
+                }
+            );
             $('#cur_team').select2({
                 ajax: {
-                    type: "POST",
-                    beforeSend: function(request) {
-                        request.setRequestHeader("x-auth-token", $_token.user.token);
-                    },
-                    url: "https://api-football.instatscout.com/data",
+                    type: "GET",
+                    url: "{{ route('user.getteams') }}",
                     dataType: 'json',
                     delay: 250,
                     data: function (params) {
-                        let result = {"proc":"tmp_euh_scout_get_players_teams_by_params","params":{"_ps_any_text":params.term,"_p_include_type":[2],"_p_get_short_names":1}}
+                        let result = {"name":params.term};
                         return result;
                     },
                     processResults: function (data, params) {
-                        let results = [];
-                        let items = data.data[0].tmp_euh_scout_get_players_teams_by_params.teams;
-                        for (let i = 0; i < items.length; i++)
-                        {
-                            results.push({id: items[i].name_eng, name: items[i].name_eng});
-                        }
-                        params.page = params.page || 1;
                         return {
-                            results: results
+                            results:data
                         };
                     },
                     cache: true
                 },
+                tags: false,
                 placeholder: 'Search for a team',
                 minimumInputLength: 3,
                 templateResult: formatRepo,
                 templateSelection: formatRepoSelection
+            }).on('select2:select', function (e) {
+                let data = e.params.data;
+                $(this).children('[value="'+data.id+'"]').attr(
+                    {
+                        'team_link':data.team_link, //dynamic value from data array
+                        'team_name':data.team_name // fixed value
+                    }
+                );
             });
             var inputs = document.querySelectorAll( '.custom-file-input' );
             Array.prototype.forEach.call( inputs, function( input )
@@ -1240,6 +1253,13 @@
             ++curCounter;
         }
         function submitForm() {
+            let team_id = $("#cur_team option").last().attr("value");
+            let team_link = $("#cur_team option").last().attr("team_link");
+            let team_name = $("#cur_team option").last().text();
+
+            $("#team_id").val(team_id);
+            $("#team_link").val(team_link);
+            $("#team_name").val(team_name);
             if ($("#name").val() == "")
             {
                 $.NotificationApp.send(
