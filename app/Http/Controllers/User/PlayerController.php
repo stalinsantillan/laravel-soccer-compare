@@ -1155,31 +1155,39 @@ class PlayerController extends Controller
         $name = ''; $min_age=0; $max_age = 0;
         $nationality = array();
         $position = array();
-
-        if ($request->name)
-            $name = $request->name;
-        $data = Player::where('name', 'LIKE', "%$name%");
-
-        if ($request->nationality) {
-            $nationality = $request->nationality;
-            $data = $data->whereIn('nationality', $nationality);
+        $filter_data = array();
+        if ($request->s_name) {
+            $name = $request->s_name;
+            $filter_data['name'] = $name;
         }
-
-        if ($request->position) {
-            $position = $request->position;
+        $data = Player::where('name', 'LIKE', "%$name%")->orWhere('surename', 'LIKE', "%$name%");
+        if ($request->s_nationality && $request->s_nationality != null) {
+            $nationality = $request->s_nationality;
+            $data = $data->whereIn('nationality', explode(",", $nationality));
+            $filter_data['nationality'] = $nationality;
         }
-
-
-        if ($request->min_age) {
-            $min_age = $request->min_age;
-            $max_age = $request->max_age;
+        if ($request->s_position && $request->s_position != null) {
+            $position = $request->s_position;
+            $arr = explode(",", $position);
+            $filter_data['position'] = $position;
         }
-        
-        $data = $data->orWhere('surename', 'LIKE', "%$name%")
-            ->get();
-
+        if ($request->s_age && $request->s_age != null) {
+            $age = explode(",", $request->s_age);
+            $min_age = $age[0];
+            $max_age = $age[1];
+            $data = $data->whereRaw("(YEAR(NOW()) - YEAR(birth_date)) >= ?", $min_age)->whereRaw("(YEAR(NOW()) - YEAR(birth_date)) <= ?", $max_age);
+            $filter_data['age'] = $age;
+        }
+        if ($request->s_height && $request->s_height != null) {
+            $height = explode(",", $request->s_height);
+            $min_height = $height[0];
+            $max_height = $height[1];
+            $data = $data->where("height", ">=", $min_height)->where("height", "<=", $max_height);
+            $filter_data['height'] = $height;
+        }
+        $data = $data->get();
         return view('user.filter')
-            ->with('filter', $request->all())
+            ->with('filter', $filter_data)
             ->with('data', $data);
     }
 
