@@ -6,10 +6,26 @@
     <link href="{{ asset('user_assets/libs/datatables/select.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('popover_assets/css/bootstrap-popover-x.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('erp_assets/nouislider/nouislider.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('erp_assets/select/css/select2.css') }}" rel="stylesheet" type="text/css" />
 {{--    <link href="{{ asset('erp_assets/rangeslider-2.3.0/rangeslider.css') }}" rel="stylesheet" type="text/css" />--}}
     <style>
         .table td, .table th {
             vertical-align: middle !important;
+        }
+        .select2-container--default .select2-results__option--selected {
+            background-color: #4c5a67;
+            color: white;
+        }
+        .select2-selection__rendered {
+            padding: 0 !important;
+        }
+        .select2-selection__choice__remove:hover{
+            background-color: #6658dd !important;
+        }
+        .select2-container {
+            width: auto !important;
+            min-width: 300px !important;
+            max-width: 600px !important;
         }
     </style>
 @endsection
@@ -31,120 +47,154 @@
 <!-- end page title -->
 <div class="card">
     <div class="card-body">
-        <form role="form" method="get" action="{{ route('user.filter_player') }}">
-            <div class="row mb-2">
-                <div class="col-md-auto">
-                    <label for="name">Player name</label>
-                    <div class="row">
-                        <div class="col-md-auto">
-                            <input type="text" class="form-control" id="name" name="name" value="{{ $filter['name'] ?? '' }}">
-                        </div>
-                        <div class="col-md-auto">
-                            <button type="button" class="btn btn-primary" id="btn_position">Position</button>
-                            <!-- PopoverX content -->
-                            <div id="popover_position" class="popover popover-x popover-default" style="min-width: 550px;">
-                                <div class="arrow"></div>
-                                <h3 class="popover-header popover-title">Select Position</h3>
-                                <div class="popover-body popover-content">
-                                    @php
-                                        $arrDefender = array("Centre-back", "Sweeper", "Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back");
-                                        $arrMidfielder = array("Centre midfield", "Defensive midfield", "Attacking midfield", "Left Wide midfield", "Right Wide midfield");
-                                        $arrForward = array("Centre forward", "Second striker", "Left Winger", "Right Winger");
-                                        $arrGoalkeeper = array("Goalkeeper");
-                                    @endphp
-                                    <div class="card-title font-15 font-weight-bold">
-                                        Defender
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-10 offset-md-1 row">
-                                            @foreach($arrDefender as $defender)
-                                                <div class="checkbox checkbox-primary mb-2 col-md-6">
-                                                    <input id="{{ $defender }}" type="checkbox">
-                                                    <label for="{{ $defender }}">
-                                                        {{ $defender }}
-                                                    </label>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    <div class="card-title font-15 font-weight-bold">
-                                        Midfielder
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-10 offset-md-1 row">
-                                            @foreach($arrMidfielder as $midfielder)
-                                                <div class="checkbox checkbox-primary mb-2 col-md-6">
-                                                    <input id="{{ $midfielder }}" type="checkbox">
-                                                    <label for="{{ $midfielder }}">
-                                                        {{ $midfielder }}
-                                                    </label>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    <div class="card-title font-15 font-weight-bold">
-                                        Forward
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-10 offset-md-1 row">
-                                            @foreach($arrForward as $forward)
-                                                <div class="checkbox checkbox-primary mb-2 col-md-6">
-                                                    <input id="{{ $forward }}" type="checkbox">
-                                                    <label for="{{ $forward }}">
-                                                        {{ $forward }}
-                                                    </label>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    <div class="card-title font-15 font-weight-bold">
-                                        Goalkeeper
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-10 offset-md-1 row">
-                                            @foreach($arrGoalkeeper as $goalkeeper)
-                                                <div class="checkbox checkbox-primary mb-2 col-md-6">
-                                                    <input id="{{ $goalkeeper }}" type="checkbox">
-                                                    <label for="{{ $goalkeeper }}">
-                                                        {{ $goalkeeper }}
-                                                    </label>
-                                                </div>
-                                            @endforeach
-                                        </div>
+        <form role="form" id="search_form" method="get" action="{{ route('user.filter_player') }}">
+            <input type="hidden" name="s_name" />
+            <input type="hidden" name="s_position" />
+            <input type="hidden" name="s_age" />
+            <input type="hidden" name="s_height" />
+            <input type="hidden" name="s_nationality" />
+        </form>
+        <div class="row mb-2">
+            <div class="col-md-auto">
+                <div class="row">
+                    <div class="col-md-auto">
+                        <label for="name" class="col-form-label">Player name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $filter['name'] ?? '' }}">
+                    </div>
+                    <div class="col-md-auto">
+                        <label for="btn_position" class="col-form-label">&nbsp;</label><br />
+                        <button type="button" class="btn btn-primary" id="btn_position">Position</button>
+                        <!-- PopoverX content -->
+                        <div id="popover_position" class="popover popover-x popover-default" style="min-width: 550px;">
+                            <div class="arrow"></div>
+                            <h3 class="popover-header popover-title">Select Position</h3>
+                            <div class="popover-body popover-content">
+                                @php
+                                    $arrDefender = array("Centre-back", "Sweeper", "Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back");
+                                    $arrMidfielder = array("Centre midfield", "Defensive midfield", "Attacking midfield", "Left Wide midfield", "Right Wide midfield");
+                                    $arrForward = array("Centre forward", "Second striker", "Left Winger", "Right Winger");
+                                    $arrGoalkeeper = array("Goalkeeper");
+                                @endphp
+                                <div class="card-title font-15 font-weight-bold">
+                                    Defender
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10 offset-md-1 row">
+                                        @foreach($arrDefender as $defender)
+                                            <div class="checkbox checkbox-primary mb-2 col-md-6">
+                                                <input id="{{ $defender }}" name="position[]" type="checkbox">
+                                                <label for="{{ $defender }}">
+                                                    {{ $defender }}
+                                                </label>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
-                                <div class="popover-footer">
-                                    <button type="button" class="btn btn-sm btn-primary">Set</button>
-                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="popover-x">Close</button>
+                                <div class="card-title font-15 font-weight-bold">
+                                    Midfielder
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10 offset-md-1 row">
+                                        @foreach($arrMidfielder as $midfielder)
+                                            <div class="checkbox checkbox-primary mb-2 col-md-6">
+                                                <input id="{{ $midfielder }}" name="position[]" type="checkbox">
+                                                <label for="{{ $midfielder }}">
+                                                    {{ $midfielder }}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="card-title font-15 font-weight-bold">
+                                    Forward
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10 offset-md-1 row">
+                                        @foreach($arrForward as $forward)
+                                            <div class="checkbox checkbox-primary mb-2 col-md-6">
+                                                <input id="{{ $forward }}" name="position[]" type="checkbox">
+                                                <label for="{{ $forward }}">
+                                                    {{ $forward }}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="card-title font-15 font-weight-bold">
+                                    Goalkeeper
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10 offset-md-1 row">
+                                        @foreach($arrGoalkeeper as $goalkeeper)
+                                            <div class="checkbox checkbox-primary mb-2 col-md-6">
+                                                <input id="{{ $goalkeeper }}" name="position[]" type="checkbox">
+                                                <label for="{{ $goalkeeper }}">
+                                                    {{ $goalkeeper }}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="popover-footer text-center">
+                                <button type="button" class="btn btn-sm btn-primary" style="min-width: 150px" onclick="setPosition()">Set</button>
+{{--                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="popover-x">Close</button>--}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <label for="btn_age" class="col-form-label">&nbsp;</label><br />
+                        <button type="button" class="btn btn-primary" id="btn_age">Age</button>
+                        <!-- PopoverX content -->
+                        <div id="popover_age" class="popover popover-x popover-default" style="min-width: 550px;">
+                            <div class="arrow"></div>
+                            <h3 class="popover-header popover-title">Age</h3>
+                            <div class="popover-body popover-content">
+                                <div class="row mb-5 mt-5">
+                                    <div class="col-md-10 offset-md-1">
+                                        <div id="range_age"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="popover-footer text-center">
+                                <button type="button" class="btn btn-sm btn-primary" style="min-width: 150px" onclick="setAge()">Set</button>
+{{--                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="popover-x">Close</button>--}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <label for="btn_height" class="col-form-label">&nbsp;</label><br />
+                        <button type="button" class="btn btn-primary" id="btn_height">Height</button>
+                        <!-- PopoverX content -->
+                        <div id="popover_height" class="popover popover-x popover-default" style="min-width: 550px;">
+                            <div class="arrow"></div>
+                            <h3 class="popover-header popover-title">Height</h3>
+                            <div class="popover-body popover-content">
+                                <div class="row mb-5 mt-5">
+                                    <div class="col-md-10 offset-md-1">
+                                        <div id="range_height"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="popover-footer">
+                                <div class="popover-footer text-center">
+                                    <button type="button" class="btn btn-sm btn-primary" style="min-width: 150px" onclick="setHeight()">Set</button>
+                                    {{--                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="popover-x">Close</button>--}}
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-auto">
-                            <button type="button" class="btn btn-primary" id="btn_age">Age</button>
-                            <!-- PopoverX content -->
-                            <div id="popover_age" class="popover popover-x popover-default" style="min-width: 550px;">
-                                <div class="arrow"></div>
-                                <h3 class="popover-header popover-title">Age</h3>
-                                <div class="popover-body popover-content">
-                                    <div class="row mb-5 mt-5">
-                                        <div class="col-md-10 offset-md-1">
-                                            <div id="range"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="popover-footer">
-                                    <button type="button" class="btn btn-sm btn-primary">Set</button>
-                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="popover-x">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-auto">
-                            <button class="btn btn-primary" type="submit"><i class="fe-search"> Search</i></button>
-                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <label for="nationality" class="col-form-label">Nationality</label><br />
+                        <select class="js-states form-control" id="nationality" style="min-width: 300px;" multiple="multiple"></select>
+                    </div>
+                    <div class="col-md-auto">
+                        <label for="" class="col-form-label">&nbsp;</label><br />
+                        <button class="btn btn-primary" type="button" onclick="search()"><i class="fe-search"> Search</i></button>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
         <table id="filter-table" class="table nowrap table-responsive">
             <thead>
                 <tr>
@@ -250,10 +300,39 @@
 
     <script src="{{ asset('popover_assets/js/bootstrap-popover-x.js') }}" type="text/javascript"></script>
     <script src="{{ asset('erp_assets/nouislider/nouislider.js') }}"></script>
+
+
+    <script src="{{ asset('erp_assets/select/js/select2.js') }}"></script>
 {{--    <script src="{{ asset('erp_assets/rangeslider-2.3.0/rangeslider.js') }}"></script>--}}
     <!-- third party js ends -->
     <script>
+        let range_age;
+        let range_height;
         $(document).ready(function () {
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://ajayakv-rest-countries-v1.p.rapidapi.com/rest/v1/all",
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-host": "ajayakv-rest-countries-v1.p.rapidapi.com",
+                    "x-rapidapi-key": "596585807fmsh94116d249e0cd64p1d139cjsn6b7b5407af9b"
+                }
+            }
+            $.ajax(settings).done(function (response) {
+                for(ind in response)
+                {
+                    $('#nationality').append($("<option></option>").text(response[ind].name).attr("value", response[ind].name));
+                }
+                $('#nationality').select2({
+                    allowClear: false,
+                    dropdownAutoWidth: true,
+                    width: 'element',
+                    minimumResultsForSearch: 20, //prevent filter input
+                    maximumSelectionSize: 20 // prevent scrollbar
+                });
+            });
+            $("#nationality").select2();
             var table = $("#filter-table").DataTable({
                 language: {
                     paginate: {
@@ -274,7 +353,8 @@
                 target: '#popover_age',
                 placement: 'right'
             });
-            noUiSlider.create(document.getElementById('range'), {
+            range_age = document.getElementById('range_age');
+            noUiSlider.create(range_age, {
                 start: [20, 80],// ... must be at least 300 apart
                 // margin: 300,
                 step: 1,
@@ -314,19 +394,76 @@
                     'max': 100
                 }
             });
-            // $('[data-rangeslider]').rangeslider({
-            //     // Deactivate the feature detection
-            //     polyfill: false,
-            //     // Callback function
-            //     onInit: function() {
-            //     },
-            //     // Callback function
-            //     onSlide: function(position, value) {
-            //     },
-            //     // Callback function
-            //     onSlideEnd: function(position, value) {
-            //     }
-            // });
+            $('#btn_height').popoverButton({
+                target: '#popover_height',
+                placement: 'right'
+            });
+            range_height = document.getElementById('range_height');
+            noUiSlider.create(range_height, {
+                start: [160, 190],// ... must be at least 300 apart
+                // margin: 300,
+                step: 1,
+                // ... but no more than 600
+                // limit: 600,
+
+                // Display colored bars between handles
+                connect: true,
+
+                // Put '0' at the bottom of the slider
+                // direction: 'rtl',
+                // orientation: 'vertical',
+
+                // Move handle on tap, bars are draggable
+                behaviour: 'tap-drag',
+                tooltips: true,
+                format: {
+                    // 'to' the formatted value. Receives a number.
+                    to: function (value) {
+                        return value;
+                    },
+                    // 'from' the formatted value.
+                    // Receives a string, should return a number.
+                    from: function (value) {
+                        return Number(value.replace(',-', ''));
+                    }
+                },
+
+                // Show a scale with the slider
+                // pips: {
+                //     mode: 'steps',
+                //     stepped: true,
+                //     density: 20
+                // },
+                range: {
+                    'min': 100,
+                    'max': 250
+                }
+            });
         })
+        function search() {
+            let nationality = $("#nationality").val();
+            let positions = $("[name='position[]']").map(function(){
+                if($(this).prop("checked") == true) {
+                    return $(this).attr("id");
+                }
+            }).get();
+            let age = range_age.noUiSlider.get();
+            let height = range_height.noUiSlider.get();
+            $("input[name=s_name]").val($("#name").val());
+            $("input[name=s_nationality]").val(nationality);
+            $("input[name=s_position]").val(positions);
+            $("input[name=s_age]").val(age);
+            $("input[name=s_height]").val(height);
+            $("#search_form").submit();
+        }
+        function setPosition() {
+            $('#popover_position').popoverX('hide');
+        }
+        function setAge() {
+            $('#popover_age').popoverX('hide');
+        }
+        function setHeight() {
+            $('#popover_height').popoverX('hide');
+        }
     </script>
 @endsection
