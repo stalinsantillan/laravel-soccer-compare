@@ -1160,22 +1160,26 @@ class PlayerController extends Controller
             $name = $request->s_name;
             $filter_data['name'] = $name;
         }
-        $data = Player::where('name', 'LIKE', "%$name%")->orWhere('surename', 'LIKE', "%$name%");
+        $data = Player::where('name', 'LIKE', "%".$name."%");
+        //->orWhere('surename', 'LIKE', "%$name%")
         if ($request->s_nationality && $request->s_nationality != null) {
             $nationality = $request->s_nationality;
             $data = $data->whereIn('nationality', explode(",", $nationality));
-            $filter_data['nationality'] = $nationality;
+            $filter_data['nationality'] = explode(",", $nationality);
         }
         if ($request->s_position && $request->s_position != null) {
             $position = $request->s_position;
             $arr = explode(",", $position);
-            $filter_data['position'] = $position;
+            $filter_data['position'] = $arr;
+//            $data = $data->whereHas('positions', function ( $query) use ($arr) {
+//                $query->whereIn('specify', $arr);
+//            });
         }
         if ($request->s_age && $request->s_age != null) {
             $age = explode(",", $request->s_age);
             $min_age = $age[0];
             $max_age = $age[1];
-            $data = $data->whereRaw("(YEAR(NOW()) - YEAR(birth_date)) >= ?", $min_age)->whereRaw("(YEAR(NOW()) - YEAR(birth_date)) <= ?", $max_age);
+            $data = $data->whereRaw("(YEAR(NOW()) - YEAR(birth_date)) >= ".$min_age)->whereRaw("(YEAR(NOW()) - YEAR(birth_date)) <= ".$max_age);
             $filter_data['age'] = $age;
         }
         if ($request->s_height && $request->s_height != null) {
