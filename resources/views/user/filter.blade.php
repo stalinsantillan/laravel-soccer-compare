@@ -364,7 +364,7 @@
             });
             range_age = document.getElementById('range_age');
             let scope_age = [0, 100];
-            @if($filter['age'])
+            @if(isset($filter['age']))
                 scope_age = [{{ $filter['age'][0] }}, {{ $filter['age'][1] }}]
             @endif
             noUiSlider.create(range_age, {
@@ -413,7 +413,7 @@
             });
             range_height = document.getElementById('range_height');
             let scope_height = [100, 250];
-            @if($filter['height'])
+            @if(isset($filter['height']))
                 scope_height = [{{ $filter['height'][0] }}, {{ $filter['height'][1] }}]
             @endif
             noUiSlider.create(range_height, {
