@@ -39,8 +39,10 @@ class UsersController extends Controller
             return abort(401);
         }
         $roles = Role::get()->pluck('name', 'name');
+//        dd($roles);
+        $status = array("Pending"=>"Pending", "Approve"=>"Approve", "Reject"=>"Reject");
 
-        return view('admin.users.create', compact('roles'));
+        return view('admin.users.create', compact('roles', 'status'));
     }
 
     /**
@@ -75,7 +77,8 @@ class UsersController extends Controller
         }
         $roles = Role::get()->pluck('name', 'name');
 
-        return view('admin.users.edit', compact('user', 'roles'));
+        $status = array("Pending"=>"Pending", "Approve"=>"Approve", "Reject"=>"Reject");
+        return view('admin.users.edit', compact('user', 'roles', 'status'));
     }
 
     /**
