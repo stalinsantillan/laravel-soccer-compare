@@ -45,6 +45,9 @@
                                 {{ trans('cruds.user.fields.roles') }}
                             </th>
                             <th>
+                                {{ trans('cruds.user.fields.status') }}
+                            </th>
+                            <th>
                                 &nbsp;
                             </th>
                         </tr>
@@ -65,6 +68,15 @@
                                     @foreach($user->roles()->pluck('name') as $role)
                                         <span class="badge badge-info">{{ $role }}</span>
                                     @endforeach
+                                </td>
+                                <td>
+                                    @if($user->status == "Pending")
+                                        <span class="badge badge-warning">{{ $user->status }}</span>
+                                    @elseif($user->status == "Reject")
+                                        <span class="badge badge-danger">{{ $user->status }}</span>
+                                    @else
+                                        <span class="badge badge-success">{{ $user->status }}</span>
+                                    @endif
                                 </td>
                                 <td>
                                     <a class="btn btn-xs btn-info" href="{{ route('admin.users.edit', $user->id) }}">

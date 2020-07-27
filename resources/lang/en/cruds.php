@@ -104,6 +104,8 @@ return [
             'password_helper'          => '',
             'roles'                    => 'Roles',
             'roles_helper'             => '',
+            'status'                    => 'Status',
+            'status_helper'             => '',
             'remember_token'           => 'Remember Token',
             'remember_token_helper'    => '',
             'created_at'               => 'Created at',

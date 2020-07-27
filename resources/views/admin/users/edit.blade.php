@@ -3,6 +3,18 @@
     <!-- third party css -->
     <link href="{{ asset('admin_assets/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- third party css end -->
+    <style>
+        .select2-container{
+            width: 100% !important;
+        }
+        .select2-selection--single{
+            height: 32px !important;
+            border-color: #ced4da !important;
+        }
+        .select2-selection__rendered{
+            /*line-height: 32px !important;*/
+        }
+    </style>
 @endsection
 @section('content')
 <div class="row">
@@ -56,7 +68,7 @@
                 @endif
             </div>
             <div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
-                {!! Form::label('roles', trans('cruds.role.fields.roles')) !!}
+                {!! Form::label('roles', trans('cruds.user.fields.roles')) !!}
                 <div>
                     {!! Form::select('roles[]', $roles
                         , old('roles') ? old('roles') : $user->roles()->pluck('name', 'name')
@@ -65,6 +77,17 @@
                 @if($errors->has('roles'))
                     <div class="mt-1" style="color: #e6334d; font-weight: 500;">
                         {{ $errors->first('roles') }}
+                    </div>
+                @endif
+            </div>
+            <div class="form-group">
+                {!! Form::label('status', trans('cruds.user.fields.status')) !!}
+                <div>
+                    {!! Form::select('status', $status, old('status') ? old('status') : $user->status, ['class' => 'form-control', 'data-toggle'=>'select2']) !!}
+                </div>
+                @if($errors->has('status'))
+                    <div class="mt-1" style="color: #e6334d; font-weight: 500;">
+                        {{ $errors->first('status') }}
                     </div>
                 @endif
             </div>
