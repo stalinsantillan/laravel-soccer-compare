@@ -15,7 +15,7 @@
         <div class="container-fluid bg-layer" id="userLogSection">
             <div class="row">
                 <div class="col-12">
-                    <form class="jumbotron mt-5" role="form" method="POST" action="{{ url('login') }}">
+                    <form class="jumbotron mt-5 text-center" role="form" method="POST" action="{{ url('login') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <h2 class="text-center mb-4">Soccer Compare</h2>
                         @if (count($errors) > 0)
@@ -33,6 +33,7 @@
                             <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
+                        <a href="{{ url("register") }}" class="text-white-50" style="font-size: 13px;">Don't you have account?</a>
                     </form>
                 </div>
             </div>
