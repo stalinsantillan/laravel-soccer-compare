@@ -30,4 +30,8 @@ class DashboardController extends Controller
         $users = \App\User::all();
         return view('user.dashboard', compact('users'));
     }
+    public function approval()
+    {
+        return view('layouts.approval');
+    }
 }
