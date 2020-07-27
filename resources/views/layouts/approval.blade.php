@@ -17,7 +17,7 @@
                         @endif
                         <br />
                         <a href="javascript:void(0);" class="text-white-50" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
-                            Please check back later.
+                            Please check back.
                         </a>
                     </div>
                 </div>
