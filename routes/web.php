@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 });
 
 Route::get('approval', 'User\DashboardController@approval')->name('approval');
+
 Route::middleware(['approved'])->group(function () {
     Route::group(['middleware' => ['auth'], 'prefix' => 'user', 'as' => 'user.'], function () {
         Route::get('dashboard', 'User\DashboardController@index')->name('dashboard');
@@ -35,6 +36,7 @@ Route::middleware(['approved'])->group(function () {
         Route::get('get_player_list_api', 'User\PlayerController@get_player_list_api')->name('get_player_list_api');
         Route::get('get_player_list_api_data', 'User\PlayerController@get_player_list_api_data')->name('get_player_list_api_data');
         Route::get('edit_player/{player}', 'User\PlayerController@edit_player')->name('edit_player');
+        Route::delete('delete_player/{player}', 'User\PlayerController@delete_player')->name('delete_player');
         Route::post('store__edt_player/{player}', 'User\PlayerController@store__edt_player')->name('store__edt_player');
         Route::post('store_player', 'User\PlayerController@store_player')->name('store_player');
         Route::get('filter_player', 'User\PlayerController@filter_player')->name('filter_player');
