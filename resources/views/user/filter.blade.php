@@ -203,7 +203,7 @@
                     <th>Name</th>
                     <th>Position</th>
                     <th style="background-color: #3f4a56">General average</th>
-                    <th>Date of birth</th>
+                    <th>Age</th>
                     <th>Height</th>
                     <th>Nationality</th>
                     <th>League</th>
@@ -211,6 +211,7 @@
                     <th>Physical average</th>
                     <th>Technical average</th>
                     <th>Goalkeeper average</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -254,7 +255,7 @@
                                         @endforeach
                                     </td>
                                     <td style="background-color: #3f4a56">{{ round($one->general_average, 1) }}</td>
-                                    <td>{{ $one->birth_date }}</td>
+                                    <td>{{ date('Y') - date('Y', strtotime($one->birth_date)) }}</td>
                                     <td>{{ $one->height }}cm</td>
                                     <td>{{ $one->nationality }}</td>
                                     @php
@@ -274,6 +275,13 @@
                                     <td>{{ round($one->physical_average, 1) }}</td>
                                     <td>{{ round($one->technical_average, 1) }}</td>
                                     <td>{{ round($one->goalkeeper_average, 1) }}</td>
+                                    <td>
+                                        <form action="{{ route('user.delete_player', $one->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        </form>
+                                    </td>
                                 </tr>
                             @endif
                         @endforeach
@@ -352,8 +360,18 @@
                 buttons: ["copy", "print", "pdf"],
                 drawCallback: function() {
                     $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
-                }
+                },
+                "order": [[ 4, "desc" ]],
+                'columnDefs': [ {
+                    'targets': [0,1,2,3,7,8,13], // column index (start from 0)
+                    'orderable': false, // set orderable false for selected columns
+                }]
             });
+            table.on( 'order.dt search.dt', function () {
+                table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                    cell.innerHTML = i+1;
+                } );
+            } ).draw();
             $('#btn_position').popoverButton({
                 target: '#popover_position',
                 placement: 'right'
@@ -363,7 +381,7 @@
                 placement: 'right'
             });
             range_age = document.getElementById('range_age');
-            let scope_age = [0, 100];
+            let scope_age = [5, 45];
             @if(isset($filter['age']))
                 scope_age = [{{ $filter['age'][0] }}, {{ $filter['age'][1] }}]
             @endif
@@ -403,8 +421,8 @@
                 //     density: 20
                 // },
                 range: {
-                    'min': 0,
-                    'max': 100
+                    'min': 5,
+                    'max': 45
                 }
             });
             $('#btn_height').popoverButton({
@@ -412,7 +430,7 @@
                 placement: 'right'
             });
             range_height = document.getElementById('range_height');
-            let scope_height = [100, 250];
+            let scope_height = [130, 210];
             @if(isset($filter['height']))
                 scope_height = [{{ $filter['height'][0] }}, {{ $filter['height'][1] }}]
             @endif
@@ -452,8 +470,8 @@
                 //     density: 20
                 // },
                 range: {
-                    'min': 100,
-                    'max': 250
+                    'min': 130,
+                    'max': 210
                 }
             });
         })

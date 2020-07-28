@@ -718,6 +718,17 @@ class PlayerController extends Controller
     }
 
     /**
+     * delete player.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function delete_player(Request $request, Player $player)
+    {
+        $player->delete();
+        return redirect('user/filter_show');
+    }
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -1202,7 +1213,7 @@ class PlayerController extends Controller
      */
     public function filter_show()
     {
-        $data = Player::orderBy('general_average')->limit(10)->get();
+        $data = Player::orderByDesc('general_average')->limit(10)->get();
 
         return view("user.filter")
             ->with('data', $data);
