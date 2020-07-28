@@ -1062,6 +1062,7 @@
             $("#main_pos").change(function (e) {
                 let main_pos = $( "#main_pos option:selected" ).text();
                 $("#position2 option").remove();
+                $('#position2').append($("<option></option>").text("Select Specify Position").attr("value", "0"));
                 $('#position2').select2('val', null);
                 if (main_pos == "Defender")
                 {
@@ -1294,11 +1295,11 @@
                     "info");
                 return;
             }
-            if ($("#position2").val() == "")
+            if ($("#position2").val() == "" || $("#position2").val() == "0")
             {
                 $.NotificationApp.send(
                     "Warning",
-                    "You must secondary position",
+                    "You must select specify position",
                     "top-right",
                     "#da8609",
                     "info");
