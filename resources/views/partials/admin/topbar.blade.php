@@ -43,12 +43,12 @@
 <div class="logo-box">
     <a href="/" class="logo text-center">
         <span class="logo-lg">
-            <img src="{{ asset('admin_assets/images/logo-light.png') }}" alt="" height="18">
+            <img src="{{ asset('admin_assets/images/logo-light.png') }}" alt="" height="50">
             <!-- <span class="logo-lg-text-light">UBold</span> -->
         </span>
         <span class="logo-sm">
             <!-- <span class="logo-sm-text-dark">U</span> -->
-            <img src="{{ asset('admin_assets/images/logo-sm.png') }}" alt="" height="24">
+            <img src="{{ asset('admin_assets/images/logo-sm.png') }}" alt="" height="45">
         </span>
     </a>
 </div>
