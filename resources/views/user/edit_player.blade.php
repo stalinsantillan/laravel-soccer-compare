@@ -853,22 +853,30 @@
     <script src="{{ asset('erp_assets/select/js/select2.js') }}"></script>
     <script>
         let curCounter = 1;
-        let arrDefender = ["Centre-back", "Sweeper", "Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back"];
-        let arrMidfielder = ["Centre midfield", "Defensive midfield", "Attacking midfield", "Left Wide midfield", "Right Wide midfield"];
-        let arrForward = ["Centre forward", "Second striker", "Left Winger", "Right Winger"];
+        let arrDefender = ["Centre-back", "Sweeper", "Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back", "Left Centre-back", "Right Centre-back"];
+        let arrMidfielder = ["Centre midfield", "Defensive midfield", "Attacking midfield", "Left Wide midfield", "Right Wide midfield"
+            , "Left Defensive midfield", "Right Defensive midfield", "Left Centre midfield", "Right Centre midfield"
+            , "Left Attacking midfield", "Right Attacking midfield"];
+        let arrForward = ["Centre forward", "Second striker", "Left Winger", "Right Winger", "Left striker", "Right striker"
+            , "Left Centre forward", "Right Centre forward"];
         let arrGoalkeeper = ["Goalkeeper"];
+
         let arrDefenderPos = ["Centre-back", "Sweeper", "Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back"
-                                , "Defensive midfield", "Attacking midfield", "Left Wide midfield", "Right Wide midfield"];
-        let arrAttackingPos = ["Centre midfield", "Centre forward", "Second striker", "Left Winger", "Right Winger"];
+            , "Defensive midfield", "Centre midfield", "Left Wide midfield", "Right Wide midfield"
+            , "Left Centre-back", "Right Centre-back", "Left Defensive midfield", "Right Defensive midfield"
+            , "Left Centre midfield", "Right Centre midfield"];
+        let arrAttackingPos = ["Attacking midfield", "Left Attacking midfield", "Right Attacking midfield", "Left Winger", "Right Winger"
+            , "Second striker", "Left striker", "Right striker", "Centre forward", "Left Centre forward", "Right Centre forward"];
         let arrGoalkeeperPos = ["Goalkeeper"];
+
         let arrDefenderAttr = ["crossing", "dribbling", "finishing", "first_touch", "heading", "long_shots", "long_throws", "marking", "passing", "tackling"
-                            , "technique", "aggression", "articipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
-                            , "off_ball", "positioning", "teamwork", "vision", "work_rate", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
-                            , "stamina", "strength", "shots", "offensive", "deffense", "aerial_duels", "reaction", "sprint_speed"];
+            , "technique", "aggression", "articipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
+            , "off_ball", "positioning", "teamwork", "vision", "work_rate", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
+            , "stamina", "strength", "shots", "offensive", "deffense", "aerial_duels", "reaction", "sprint_speed"];
         let arrAttackingAttr = ["crossing", "dribbling", "finishing", "first_touch", "heading", "long_shots", "long_throws", "marking", "passing", "tackling"
-                            , "technique", "aggression", "articipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
-                            , "off_ball", "positioning", "teamwork", "vision", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
-                            , "stamina", "strength", "shots", "offensive", "aerial_duels", "reaction", "sprint_speed"];
+            , "technique", "aggression", "articipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
+            , "off_ball", "positioning", "teamwork", "vision", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
+            , "stamina", "strength", "shots", "offensive", "aerial_duels", "reaction", "sprint_speed"];
         let arrGoalkeeperAttr = ["aggression", "articipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
             , "off_ball", "positioning", "teamwork", "vision", "work_rate", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
             , "stamina", "strength", "aerial_duels", "reaction", "sprint_speed", "areial_reach", "command_of_area", "communication"

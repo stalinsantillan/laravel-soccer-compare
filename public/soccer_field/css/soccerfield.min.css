@@ -48,6 +48,10 @@
 }
 
 .soccerfield-player.posX-W {
+    bottom: 65%
+}
+
+.soccerfield-player.posX-S {
     bottom: 70%
 }
 
@@ -68,7 +72,7 @@
 }
 
 .soccerfield-player.posY-RC {
-    right: 30%
+    right: 26%
 }
 
 .soccerfield-player.posY-R {
