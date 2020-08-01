@@ -25,8 +25,17 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
 Route::get('approval', 'User\DashboardController@approval')->name('approval');
 
+Route::get('subscribe/paypal/return', 'PaypalController@paypalReturn')->name('paypal.return');
+
 Route::middleware(['approved'])->group(function () {
-    Route::group(['middleware' => ['auth'], 'prefix' => 'user', 'as' => 'user.'], function () {
+
+    Route::get('create_paypal_plan/{subscribePlan}', 'PaypalController@create_plan');
+    Route::get('subscribe/paypal/{subscribePlan}', 'PaypalController@paypalRedirect')->name('paypal.redirect');
+    Route::get('subscribe/paypal/cancel/{subscribePlan}', 'PaypalController@paypalCancel')->name('paypal.cancel');
+
+    Route::get('/user/subscriptions', 'PaypalController@subscriptions')->name("user.subscriptions");
+
+    Route::group(['middleware' => ['auth', 'subscribed'], 'prefix' => 'user', 'as' => 'user.'], function () {
         Route::get('dashboard', 'User\DashboardController@index')->name('dashboard');
         // Player
         Route::get('getteams', 'User\PlayerController@getteams')->name('getteams');
