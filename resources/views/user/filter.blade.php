@@ -218,73 +218,84 @@
                 @if(isset($data))
                     @php
                         $no = 0;
+                        $ok = 0;
                     @endphp
                     @foreach($data as $one)
 
                         @foreach($one->positions as $position_one)
                             @if(!isset($filter['position']) || in_array($position_one->specify, $filter['position'] ?? array()))
-                                <tr>
-                                    <td>{{ ++$no }}</td>
-                                    <td>
-                                        <a href="{{ route('user.player_profile', $one->id) }}" target="_blank">
-                                            @if(isset($one->photo))
-                                                <img src="{{ asset('storage').'/'.$one->photo }}" class="user-photo" height="50px" width="50px" alt="">
-                                            @else
-                                                <img src="{{ asset('user_assets/images/users/standard.png') }}" class="user-photo" height="50px" width="50px" alt="">
-                                            @endif
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('user.player_profile', $one->id) }}" class="text-white-50" target="_blank"
-                                           style="border-bottom: rgba(255,255,255,.5) dashed 1px;">
-                                            @if($one->player_link == "")
-                                                {{ $one->name }} {{ $one->surename }}
-                                            @else
-                                                {{ $one->short_name }}
-                                            @endif
-                                        </a>
-                                    </td>
-                                    <td>
-                                        @php $subone = 1; @endphp
-                                        @foreach($one->positions as $position)
-                                            @if($subone > 1)
-                                                <br>
-                                            @endif
-                                            <span class="badge badge-primary">{{ $position->specify }}</span>
-                                            @php ++$subone; @endphp
-                                        @endforeach
-                                    </td>
-                                    <td style="background-color: #3f4a56">{{ round($one->general_average, 1) }}</td>
-                                    <td>{{ date('Y') - date('Y', strtotime($one->birth_date)) }}</td>
-                                    <td>{{ $one->height }}cm</td>
-                                    <td>{{ $one->nationality }}</td>
-                                    @php
-                                        $league = '';
-                                        if ($one->current_team_link == "")
-                                        {
-                                            $league = App\Models\User\Team::findOrFail($one->current_team_id)->league->name;
-                                        }
-                                        else
-                                        {
-                                            $leagues = App\Models\User\ApiTeam::findOrFail($one->current_team_id);
-                                            $league = $leagues->competition_name ?? '';
-                                        }
-                                    @endphp
-                                    <td>{{ $league }}</td>
-                                    <td>{{ round($one->mental_average, 1) }}</td>
-                                    <td>{{ round($one->physical_average, 1) }}</td>
-                                    <td>{{ round($one->technical_average, 1) }}</td>
-                                    <td>{{ round($one->goalkeeper_average, 1) }}</td>
-                                    <td>
-                                        <form action="{{ route('user.delete_player', $one->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                        </form>
-                                    </td>
-                                </tr>
+                                @php
+                                    $ok = 1;
+                                @endphp
+                            @else
+                                @php
+                                    $ok = 0;
+                                @endphp
                             @endif
                         @endforeach
+                        @if($ok == 0)
+                            @continue
+                        @endif
+                        <tr>
+                            <td>{{ ++$no }}</td>
+                            <td>
+                                <a href="{{ route('user.player_profile', $one->id) }}" target="_blank">
+                                    @if(isset($one->photo))
+                                        <img src="{{ asset('storage').'/'.$one->photo }}" class="user-photo" height="50px" width="50px" alt="">
+                                    @else
+                                        <img src="{{ asset('user_assets/images/users/standard.png') }}" class="user-photo" height="50px" width="50px" alt="">
+                                    @endif
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route('user.player_profile', $one->id) }}" class="text-white-50" target="_blank"
+                                   style="border-bottom: rgba(255,255,255,.5) dashed 1px;">
+                                    @if($one->player_link == "")
+                                        {{ $one->name }} {{ $one->surename }}
+                                    @else
+                                        {{ $one->short_name }}
+                                    @endif
+                                </a>
+                            </td>
+                            <td>
+                                @php $subone = 1; @endphp
+                                @foreach($one->positions as $position)
+                                    @if($subone > 1)
+                                        <br>
+                                    @endif
+                                    <span class="badge badge-primary">{{ $position->specify }}</span>
+                                    @php ++$subone; @endphp
+                                @endforeach
+                            </td>
+                            <td style="background-color: #3f4a56">{{ round($one->general_average, 1) }}</td>
+                            <td>{{ date('Y') - date('Y', strtotime($one->birth_date)) }}</td>
+                            <td>{{ $one->height }}cm</td>
+                            <td>{{ $one->nationality }}</td>
+                            @php
+                                $league = '';
+                                if ($one->current_team_link == "")
+                                {
+                                    $league = App\Models\User\Team::findOrFail($one->current_team_id)->league->name;
+                                }
+                                else
+                                {
+                                    $leagues = App\Models\User\ApiTeam::findOrFail($one->current_team_id);
+                                    $league = $leagues->competition_name ?? '';
+                                }
+                            @endphp
+                            <td>{{ $league }}</td>
+                            <td>{{ round($one->mental_average, 1) }}</td>
+                            <td>{{ round($one->physical_average, 1) }}</td>
+                            <td>{{ round($one->technical_average, 1) }}</td>
+                            <td>{{ round($one->goalkeeper_average, 1) }}</td>
+                            <td>
+                                <form action="{{ route('user.delete_player', $one->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                </form>
+                            </td>
+                        </tr>
                     @endforeach
                 @endif
             </tbody>
