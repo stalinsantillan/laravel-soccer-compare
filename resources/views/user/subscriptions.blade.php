@@ -29,13 +29,13 @@
     <div class="col-md-6 offset-3">
         <ul class="nav nav-pills navtab-bg nav-justified">
             <li class="nav-item">
-                <a href="#yearly" id="yearly_tag" data-toggle="tab" aria-expanded="false" class="nav-link" onclick="selectType()">
-                    Yearly
+                <a href="#monthly" id="monthly_tag" data-toggle="tab" aria-expanded="true" class="nav-link active" onclick="selectType()">
+                    Monthly
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#monthly" id="monthly_tag" data-toggle="tab" aria-expanded="true" class="nav-link active" onclick="selectType()">
-                    Monthly
+                <a href="#yearly" id="yearly_tag" data-toggle="tab" aria-expanded="false" class="nav-link" onclick="selectType()">
+                    Yearly
                 </a>
             </li>
         </ul>
