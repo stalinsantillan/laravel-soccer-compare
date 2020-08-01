@@ -12,11 +12,15 @@
                             {{ trans('cruds.player.new') }}
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('user.get_player_list_api') }}">
-                            {{ trans('cruds.player.existing') }}
-                        </a>
-                    </li>
+                        @if (Auth::user()->is_subscribed == 1)
+                            @if(Auth::user()->subscribe_id == 2 || Auth::user()->subscribe_id == 4)
+                                <li>
+                                    <a href="{{ route('user.get_player_list_api') }}">
+                                        {{ trans('cruds.player.existing') }}
+                                    </a>
+                                </li>
+                            @endif
+                        @endif
 {{--                    <li>--}}
 {{--                        <a href="{{ route('user.add_player_excel') }}">--}}
 {{--                            {{ trans('cruds.player.excel') }}--}}
