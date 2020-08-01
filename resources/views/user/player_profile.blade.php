@@ -673,52 +673,65 @@
                 }
             };
             var data = [];
-{{--            @if ($position->specify == "Sweeper") data.push({name: ' ', position: 'C_SW'}); @endif--}}
-{{--            @if ($position->specify == "Left Full-back") data.push({name: ' ', position: 'L_B'}); @endif--}}
-{{--            @if ($position->specify == "Centre-back") data.push({name: ' ', position: 'C_B'}); @endif--}}
-{{--            @if ($position->specify == "Right Full-back") data.push({name: ' ', position: 'R_B'}); @endif--}}
-{{--            @if ($position->specify == "Left Wing-back") data.push({name: ' ', position: 'L_WB'}); @endif--}}
-{{--            @if ($position->specify == "Right Wing-back") data.push({name: ' ', position: 'R_WB'}); @endif--}}
-{{--            @if ($position->specify == "Defensive midfield") data.push({name: ' ', position: 'C_DM'}); @endif--}}
-{{--            @if ($position->specify == "Left Wide midfield") data.push({name: ' ', position: 'L_M'}); @endif--}}
-{{--            @if ($position->specify == "Centre midfield") data.push({name: ' ', position: 'C_M'}); @endif--}}
-{{--            @if ($position->specify == "Right Wide midfield") data.push({name: ' ', position: 'R_M'}); @endif--}}
-{{--            @if ($position->specify == "Attacking midfield") data.push({name: ' ', position: 'C_AM'}); @endif--}}
-{{--            @if ($position->specify == "Left Winger") data.push({name: ' ', position: 'L_W'}); @endif--}}
-{{--            @if ($position->specify == "Second striker") data.push({name: ' ', position: 'C_W'}); @endif--}}
-{{--            @if ($position->specify == "Right Winger") data.push({name: ' ', position: 'R_W'}); @endif--}}
-{{--            @if ($position->specify == "Centre forward") data.push({name: ' ', position: 'C_F'}); @endif--}}
-{{--            @if ($position->specify == "Goalkeeper") data.push({name: ' ', position: 'C_GK'}); @endif--}}
-            @foreach($data->positions as $position)
-                @if ($position->specify == "Sweeper") data.push({name: 'SW ', position: 'C_SW'}); @endif
-                @if ($position->specify == "Left Full-back") data.push({name: 'LB ', position: 'L_B'}); @endif
-                @if ($position->specify == "Centre-back") data.push({name: 'CB ', position: 'C_B'}); @endif
-                @if ($position->specify == "Right Full-back") data.push({name: 'RB ', position: 'R_B'}); @endif
-                @if ($position->specify == "Left Wing-back") data.push({name: 'CWB ', position: 'L_WB'}); @endif
-                @if ($position->specify == "Right Wing-back") data.push({name: 'RWB ', position: 'R_WB'}); @endif
-                @if ($position->specify == "Defensive midfield") data.push({name: 'CDM ', position: 'C_DM'}); @endif
-                @if ($position->specify == "Left Wide midfield") data.push({name: 'LM ', position: 'L_M'}); @endif
-                @if ($position->specify == "Centre midfield") data.push({name: 'CM ', position: 'C_M'}); @endif
-                @if ($position->specify == "Right Wide midfield") data.push({name: 'RM ', position: 'R_M'}); @endif
-                @if ($position->specify == "Attacking midfield") data.push({name: 'CAM ', position: 'C_AM'}); @endif
-                @if ($position->specify == "Left Winger") data.push({name: 'LW ', position: 'L_W'}); @endif
-                @if ($position->specify == "Second striker") data.push({name: 'CS ', position: 'C_S'}); @endif
-                @if ($position->specify == "Right Winger") data.push({name: 'RW ', position: 'R_W'}); @endif
-                @if ($position->specify == "Centre forward") data.push({name: 'CF ', position: 'C_F'}); @endif
-                @if ($position->specify == "Goalkeeper") data.push({name: 'GK ', position: 'C_GK'}); @endif
+{{--            @if ($position->specify == "Sweeper") data.push({name: 'SW ', position: 'C_SW'}); @endif--}}
+{{--            @if ($position->specify == "Left Full-back") data.push({name: 'LB ', position: 'L_B'}); @endif--}}
+{{--            @if ($position->specify == "Centre-back") data.push({name: 'CB ', position: 'C_B'}); @endif--}}
+{{--            @if ($position->specify == "Right Full-back") data.push({name: 'RB ', position: 'R_B'}); @endif--}}
+{{--            @if ($position->specify == "Left Wing-back") data.push({name: 'CWB ', position: 'L_WB'}); @endif--}}
+{{--            @if ($position->specify == "Right Wing-back") data.push({name: 'RWB ', position: 'R_WB'}); @endif--}}
+{{--            @if ($position->specify == "Defensive midfield") data.push({name: 'CDM ', position: 'C_DM'}); @endif--}}
+{{--            @if ($position->specify == "Left Wide midfield") data.push({name: 'LM ', position: 'L_M'}); @endif--}}
+{{--            @if ($position->specify == "Centre midfield") data.push({name: 'CM ', position: 'C_M'}); @endif--}}
+{{--            @if ($position->specify == "Right Wide midfield") data.push({name: 'RM ', position: 'R_M'}); @endif--}}
+{{--            @if ($position->specify == "Attacking midfield") data.push({name: 'CAM ', position: 'C_AM'}); @endif--}}
+{{--            @if ($position->specify == "Left Winger") data.push({name: 'LW ', position: 'L_W'}); @endif--}}
+{{--            @if ($position->specify == "Second striker") data.push({name: 'CS ', position: 'C_S'}); @endif--}}
+{{--            @if ($position->specify == "Right Winger") data.push({name: 'RW ', position: 'R_W'}); @endif--}}
+{{--            @if ($position->specify == "Centre forward") data.push({name: 'CF ', position: 'C_F'}); @endif--}}
+{{--            @if ($position->specify == "Goalkeeper") data.push({name: 'GK ', position: 'C_GK'}); @endif--}}
 
-                @if ($position->specify == "Left Centre-back") data.push({name: 'LCB ', position: 'LC_B'}); @endif
-                @if ($position->specify == "Right Centre-back") data.push({name: 'RCB ', position: 'RC_B'}); @endif
-                @if ($position->specify == "Left Defensive midfield") data.push({name: 'LDM ', position: 'LC_DM'}); @endif
-                @if ($position->specify == "Right Defensive midfield") data.push({name: 'RDM ', position: 'RC_DM'}); @endif
-                @if ($position->specify == "Left Centre midfield") data.push({name: 'LCM ', position: 'LC_M'}); @endif
-                @if ($position->specify == "Right Centre midfield") data.push({name: 'RCM ', position: 'RC_M'}); @endif
-                @if ($position->specify == "Left Attacking midfield") data.push({name: 'LAM ', position: 'LC_AM'}); @endif
-                @if ($position->specify == "Right Attacking midfield") data.push({name: 'RAM ', position: 'RC_AM'}); @endif
-                @if ($position->specify == "Left striker") data.push({name: 'LS ', position: 'LC_S'}); @endif
-                @if ($position->specify == "Right striker") data.push({name: 'RS ', position: 'RC_S'}); @endif
-                @if ($position->specify == "Left Centre forward") data.push({name: 'LCF ', position: 'LC_F'}); @endif
-                @if ($position->specify == "Right Centre forward") data.push({name: 'RCF ', position: 'RC_F'}); @endif
+{{--            @if ($position->specify == "Left Centre-back") data.push({name: 'LCB ', position: 'LC_B'}); @endif--}}
+{{--            @if ($position->specify == "Right Centre-back") data.push({name: 'RCB ', position: 'RC_B'}); @endif--}}
+{{--            @if ($position->specify == "Left Defensive midfield") data.push({name: 'LDM ', position: 'LC_DM'}); @endif--}}
+{{--            @if ($position->specify == "Right Defensive midfield") data.push({name: 'RDM ', position: 'RC_DM'}); @endif--}}
+{{--            @if ($position->specify == "Left Centre midfield") data.push({name: 'LCM ', position: 'LC_M'}); @endif--}}
+{{--            @if ($position->specify == "Right Centre midfield") data.push({name: 'RCM ', position: 'RC_M'}); @endif--}}
+{{--            @if ($position->specify == "Left Attacking midfield") data.push({name: 'LAM ', position: 'LC_AM'}); @endif--}}
+{{--            @if ($position->specify == "Right Attacking midfield") data.push({name: 'RAM ', position: 'RC_AM'}); @endif--}}
+{{--            @if ($position->specify == "Left striker") data.push({name: 'LS ', position: 'LC_S'}); @endif--}}
+{{--            @if ($position->specify == "Right striker") data.push({name: 'RS ', position: 'RC_S'}); @endif--}}
+{{--            @if ($position->specify == "Left Centre forward") data.push({name: 'LCF ', position: 'LC_F'}); @endif--}}
+{{--            @if ($position->specify == "Right Centre forward") data.push({name: 'RCF ', position: 'RC_F'}); @endif--}}
+            @foreach($data->positions as $position)
+                @if ($position->specify == "Sweeper") data.push({name: ' ', position: 'C_SW'}); @endif
+                @if ($position->specify == "Left Full-back") data.push({name: ' ', position: 'L_B'}); @endif
+                @if ($position->specify == "Centre-back") data.push({name: ' ', position: 'C_B'}); @endif
+                @if ($position->specify == "Right Full-back") data.push({name: ' ', position: 'R_B'}); @endif
+                @if ($position->specify == "Left Wing-back") data.push({name: ' ', position: 'L_WB'}); @endif
+                @if ($position->specify == "Right Wing-back") data.push({name: ' ', position: 'R_WB'}); @endif
+                @if ($position->specify == "Defensive midfield") data.push({name: ' ', position: 'C_DM'}); @endif
+                @if ($position->specify == "Left Wide midfield") data.push({name: ' ', position: 'L_M'}); @endif
+                @if ($position->specify == "Centre midfield") data.push({name: ' ', position: 'C_M'}); @endif
+                @if ($position->specify == "Right Wide midfield") data.push({name: ' ', position: 'R_M'}); @endif
+                @if ($position->specify == "Attacking midfield") data.push({name: ' ', position: 'C_AM'}); @endif
+                @if ($position->specify == "Left Winger") data.push({name: ' ', position: 'L_W'}); @endif
+                @if ($position->specify == "Second striker") data.push({name: ' ', position: 'C_S'}); @endif
+                @if ($position->specify == "Right Winger") data.push({name: ' ', position: 'R_W'}); @endif
+                @if ($position->specify == "Centre forward") data.push({name: ' ', position: 'C_F'}); @endif
+                @if ($position->specify == "Goalkeeper") data.push({name: ' ', position: 'C_GK'}); @endif
+
+                @if ($position->specify == "Left Centre-back") data.push({name: ' ', position: 'LC_B'}); @endif
+                @if ($position->specify == "Right Centre-back") data.push({name: ' ', position: 'RC_B'}); @endif
+                @if ($position->specify == "Left Defensive midfield") data.push({name: ' ', position: 'LC_DM'}); @endif
+                @if ($position->specify == "Right Defensive midfield") data.push({name: ' ', position: 'RC_DM'}); @endif
+                @if ($position->specify == "Left Centre midfield") data.push({name: ' ', position: 'LC_M'}); @endif
+                @if ($position->specify == "Right Centre midfield") data.push({name: ' ', position: 'RC_M'}); @endif
+                @if ($position->specify == "Left Attacking midfield") data.push({name: ' ', position: 'LC_AM'}); @endif
+                @if ($position->specify == "Right Attacking midfield") data.push({name: ' ', position: 'RC_AM'}); @endif
+                @if ($position->specify == "Left striker") data.push({name: ' ', position: 'LC_S'}); @endif
+                @if ($position->specify == "Right striker") data.push({name: ' ', position: 'RC_S'}); @endif
+                @if ($position->specify == "Left Centre forward") data.push({name: ' ', position: 'LC_F'}); @endif
+                @if ($position->specify == "Right Centre forward") data.push({name: ' ', position: 'RC_F'}); @endif
             @endforeach
             $("#soccerfield").soccerfield(data,options);
             console.log(data);
