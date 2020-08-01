@@ -51,9 +51,9 @@
         <!-- ============================================================== -->
 
         <!-- Footer Start -->
-        <footer class="footer">
+{{--        <footer class="footer">--}}
           {{-- @include('partials.user.footerbar') --}}
-        </footer>
+{{--        </footer>--}}
         <!-- end Footer -->
 
         <!-- Right Sidebar -->

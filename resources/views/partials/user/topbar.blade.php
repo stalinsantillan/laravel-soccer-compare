@@ -35,11 +35,17 @@
                 <!-- item-->
                 <a href="{{ route('auth.change_password') }}" class="dropdown-item notify-item">
                     <i class="fas fa-key"></i>
-                    <span>Change password</span>
+                    <span>Password</span>
                 </a>
 
                 <div class="dropdown-divider"></div>
 
+                <!-- item-->
+                <a href="{{ route('user.subscriptions') }}" class="dropdown-item notify-item">
+                    <i class="fe-award"></i>
+                    <span>Subscriptions</span>
+                </a>
+                <div class="dropdown-divider"></div>
                 <!-- item-->
                 <a href="javascript:void(0);" class="dropdown-item notify-item"  onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                     <i class="fe-log-out"></i>
