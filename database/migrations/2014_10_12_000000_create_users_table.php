@@ -18,6 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->string('status');
+            $table->integer('is_subscribed')->default(0)->nullable();
+            $table->integer('subscribe_id')->default(0)->nullable();
+            $table->string('plan_id')->default('')->nullable();
+            $table->string('agreement_id')->default('')->nullable();
             $table->string('remember_token')->nullable();
 
             $table->timestamps();
