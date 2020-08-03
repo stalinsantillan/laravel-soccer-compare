@@ -17,7 +17,7 @@
                 <div class="col-12">
                     <form class="jumbotron mt-5 text-center" role="form" method="POST" action="{{ url('login') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <h2 class="text-center mb-4">Soccer Compare</h2>
+{{--                        <h2 class="text-center mb-4">Soccer Compare</h2>--}}
                         @if (count($errors) > 0)
                             <div class="alert alert-danger" id="alertMessage" role="alert">
                                 @foreach ($errors->all() as $error)
@@ -25,7 +25,7 @@
                                 @endforeach
                             </div>
                         @endif
-                        <img src="{{ asset('login_assets/bg/user_start.jpg') }}" class="heading-avatar-icon" />
+                        <img src="{{ asset('user_assets/images/logo-light.png') }}" class="heading-avatar-icon mb-4" />
                         <div class="form-group">
                             <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                         </div>

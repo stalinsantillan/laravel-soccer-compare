@@ -8,7 +8,7 @@
         <meta content="Coderthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{ asset('user_assets/images/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('user_assets/images/logo-sm.png') }}">
         <link href="{{ asset('user_assets/libs/jquery-toast/jquery.toast.min.css') }}" rel="stylesheet" type="text/css" />
         @yield('styles')
         <!-- App css -->

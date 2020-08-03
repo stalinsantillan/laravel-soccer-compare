@@ -75,10 +75,9 @@ button
 }
 
 .heading-avatar-icon{
-  text-align: center !important; 
-  border-radius: 50%;
-  height: 100px;
-  width: 100px;
+  text-align: center !important;
+  height: 50px;
+  width: 225px;
   /*margin-left: 35%;*/
 }
 
