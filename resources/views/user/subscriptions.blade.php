@@ -88,6 +88,7 @@
         <div class="card card-pricing card-pricing-recommended">
             <div class="card-body text-center">
                 <p class="card-pricing-plan-name font-weight-bold text-uppercase pb-0">Plan Pro</p>
+                <img src="{{ asset('user_assets/images/pro_logo.png') }}" width="100px" height="40px" style="top: 13px; right: 5px; position: absolute;" />
                 <h2 class="card-pricing-price pt-0 mb-0"><sup>€</sup>&nbsp;290 <span>/ Year</span></h2>
                 <ul class="card-pricing-features pt-0 pb-0">
                     <li>Scout young and professional players</li>
@@ -159,6 +160,7 @@
         <div class="card card-pricing card-pricing-recommended">
             <div class="card-body text-center">
                 <p class="card-pricing-plan-name font-weight-bold text-uppercase pb-0">Plan Pro</p>
+                <img src="{{ asset('user_assets/images/pro_logo.png') }}" width="100px" height="40px" style="top: 13px; right: 5px; position: absolute;" />
                 <h2 class="card-pricing-price pt-0 mb-0"><sup>€</sup>&nbsp;30 <span>/ Month</span></h2>
                 <ul class="card-pricing-features pt-0 pb-0">
                     <li>Scout young and professional players</li>
