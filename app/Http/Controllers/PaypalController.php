@@ -50,7 +50,17 @@ class PaypalController extends Controller
     }
 
     public function subscriptions(){
-        return view("user.subscriptions");
+        $trial_version_msg = "";
+        $user = Auth::user();
+        if ($user->trial_end < date('Y-m-d') && $user->trial_end != "0000-00-00" && $user->is_subscribed != 1)
+        {
+            $trial_version_msg = "Your trial version has finished, check the subscription plans here.";
+        } else if ($user->trial_end >= date('Y-m-d') && $user->is_subscribed != 1)
+        {
+            $remain = (strtotime($user->trial_end) - strtotime(date('Y-m-d')))/60/60/24;
+            $trial_version_msg = "Your trial version will be expired after " . $remain . " days.";
+        }
+        return view("user.subscriptions", compact('trial_version_msg'));
     }
 
     public function create_plan(SubscribePlan $subscribePlan){
