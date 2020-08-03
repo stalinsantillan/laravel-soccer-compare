@@ -15,6 +15,11 @@
         </div>
     </div>
 </div>
+@if(isset($trial_version_msg) && $trial_version_msg != "")
+    <div class="alert alert-info col-md-8 offset-2" role="alert">
+        <i class="mdi mdi-alert-circle-outline mr-2"></i> {{ $trial_version_msg }}
+    </div>
+@endif
 @if(isset($success))
     <div class="alert alert-success" role="alert">
         <i class="mdi mdi-check-all mr-2"></i> {{ $success }}
@@ -56,8 +61,7 @@
                 </ul>
                 <ul class="card-pricing-features pt-0">
                     <li>Free Trial</li>
-                    <li>Instalment payment</li>
-                    <li>One payment - save 25 EUR</li>
+                    <li>(save 20 €)</li>
                 </ul>
                 @if($user->is_subscribed == 1)
                     @if($plan_id == 3)
@@ -75,7 +79,6 @@
                     <li>Create new teams and tournaments</li>
                     <li>Create and export PDF reports</li>
                     <li>Find your players with smart filters</li>
-                    <li>.......</li>
                 </ul>
             </div>
         </div> <!-- end Pricing_card -->
@@ -91,8 +94,7 @@
                 </ul>
                 <ul class="card-pricing-features pt-0">
                     <li>Free Trial</li>
-                    <li>Instalment payment</li>
-                    <li>One payment - save 40 EUR</li>
+                    <li>(save 70 €)</li>
                 </ul>
                 @if($user->is_subscribed == 1)
                     @if($plan_id == 4)
@@ -113,7 +115,6 @@
                     <li>+250 competitions, +170000 players, +75 teams</li>
                     <li>Compare players</li>
                     <li>Add more users or collaborators</li>
-                    <li>.......</li>
                 </ul>
             </div>
         </div> <!-- end Pricing_card -->
@@ -125,13 +126,13 @@
         <div class="card card-pricing">
             <div class="card-body text-center">
                 <p class="card-pricing-plan-name font-weight-bold text-uppercase pb-0">Basic Plan</p>
-                <h2 class="card-pricing-price pt-0 mb-0"><sup>€</sup>&nbsp;25 <span>/ Month</span></h2>
+                <h2 class="card-pricing-price pt-0 mb-0"><sup>€</sup>&nbsp;20 <span>/ Month</span></h2>
                 <ul class="card-pricing-features pt-0 pb-0">
                     <li>Scout young players and academies</li>
                 </ul>
                 <ul class="card-pricing-features pt-0">
                     <li>Free Trial</li>
-                    <li>Instalment payment</li>
+                    <li>(240 € per year)</li>
                 </ul>
                 @if($user->is_subscribed == 1)
                     @if($plan_id == 1)
@@ -149,7 +150,6 @@
                     <li>Create new teams and tournaments</li>
                     <li>Create and export PDF reports</li>
                     <li>Find your players with smart filters</li>
-                    <li>.......</li>
                 </ul>
             </div>
         </div> <!-- end Pricing_card -->
@@ -159,13 +159,13 @@
         <div class="card card-pricing card-pricing-recommended">
             <div class="card-body text-center">
                 <p class="card-pricing-plan-name font-weight-bold text-uppercase pb-0">Plan Pro</p>
-                <h2 class="card-pricing-price pt-0 mb-0"><sup>€</sup>&nbsp;40 <span>/ Month</span></h2>
+                <h2 class="card-pricing-price pt-0 mb-0"><sup>€</sup>&nbsp;30 <span>/ Month</span></h2>
                 <ul class="card-pricing-features pt-0 pb-0">
                     <li>Scout young and professional players</li>
                 </ul>
                 <ul class="card-pricing-features pt-0">
                     <li>Free Trial</li>
-                    <li>Instalment payment</li>
+                    <li>(360 € per year)</li>
                 </ul>
                 @if($user->is_subscribed == 1)
                     @if($plan_id == 2)
@@ -186,7 +186,6 @@
                     <li>+250 competitions, +170000 players, +75 teams</li>
                     <li>Compare players</li>
                     <li>Add more users or collaborators</li>
-                    <li>.......</li>
                 </ul>
             </div>
         </div> <!-- end Pricing_card -->

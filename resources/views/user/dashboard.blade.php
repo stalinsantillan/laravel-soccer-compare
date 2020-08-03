@@ -15,7 +15,12 @@
         </div>
     </div>
 </div>     
-<!-- end page title --> 
+<!-- end page title -->
+@if($trial_version_msg != "")
+    <div class="alert alert-info" role="alert">
+        <i class="mdi mdi-alert-circle-outline mr-2"></i> {{ $trial_version_msg }}
+    </div>
+@endif
 <div class="row">
     <div class="col-md-6 col-xl-4">
         <div class="widget-rounded-circle card-box">
