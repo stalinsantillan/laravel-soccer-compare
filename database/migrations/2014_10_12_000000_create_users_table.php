@@ -22,8 +22,9 @@ class CreateUsersTable extends Migration
             $table->integer('subscribe_id')->default(0)->nullable();
             $table->string('plan_id')->default('')->nullable();
             $table->string('agreement_id')->default('')->nullable();
-            $table->date('trial_start')->default('0000-00-00')->nullable();
-            $table->date('trial_end')->default('0000-00-00')->nullable();
+            $table->integer('trial_type')->default(0)->nullable();
+            $table->date('trial_start')->nullable();
+            $table->date('trial_end')->nullable();
             $table->string('remember_token')->nullable();
 
             $table->timestamps();

@@ -17,7 +17,7 @@ class Subscribed
     public function handle($request, Closure $next)
     {
         $user = Auth::user();
-        if ($user->trial_end < date('Y-m-d') && $user->trial_end != "0000-00-00" && $user->is_subscribed != 1) {
+        if ($user->trial_end < date('Y-m-d') && $user->is_subscribed != 1) {
             return redirect('/user/subscriptions');
         }
         return $next($request);

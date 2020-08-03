@@ -73,7 +73,7 @@
                 <div>
                     {!! Form::select('roles[]', $roles
                         , old('roles') ? old('roles') : $user->roles()->pluck('name', 'name')
-                        , ['class' => 'form-control', 'data-toggle'=>'select2', 'multiple'=>'multiple']) !!}
+                        , ['class' => 'form-control', 'data-toggle'=>'select2']) !!}
                 </div>
                 @if($errors->has('roles'))
                     <div class="mt-1" style="color: #e6334d; font-weight: 500;">
@@ -81,7 +81,6 @@
                     </div>
                 @endif
             </div>
-            @if($user->trial_start != "0000-00-00")
             <div class="form-group {{ $errors->has('trial_start') ? 'has-error' : '' }}">
                 <label for="trial_start">{{ trans('cruds.user.fields.trial_start') }}*</label>
                 <input type="text" id="trial_start" name="trial_start" class="form-control" value="{{ old('trial_start', isset($user) ? $user->trial_start : '') }}" required>
@@ -100,7 +99,17 @@
                     </div>
                 @endif
             </div>
-            @endif
+            <div class="form-group">
+                {!! Form::label('trial_type', trans('cruds.user.fields.trial_type')) !!}
+                <div>
+                    {!! Form::select('trial_type', $trial_types, old('trial_type') ? old('trial_type') : $user->trial_type, ['class' => 'form-control', 'data-toggle'=>'select2']) !!}
+                </div>
+                @if($errors->has('trial_type'))
+                    <div class="mt-1" style="color: #e6334d; font-weight: 500;">
+                        {{ $errors->first('trial_type') }}
+                    </div>
+                @endif
+            </div>
             <div class="form-group">
                 {!! Form::label('status', trans('cruds.user.fields.status')) !!}
                 <div>

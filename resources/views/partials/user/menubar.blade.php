@@ -20,6 +20,12 @@
                                     </a>
                                 </li>
                             @endif
+                        @elseif (Auth::user()->trial_end >= date('Y-m-d') && Auth::user()->trial_type == 1)
+                            <li>
+                                <a href="{{ route('user.get_player_list_api') }}">
+                                    {{ trans('cruds.player.existing') }}
+                                </a>
+                            </li>
                         @endif
 {{--                    <li>--}}
 {{--                        <a href="{{ route('user.add_player_excel') }}">--}}

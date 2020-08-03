@@ -108,6 +108,8 @@ return [
             'status_helper'             => '',
             'cur_plan'                  => 'Current Plan',
             'cur_plan_helper'           => '',
+            'trial_type'                => 'Trial Type',
+            'trial_type_helper'         => '',
             'trial_start'              => 'Trial Start',
             'trial_start_helper'       => '',
             'trial_end'                => 'Trial End',
