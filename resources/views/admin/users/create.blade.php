@@ -72,11 +72,22 @@
                     <div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
                         {!! Form::label('roles', trans('cruds.user.fields.roles')) !!}
                         <div>
-                            {!! Form::select('roles[]', $roles, old('roles'), ['class' => 'form-control', 'data-toggle'=>'select2', 'multiple'=>'multiple']) !!}
+                            {!! Form::select('roles[]', $roles, old('roles'), ['class' => 'form-control', 'data-toggle'=>'select2']) !!}
                         </div>
                         @if($errors->has('roles'))
                             <div class="mt-1" style="color: #e6334d; font-weight: 500;">
                                 {{ $errors->first('roles') }}
+                            </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('trial_type', trans('cruds.user.fields.trial_type')) !!}
+                        <div>
+                            {!! Form::select('trial_type', $trial_types, old('trial_type'), ['class' => 'form-control', 'data-toggle'=>'select2']) !!}
+                        </div>
+                        @if($errors->has('trial_type'))
+                            <div class="mt-1" style="color: #e6334d; font-weight: 500;">
+                                {{ $errors->first('trial_type') }}
                             </div>
                         @endif
                     </div>

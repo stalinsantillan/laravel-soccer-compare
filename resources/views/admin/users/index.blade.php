@@ -87,7 +87,11 @@
                                                 <span class="badge badge-success">Plan Pro</span>
                                             @endif
                                         @else
-                                            <span class="badge badge-warning">Trial</span>
+                                            @if($user->trial_type == 1)
+                                                <span class="badge badge-warning">Pro Trial</span>
+                                            @else
+                                                <span class="badge badge-warning">Basic Trial</span>
+                                            @endif
                                         @endif
                                     @endif
                                 </td>
