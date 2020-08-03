@@ -86,7 +86,7 @@ class PaypalController extends Controller
             ->setMaxFailAttempts('0');
 //            ->setSetupFee(new Currency(array('value' => 11.99, 'currency' => 'USD')));
 
-        $plan->addPaymentDefinition($paymentDefinitionTrial);
+//        $plan->addPaymentDefinition($paymentDefinitionTrial);
         $plan->addPaymentDefinition($paymentDefinition);
         $plan->setMerchantPreferences($merchantPreferences);
 
