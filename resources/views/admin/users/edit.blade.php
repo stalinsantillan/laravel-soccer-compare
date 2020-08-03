@@ -2,6 +2,7 @@
 @section('styles')
     <!-- third party css -->
     <link href="{{ asset('admin_assets/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin_assets/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- third party css end -->
     <style>
         .select2-container{
@@ -80,6 +81,26 @@
                     </div>
                 @endif
             </div>
+            @if($user->trial_start != "0000-00-00")
+            <div class="form-group {{ $errors->has('trial_start') ? 'has-error' : '' }}">
+                <label for="trial_start">{{ trans('cruds.user.fields.trial_start') }}*</label>
+                <input type="text" id="trial_start" name="trial_start" class="form-control" value="{{ old('trial_start', isset($user) ? $user->trial_start : '') }}" required>
+                @if($errors->has('trial_start'))
+                    <div class="mt-1" style="color: #e6334d; font-weight: 500;">
+                        {{ $errors->first('trial_start') }}
+                    </div>
+                @endif
+            </div>
+            <div class="form-group {{ $errors->has('trial_end') ? 'has-error' : '' }}">
+                <label for="trial_end">{{ trans('cruds.user.fields.trial_end') }}*</label>
+                <input type="text" id="trial_end" name="trial_end" class="form-control" value="{{ old('trial_end', isset($user) ? $user->trial_end : '') }}" required>
+                @if($errors->has('trial_end'))
+                    <div class="mt-1" style="color: #e6334d; font-weight: 500;">
+                        {{ $errors->first('trial_end') }}
+                    </div>
+                @endif
+            </div>
+            @endif
             <div class="form-group">
                 {!! Form::label('status', trans('cruds.user.fields.status')) !!}
                 <div>
@@ -104,10 +125,13 @@
 @parent
     <script src="{{ asset('admin_assets/libs/select2/select2.min.js') }}"></script>
     <script src="{{ asset('admin_assets/js/pages/datatables.init.js') }}"></script>
+    <script src="{{ asset('admin_assets/libs/flatpickr/flatpickr.min.js') }}"></script>
 
     <script>
         $(document).ready(function(){
             $('[data-toggle="select2"]').select2()
+            $("#trial_start").flatpickr();
+            $("#trial_end").flatpickr();
         });
     </script>
 @endsection

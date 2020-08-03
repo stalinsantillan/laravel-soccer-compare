@@ -45,6 +45,15 @@
                                 {{ trans('cruds.user.fields.roles') }}
                             </th>
                             <th>
+                                {{ trans('cruds.user.fields.cur_plan') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.user.fields.trial_start') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.user.fields.trial_end') }}
+                            </th>
+                            <th>
                                 {{ trans('cruds.user.fields.status') }}
                             </th>
                             <th>
@@ -70,6 +79,25 @@
                                     @endforeach
                                 </td>
                                 <td>
+                                    @if(!$user->hasRole("administrator"))
+                                        @if($user->is_subscribed == 1)
+                                            @if($user->subscribe_id == 1 || $user->subscribe_id == 3)
+                                                <span class="badge badge-info">Basic Plan</span>
+                                            @else
+                                                <span class="badge badge-success">Plan Pro</span>
+                                            @endif
+                                        @else
+                                            <span class="badge badge-warning">Trial</span>
+                                        @endif
+                                    @endif
+                                </td>
+                                <td>
+                                    {{ $user->trial_start=="0000-00-00" ? '' : $user->trial_start}}
+                                </td>
+                                <td>
+                                    {{ $user->trial_end=="0000-00-00" ? '' : $user->trial_end }}
+                                </td>
+                                <td>
                                     @if($user->status == "Pending")
                                         <span class="badge badge-warning">{{ $user->status }}</span>
                                     @elseif($user->status == "Reject")
@@ -79,6 +107,7 @@
                                     @endif
                                 </td>
                                 <td>
+                                    @if($user->id != 1)
                                     <a class="btn btn-xs btn-info" href="{{ route('admin.users.edit', $user->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
@@ -88,6 +117,7 @@
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

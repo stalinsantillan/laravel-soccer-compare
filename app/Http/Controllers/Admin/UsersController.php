@@ -90,11 +90,17 @@ class UsersController extends Controller
      */
     public function update(UpdateUsersRequest $request, User $user)
     {
-        if (! Gate::allows('users_manage')) {
+        if (!Gate::allows('users_manage')) {
             return abort(401);
         }
 
         $user->update($request->all());
+        if (isset($request->trial_start) && isset($request->trial_end))
+        {
+            $user->trial_start = $request->trial_start;
+            $user->trial_end = $request->trial_end;
+        }
+        $user->save();
         $roles = $request->input('roles') ? $request->input('roles') : [];
         $user->syncRoles($roles);
 
