@@ -41,8 +41,9 @@ class UsersController extends Controller
         $roles = Role::get()->pluck('name', 'name');
 //        dd($roles);
         $status = array("Pending"=>"Pending", "Approve"=>"Approve", "Reject"=>"Reject");
+        $trial_types = array("0"=>"Basic", "1"=>"Pro");
 
-        return view('admin.users.create', compact('roles', 'status'));
+        return view('admin.users.create', compact('roles', 'status', 'trial_types'));
     }
 
     /**
@@ -59,7 +60,16 @@ class UsersController extends Controller
         $user = User::create($request->all());
         $roles = $request->input('roles') ? $request->input('roles') : [];
         $user->assignRole($roles);
-
+        if (isset($request->trial_start) && isset($request->trial_end))
+        {
+            $user->trial_start = $request->trial_start;
+            $user->trial_end = $request->trial_end;
+            $user->save();
+        }
+        if (isset($request->trial_type)) {
+            $user->trial_type = $request->trial_type;
+            $user->save();
+        }
         return redirect()->route('admin.users.index');
     }
 
@@ -78,7 +88,8 @@ class UsersController extends Controller
         $roles = Role::get()->pluck('name', 'name');
 
         $status = array("Pending"=>"Pending", "Approve"=>"Approve", "Reject"=>"Reject");
-        return view('admin.users.edit', compact('user', 'roles', 'status'));
+        $trial_types = array("0"=>"Basic", "1"=>"Pro");
+        return view('admin.users.edit', compact('user', 'roles', 'status', 'trial_types'));
     }
 
     /**
@@ -99,8 +110,12 @@ class UsersController extends Controller
         {
             $user->trial_start = $request->trial_start;
             $user->trial_end = $request->trial_end;
+            $user->save();
         }
-        $user->save();
+        if (isset($request->trial_type)) {
+            $user->trial_type = $request->trial_type;
+            $user->save();
+        }
         $roles = $request->input('roles') ? $request->input('roles') : [];
         $user->syncRoles($roles);
 
