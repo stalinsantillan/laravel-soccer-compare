@@ -1,4 +1,13 @@
 @extends('layouts.user')
+@section('styles')
+    <link href="{{ asset('user_assets/libs/switchery/switchery.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <style>
+        .switchery {
+            width: 90px;
+        }
+    </style>
+@endsection
 @section('content')
 <!-- start page title -->
 <div class="row">
@@ -31,19 +40,20 @@
 @endif
 <!-- Plans -->
 <div class="row mb-3">
-    <div class="col-md-6 offset-3">
-        <ul class="nav nav-pills navtab-bg nav-justified">
-            <li class="nav-item">
-                <a href="#monthly" id="monthly_tag" data-toggle="tab" aria-expanded="true" class="nav-link active" onclick="selectType()">
-                    Monthly
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#yearly" id="yearly_tag" data-toggle="tab" aria-expanded="false" class="nav-link" onclick="selectType()">
-                    Yearly
-                </a>
-            </li>
-        </ul>
+    <div class="col-md-6 offset-3 text-center">
+        <input type="checkbox" data-plugin="switchery" data-color="#1bb99a" data-secondary-color="#1C8AB9" />
+{{--        <ul class="nav nav-pills navtab-bg nav-justified">--}}
+{{--            <li class="nav-item">--}}
+{{--                <a href="#monthly" id="monthly_tag" data-toggle="tab" aria-expanded="true" class="nav-link active" onclick="selectType()">--}}
+{{--                    Monthly--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--            <li class="nav-item">--}}
+{{--                <a href="#yearly" id="yearly_tag" data-toggle="tab" aria-expanded="false" class="nav-link" onclick="selectType()">--}}
+{{--                    Yearly--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--        </ul>--}}
     </div>
 </div>
 @php
@@ -198,10 +208,25 @@
 
 @section('scripts')
     @parent
+    <script src="{{ asset('user_assets/libs/switchery/switchery.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(".card-pricing").css("height", $(".card-pricing-recommended").css("height"));
-            selectType();
+            // selectType();
+            $('[data-plugin="switchery"]').each(function (e, n) {
+                new Switchery($(this)[0], $(this).data())
+            }).change(function() {
+                if (this.checked)
+                {
+                    $("#yearly").css("display", "");
+                    $("#monthly").css("display", "none");
+                } else {
+                    $("#yearly").css("display", "none");
+                    $("#monthly").css("display", "");
+                }
+            });
+            $("#yearly").css("display", "none");
+            $("#monthly").css("display", "");
         });
         function selectType() {
             setTimeout(function () {
