@@ -54,14 +54,19 @@
                     <li class="breadcrumb-item active">{{ trans('cruds.player.profile') }}</li>
                 </ol>
             </div>
-            <h4 class="page-title">{{ $data->name }} {{ $data->surename }}</h4>
+
+            <a href="{{ route('user.edit_player', $data->id) }}" class="btn btn-outline-info waves-effect waves-light" style="position: absolute; top: 15px; right: 500px;">Edit</a>
+            <button class="btn btn-primary waves-effect waves-light" onclick="download();" style="position: absolute; top: 15px; right: 350px;">Export to PDF</button>
         </div>
     </div>
 </div>
 <!-- end page title --> 
-<div class="row">
+<div class="row" id="pdf_content">
     <div class="col-md-12">
         <div class="card mb-0">
+            <div class="card-header font-16">
+                {{ $data->name }} {{ $data->surename }}
+            </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-5">
@@ -132,7 +137,6 @@
                     </div>
                     <div class="col-md-7 row">
                         <div class="col-md-4 text-center">
-                            <a href="{{ route('user.edit_player', $data->id) }}" class="btn btn-outline-info waves-effect waves-light mb-2" style="margin: auto">Edit</a>
                             <div id="soccerfield"></div>
                         </div>
                         <div class="col-md-8">
@@ -200,7 +204,7 @@
                 </div>
             </div>
         </div> <!-- end card-box-->
-        <div class="card mt-2">
+        <div class="card">
             <div class="card-header font-16">
                 Attribute
             </div>
@@ -643,9 +647,25 @@
     <script src="{{ asset('user_assets/libs/moment/moment.min.js') }}"></script>
     <!-- Chart JS -->
     <script src="{{ asset('user_assets/libs/chart-js/Chart.bundle.min.js') }}"></script>
-    <!-- Init js -->
-    {{-- <script src="{{ asset('user_assets/js/pages/chartjs.init.js') }}"></script> --}}
+
+
+    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
     <script>
+        function download() {
+            kendo.drawing
+                .drawDOM("#pdf_content",
+                    {
+                        // paperSize: "A4",
+                        margin: { top: "1cm", bottom: "1cm" },
+                        scale: 1,
+                        // width: 1000,
+                        // height: 2000
+                    })
+                .then(function(group){
+                    kendo.drawing.pdf.saveAs(group, "Exported.pdf")
+                });
+        }
         $(document).ready(function () {
             var options =  {
                 field: {
