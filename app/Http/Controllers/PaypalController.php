@@ -52,7 +52,7 @@ class PaypalController extends Controller
     public function subscriptions(){
         $trial_version_msg = "";
         $user = Auth::user();
-        if ($user->trial_end < date('Y-m-d') && $user->trial_end != "0000-00-00" && $user->is_subscribed != 1)
+        if ($user->trial_end < date('Y-m-d') && $user->trial_end != "0000-00-00" && $user->trial_end != "" && $user->is_subscribed != 1)
         {
             $trial_version_msg = "Your trial version has finished, check the subscription plans here.";
         } else if ($user->trial_end >= date('Y-m-d') && $user->is_subscribed != 1)
