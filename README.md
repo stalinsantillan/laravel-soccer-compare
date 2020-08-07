@@ -27,8 +27,8 @@ $ php artisan key:generate
 
 Database migrate and seed
 ```sh
-$ php artisan migrate --seed
 $ php artisan vendor:publish --tag="cashier-migrations"
+$ php artisan migrate --seed
 ```
 
 Storage link
