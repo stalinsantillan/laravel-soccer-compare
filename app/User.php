@@ -5,6 +5,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Hash;
+use Laravel\Cashier\Billable;
 
 /**
  * Class User
@@ -19,6 +20,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
+    use Billable;
 
     protected $fillable = ['name', 'email', 'password', 'remember_token', 'status'];
     
