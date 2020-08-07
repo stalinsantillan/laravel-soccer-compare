@@ -13,6 +13,8 @@ Attribute add per position, perfect position map.
 ![ScreenShot](/screenshots/screenshot6.png)
 
 ## Get Started
+env setting
+
 Composer install
 ```sh
 $ composer install
@@ -26,6 +28,7 @@ $ php artisan key:generate
 Database migrate and seed
 ```sh
 $ php artisan migrate --seed
+$ php artisan vendor:publish --tag="cashier-migrations"
 ```
 
 Storage link
