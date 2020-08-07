@@ -58,7 +58,7 @@
 </div>
 @php
     $user = \Illuminate\Support\Facades\Auth::user();
-    $plan_id = \App\Models\User\SubscribePlan::query()->where("plan_id", $user->plan_id)->get()[0]->id ?? 0;
+    $plan_id = $user->subscribe_id;//\App\Models\User\SubscribePlan::query()->where("plan_id", $user->plan_id)->get()[0]->id ?? 0;
 @endphp
 <div class="row" id="yearly">
     <div class="col-md-3 offset-3">
@@ -81,7 +81,7 @@
                         <button class="btn btn-primary btn-block mt-1 mb-2 width-sm" disabled="">Other Plan Selected</button>
                     @endif
                 @else
-                    <a href="{{ url('/subscribe/paypal/3') }}" class="btn btn-primary btn-block waves-effect waves-light mt-1 mb-2 width-sm">Select</a>
+                    <a href="#" class="btn btn-primary btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(3)">Select</a>
                 @endif
                 <div class="dropdown-divider"></div>
                 <ul class="card-pricing-features">
@@ -115,7 +115,7 @@
                         <button class="btn btn-light btn-block mt-1 mb-2 width-sm" disabled="">Other Plan Selected</button>
                     @endif
                 @else
-                    <a href="{{ url('/subscribe/paypal/4') }}" class="btn btn-light btn-block waves-effect waves-light mt-1 mb-2 width-sm">Select</a>
+                    <a href="#" class="btn btn-light btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(4)">Select</a>
                 @endif
                 <div class="dropdown-divider"></div>
                 <ul class="card-pricing-features">
@@ -153,7 +153,7 @@
                         <button class="btn btn-primary btn-block mt-1 mb-2 width-sm" disabled="">Other Plan Selected</button>
                     @endif
                 @else
-                    <a href="{{ url('/subscribe/paypal/1') }}" class="btn btn-primary btn-block waves-effect waves-light mt-1 mb-2 width-sm">Select</a>
+                    <a href="#" class="btn btn-primary btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(1)">Select</a>
                 @endif
                 <div class="dropdown-divider"></div>
                 <ul class="card-pricing-features">
@@ -187,7 +187,7 @@
                         <button class="btn btn-light btn-block mt-1 mb-2 width-sm" disabled="">Other Plan Selected</button>
                     @endif
                 @else
-                    <a href="{{ url('/subscribe/paypal/2') }}" class="btn btn-light btn-block waves-effect waves-light mt-1 mb-2 width-sm">Select</a>
+                    <a href="#" class="btn btn-light btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(2)">Select</a>
                 @endif
                 <div class="dropdown-divider"></div>
                 <ul class="card-pricing-features">
@@ -204,12 +204,50 @@
     </div> <!-- end col -->
 </div>
 <!-- end row -->
+
+<!-- payment selection modal -->
+<div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="myCenterModalLabel" aria-hidden="true"  id="payment_method_modal" data-backdrop="static" payment-type="1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myCenterModalLabel">Payment Method</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <button type="button" class="btn btn-block btn-lg btn-primary waves-effect waves-light" onclick="gotoStripe()">
+                    <i class="mdi mdi-credit-card"></i> Credit Card</button>
+                    
+                        <form action="#" method="post" id="payment-form" class="card card-body" style="display:none;">
+                            @csrf                    
+                            <div class="form-group">
+                                <div class="card-body">
+                                    <div id="card-element">
+                                    <!-- A Stripe Element will be inserted here. -->
+                                    </div>
+                                    <!-- Used to display form errors. -->
+                                    <div id="card-errors" role="alert"></div>
+                                    <input type="hidden" name="plan" id="plan_id"/>
+                                </div>
+                            </div>
+                            <button class="btn btn-dark width-xs waves-effect waves-light" type="submit">Pay</button>
+                        </form>
+                    <div class="dropdown-divider"></div>
+                    <button type="button" class="btn btn-block btn-lg btn-primary waves-effect waves-light" onclick="gotoPaypal()">
+                    <i class="mdi mdi-paypal"></i> Paypal</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- end modal -->
+
 @endsection
 
 @section('scripts')
     @parent
     <script src="{{ asset('user_assets/libs/switchery/switchery.min.js') }}"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <script>
+        let paymentType = 0;
         $(document).ready(function () {
             $(".card-pricing").css("height", $(".card-pricing-recommended").css("height"));
             // selectType();
@@ -239,6 +277,107 @@
                     $("#monthly").css("display", "");
                 }
             }, 100);
+        }
+        
+        function paymentMethod(type)
+        {
+            paymentType = type;
+            $('#payment_method_modal').modal();
+            $('#plan_id').val(paymentType);
+            $('#payment-form').attr("action", "{{ url('/subscribe/stripe') }}/" + paymentType);
+        }
+
+        function gotoPaypal()
+        {
+            location.href = "{{ url('/subscribe/paypal') }}/" + paymentType;
+        }
+
+        function gotoStripe()
+        {
+            if($('#payment-form').is(":visible"))
+                $('#payment-form').hide();
+            else
+                $('#payment-form').show();
+        }
+
+        var stripe = Stripe("{{ \Config::get('services.stripe.key') }}");
+
+        // Create an instance of Elements.
+        var elements = stripe.elements();
+
+        // Custom styling can be passed to options when creating an Element.
+        // (Note that this demo uses a wider set of styles than the guide below.)
+        var style = {
+            base: {
+                color: 'white',
+                lineHeight: '18px',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                iconColor: 'white',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                }
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+        };
+
+        // Create an instance of the card Element.
+        var card = elements.create('card', {style: style});
+
+        // Add an instance of the card Element into the `card-element` <div>.
+        card.mount('#card-element');
+
+        // Handle real-time validation errors from the card Element.
+        card.addEventListener('change', function(event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        // Handle form submission.
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    // Inform the user if there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    stripeTokenHandler(result.token);
+                }
+            });
+        });
+
+        // Submit the form with the token ID.
+        function stripeTokenHandler(token) {
+            // Insert the token ID into the form so it gets submitted to the server
+            stripe.createPaymentMethod({
+                    type: 'card',
+                    card: card,
+                    billing_details: {
+                    name: 'Test',
+                },
+            })
+            .then(function(result) {
+                var form = document.getElementById('payment-form');
+                var hiddenInput = document.createElement('input');
+                hiddenInput.setAttribute('type', 'hidden');
+                hiddenInput.setAttribute('name', 'stripeToken');
+                hiddenInput.setAttribute('value', JSON.stringify(result.paymentMethod));
+                form.appendChild(hiddenInput);
+                // Submit the form
+                form.submit();
+                //console.log(result.paymentMethod);
+            });
         }
     </script>
 @endsection
