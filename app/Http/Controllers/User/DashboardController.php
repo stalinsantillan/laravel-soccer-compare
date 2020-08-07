@@ -30,7 +30,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $trial_version_msg = "";
-        if (($user->trial_start == "0000-00-00" || $user->trial_start == "") && $user->is_subscribe != 1)
+        if (($user->trial_start == "0000-00-00" || $user->trial_start == null) && $user->is_subscribe != 1)
         {
             $trial_version_msg = "Your trial version is started now. it will be expire after 21 days.";
             $user->trial_start = date('Y-m-d');
