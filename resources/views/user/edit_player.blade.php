@@ -448,6 +448,17 @@
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
+                    <label for="long_pass" class="col-md-3 col-form-label text-right">
+                        Long Pass
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="long_pass" name="long_pass">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->latestParam->long_pass }}" max="{{ $paramsetting->long_pass }}" step="0.1"  match="long_pass" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
                     <label for="punching" class="col-md-3 col-form-label text-right">
                         Punching
                     </label>
@@ -832,6 +843,17 @@
                         <input type="range" min="0" value="{{ $data->latestParam->strength }}" max="{{ $paramsetting->strength }}" step="0.1"  match="strength" data-rangeslider>
                     </div>
                 </div>
+                <div class="form-group col-md-6 row">
+                    <label for="injury_resistance" class="col-md-3 col-form-label text-right">
+                        Injury resistance
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="injury_resistance" name="injury_resistance">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->latestParam->injury_resistance }}" max="{{ $paramsetting->injury_resistance }}" step="0.1"  match="injury_resistance" data-rangeslider>
+                    </div>
+                </div>
             </div>
         </div>
     </div> <!-- end card-box-->
@@ -853,34 +875,46 @@
     <script src="{{ asset('erp_assets/select/js/select2.js') }}"></script>
     <script>
         let curCounter = 1;
-        let arrDefender = ["Centre-back", "Sweeper", "Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back", "Left Centre-back", "Right Centre-back"];
-        let arrMidfielder = ["Centre midfield", "Defensive midfield", "Attacking midfield", "Left Wide midfield", "Right Wide midfield"
-            , "Left Defensive midfield", "Right Defensive midfield", "Left Centre midfield", "Right Centre midfield"
-            , "Left Attacking midfield", "Right Attacking midfield"];
+
+        let arrGoalkeeper = ["Goalkeeper"];
+        let arrDefender = ["Sweeper", "Centre-back", "Left Centre-back", "Right Centre-back", "Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back"];
+        let arrMidfielder = ["Defensive midfield", "Left Defensive midfield", "Right Defensive midfield"
+            , "Centre midfield", "Left Centre midfield", "Right Centre midfield"
+            , "Attacking midfield", "Left Attacking midfield", "Right Attacking midfield"
+            , "Left Wide midfield", "Right Wide midfield"];
         let arrForward = ["Centre forward", "Second striker", "Left Winger", "Right Winger", "Left striker", "Right striker"
             , "Left Centre forward", "Right Centre forward"];
-        let arrGoalkeeper = ["Goalkeeper"];
 
-        let arrDefenderPos = ["Centre-back", "Sweeper", "Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back"
-            , "Defensive midfield", "Centre midfield", "Left Wide midfield", "Right Wide midfield"
-            , "Left Centre-back", "Right Centre-back", "Left Defensive midfield", "Right Defensive midfield"
-            , "Left Centre midfield", "Right Centre midfield"];
-        let arrAttackingPos = ["Attacking midfield", "Left Attacking midfield", "Right Attacking midfield", "Left Winger", "Right Winger"
-            , "Second striker", "Left striker", "Right striker", "Centre forward", "Left Centre forward", "Right Centre forward"];
         let arrGoalkeeperPos = ["Goalkeeper"];
+        let arrDefenderPos = ["Sweeper", "Centre-back", "Left Centre-back", "Right Centre-back"];
+        let arrDefender_MidfielderPos = ["Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back"
+            , "Defensive midfield", "Left Defensive midfield", "Right Defensive midfield"
+            , "Centre midfield", "Left Centre midfield", "Right Centre midfield"];
+        let arrMidfielderPos = ["Left Wide midfield", "Right Wide midfield", "Attacking midfield", "Left Attacking midfield", "Right Attacking midfield"];
+        let arrForwardPos = ["Centre forward", "Second striker", "Left Winger", "Right Winger", "Left striker", "Right striker"
+            , "Left Centre forward", "Right Centre forward"];
 
-        let arrDefenderAttr = ["crossing", "dribbling", "finishing", "first_touch", "heading", "long_shots", "long_throws", "marking", "passing", "tackling"
-            , "technique", "aggression", "articipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
-            , "off_ball", "positioning", "teamwork", "vision", "work_rate", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
-            , "stamina", "strength", "shots", "offensive", "deffense", "aerial_duels", "reaction", "sprint_speed"];
-        let arrAttackingAttr = ["crossing", "dribbling", "finishing", "first_touch", "heading", "long_shots", "long_throws", "marking", "passing", "tackling"
-            , "technique", "aggression", "articipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
+        let arrGoalkeeperAttr = ["aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership"
             , "off_ball", "positioning", "teamwork", "vision", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
-            , "stamina", "strength", "shots", "offensive", "aerial_duels", "reaction", "sprint_speed"];
-        let arrGoalkeeperAttr = ["aggression", "articipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
-            , "off_ball", "positioning", "teamwork", "vision", "work_rate", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
             , "stamina", "strength", "aerial_duels", "reaction", "sprint_speed", "areial_reach", "command_of_area", "communication"
-            , "eccentricity", "first_touch", "handling", "kicking", "one_on_ones", "feet_playing", "passing", "punching", "reflexes", "rushing_out", "throwing"];
+            , "eccentricity", "first_touch", "handling", "kicking", "one_on_ones", "feet_playing", "passing", "punching", "reflexes", "rushing_out"];
+
+        let arrDefenderAttr = ["crossing", "dribbling", "first_touch", "heading", "shots", "long_shots", "passing", "long_pass", "marking", "tackling", "technique", "deffense"
+            , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+            , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
+
+        let arrDefender_MidfielderAttr = ["crossing", "dribbling", "first_touch", "shots", "long_shots", "passing", "long_pass", "marking", "tackling", "technique", "offensive", "deffense"
+            , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+            , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
+
+        let arrMidfielderAttr = ["crossing", "dribbling", "first_touch", "shots", "long_shots", "passing", "long_pass", "finishing", "marking", "technique", "offensive", "deffense"
+            , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+            , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
+
+        let arrForwardAttr = ["crossing", "dribbling", "first_touch", "shots", "long_shots", "passing", "long_pass", "finishing", "marking", "technique", "offensive", "heading"
+            , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+            , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
+
         function formatRepo (repo) {
             if (repo.loading) {
                 return repo.text;
@@ -1130,44 +1164,69 @@
             $spec_pos = $("#position2").val();
             $("[attrtype=range_input]").parent().parent().css("display", "none");
 
-            if (arrDefenderPos.includes($spec_pos))
-            {
-                for (let i = 0; i < arrDefenderAttr.length; i++)
-                {
-                    $("#" + arrDefenderAttr[i]).parent().parent().css("display", "");
-                }
-            } else if (arrAttackingPos.includes($spec_pos))
-            {
-                for (let i = 0; i < arrAttackingAttr.length; i++)
-                {
-                    $("#" + arrAttackingAttr[i]).parent().parent().css("display", "");
-                }
-            } else if (arrGoalkeeperPos.includes($spec_pos))
+            if (arrGoalkeeperPos.includes($spec_pos))
             {
                 for (let i = 0; i < arrGoalkeeperAttr.length; i++)
                 {
                     $("#" + arrGoalkeeperAttr[i]).parent().parent().css("display", "");
                 }
+            } else if (arrDefenderPos.includes($spec_pos))
+            {
+                for (let i = 0; i < arrDefenderAttr.length; i++)
+                {
+                    $("#" + arrDefenderAttr[i]).parent().parent().css("display", "");
+                }
+            } else if (arrDefender_MidfielderPos.includes($spec_pos))
+            {
+                for (let i = 0; i < arrDefender_MidfielderAttr.length; i++)
+                {
+                    $("#" + arrDefender_MidfielderAttr[i]).parent().parent().css("display", "");
+                }
+            } else if (arrMidfielderPos.includes($spec_pos))
+            {
+                for (let i = 0; i < arrMidfielderAttr.length; i++)
+                {
+                    $("#" + arrMidfielderAttr[i]).parent().parent().css("display", "");
+                }
+            } else if (arrForwardPos.includes($spec_pos))
+            {
+                for (let i = 0; i < arrForwardAttr.length; i++)
+                {
+                    $("#" + arrForwardAttr[i]).parent().parent().css("display", "");
+                }
             }
             $("[identi=spec_position]").each(function () {
                 $spec_pos = $(this).val();
-                if (arrDefenderPos.includes($spec_pos))
+
+                if (arrGoalkeeperPos.includes($spec_pos))
+                {
+                    for (let i = 0; i < arrGoalkeeperAttr.length; i++)
+                    {
+                        $("#" + arrGoalkeeperAttr[i]).parent().parent().css("display", "");
+                    }
+                } else if (arrDefenderPos.includes($spec_pos))
                 {
                     for (let i = 0; i < arrDefenderAttr.length; i++)
                     {
                         $("#" + arrDefenderAttr[i]).parent().parent().css("display", "");
                     }
-                } else if (arrAttackingPos.includes($spec_pos))
+                } else if (arrDefender_MidfielderPos.includes($spec_pos))
                 {
-                    for (let i = 0; i < arrAttackingAttr.length; i++)
+                    for (let i = 0; i < arrDefender_MidfielderAttr.length; i++)
                     {
-                        $("#" + arrAttackingAttr[i]).parent().parent().css("display", "");
+                        $("#" + arrDefender_MidfielderAttr[i]).parent().parent().css("display", "");
                     }
-                } else if (arrGoalkeeperPos.includes($spec_pos))
+                } else if (arrMidfielderPos.includes($spec_pos))
                 {
-                    for (let i = 0; i < arrGoalkeeperAttr.length; i++)
+                    for (let i = 0; i < arrMidfielderAttr.length; i++)
                     {
-                        $("#" + arrGoalkeeperAttr[i]).parent().parent().css("display", "");
+                        $("#" + arrMidfielderAttr[i]).parent().parent().css("display", "");
+                    }
+                } else if (arrForwardPos.includes($spec_pos))
+                {
+                    for (let i = 0; i < arrForwardAttr.length; i++)
+                    {
+                        $("#" + arrForwardAttr[i]).parent().parent().css("display", "");
                     }
                 }
             })

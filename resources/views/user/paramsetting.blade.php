@@ -274,6 +274,17 @@
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
+                    <label for="long_pass" class="col-md-3 col-form-label text-right">
+                        Long Pass
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="long_pass" name="long_pass">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->long_pass }}" max="100"step="0.1"  match="long_pass" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
                     <label for="punching" class="col-md-3 col-form-label text-right">
                         Punching
                     </label>
@@ -656,6 +667,17 @@
                     </div>
                     <div class="col-md-5">
                         <input type="range" min="0" value="{{ $data->strength }}" max="100"step="0.1"  match="strength" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="injury_resistance" class="col-md-3 col-form-label text-right">
+                        Injury resistance
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="injury_resistance" name="injury_resistance">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="{{ $data->injury_resistance }}" max="100"step="0.1"  match="injury_resistance" data-rangeslider>
                     </div>
                 </div>
             </div>

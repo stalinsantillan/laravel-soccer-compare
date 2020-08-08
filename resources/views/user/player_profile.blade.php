@@ -355,6 +355,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="long_pass">Long Pass</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->long_pass }} / {{ $paramsetting->long_pass }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" bartype="technical" style="width: {{ $data->latestParam->long_pass * 10 }}%"  aria-valuenow="{{ $data->latestParam->long_pass }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->long_pass }}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="punching">Punching</label>
                             <div class="progress mb-2 progress-lg">
                                 <span style="position: absolute; left: 45%">{{ $data->latestParam->punching }} / {{ $paramsetting->punching }}</span>
@@ -602,6 +609,13 @@
                                 <div class="progress-bar bg-info" role="progressbar" bartype="physical" style="width: {{ $data->latestParam->strength * 10 }}%"  aria-valuenow="{{ $data->latestParam->strength }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->strength }}"></div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="injury_resistance">Injury resistance</label>
+                            <div class="progress mb-2 progress-lg">
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->injury_resistance }} / {{ $paramsetting->injury_resistance }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" bartype="physical" style="width: {{ $data->latestParam->injury_resistance * 10 }}%"  aria-valuenow="{{ $data->latestParam->injury_resistance }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->injury_resistance }}"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -792,42 +806,68 @@
                     }
                 }
             });
-            let arrDefenderPos = ["Centre-back", "Sweeper", "Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back"
-                , "Defensive midfield", "Attacking midfield", "Left Wide midfield", "Right Wide midfield"];
-            let arrAttackingPos = ["Centre midfield", "Centre forward", "Second striker", "Left Winger", "Right Winger"];
             let arrGoalkeeperPos = ["Goalkeeper"];
-            let arrDefenderAttr = ["crossing", "dribbling", "finishing", "first_touch", "heading", "long_shots", "long_throws", "marking", "passing", "tackling"
-                , "technique", "aggression", "articipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
-                , "off_ball", "positioning", "teamwork", "vision", "work_rate", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
-                , "stamina", "strength", "shots", "offensive", "deffense", "aerial_duels", "reaction", "sprint_speed"];
-            let arrAttackingAttr = ["crossing", "dribbling", "finishing", "first_touch", "heading", "long_shots", "long_throws", "marking", "passing", "tackling"
-                , "technique", "aggression", "articipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
+            let arrDefenderPos = ["Sweeper", "Centre-back", "Left Centre-back", "Right Centre-back"];
+            let arrDefender_MidfielderPos = ["Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back"
+                , "Defensive midfield", "Left Defensive midfield", "Right Defensive midfield"
+                , "Centre midfield", "Left Centre midfield", "Right Centre midfield"];
+            let arrMidfielderPos = ["Left Wide midfield", "Right Wide midfield", "Attacking midfield", "Left Attacking midfield", "Right Attacking midfield"];
+            let arrForwardPos = ["Centre forward", "Second striker", "Left Winger", "Right Winger", "Left striker", "Right striker"
+                , "Left Centre forward", "Right Centre forward"];
+
+            let arrGoalkeeperAttr = ["aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership"
                 , "off_ball", "positioning", "teamwork", "vision", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
-                , "stamina", "strength", "shots", "offensive", "aerial_duels", "reaction", "sprint_speed"];
-            let arrGoalkeeperAttr = ["aggression", "articipation", "bravery", "composure", "concentration", "decisions", "determination", "flair", "leadership"
-                , "off_ball", "positioning", "teamwork", "vision", "work_rate", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
                 , "stamina", "strength", "aerial_duels", "reaction", "sprint_speed", "areial_reach", "command_of_area", "communication"
-                , "eccentricity", "first_touch", "handling", "kicking", "one_on_ones", "feet_playing", "passing", "punching", "reflexes", "rushing_out", "throwing"];
+                , "eccentricity", "first_touch", "handling", "kicking", "one_on_ones", "feet_playing", "passing", "punching", "reflexes", "rushing_out"];
+
+            let arrDefenderAttr = ["crossing", "dribbling", "first_touch", "heading", "shots", "long_shots", "passing", "long_pass", "marking", "tackling", "technique", "deffense"
+                , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+                , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
+
+            let arrDefender_MidfielderAttr = ["crossing", "dribbling", "first_touch", "shots", "long_shots", "passing", "long_pass", "marking", "tackling", "technique", "offensive", "deffense"
+                , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+                , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
+
+            let arrMidfielderAttr = ["crossing", "dribbling", "first_touch", "shots", "long_shots", "passing", "long_pass", "finishing", "marking", "technique", "offensive", "deffense"
+                , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+                , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
+
+            let arrForwardAttr = ["crossing", "dribbling", "first_touch", "shots", "long_shots", "passing", "long_pass", "finishing", "marking", "technique", "offensive", "heading"
+                , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+                , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
+
             $("[role=progressbar]").parent().parent().css("display", "none");
             @foreach($data->positions as $position)
                 $specify = '{{ $position->specify }}';
-                if (arrDefenderPos.includes($specify))
+                if (arrGoalkeeperPos.includes($specify))
+                {
+                    for (let i = 0; i < arrGoalkeeperAttr.length; i++)
+                    {
+                        $("[for=" + arrGoalkeeperAttr[i] + "]").parent().css("display", "");
+                    }
+                } else if (arrDefenderPos.includes($specify))
                 {
                     for (let i = 0; i < arrDefenderAttr.length; i++)
                     {
                         $("[for=" + arrDefenderAttr[i] + "]").parent().css("display", "");
                     }
-                } else if (arrAttackingPos.includes($specify))
+                } else if (arrDefender_MidfielderPos.includes($specify))
                 {
-                    for (let i = 0; i < arrAttackingAttr.length; i++)
+                    for (let i = 0; i < arrDefender_MidfielderAttr.length; i++)
                     {
-                        $("[for=" + arrAttackingAttr[i] + "]").parent().css("display", "");
+                        $("[for=" + arrDefender_MidfielderAttr[i] + "]").parent().css("display", "");
                     }
-                } else if (arrGoalkeeperPos.includes($specify))
+                } else if (arrMidfielderPos.includes($specify))
                 {
-                    for (let i = 0; i < arrGoalkeeperAttr.length; i++)
+                    for (let i = 0; i < arrMidfielderAttr.length; i++)
                     {
-                        $("[for=" + arrGoalkeeperAttr[i] + "]").parent().css("display", "");
+                        $("[for=" + arrMidfielderAttr[i] + "]").parent().css("display", "");
+                    }
+                } else if (arrForwardPos.includes($specify))
+                {
+                    for (let i = 0; i < arrForwardAttr.length; i++)
+                    {
+                        $("[for=" + arrForwardAttr[i] + "]").parent().css("display", "");
                     }
                 }
             @endforeach
