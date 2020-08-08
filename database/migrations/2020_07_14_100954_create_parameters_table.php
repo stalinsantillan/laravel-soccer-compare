@@ -71,6 +71,8 @@ class CreateParametersTable extends Migration
             $table->double('reflexes')->default(0);
             $table->double('rushing_out')->default(0);
             $table->double('throwing')->default(0);
+            $table->double('long_pass')->default(0);
+            $table->double('injury_resistance')->default(0);
 
             $table->timestamps();
 

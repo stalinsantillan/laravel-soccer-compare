@@ -70,6 +70,8 @@ class CreateParamsettingsTable extends Migration
             $table->double('reflexes')->default(10);
             $table->double('rushing_out')->default(10);
             $table->double('throwing')->default(10);
+            $table->double('long_pass')->default(10);
+            $table->double('injury_resistance')->default(10);
             $table->timestamps();
         });
     }
