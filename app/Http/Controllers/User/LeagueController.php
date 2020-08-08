@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Models\User\League;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use const http\Client\Curl\AUTH_ANY;
 
 class LeagueController extends Controller
 {
@@ -16,7 +18,7 @@ class LeagueController extends Controller
     public function index()
     {
         //
-        $leagues = League::all();
+        $leagues = League::query()->where("user_id", Auth::user()->id)->get();
 
         return view('user.leagues.index', compact('leagues'));
     }
@@ -41,8 +43,8 @@ class LeagueController extends Controller
     public function store(Request $request)
     {
         //
+        $request->request->add(['user_id' => Auth::user()->id]);
         League::create($request->all());
-
         return redirect()->route('user.leagues.index');
     }
 
@@ -79,6 +81,7 @@ class LeagueController extends Controller
     public function update(Request $request, League $league)
     {
         //
+        $request->request->add(['user_id' => Auth::user()->id]);
         $league->update($request->all());
 
         return redirect()->route('user.leagues.index');

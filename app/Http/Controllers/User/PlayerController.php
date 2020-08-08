@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 use App\Http\Controllers\Controller;
@@ -1200,7 +1201,7 @@ class PlayerController extends Controller
             $data = $data->where("height", ">=", $min_height)->where("height", "<=", $max_height);
             $filter_data['height'] = $height;
         }
-        $data = $data->get();
+        $data = $data->where("user_id", Auth::user()->id)->get();
         return view('user.filter')
             ->with('filter', $filter_data)
             ->with('data', $data);
@@ -1213,7 +1214,7 @@ class PlayerController extends Controller
      */
     public function filter_show()
     {
-        $data = Player::orderByDesc('general_average')->limit(10)->get();
+        $data = Player::query()->where("user_id", Auth::user()->id)->orderByDesc('general_average')->limit(10)->get();
 
         return view("user.filter")
             ->with('data', $data);

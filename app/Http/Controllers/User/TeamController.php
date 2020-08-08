@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Models\User\Team;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
@@ -16,7 +17,7 @@ class TeamController extends Controller
     public function index()
     {
         //
-        $teams = Team::all();
+        $teams = Team::query()->where("user_id", Auth::user()->id)->get();
 
         return view('user.teams.index', compact('teams'));
     }
@@ -29,7 +30,7 @@ class TeamController extends Controller
     public function create()
     {
         //
-        $leagues = \App\Models\User\League::all()->pluck("name", "id");
+        $leagues = \App\Models\User\League::query()->where("user_id", Auth::user()->id)->get()->pluck("name", "id");
         return view('user.teams.create', compact('leagues'));
     }
 
@@ -42,6 +43,7 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         //
+        $request->request->add(['user_id' => Auth::user()->id]);
         Team::create($request->all());
 
         return redirect()->route('user.teams.index');
@@ -67,7 +69,7 @@ class TeamController extends Controller
     public function edit(Team $team)
     {
         //
-        $leagues = \App\Models\User\League::all()->pluck("name", "id");
+        $leagues = \App\Models\User\League::query()->where("user_id", Auth::user()->id)->get()->pluck("name", "id");
         return view('user.teams.edit', compact('leagues', 'team'));
     }
 
@@ -80,7 +82,7 @@ class TeamController extends Controller
      */
     public function update(Request $request, Team $team)
     {
-        //
+        $request->request->add(['user_id' => Auth::user()->id]);
         $team->update($request->all());
 
         return redirect()->route('user.teams.index');
