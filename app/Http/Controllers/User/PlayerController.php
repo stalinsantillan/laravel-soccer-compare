@@ -575,6 +575,11 @@ class PlayerController extends Controller
             $technicals['throwing'] = $request->throwing;
             $goalkeepers['throwing'] = $request->throwing;
         }
+
+        if ($request->long_pass) {
+            $parameters['long_pass'] = $request->long_pass;
+            $technicals['long_pass'] = $request->long_pass;
+        }
         
         // Parameters, mentals
         if ($request->aggression) {
@@ -726,7 +731,13 @@ class PlayerController extends Controller
             $physicals['sprint_speed'] = $request->sprint_speed;
             $goalkeepers['sprint_speed'] = $request->sprint_speed;
         }
-        
+
+        if ($request->injury_resistance) {
+            $parameters['injury_resistance'] = $request->injury_resistance;
+            $physicals['injury_resistance'] = $request->injury_resistance;
+            $goalkeepers['injury_resistance'] = $request->injury_resistance;
+        }
+
         foreach ($parameters as $parameter) {
             $sum += $parameter;
             $count ++;
@@ -790,7 +801,7 @@ class PlayerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store__edt_player(Request $request, Player $player)
+    public function store_edt_player(Request $request, Player $player)
     {
         $parameters = array(); $technicals = array(); $physicals = array(); $mentals = array(); $goalkeepers = array(); $positions = array();
         $sum = 0; $count = 0;
@@ -1000,6 +1011,11 @@ class PlayerController extends Controller
             $goalkeepers['throwing'] = $request->throwing;
         }
 
+        if ($request->long_pass) {
+            $parameters['long_pass'] = $request->long_pass;
+            $technicals['long_pass'] = $request->long_pass;
+        }
+
         // Parameters, mentals
         if ($request->aggression) {
             $parameters['aggression'] = $request->aggression;
@@ -1149,6 +1165,12 @@ class PlayerController extends Controller
             $parameters['sprint_speed'] = $request->sprint_speed;
             $physicals['sprint_speed'] = $request->sprint_speed;
             $goalkeepers['sprint_speed'] = $request->sprint_speed;
+        }
+
+        if ($request->injury_resistance) {
+            $parameters['injury_resistance'] = $request->injury_resistance;
+            $physicals['injury_resistance'] = $request->injury_resistance;
+            $goalkeepers['injury_resistance'] = $request->injury_resistance;
         }
 
         foreach ($parameters as $parameter) {

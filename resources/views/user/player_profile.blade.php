@@ -70,7 +70,7 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="/">Soccer</a></li>
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ trans('cruds.filter.title') }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('user.filter_player') }}">{{ trans('cruds.filter.title') }}</a></li>
                     <li class="breadcrumb-item active">{{ trans('cruds.player.profile') }}</li>
                 </ol>
             </div>
@@ -159,11 +159,11 @@
                             @php $i = 0; @endphp
                             @foreach($data->positions as $position)
                                 @if ($i == 0)
-                                    <p class="font-16  text-white mt-3 mb-0">Main Position : </p>
+                                    <p class="font-14 text-white mt-3 mb-0">Main Position : </p>
                                 @elseif ($i == 1)
-                                    <p class="font-16  text-white mt-2 mb-0">Other Position : </p>
+                                    <p class="font-14 text-white mt-2 mb-0">Other Position : </p>
                                 @endif
-                                <p class="font-16 mb-0">{{ $position->specify }}</p>
+                                <p class="font-14 mb-0">{{ $position->specify }}</p>
                                 @php ++$i; @endphp
                             @endforeach
                         </div>
@@ -1820,7 +1820,7 @@
                     englishName: "Zulu"
                 }
             };
-            let lang_arrays_str = "{{ $data->additional->languages }}";
+            let lang_arrays_str = "{{ $data->additional->languages ?? '' }}";
             let lang_arrays = lang_arrays_str.split(",");
             for (r in languages)
             {
@@ -1838,16 +1838,16 @@
                 minimumResultsForSearch: 20, //prevent filter input
                 maximumSelectionSize: 20 // prevent scrollbar
             });
-
-            var newOption = new Option("{{ $data->additional->getNationalTeamName() }}", "{{ $data->additional->national_team }}", false, false);
-            $('#national_team').append(newOption).trigger('change');
-            $('#national_team').children('[value="{{ $data->additional->national_team }}"]').attr(
-                {
-                    'team_link':"", //dynamic value from data array
-                    'team_name':"{{ $data->additional->getNationalTeamName() }}" // fixed value
-                }
-            );
-
+            @if (isset($data->additional->national_team))
+                var newOption = new Option("{{ $data->additional->getNationalTeamName() }}", "{{ $data->additional->national_team }}", false, false);
+                $('#national_team').append(newOption).trigger('change');
+                $('#national_team').children('[value="{{ $data->additional->national_team }}"]').attr(
+                    {
+                        'team_link':"", //dynamic value from data array
+                        'team_name':"{{ $data->additional->getNationalTeamName() }}" // fixed value
+                    }
+                );
+            @endif
             $('#national_team').select2({
                 ajax: {
                     type: "GET",
@@ -1880,14 +1880,16 @@
                     }
                 );
             });
-            newOption = new Option("{{ $data->additional->getFirstAppearanceTeamName() }}", "{{ $data->additional->first_appearance_team }}", false, false);
-            $('#first_appearance_team').append(newOption).trigger('change');
-            $('#first_appearance_team').children('[value="{{ $data->additional->first_appearance_team }}"]').attr(
-                {
-                    'team_link':"", //dynamic value from data array
-                    'team_name':"{{ $data->additional->getFirstAppearanceTeamName() }}" // fixed value
-                }
-            );
+            @if (isset($data->additional->first_appearance_team))
+                newOption = new Option("{{ $data->additional->getFirstAppearanceTeamName() }}", "{{ $data->additional->first_appearance_team }}", false, false);
+                $('#first_appearance_team').append(newOption).trigger('change');
+                $('#first_appearance_team').children('[value="{{ $data->additional->first_appearance_team }}"]').attr(
+                    {
+                        'team_link':"", //dynamic value from data array
+                        'team_name':"{{ $data->additional->getFirstAppearanceTeamName() }}" // fixed value
+                    }
+                );
+            @endif
 
             $('#first_appearance_team').select2({
                 ajax: {
@@ -2105,7 +2107,7 @@
             let arrGoalkeeperAttr = ["aggression", "anticipation", "composure", "concentration", "decisions", "determination", "flair", "leadership"
                 , "off_ball", "positioning", "teamwork", "vision", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
                 , "stamina", "strength", "aerial_duels", "reaction", "sprint_speed", "aerial_reach", "command_of_area", "communication"
-                , "eccentricity", "first_touch", "handling", "kicking", "one_on_ones", "feet_playing", "passing", "punching", "reflexes", "rushing_out"];
+                , "first_touch", "handling", "kicking", "one_on_ones", "feet_playing", "passing", "punching", "reflexes", "rushing_out", "injury_resistance"];
 
             let arrDefenderAttr = ["crossing", "dribbling", "first_touch", "heading", "shots", "long_shots", "passing", "long_pass", "marking", "tackling", "technique", "deffense"
                 , "aggression", "anticipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
