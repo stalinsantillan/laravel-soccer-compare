@@ -56,6 +56,7 @@ Route::middleware(['approved'])->group(function () {
         Route::get('filter_player', 'User\PlayerController@filter_player')->name('filter_player');
         Route::get('filter_show', 'User\PlayerController@filter_show')->name('filter_show');
         Route::get('player_profile/{player}', 'User\PlayerController@player_profile')->name('player_profile');
+        Route::get('save_additional/{player}', 'User\PlayerController@save_additional')->name('save_additional');
 
         // Setting
         Route::get('setting/paramsetting_show', 'User\SettingsController@paramsetting_show')->name('paramsetting_show');
