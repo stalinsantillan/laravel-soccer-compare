@@ -59,6 +59,7 @@ Route::middleware(['approved'])->group(function () {
         Route::get('save_additional/{player}', 'User\PlayerController@save_additional')->name('save_additional');
         Route::get('save_scout/{player}', 'User\PlayerController@save_scout')->name('save_scout');
         Route::get('save_injury/{player}', 'User\PlayerController@save_injury')->name('save_injury');
+        Route::get('save_video/{player}', 'User\PlayerController@save_video')->name('save_video');
 
         // Setting
         Route::get('setting/paramsetting_show', 'User\SettingsController@paramsetting_show')->name('paramsetting_show');
