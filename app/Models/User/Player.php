@@ -24,6 +24,11 @@ class Player extends Model
         return $this->hasOne('\App\Models\User\Parameter')->latest();
     }
 
+    public function additional()
+    {
+        return $this->hasOne('\App\Models\User\Additional');
+    }
+
     public function storePositions($positions)
     {
         $this->positions()->delete();
