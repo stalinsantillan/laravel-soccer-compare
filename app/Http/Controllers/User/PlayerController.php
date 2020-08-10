@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User\Additional;
+use App\Models\User\Injury;
 use App\Models\User\Scout_Report;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -105,6 +106,27 @@ class PlayerController extends Controller
             Scout_Report::create($request->all());
         }else
             $scout_report->update($request->all());
+        exit("OK");
+    }
+
+    public function save_injury(Request $request, Player $player){
+        $player_id = $player->id;
+        $all = $request->all();
+        $injuries = $all['injury'];
+        $injury_dates = $all['injury_date'];
+        $descriptions = $all['description'];
+        $player->injury()->delete();
+        $index = 0;
+        foreach ($injuries as $injury)
+        {
+            $injury_model = new Injury;
+            $injury_model->player_id = $player_id;
+            $injury_model->injury = $injury;
+            $injury_model->injury_date = $injury_dates[$index];
+            $injury_model->description = $descriptions[$index];
+            $injury_model->save();
+            ++$index;
+        }
         exit("OK");
     }
 

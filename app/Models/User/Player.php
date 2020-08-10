@@ -59,4 +59,8 @@ class Player extends Model
     {
         return $this->hasOne('\App\Models\User\Scout_Report');
     }
+    public function injury()
+    {
+        return $this->hasMany('\App\Models\User\Injury');
+    }
 }

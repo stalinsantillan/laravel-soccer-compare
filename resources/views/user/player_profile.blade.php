@@ -88,7 +88,7 @@
                 <span style="margin-top: auto; margin-bottom: auto" class="col-md-auto">{{ $data->name }} {{ $data->surename }}</span>
                 <button class="col-md-auto btn btn-link text-white waves-effect ml-5" onclick="openAdditional()">Additional Information</button>
                 <button class="col-md-auto btn btn-link text-white waves-effect" onclick="openScout_Report()">Scout Report</button>
-                <button class="col-md-auto btn btn-link text-white waves-effect">Injuries</button>
+                <button class="col-md-auto btn btn-link text-white waves-effect" onclick="openInjury();">Injuries</button>
                 <button class="col-md-auto btn btn-link text-white waves-effect">Add Video</button>
             </div>
             <div class="card-body">
@@ -102,11 +102,6 @@
                                 <img src="{{ asset('user_assets/images/users/standard.png') }}" class="user-photo" height="180px" width="180px" alt="">
                             @endif
                             </div>
-                            {{--                            <div class="card text-white text-center bg-primary text-xs-center mt-1 mb-0 ml-5" style="width: 130px">--}}
-                            {{--                                <p class="mb-0 mt-1" style="line-height: 15px">General</p>--}}
-                            {{--                                <p class="mb-0" style="line-height: 15px">average</p>--}}
-                            {{--                                <p class="mb-0 font-18 font-weight-bold" id="general_average"></p>--}}
-                            {{--                            </div>--}}
                             <div class="col-md-6">
                                 <div class="mt-2 chartjs-chart"  style="height: 200px !important; width: 200px !important;">
                                     <canvas id="general-radar"  style="height: 180px !important; width: 180px !important;"></canvas>
@@ -820,6 +815,54 @@
         </div>
     </div>
 </div><!-- /.modal -->
+<div id="injuries-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Injuries</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="row">
+                    <div class="injury" style="width: 100%">
+                    @php $i = 0; @endphp
+                    @foreach ($data->injury as $injury)
+                        <div class="form-group" style="border: 1px solid #6f7983; padding: 15px;">
+                            @if ($i > 0)
+                                <button class="btn btn-danger btn-xs" style="margin-left: calc(100% - 60px)" onclick="deleteInjury(this)">Delete</button>
+                            @endif
+                            <label for="injury" class="control-label">Injury<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" value="{{ $injury->injury ?? '' }}" name="injury">
+                            <label for="injury_date" class="control-label mt-1">Date of injury<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" value="{{ $injury->injury_date ?? '' }}" name="injury_date">
+                            <label for="description" class="control-label mt-1">Description and evolution<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" value="{{ $injury->description ?? '' }}" name="description">
+                        </div>
+                        @php ++$i; @endphp
+                    @endforeach
+                    @if ($i == 0)
+                        <div class="form-group" style="border: 1px solid #6f7983; padding: 15px;">
+                            <label for="injury" class="control-label">Injury<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" value="" name="injury">
+                            <label for="injury_date" class="control-label mt-1">Date of injury<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" value="" name="injury_date">
+                            <label for="description" class="control-label mt-1">Description and evolution<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" value="" name="description">
+                        </div>
+                    @endif
+                    </div>
+                    <div class="col-md-12 text-right">
+                        <button class="col-md-auto btn btn-link text-white waves-effect" onclick="addInjury()">Add Injury</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info waves-effect waves-light" onclick="saveInjury()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div><!-- /.modal -->
 @endsection
 @section('scripts')
 @parent
@@ -857,6 +900,11 @@
         }
         function openScout_Report(){
             $("#scout-report").modal({
+                backdrop:'static',keyboard:false, show:true
+            });
+        }
+        function openInjury(){
+            $("#injuries-modal").modal({
                 backdrop:'static',keyboard:false, show:true
             });
         }
@@ -1835,6 +1883,7 @@
             $("#first_appearance_date").flatpickr();
             $("#first_appearance_division").flatpickr();
             $("#contact_expires").flatpickr();
+            $("input[name=injury_date]").flatpickr();
             var options =  {
                 field: {
                     width: "200px",
@@ -2399,5 +2448,89 @@
                 }
             });
         }
+        function addInjury() {
+            $(".injury").append(
+                '                        <div class="form-group" index = "1" style="border: 1px solid #6f7983; padding: 15px;">\n' +
+                '                            <button class="btn btn-danger btn-xs" style="margin-left: calc(100% - 60px)" onclick="deleteInjury(this)">Delete</button>\n' +
+                '                            <label for="injury" class="control-label">Injury<span class="text-danger">*</span></label>\n' +
+                '                            <input type="text" required class="form-control" value="" name="injury">\n' +
+                '                            <label for="injury_date" class="control-label mt-1">Date of injury<span class="text-danger">*</span></label>\n' +
+                '                            <input type="text" required class="form-control" value="" name="injury_date">\n' +
+                '                            <label for="description" class="control-label mt-1">Description and evolution<span class="text-danger">*</span></label>\n' +
+                '                            <input type="text" required class="form-control" value="" name="description">\n' +
+                '                        </div>');
+            $("input[name=injury_date]").last().flatpickr();
+        }
+        function saveInjury() {
+            let injury = [];
+            $("input[name=injury]").each(function (){
+                injury.push($(this).val());
+            })
+            let injury_date = [];
+            $("input[name=injury_date]").each(function (){
+                injury_date.push($(this).val());
+            })
+            let description = [];
+            $("input[name=description]").each(function (){
+                description.push($(this).val());
+            })
+            if (injury.length == 0 || injury.includes("") == true)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type all Injuries.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            if (injury_date.length == 0 || injury_date.includes("") == true)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type all Dates of injury.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            if (description.length == 0 || description.includes("") == true)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type all Description and evolutions.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            $.ajax({
+                url: "{{ route('user.save_injury', $data->id) }}",
+                data: {injury: injury, injury_date: injury_date, description: description},
+                type: 'GET',
+                dataType: 'text', // added data type
+                success: function(res) {
+                    $.NotificationApp.send(
+                        "Notification",
+                        "Injuries was saved successfully.",
+                        "top-right",
+                        "#da8609",
+                        "success");
+                    $("#injuries-modal").modal('hide');
+                },
+                error: function (jqXHR, exception) {
+                    $.NotificationApp.send(
+                        "Warning",
+                        "Injuries Report was not saved.",
+                        "top-right",
+                        "#da8609",
+                        "warning");
+                }
+            });
+        }
+        function deleteInjury(obj){
+            if(!confirm("are you really?")) return;
+            $(obj).parent().remove();
+        }
     </script>
-@endsection
+@endsection.
