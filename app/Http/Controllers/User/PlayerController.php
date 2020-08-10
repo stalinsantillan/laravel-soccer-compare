@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\User\Additional;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -84,6 +85,16 @@ class PlayerController extends Controller
     public function getTeamByURL($team_url){
         $team = ApiTeam::query()->where("team_link", "https://int.soccerway.com".$team_url)->get();
         return array("team" => $team[0]->team_name, "league" => $team[0]->competition_name, "id" => $team[0]->id);
+    }
+
+    public function save_additional(Request $request, Player $player){
+        $request->request->add(['player_id' => $player->id]);
+        $additional = $player->additional;
+        if ($additional == null) {
+            Additional::create($request->all());
+        }else
+            $additional->update($request->all());
+        exit("OK");
     }
 
     /**
