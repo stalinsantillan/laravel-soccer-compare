@@ -792,7 +792,8 @@
         }
 
         function formatRepoSelection (repo) {
-            return repo.team_name;
+            console.log(repo);
+            return repo.team_name || repo.text;
         }
         $(document).ready(function () {
             var languages = {
@@ -1668,6 +1669,15 @@
                 maximumSelectionSize: 20 // prevent scrollbar
             });
 
+            var newOption = new Option("{{ $data->additional->getNationalTeamName() }}", "{{ $data->additional->national_team }}", false, false);
+            $('#national_team').append(newOption).trigger('change');
+            $('#national_team').children('[value="{{ $data->additional->national_team }}"]').attr(
+                {
+                    'team_link':"", //dynamic value from data array
+                    'team_name':"{{ $data->additional->getNationalTeamName() }}" // fixed value
+                }
+            );
+
             $('#national_team').select2({
                 ajax: {
                     type: "GET",
@@ -1700,6 +1710,15 @@
                     }
                 );
             });
+            newOption = new Option("{{ $data->additional->getFirstAppearanceTeamName() }}", "{{ $data->additional->first_appearance_team }}", false, false);
+            $('#first_appearance_team').append(newOption).trigger('change');
+            $('#first_appearance_team').children('[value="{{ $data->additional->first_appearance_team }}"]').attr(
+                {
+                    'team_link':"", //dynamic value from data array
+                    'team_name':"{{ $data->additional->getFirstAppearanceTeamName() }}" // fixed value
+                }
+            );
+
             $('#first_appearance_team').select2({
                 ajax: {
                     type: "GET",
