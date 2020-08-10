@@ -70,17 +70,14 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="/">Soccer</a></li>
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ trans('cruds.player.title') }}</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ trans('cruds.filter.title') }}</a></li>
                     <li class="breadcrumb-item active">{{ trans('cruds.player.profile') }}</li>
                 </ol>
             </div>
-
-            <a href="{{ route('user.edit_player', $data->id) }}" class="btn btn-outline-info waves-effect waves-light" style="position: absolute; top: 15px; right: 500px;">Edit</a>
-            <button class="btn btn-primary waves-effect waves-light" onclick="download();" style="position: absolute; top: 15px; right: 350px;">Export to PDF</button>
         </div>
     </div>
 </div>
-<!-- end page title --> 
+<!-- end page title -->
 <div class="row" id="pdf_content">
     <div class="col-md-12">
         <div class="card mb-0">
@@ -90,6 +87,8 @@
                 <button class="col-md-auto btn btn-link text-white waves-effect" onclick="openScout_Report()">Scout Report</button>
                 <button class="col-md-auto btn btn-link text-white waves-effect" onclick="openInjury();">Injuries</button>
                 <button class="col-md-auto btn btn-link text-white waves-effect" onclick="openVideo();">Add Video</button>
+                <a href="{{ route('user.edit_player', $data->id) }}" class="btn btn-outline-info waves-effect waves-light ml-2" style="height: 38px; top: 10px">Edit Player</a>
+                <button class="btn btn-primary waves-effect waves-light ml-2" onclick="download();" style="height: 38px; top: 10px">Export to PDF</button>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -103,8 +102,8 @@
                             @endif
                             </div>
                             <div class="col-md-6">
-                                <div class="mt-2 chartjs-chart"  style="height: 200px !important; width: 200px !important;">
-                                    <canvas id="general-radar"  style="height: 180px !important; width: 180px !important;"></canvas>
+                                <div class="mt-2 chartjs-chart"  style="height: 200px !important; width: 280px !important;">
+                                    <canvas id="general-radar"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -157,6 +156,16 @@
                     <div class="col-md-7 row">
                         <div class="col-md-4 text-center">
                             <div id="soccerfield"></div>
+                            @php $i = 0; @endphp
+                            @foreach($data->positions as $position)
+                                @if ($i == 0)
+                                    <p class="font-16  text-white mt-3 mb-0">Main Position : </p>
+                                @elseif ($i == 1)
+                                    <p class="font-16  text-white mt-2 mb-0">Other Position : </p>
+                                @endif
+                                <p class="font-16 mb-0">{{ $position->specify }}</p>
+                                @php ++$i; @endphp
+                            @endforeach
                         </div>
                         <div class="col-md-8">
 
@@ -262,10 +271,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="areial_reach">Aerial Reach</label>
+                            <label for="aerial_reach">Aerial Reach</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->areial_reach }} / {{ $paramsetting->areial_reach }}</span>
-                                <div class="progress-bar bg-info" role="progressbar" bartype="technical" style="width: {{ $data->latestParam->areial_reach * 10 }}%"  aria-valuenow="{{ $data->latestParam->areial_reach }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->areial_reach }}"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->aerial_reach }} / {{ $paramsetting->aerial_reach }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" bartype="technical" style="width: {{ $data->latestParam->aerial_reach * 10 }}%"  aria-valuenow="{{ $data->latestParam->aerial_reach }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->aerial_reach }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -456,10 +465,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="articipation">Anticipation</label>
+                            <label for="anticipation">Anticipation</label>
                             <div class="progress mb-2 progress-lg">
-                                <span style="position: absolute; left: 45%">{{ $data->latestParam->articipation }} / {{ $paramsetting->articipation }}</span>
-                                <div class="progress-bar bg-info" role="progressbar" bartype="mental" style="width: {{ $data->latestParam->articipation * 10 }}%"  aria-valuenow="{{ $data->latestParam->articipation }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->articipation }}"></div>
+                                <span style="position: absolute; left: 45%">{{ $data->latestParam->anticipation }} / {{ $paramsetting->anticipation }}</span>
+                                <div class="progress-bar bg-info" role="progressbar" bartype="mental" style="width: {{ $data->latestParam->anticipation * 10 }}%"  aria-valuenow="{{ $data->latestParam->anticipation }}" aria-valuemin="0" aria-valuemax="{{ $paramsetting->anticipation }}"></div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -901,9 +910,10 @@
 
     <script src="{{ asset('user_assets/libs/flatpickr/flatpickr.min.js') }}"></script>
 
+    <script src="{{ asset('erp_assets/select/js/select2.js') }}"></script>
+
     <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jszip.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
-    <script src="{{ asset('erp_assets/select/js/select2.js') }}"></script>
     <script>
         function download() {
             kendo.drawing
@@ -2002,13 +2012,57 @@
                 @if ($position->specify == "Right Centre forward") data.push({name: ' ', position: 'RC_F'}); @endif
             @endforeach
             $("#soccerfield").soccerfield(data,options);
+            let posIndex = 0;
+            let isGoalkeeper = 0;
+            for (const r in data) {
+                let before = data[r].position.split("_")[0];
+                let after = data[r].position.split("_")[1];
+                let obj = $(".posY-" + before + '.posX-' + after).find(".soccerfield-player-name");
+                if (posIndex == 0) {
+                    $(obj).attr("style", "background: #00ffc4; width: 15px !important; min-height: 15px !important; margin-top: 11px !important; margin-left: 2px !important;");
+                }
+                if (data[r].position == 'C_GK')
+                {
+                    isGoalkeeper = 1;
+                }
+                ++posIndex;
+            }
             Chart.defaults.global.defaultFontColor = "rgba(255,255,255,0.5)";
             Chart.defaults.scale.gridLines.color = "rgba(255,255,255,0.05)";
-            let general_radar_data = ['{{ $data->latestParam->marking }}', '{{ $data->latestParam->passing }}', '{{ $data->latestParam->technique }}', '{{ $data->latestParam->vision }}', '{{ $data->latestParam->tackling }}'];
+            //Goalkeeper
+            let general_radar_label = ['PASS', 'FEET PLAYING', 'TACTICAL', 'PHYSICAL', 'AERIAL', 'MENTAL', 'GK REFLEXES', 'GOAL KEEPING'];
+            let pass = {{ $data->latestParam->passing }};
+            let feet_playing =  ({{ $data->latestParam->first_touch }} + {{ $data->latestParam->feet_playing }}) /2;
+            let tactical = ({{ $data->latestParam->anticipation }} + {{ $data->latestParam->off_ball }} + {{ $data->latestParam->positioning }}
+                + {{ $data->latestParam->vision }}) /4;
+            let physical = ({{ $data->latestParam->acceleration }} + {{ $data->latestParam->agility }} + {{ $data->latestParam->balance }}
+                + {{ $data->latestParam->natural_fitness }} + {{ $data->latestParam->pace }} + {{ $data->latestParam->reaction }} + {{ $data->latestParam->sprint_speed }}
+                + {{ $data->latestParam->stamina }} + {{ $data->latestParam->strength }} + {{ $data->latestParam->injury_resistance }}) / 10;
+            let aerial = ({{ $data->latestParam->aerial_reach }} + {{ $data->latestParam->aerial_duels }} + {{ $data->latestParam->jumping_reach }}) /3;
+            let mental = ({{ $data->latestParam->aggression }} + {{ $data->latestParam->composure }} + {{ $data->latestParam->concentration }}
+                + {{ $data->latestParam->decisions }} + {{ $data->latestParam->determination }} + {{ $data->latestParam->flair }} + {{ $data->latestParam->leadership }}
+                + {{ $data->latestParam->teamwork }}) / 8;
+            let gk_reflexes = ({{ $data->latestParam->reaction }} + {{ $data->latestParam->reflexes }}) /2;
+            let goal_keeping = ({{ $data->latestParam->command_of_area }} + {{ $data->latestParam->communication }} + {{ $data->latestParam->handling }}
+                + {{ $data->latestParam->one_on_ones }} + {{ $data->latestParam->rushing_out }}) /5;
+            let general_radar_data = [pass, feet_playing, tactical, physical, aerial, mental, gk_reflexes, goal_keeping];
+            if (isGoalkeeper == 0)
+            {
+                //not Goalkeeper
+                general_radar_label = ['PASS', 'ATTACK', 'TACTICAL', 'PHYSICAL', 'AERIAL', 'MENTAL', 'TECHNIQUE', 'DEFENSE'];
+                pass = ({{ $data->latestParam->crossing }} + {{ $data->latestParam->passing }} + {{ $data->latestParam->long_pass }}) /3;
+                let attack = ({{ $data->latestParam->shots }} + {{ $data->latestParam->long_shots }}) /2;
+                aerial = ({{ $data->latestParam->heading }} + {{ $data->latestParam->aerial_duels }} + {{ $data->latestParam->jumping_reach }}) /3;
+                let technique = ({{ $data->latestParam->first_touch }} + {{ $data->latestParam->technique }} + {{ $data->latestParam->dribbling }}) /3;
+                let defense = ({{ $data->latestParam->marking }} + {{ $data->latestParam->tackling }} + {{ $data->latestParam->deffense }}) /3;
+                general_radar_data = [pass, attack, tactical, physical, aerial, mental, technique, defense];
+            }
+            $("#general-radar").css("height", "200px");
+            $("#general-radar").css("width", "300px");
             new Chart(document.getElementById("general-radar").getContext("2d"), {
                 type: 'radar',
                 data: {
-                    labels: ['Marking', 'Passing', 'Technique', 'Vision', 'Tackling'],
+                    labels: general_radar_label,
                     datasets: [{
                         label: "",
                         backgroundColor: "rgba(57,175,209,0.2)",
@@ -2048,25 +2102,25 @@
             let arrForwardPos = ["Centre forward", "Second striker", "Left Winger", "Right Winger", "Left striker", "Right striker"
                 , "Left Centre forward", "Right Centre forward"];
 
-            let arrGoalkeeperAttr = ["aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership"
+            let arrGoalkeeperAttr = ["aggression", "anticipation", "composure", "concentration", "decisions", "determination", "flair", "leadership"
                 , "off_ball", "positioning", "teamwork", "vision", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
-                , "stamina", "strength", "aerial_duels", "reaction", "sprint_speed", "areial_reach", "command_of_area", "communication"
+                , "stamina", "strength", "aerial_duels", "reaction", "sprint_speed", "aerial_reach", "command_of_area", "communication"
                 , "eccentricity", "first_touch", "handling", "kicking", "one_on_ones", "feet_playing", "passing", "punching", "reflexes", "rushing_out"];
 
             let arrDefenderAttr = ["crossing", "dribbling", "first_touch", "heading", "shots", "long_shots", "passing", "long_pass", "marking", "tackling", "technique", "deffense"
-                , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+                , "aggression", "anticipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
                 , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
 
             let arrDefender_MidfielderAttr = ["crossing", "dribbling", "first_touch", "shots", "long_shots", "passing", "long_pass", "marking", "tackling", "technique", "offensive", "deffense"
-                , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+                , "aggression", "anticipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
                 , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
 
             let arrMidfielderAttr = ["crossing", "dribbling", "first_touch", "shots", "long_shots", "passing", "long_pass", "finishing", "marking", "technique", "offensive", "deffense"
-                , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+                , "aggression", "anticipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
                 , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
 
             let arrForwardAttr = ["crossing", "dribbling", "first_touch", "shots", "long_shots", "passing", "long_pass", "finishing", "marking", "technique", "offensive", "heading"
-                , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+                , "aggression", "anticipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
                 , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
 
             $("[role=progressbar]").parent().parent().css("display", "none");
@@ -2601,4 +2655,4 @@
             });
         }
     </script>
-@endsection.
+@endsection
