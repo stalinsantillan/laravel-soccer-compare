@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User\Additional;
+use App\Models\User\Scout_Report;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -94,6 +95,16 @@ class PlayerController extends Controller
             Additional::create($request->all());
         }else
             $additional->update($request->all());
+        exit("OK");
+    }
+
+    public function save_scout(Request $request, Player $player){
+        $request->request->add(['player_id' => $player->id]);
+        $scout_report = $player->scout_report;
+        if ($scout_report == null) {
+            Scout_Report::create($request->all());
+        }else
+            $scout_report->update($request->all());
         exit("OK");
     }
 

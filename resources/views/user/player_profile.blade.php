@@ -87,7 +87,7 @@
             <div class="card-header font-16 row" style="padding-top: 0; padding-bottom: 0; min-height: 56px;">
                 <span style="margin-top: auto; margin-bottom: auto" class="col-md-auto">{{ $data->name }} {{ $data->surename }}</span>
                 <button class="col-md-auto btn btn-link text-white waves-effect ml-5" onclick="openAdditional()">Additional Information</button>
-                <button class="col-md-auto btn btn-link text-white waves-effect">Scout Report</button>
+                <button class="col-md-auto btn btn-link text-white waves-effect" onclick="openScout_Report()">Scout Report</button>
                 <button class="col-md-auto btn btn-link text-white waves-effect">Injuries</button>
                 <button class="col-md-auto btn btn-link text-white waves-effect">Add Video</button>
             </div>
@@ -730,7 +730,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="market_value_ap" style="background-color: #3c4853">€</span>
                                 </div>
-                                <input type="text" data-parsley-type="number" required class="form-control" id="market_value" value="{{ $data->additional->market_value ?? '' }}" name="market_value" aria-describedby="market_value_ap">
+                                <input type="text" data-parsley-type="number" required class="form-control" id="market_value" value="{{ $data->additional->market_value ?? '' }}" name="market_value">
                             </div>
                         </div>
                     </div>
@@ -739,6 +739,83 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-info waves-effect waves-light" onclick="saveAdditional()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div><!-- /.modal -->
+<div id="scout-report" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Scout Report</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="general_info" class="control-label">General Information<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" id="general_info" value="{{ $data->scout_report->general_info ?? '' }}" name="general_info">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="strengths" class="control-label">Strengths<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" id="strengths" value="{{ $data->scout_report->strengths ?? '' }}" name="strengths">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="weaknesses" class="control-label">Weaknesses<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" id="weaknesses" value="{{ $data->scout_report->weaknesses ?? '' }}" name="weaknesses">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="pros" class="control-label">Pros<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" id="pros" value="{{ $data->scout_report->pros ?? '' }}" name="pros">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="cons" class="control-label">Cons<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" id="cons" value="{{ $data->scout_report->cons ?? '' }}" name="cons">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="conslusion" class="control-label">Conslusion<span class="text-danger">*</span></label>
+                            <div class="radio radio-danger mb-2">
+                                <input id="discard" type="radio" value="1" name="conslusion" {{ (isset($data->scout_report->conslusion) && $data->scout_report->conslusion==1) ? 'checked' : '' }}>
+                                <label for="discard">
+                                    Discard player
+                                </label>
+                            </div>
+                            <div class="radio radio-warning mb-2">
+                                <input id="continue" type="radio" value="2" name="conslusion" {{ (isset($data->scout_report->conslusion) && $data->scout_report->conslusion==2) ? 'checked' : '' }}>
+                                <label for="continue">
+                                    Continue watching
+                                </label>
+                            </div>
+                            <div class="radio radio-success mb-2">
+                                <input id="sign" type="radio" value="3" name="conslusion" {{ (isset($data->scout_report->conslusion) && $data->scout_report->conslusion==3) ? 'checked' : '' }}>
+                                <label for="sign">
+                                    Sign the player
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="other" class="control-label">Other<span class="text-danger">*</span></label>
+                            <textarea id="other" class="form-control">{{ $data->scout_report->other ?? '' }}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info waves-effect waves-light" onclick="saveScout()">Save changes</button>
             </div>
         </div>
     </div>
@@ -778,6 +855,11 @@
                 backdrop:'static',keyboard:false, show:true
             });
         }
+        function openScout_Report(){
+            $("#scout-report").modal({
+                backdrop:'static',keyboard:false, show:true
+            });
+        }
         function formatRepo (repo) {
             if (repo.loading) {
                 return repo.text;
@@ -792,7 +874,6 @@
         }
 
         function formatRepoSelection (repo) {
-            console.log(repo);
             return repo.team_name || repo.text;
         }
         $(document).ready(function () {
@@ -2205,6 +2286,113 @@
                     $.NotificationApp.send(
                         "Warning",
                         "Additional Information was not saved.",
+                        "top-right",
+                        "#da8609",
+                        "warning");
+                }
+            });
+        }
+        function saveScout() {
+            let general_info = $("#general_info").val();
+            let strengths = $("#strengths").val();
+            let weaknesses = $("#weaknesses").val();
+            let pros = $("#pros").val();
+            let cons = $("#cons").val();
+            let conslusion = 0;
+            $("input[name=conslusion]").each(function (){
+                if ($(this).prop("checked"))
+                    conslusion = $(this).val();
+            });
+            let other = $("#other").val();
+            if (general_info == "" || general_info == null)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type General Information.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            if (strengths == null || strengths == "")
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type Strengths.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            if (weaknesses == "" || weaknesses == null)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type Weaknesses.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            if (pros == "" || pros == null)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type Pros.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            if (cons == "" || cons == null)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type Cons.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            if (conslusion == "" || conslusion == null || conslusion == 0)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must select Conclusion.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            if (other == "" || other == null)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type Other.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            $.ajax({
+                url: "{{ route('user.save_scout', $data->id) }}",
+                data: {general_info: general_info, strengths: strengths, weaknesses: weaknesses
+                    , pros: pros, cons: cons, conslusion: conslusion, other: other},
+                type: 'GET',
+                dataType: 'text', // added data type
+                success: function(res) {
+                    $.NotificationApp.send(
+                        "Notification",
+                        "Scout Report was saved successfully.",
+                        "top-right",
+                        "#da8609",
+                        "success");
+                    $("#scout-report").modal('hide');
+                },
+                error: function (jqXHR, exception) {
+                    $.NotificationApp.send(
+                        "Warning",
+                        "Scout Report was not saved.",
                         "top-right",
                         "#da8609",
                         "warning");
