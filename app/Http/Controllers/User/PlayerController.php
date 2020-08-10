@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Models\User\Additional;
 use App\Models\User\Injury;
 use App\Models\User\Scout_Report;
+use App\Models\User\Video;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -106,6 +107,16 @@ class PlayerController extends Controller
             Scout_Report::create($request->all());
         }else
             $scout_report->update($request->all());
+        exit("OK");
+    }
+
+    public function save_video(Request $request, Player $player){
+        $request->request->add(['player_id' => $player->id]);
+        $video = $player->video;
+        if ($video == null) {
+            Video::create($request->all());
+        }else
+            $video->update($request->all());
         exit("OK");
     }
 
