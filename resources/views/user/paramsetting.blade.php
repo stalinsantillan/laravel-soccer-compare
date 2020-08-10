@@ -98,14 +98,14 @@
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
-                    <label for="areial_reach" class="col-md-3 col-form-label text-right">
+                    <label for="aerial_reach" class="col-md-3 col-form-label text-right">
                         Aerial Reach
                     </label>
                     <div class="col-md-4">
-                        <input type="text" attrtype="range_input" class="form-control" id="areial_reach" name="areial_reach">
+                        <input type="text" attrtype="range_input" class="form-control" id="aerial_reach" name="aerial_reach">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="{{ $data->areial_reach }}" max="100"step="0.1"  match="areial_reach" data-rangeslider>
+                        <input type="range" min="0" value="{{ $data->aerial_reach }}" max="100"step="0.1"  match="aerial_reach" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -401,14 +401,14 @@
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
-                    <label for="articipation" class="col-md-3 col-form-label text-right">
+                    <label for="anticipation" class="col-md-3 col-form-label text-right">
                         Anticipation
                     </label>
                     <div class="col-md-4">
-                        <input type="text" attrtype="range_input" class="form-control" id="articipation" name="articipation">
+                        <input type="text" attrtype="range_input" class="form-control" id="anticipation" name="anticipation">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="{{ $data->articipation }}" max="100"step="0.1"  match="articipation" data-rangeslider>
+                        <input type="range" min="0" value="{{ $data->anticipation }}" max="100"step="0.1"  match="anticipation" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">

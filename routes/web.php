@@ -51,7 +51,7 @@ Route::middleware(['approved'])->group(function () {
         Route::get('get_player_list_api_data', 'User\PlayerController@get_player_list_api_data')->name('get_player_list_api_data');
         Route::get('edit_player/{player}', 'User\PlayerController@edit_player')->name('edit_player');
         Route::delete('delete_player/{player}', 'User\PlayerController@delete_player')->name('delete_player');
-        Route::post('store__edt_player/{player}', 'User\PlayerController@store__edt_player')->name('store__edt_player');
+        Route::post('store_edt_player/{player}', 'User\PlayerController@store_edt_player')->name('store_edt_player');
         Route::post('store_player', 'User\PlayerController@store_player')->name('store_player');
         Route::get('filter_player', 'User\PlayerController@filter_player')->name('filter_player');
         Route::get('filter_show', 'User\PlayerController@filter_show')->name('filter_show');
@@ -59,6 +59,7 @@ Route::middleware(['approved'])->group(function () {
         Route::get('save_additional/{player}', 'User\PlayerController@save_additional')->name('save_additional');
         Route::get('save_scout/{player}', 'User\PlayerController@save_scout')->name('save_scout');
         Route::get('save_injury/{player}', 'User\PlayerController@save_injury')->name('save_injury');
+        Route::get('save_video/{player}', 'User\PlayerController@save_video')->name('save_video');
 
         // Setting
         Route::get('setting/paramsetting_show', 'User\SettingsController@paramsetting_show')->name('paramsetting_show');

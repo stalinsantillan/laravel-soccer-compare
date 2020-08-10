@@ -254,14 +254,14 @@
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
-                    <label for="areial_reach" class="col-md-3 col-form-label text-right">
+                    <label for="aerial_reach" class="col-md-3 col-form-label text-right">
                         Aerial Reach
                     </label>
                     <div class="col-md-4">
-                        <input type="text" attrtype="range_input" class="form-control" id="areial_reach" name="areial_reach">
+                        <input type="text" attrtype="range_input" class="form-control" id="aerial_reach" name="aerial_reach">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="{{ $paramsetting->areial_reach }}" step="0.1"  match="areial_reach" data-rangeslider>
+                        <input type="range" min="0" value="0" max="{{ $paramsetting->aerial_reach }}" step="0.1"  match="aerial_reach" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -557,14 +557,14 @@
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
-                    <label for="articipation" class="col-md-3 col-form-label text-right">
+                    <label for="anticipation" class="col-md-3 col-form-label text-right">
                         Anticipation
                     </label>
                     <div class="col-md-4">
-                        <input type="text" attrtype="range_input" class="form-control" id="articipation" name="articipation">
+                        <input type="text" attrtype="range_input" class="form-control" id="anticipation" name="anticipation">
                     </div>
                     <div class="col-md-5">
-                        <input type="range" min="0" value="0" max="{{ $paramsetting->articipation }}" step="0.1"  match="articipation" data-rangeslider>
+                        <input type="range" min="0" value="0" max="{{ $paramsetting->anticipation }}" step="0.1"  match="anticipation" data-rangeslider>
                     </div>
                 </div>
                 <div class="form-group col-md-6 row">
@@ -875,25 +875,25 @@
         let arrForwardPos = ["Centre forward", "Second striker", "Left Winger", "Right Winger", "Left striker", "Right striker"
             , "Left Centre forward", "Right Centre forward"];
 
-        let arrGoalkeeperAttr = ["aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership"
+        let arrGoalkeeperAttr = ["aggression", "anticipation", "composure", "concentration", "decisions", "determination", "flair", "leadership"
             , "off_ball", "positioning", "teamwork", "vision", "acceleration", "agility", "balance", "jumping_reach", "natural_fitness", "pace"
-            , "stamina", "strength", "aerial_duels", "reaction", "sprint_speed", "areial_reach", "command_of_area", "communication"
-            , "eccentricity", "first_touch", "handling", "kicking", "one_on_ones", "feet_playing", "passing", "punching", "reflexes", "rushing_out"];
+            , "stamina", "strength", "aerial_duels", "reaction", "sprint_speed", "aerial_reach", "command_of_area", "communication"
+            , "first_touch", "handling", "kicking", "one_on_ones", "feet_playing", "passing", "punching", "reflexes", "rushing_out", "injury_resistance"];
 
         let arrDefenderAttr = ["crossing", "dribbling", "first_touch", "heading", "shots", "long_shots", "passing", "long_pass", "marking", "tackling", "technique", "deffense"
-            , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+            , "aggression", "anticipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
             , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
 
         let arrDefender_MidfielderAttr = ["crossing", "dribbling", "first_touch", "shots", "long_shots", "passing", "long_pass", "marking", "tackling", "technique", "offensive", "deffense"
-            , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+            , "aggression", "anticipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
             , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
 
         let arrMidfielderAttr = ["crossing", "dribbling", "first_touch", "shots", "long_shots", "passing", "long_pass", "finishing", "marking", "technique", "offensive", "deffense"
-            , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+            , "aggression", "anticipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
             , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
 
         let arrForwardAttr = ["crossing", "dribbling", "first_touch", "shots", "long_shots", "passing", "long_pass", "finishing", "marking", "technique", "offensive", "heading"
-            , "aggression", "articipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
+            , "aggression", "anticipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
             , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
 
         function formatRepo (repo) {

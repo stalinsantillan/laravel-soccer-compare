@@ -63,4 +63,8 @@ class Player extends Model
     {
         return $this->hasMany('\App\Models\User\Injury');
     }
+    public function video()
+    {
+        return $this->hasOne('\App\Models\User\Video');
+    }
 }

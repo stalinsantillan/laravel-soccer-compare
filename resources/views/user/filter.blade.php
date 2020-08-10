@@ -239,7 +239,7 @@
                         <tr>
                             <td>{{ ++$no }}</td>
                             <td>
-                                <a href="{{ route('user.player_profile', $one->id) }}" target="_blank">
+                                <a href="{{ route('user.player_profile', $one->id) }}">
                                     @if(isset($one->photo))
                                         <img src="{{ asset('storage').'/'.$one->photo }}" class="user-photo" height="50px" width="50px" alt="">
                                     @else
@@ -248,7 +248,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a href="{{ route('user.player_profile', $one->id) }}" class="text-white-50" target="_blank"
+                                <a href="{{ route('user.player_profile', $one->id) }}" class="text-white-50"
                                    style="border-bottom: rgba(255,255,255,.5) dashed 1px;">
                                     @if($one->player_link == "")
                                         {{ $one->name }} {{ $one->surename }}

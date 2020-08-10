@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Models\User\Additional;
 use App\Models\User\Injury;
 use App\Models\User\Scout_Report;
+use App\Models\User\Video;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -106,6 +107,16 @@ class PlayerController extends Controller
             Scout_Report::create($request->all());
         }else
             $scout_report->update($request->all());
+        exit("OK");
+    }
+
+    public function save_video(Request $request, Player $player){
+        $request->request->add(['player_id' => $player->id]);
+        $video = $player->video;
+        if ($video == null) {
+            Video::create($request->all());
+        }else
+            $video->update($request->all());
         exit("OK");
     }
 
@@ -481,10 +492,10 @@ class PlayerController extends Controller
             $technicals['deffense'] = $request->deffense;
         }
 
-        if ($request->areial_reach) {
-            $parameters['areial_reach'] = $request->areial_reach;
-            $technicals['areial_reach'] = $request->areial_reach;
-            $goalkeepers['areial_reach'] = $request->areial_reach;
+        if ($request->aerial_reach) {
+            $parameters['aerial_reach'] = $request->aerial_reach;
+            $technicals['aerial_reach'] = $request->aerial_reach;
+            $goalkeepers['aerial_reach'] = $request->aerial_reach;
         }
 
         if ($request->command_of_area) {
@@ -564,6 +575,11 @@ class PlayerController extends Controller
             $technicals['throwing'] = $request->throwing;
             $goalkeepers['throwing'] = $request->throwing;
         }
+
+        if ($request->long_pass) {
+            $parameters['long_pass'] = $request->long_pass;
+            $technicals['long_pass'] = $request->long_pass;
+        }
         
         // Parameters, mentals
         if ($request->aggression) {
@@ -572,9 +588,9 @@ class PlayerController extends Controller
             $goalkeepers['aggression'] = $request->aggression;
         }
         
-        if ($request->articipation) {
-            $parameters['articipation'] = $request->articipation;
-            $mentals['articipation'] = $request->articipation;
+        if ($request->anticipation) {
+            $parameters['anticipation'] = $request->anticipation;
+            $mentals['anticipation'] = $request->anticipation;
         }
         
         if ($request->bravery) {
@@ -715,7 +731,13 @@ class PlayerController extends Controller
             $physicals['sprint_speed'] = $request->sprint_speed;
             $goalkeepers['sprint_speed'] = $request->sprint_speed;
         }
-        
+
+        if ($request->injury_resistance) {
+            $parameters['injury_resistance'] = $request->injury_resistance;
+            $physicals['injury_resistance'] = $request->injury_resistance;
+            $goalkeepers['injury_resistance'] = $request->injury_resistance;
+        }
+
         foreach ($parameters as $parameter) {
             $sum += $parameter;
             $count ++;
@@ -779,7 +801,7 @@ class PlayerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store__edt_player(Request $request, Player $player)
+    public function store_edt_player(Request $request, Player $player)
     {
         $parameters = array(); $technicals = array(); $physicals = array(); $mentals = array(); $goalkeepers = array(); $positions = array();
         $sum = 0; $count = 0;
@@ -905,10 +927,10 @@ class PlayerController extends Controller
             $technicals['deffense'] = $request->deffense;
         }
 
-        if ($request->areial_reach) {
-            $parameters['areial_reach'] = $request->areial_reach;
-            $technicals['areial_reach'] = $request->areial_reach;
-            $goalkeepers['areial_reach'] = $request->areial_reach;
+        if ($request->aerial_reach) {
+            $parameters['aerial_reach'] = $request->aerial_reach;
+            $technicals['aerial_reach'] = $request->aerial_reach;
+            $goalkeepers['aerial_reach'] = $request->aerial_reach;
         }
 
         if ($request->command_of_area) {
@@ -989,6 +1011,11 @@ class PlayerController extends Controller
             $goalkeepers['throwing'] = $request->throwing;
         }
 
+        if ($request->long_pass) {
+            $parameters['long_pass'] = $request->long_pass;
+            $technicals['long_pass'] = $request->long_pass;
+        }
+
         // Parameters, mentals
         if ($request->aggression) {
             $parameters['aggression'] = $request->aggression;
@@ -996,9 +1023,9 @@ class PlayerController extends Controller
             $goalkeepers['aggression'] = $request->aggression;
         }
 
-        if ($request->articipation) {
-            $parameters['articipation'] = $request->articipation;
-            $mentals['articipation'] = $request->articipation;
+        if ($request->anticipation) {
+            $parameters['anticipation'] = $request->anticipation;
+            $mentals['anticipation'] = $request->anticipation;
         }
 
         if ($request->bravery) {
@@ -1138,6 +1165,12 @@ class PlayerController extends Controller
             $parameters['sprint_speed'] = $request->sprint_speed;
             $physicals['sprint_speed'] = $request->sprint_speed;
             $goalkeepers['sprint_speed'] = $request->sprint_speed;
+        }
+
+        if ($request->injury_resistance) {
+            $parameters['injury_resistance'] = $request->injury_resistance;
+            $physicals['injury_resistance'] = $request->injury_resistance;
+            $goalkeepers['injury_resistance'] = $request->injury_resistance;
         }
 
         foreach ($parameters as $parameter) {
