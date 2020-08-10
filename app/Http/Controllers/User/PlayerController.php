@@ -492,10 +492,10 @@ class PlayerController extends Controller
             $technicals['deffense'] = $request->deffense;
         }
 
-        if ($request->areial_reach) {
-            $parameters['areial_reach'] = $request->areial_reach;
-            $technicals['areial_reach'] = $request->areial_reach;
-            $goalkeepers['areial_reach'] = $request->areial_reach;
+        if ($request->aerial_reach) {
+            $parameters['aerial_reach'] = $request->aerial_reach;
+            $technicals['aerial_reach'] = $request->aerial_reach;
+            $goalkeepers['aerial_reach'] = $request->aerial_reach;
         }
 
         if ($request->command_of_area) {
@@ -583,9 +583,9 @@ class PlayerController extends Controller
             $goalkeepers['aggression'] = $request->aggression;
         }
         
-        if ($request->articipation) {
-            $parameters['articipation'] = $request->articipation;
-            $mentals['articipation'] = $request->articipation;
+        if ($request->anticipation) {
+            $parameters['anticipation'] = $request->anticipation;
+            $mentals['anticipation'] = $request->anticipation;
         }
         
         if ($request->bravery) {
@@ -916,10 +916,10 @@ class PlayerController extends Controller
             $technicals['deffense'] = $request->deffense;
         }
 
-        if ($request->areial_reach) {
-            $parameters['areial_reach'] = $request->areial_reach;
-            $technicals['areial_reach'] = $request->areial_reach;
-            $goalkeepers['areial_reach'] = $request->areial_reach;
+        if ($request->aerial_reach) {
+            $parameters['aerial_reach'] = $request->aerial_reach;
+            $technicals['aerial_reach'] = $request->aerial_reach;
+            $goalkeepers['aerial_reach'] = $request->aerial_reach;
         }
 
         if ($request->command_of_area) {
@@ -1007,9 +1007,9 @@ class PlayerController extends Controller
             $goalkeepers['aggression'] = $request->aggression;
         }
 
-        if ($request->articipation) {
-            $parameters['articipation'] = $request->articipation;
-            $mentals['articipation'] = $request->articipation;
+        if ($request->anticipation) {
+            $parameters['anticipation'] = $request->anticipation;
+            $mentals['anticipation'] = $request->anticipation;
         }
 
         if ($request->bravery) {
