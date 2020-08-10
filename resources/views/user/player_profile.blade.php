@@ -3,6 +3,8 @@
     <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('soccer_field/css/soccerfield.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('soccer_field/css/soccerfield.default.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('user_assets/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('erp_assets/select/css/select2.css') }}" rel="stylesheet" type="text/css" />
     <style>
         .soccerfield-player span {
             font-size: 8px !important;
@@ -40,6 +42,24 @@
         {
             line-height: 1;
         }
+        .select2-container--default .select2-results__option--selected {
+            background-color: #4c5a67;
+            color: white;
+        }
+        .select2-selection__rendered {
+            /*padding: 0 !important;*/
+        }
+        .select2-selection__choice__remove:hover{
+            background-color: #6658dd !important;
+        }
+        .select2-container {
+            width: 100% !important;
+            /*min-width: 300px !important;*/
+            max-width: 428px !important;
+        }
+        .form-control{
+            background-color: #3c4853 !important;
+        }
     </style>
 @endsection
 @section('content')
@@ -64,8 +84,12 @@
 <div class="row" id="pdf_content">
     <div class="col-md-12">
         <div class="card mb-0">
-            <div class="card-header font-16">
-                {{ $data->name }} {{ $data->surename }}
+            <div class="card-header font-16 row" style="padding-top: 0; padding-bottom: 0; min-height: 56px;">
+                <span style="margin-top: auto; margin-bottom: auto" class="col-md-auto">{{ $data->name }} {{ $data->surename }}</span>
+                <button class="col-md-auto btn btn-link text-white waves-effect ml-5" onclick="openAdditional()">Additional Information</button>
+                <button class="col-md-auto btn btn-link text-white waves-effect">Scout Report</button>
+                <button class="col-md-auto btn btn-link text-white waves-effect">Injuries</button>
+                <button class="col-md-auto btn btn-link text-white waves-effect">Add Video</button>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -651,7 +675,74 @@
         </div> <!-- end card-box-->
     </div>
 </div>
-
+<div id="additional-info" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Additional Information</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="language" class="control-label">Languages<span class="text-danger">*</span></label>
+                            <select class="custom-select" multiple required id="language" name="language">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="national_team" class="control-label">National Team<span class="text-danger">*</span></label>
+                            <select class="custom-select" required id="national_team" name="national_team">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="first_appearance_date" class="control-label">First appearance in National team<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" id="first_appearance_date" value="{{ $data->additional->first_appearance_date ?? '' }}" name="first_appearance_date">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="first_appearance_team" class="control-label">First appearance in first division (Team)<span class="text-danger">*</span></label>
+                            <select class="custom-select" required id="first_appearance_team" name="first_appearance_team">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="first_appearance_division" class="control-label">First appearance in First Division<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" id="first_appearance_division" value="{{ $data->additional->first_appearance_division ?? '' }}" name="first_appearance_division">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="contact_expires" class="control-label">Contract expires<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" id="contact_expires" value="{{ $data->additional->contact_expires ?? '' }}" name="contact_expires">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="market_value" class="control-label">Market Value<span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="market_value_ap" style="background-color: #3c4853">€</span>
+                                </div>
+                                <input type="text" data-parsley-type="number" required class="form-control" id="market_value" value="{{ $data->additional->market_value ?? '' }}" name="market_value" aria-describedby="market_value_ap">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info waves-effect waves-light" onclick="saveAdditional()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div><!-- /.modal -->
 @endsection
 @section('scripts')
 @parent
@@ -662,9 +753,11 @@
     <!-- Chart JS -->
     <script src="{{ asset('user_assets/libs/chart-js/Chart.bundle.min.js') }}"></script>
 
+    <script src="{{ asset('user_assets/libs/flatpickr/flatpickr.min.js') }}"></script>
 
     <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jszip.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
+    <script src="{{ asset('erp_assets/select/js/select2.js') }}"></script>
     <script>
         function download() {
             kendo.drawing
@@ -680,7 +773,968 @@
                     kendo.drawing.pdf.saveAs(group, "Exported.pdf")
                 });
         }
+        function openAdditional(){
+            $("#additional-info").modal({
+                backdrop:'static',keyboard:false, show:true
+            });
+        }
+        function formatRepo (repo) {
+            if (repo.loading) {
+                return repo.text;
+            }
+
+            let country_asset = "(" + repo.country_name + ")";
+            if (repo.country_name == "") country_asset = "";
+            var $container = $(
+                "<p class='title mb-0'></p>"
+            ).text(repo.team_name).append($("<p class='title mb-0' style='font-size: 12px'></p>").text(country_asset));
+            return $container;
+        }
+
+        function formatRepoSelection (repo) {
+            return repo.team_name;
+        }
         $(document).ready(function () {
+            var languages = {
+                'ach': {
+                    nativeName: "Lwo",
+                    englishName: "Acholi"
+                },
+                'ady': {
+                    nativeName: "Адыгэбзэ",
+                    englishName: "Adyghe"
+                },
+                'af': {
+                    nativeName: "Afrikaans",
+                    englishName: "Afrikaans"
+                },
+                'af-NA': {
+                    nativeName: "Afrikaans (Namibia)",
+                    englishName: "Afrikaans (Namibia)"
+                },
+                'af-ZA': {
+                    nativeName: "Afrikaans (South Africa)",
+                    englishName: "Afrikaans (South Africa)"
+                },
+                'ak': {
+                    nativeName: "Tɕɥi",
+                    englishName: "Akan"
+                },
+                'ar': {
+                    nativeName: "العربية",
+                    englishName: "Arabic"
+                },
+                // 'ar-AR': {
+                //     nativeName: "العربية",
+                //     englishName: "Arabic"
+                // },
+                'ar-MA': {
+                    nativeName: "العربية",
+                    englishName: "Arabic (Morocco)"
+                },
+                'ar-SA': {
+                    nativeName: "العربية (السعودية)",
+                    englishName: "Arabic (Saudi Arabia)"
+                },
+                'ay-BO': {
+                    nativeName: "Aymar aru",
+                    englishName: "Aymara"
+                },
+                'az': {
+                    nativeName: "Azərbaycan dili",
+                    englishName: "Azerbaijani"
+                },
+                // 'az-AZ': {
+                //     nativeName: "Azərbaycan dili",
+                //     englishName: "Azerbaijani"
+                // },
+                'be-BY': {
+                    nativeName: "Беларуская",
+                    englishName: "Belarusian"
+                },
+                'bg': {
+                    nativeName: "Български",
+                    englishName: "Bulgarian"
+                },
+                // 'bg-BG': {
+                //     nativeName: "Български",
+                //     englishName: "Bulgarian"
+                // },
+                'bn': {
+                    nativeName: "বাংলা",
+                    englishName: "Bengali"
+                },
+                'bn-IN': {
+                    nativeName: "বাংলা (ভারত)",
+                    englishName: "Bengali (India)"
+                },
+                'bn-BD': {
+                    nativeName: "বাংলা(বাংলাদেশ)",
+                    englishName: "Bengali (Bangladesh)"
+                },
+                'bs-BA': {
+                    nativeName: "Bosanski",
+                    englishName: "Bosnian"
+                },
+                'ca': {
+                    nativeName: "Català",
+                    englishName: "Catalan"
+                },
+                // 'ca-ES': {
+                //     nativeName: "Català",
+                //     englishName: "Catalan"
+                // },
+                'cak': {
+                    nativeName: "Maya Kaqchikel",
+                    englishName: "Kaqchikel"
+                },
+                'ck-US': {
+                    nativeName: "ᏣᎳᎩ (tsalagi)",
+                    englishName: "Cherokee"
+                },
+                'cs': {
+                    nativeName: "Čeština",
+                    englishName: "Czech"
+                },
+                // 'cs-CZ': {
+                //     nativeName: "Čeština",
+                //     englishName: "Czech"
+                // },
+                'cy': {
+                    nativeName: "Cymraeg",
+                    englishName: "Welsh"
+                },
+                // 'cy-GB': {
+                //     nativeName: "Cymraeg",
+                //     englishName: "Welsh"
+                // },
+                'da': {
+                    nativeName: "Dansk",
+                    englishName: "Danish"
+                },
+                // 'da-DK': {
+                //     nativeName: "Dansk",
+                //     englishName: "Danish"
+                // },
+                'de': {
+                    nativeName: "Deutsch",
+                    englishName: "German"
+                },
+                'de-AT': {
+                    nativeName: "Deutsch (Österreich)",
+                    englishName: "German (Austria)"
+                },
+                'de-DE': {
+                    nativeName: "Deutsch (Deutschland)",
+                    englishName: "German (Germany)"
+                },
+                'de-CH': {
+                    nativeName: "Deutsch (Schweiz)",
+                    englishName: "German (Switzerland)"
+                },
+                'dsb': {
+                    nativeName: "Dolnoserbšćina",
+                    englishName: "Lower Sorbian"
+                },
+                'el': {
+                    nativeName: "Ελληνικά",
+                    englishName: "Greek"
+                },
+                'el-GR': {
+                    nativeName: "Ελληνικά",
+                    englishName: "Greek (Greece)"
+                },
+                'en': {
+                    nativeName: "English",
+                    englishName: "English"
+                },
+                'en-GB': {
+                    nativeName: "English (UK)",
+                    englishName: "English (UK)"
+                },
+                'en-AU': {
+                    nativeName: "English (Australia)",
+                    englishName: "English (Australia)"
+                },
+                'en-CA': {
+                    nativeName: "English (Canada)",
+                    englishName: "English (Canada)"
+                },
+                'en-IE': {
+                    nativeName: "English (Ireland)",
+                    englishName: "English (Ireland)"
+                },
+                'en-IN': {
+                    nativeName: "English (India)",
+                    englishName: "English (India)"
+                },
+                'en-PI': {
+                    nativeName: "English (Pirate)",
+                    englishName: "English (Pirate)"
+                },
+                'en-UD': {
+                    nativeName: "English (Upside Down)",
+                    englishName: "English (Upside Down)"
+                },
+                'en-US': {
+                    nativeName: "English (US)",
+                    englishName: "English (US)"
+                },
+                'en-ZA': {
+                    nativeName: "English (South Africa)",
+                    englishName: "English (South Africa)"
+                },
+                'en@pirate': {
+                    nativeName: "English (Pirate)",
+                    englishName: "English (Pirate)"
+                },
+                'eo': {
+                    nativeName: "Esperanto",
+                    englishName: "Esperanto"
+                },
+                // 'eo-EO': {
+                //     nativeName: "Esperanto",
+                //     englishName: "Esperanto"
+                // },
+                'es': {
+                    nativeName: "Español",
+                    englishName: "Spanish"
+                },
+                'es-AR': {
+                    nativeName: "Español (Argentine)",
+                    englishName: "Spanish (Argentina)"
+                },
+                'es-419': {
+                    nativeName: "Español (Latinoamérica)",
+                    englishName: "Spanish (Latin America)"
+                },
+                'es-CL': {
+                    nativeName: "Español (Chile)",
+                    englishName: "Spanish (Chile)"
+                },
+                'es-CO': {
+                    nativeName: "Español (Colombia)",
+                    englishName: "Spanish (Colombia)"
+                },
+                'es-EC': {
+                    nativeName: "Español (Ecuador)",
+                    englishName: "Spanish (Ecuador)"
+                },
+                'es-ES': {
+                    nativeName: "Español (España)",
+                    englishName: "Spanish (Spain)"
+                },
+                'es-LA': {
+                    nativeName: "Español (Latinoamérica)",
+                    englishName: "Spanish (Latin America)"
+                },
+                'es-NI': {
+                    nativeName: "Español (Nicaragua)",
+                    englishName: "Spanish (Nicaragua)"
+                },
+                'es-MX': {
+                    nativeName: "Español (México)",
+                    englishName: "Spanish (Mexico)"
+                },
+                'es-US': {
+                    nativeName: "Español (Estados Unidos)",
+                    englishName: "Spanish (United States)"
+                },
+                'es-VE': {
+                    nativeName: "Español (Venezuela)",
+                    englishName: "Spanish (Venezuela)"
+                },
+                'et': {
+                    nativeName: "eesti keel",
+                    englishName: "Estonian"
+                },
+                'et-EE': {
+                    nativeName: "Eesti (Estonia)",
+                    englishName: "Estonian (Estonia)"
+                },
+                'eu': {
+                    nativeName: "Euskara",
+                    englishName: "Basque"
+                },
+                // 'eu-ES': {
+                //     nativeName: "Euskara",
+                //     englishName: "Basque"
+                // },
+                'fa': {
+                    nativeName: "فارسی",
+                    englishName: "Persian"
+                },
+                // 'fa-IR': {
+                //     nativeName: "فارسی",
+                //     englishName: "Persian"
+                // },
+                'fb-LT': {
+                    nativeName: "Leet Speak",
+                    englishName: "Leet"
+                },
+                'ff': {
+                    nativeName: "Fulah",
+                    englishName: "Fulah"
+                },
+                'fi': {
+                    nativeName: "Suomi",
+                    englishName: "Finnish"
+                },
+                // 'fi-FI': {
+                //     nativeName: "Suomi",
+                //     englishName: "Finnish"
+                // },
+                'fo-FO': {
+                    nativeName: "Føroyskt",
+                    englishName: "Faroese"
+                },
+                'fr': {
+                    nativeName: "Français",
+                    englishName: "French"
+                },
+                'fr-CA': {
+                    nativeName: "Français (Canada)",
+                    englishName: "French (Canada)"
+                },
+                'fr-FR': {
+                    nativeName: "Français (France)",
+                    englishName: "French (France)"
+                },
+                'fr-BE': {
+                    nativeName: "Français (Belgique)",
+                    englishName: "French (Belgium)"
+                },
+                'fr-CH': {
+                    nativeName: "Français (Suisse)",
+                    englishName: "French (Switzerland)"
+                },
+                'fy-NL': {
+                    nativeName: "Frysk",
+                    englishName: "Frisian (West)"
+                },
+                'ga': {
+                    nativeName: "Gaeilge",
+                    englishName: "Irish"
+                },
+                'ga-IE': {
+                    nativeName: "Gaeilge (Gaelic)",
+                    englishName: "Irish (Gaelic)"
+                },
+                'gl': {
+                    nativeName: "Galego",
+                    englishName: "Galician"
+                },
+                // 'gl-ES': {
+                //     nativeName: "Galego",
+                //     englishName: "Galician"
+                // },
+                'gn-PY': {
+                    nativeName: "Avañe'ẽ",
+                    englishName: "Guarani"
+                },
+                'gu-IN': {
+                    nativeName: "ગુજરાતી",
+                    englishName: "Gujarati"
+                },
+                'gx-GR': {
+                    nativeName: "Ἑλληνική ἀρχαία",
+                    englishName: "Classical Greek"
+                },
+                'he': {
+                    nativeName: "עברית‏",
+                    englishName: "Hebrew"
+                },
+                // 'he-IL': {
+                //     nativeName: "עברית‏",
+                //     englishName: "Hebrew"
+                // },
+                'hi': {
+                    nativeName: "हिन्दी",
+                    englishName: "Hindi"
+                },
+                // 'hi-IN': {
+                //     nativeName: "हिन्दी",
+                //     englishName: "Hindi"
+                // },
+                'hr': {
+                    nativeName: "Hrvatski",
+                    englishName: "Croatian"
+                },
+                // 'hr-HR': {
+                //     nativeName: "Hrvatski",
+                //     englishName: "Croatian"
+                // },
+                'hsb': {
+                    nativeName: "Hornjoserbšćina",
+                    englishName: "Upper Sorbian"
+                },
+                'ht': {
+                    nativeName: "Kreyòl",
+                    englishName: "Haitian Creole"
+                },
+                'hu': {
+                    nativeName: "Magyar",
+                    englishName: "Hungarian"
+                },
+                // 'hu-HU': {
+                //     nativeName: "Magyar",
+                //     englishName: "Hungarian"
+                // },
+                'hy-AM': {
+                    nativeName: "Հայերեն",
+                    englishName: "Armenian"
+                },
+                'id': {
+                    nativeName: "Bahasa Indonesia",
+                    englishName: "Indonesian"
+                },
+                // 'id-ID': {
+                //     nativeName: "Bahasa Indonesia",
+                //     englishName: "Indonesian"
+                // },
+                'is': {
+                    nativeName: "Íslenska",
+                    englishName: "Icelandic"
+                },
+                'is-IS': {
+                    nativeName: "Íslenska (Iceland)",
+                    englishName: "Icelandic (Iceland)"
+                },
+                'it': {
+                    nativeName: "Italiano",
+                    englishName: "Italian"
+                },
+                // 'it-IT': {
+                //     nativeName: "Italiano",
+                //     englishName: "Italian"
+                // },
+                'ja': {
+                    nativeName: "日本語",
+                    englishName: "Japanese"
+                },
+                // 'ja-JP': {
+                //     nativeName: "日本語",
+                //     englishName: "Japanese"
+                // },
+                'jv-ID': {
+                    nativeName: "Basa Jawa",
+                    englishName: "Javanese"
+                },
+                'ka-GE': {
+                    nativeName: "ქართული",
+                    englishName: "Georgian"
+                },
+                'kk-KZ': {
+                    nativeName: "Қазақша",
+                    englishName: "Kazakh"
+                },
+                'km': {
+                    nativeName: "ភាសាខ្មែរ",
+                    englishName: "Khmer"
+                },
+                // 'km-KH': {
+                //     nativeName: "ភាសាខ្មែរ",
+                //     englishName: "Khmer"
+                // },
+                'kab': {
+                    nativeName: "Taqbaylit",
+                    englishName: "Kabyle"
+                },
+                'kn': {
+                    nativeName: "ಕನ್ನಡ",
+                    englishName: "Kannada"
+                },
+                'kn-IN': {
+                    nativeName: "ಕನ್ನಡ (India)",
+                    englishName: "Kannada (India)"
+                },
+                'ko': {
+                    nativeName: "한국어",
+                    englishName: "Korean"
+                },
+                'ko-KR': {
+                    nativeName: "한국어 (韩国)",
+                    englishName: "Korean (Korea)"
+                },
+                'ku-TR': {
+                    nativeName: "Kurdî",
+                    englishName: "Kurdish"
+                },
+                'la': {
+                    nativeName: "Latin",
+                    englishName: "Latin"
+                },
+                // 'la-VA': {
+                //     nativeName: "Latin",
+                //     englishName: "Latin"
+                // },
+                'lb': {
+                    nativeName: "Lëtzebuergesch",
+                    englishName: "Luxembourgish"
+                },
+                'li-NL': {
+                    nativeName: "Lèmbörgs",
+                    englishName: "Limburgish"
+                },
+                'lt': {
+                    nativeName: "Lietuvių",
+                    englishName: "Lithuanian"
+                },
+                // 'lt-LT': {
+                //     nativeName: "Lietuvių",
+                //     englishName: "Lithuanian"
+                // },
+                'lv': {
+                    nativeName: "Latviešu",
+                    englishName: "Latvian"
+                },
+                // 'lv-LV': {
+                //     nativeName: "Latviešu",
+                //     englishName: "Latvian"
+                // },
+                'mai': {
+                    nativeName: "मैथिली, মৈথিলী",
+                    englishName: "Maithili"
+                },
+                'mg-MG': {
+                    nativeName: "Malagasy",
+                    englishName: "Malagasy"
+                },
+                'mk': {
+                    nativeName: "Македонски",
+                    englishName: "Macedonian"
+                },
+                'mk-MK': {
+                    nativeName: "Македонски (Македонски)",
+                    englishName: "Macedonian (Macedonian)"
+                },
+                'ml': {
+                    nativeName: "മലയാളം",
+                    englishName: "Malayalam"
+                },
+                // 'ml-IN': {
+                //     nativeName: "മലയാളം",
+                //     englishName: "Malayalam"
+                // },
+                'mn-MN': {
+                    nativeName: "Монгол",
+                    englishName: "Mongolian"
+                },
+                'mr': {
+                    nativeName: "मराठी",
+                    englishName: "Marathi"
+                },
+                // 'mr-IN': {
+                //     nativeName: "मराठी",
+                //     englishName: "Marathi"
+                // },
+                'ms': {
+                    nativeName: "Bahasa Melayu",
+                    englishName: "Malay"
+                },
+                // 'ms-MY': {
+                //     nativeName: "Bahasa Melayu",
+                //     englishName: "Malay"
+                // },
+                'mt': {
+                    nativeName: "Malti",
+                    englishName: "Maltese"
+                },
+                // 'mt-MT': {
+                //     nativeName: "Malti",
+                //     englishName: "Maltese"
+                // },
+                'my': {
+                    nativeName: "ဗမာစကာ",
+                    englishName: "Burmese"
+                },
+                'no': {
+                    nativeName: "Norsk",
+                    englishName: "Norwegian"
+                },
+                'nb': {
+                    nativeName: "Norsk (bokmål)",
+                    englishName: "Norwegian (bokmal)"
+                },
+                // 'nb-NO': {
+                //     nativeName: "Norsk (bokmål)",
+                //     englishName: "Norwegian (bokmal)"
+                // },
+                'ne': {
+                    nativeName: "नेपाली",
+                    englishName: "Nepali"
+                },
+                // 'ne-NP': {
+                //     nativeName: "नेपाली",
+                //     englishName: "Nepali"
+                // },
+                'nl': {
+                    nativeName: "Nederlands",
+                    englishName: "Dutch"
+                },
+                'nl-BE': {
+                    nativeName: "Nederlands (België)",
+                    englishName: "Dutch (Belgium)"
+                },
+                'nl-NL': {
+                    nativeName: "Nederlands (Nederland)",
+                    englishName: "Dutch (Netherlands)"
+                },
+                'nn-NO': {
+                    nativeName: "Norsk (nynorsk)",
+                    englishName: "Norwegian (nynorsk)"
+                },
+                'oc': {
+                    nativeName: "Occitan",
+                    englishName: "Occitan"
+                },
+                'or-IN': {
+                    nativeName: "ଓଡ଼ିଆ",
+                    englishName: "Oriya"
+                },
+                'pa': {
+                    nativeName: "ਪੰਜਾਬੀ",
+                    englishName: "Punjabi"
+                },
+                'pa-IN': {
+                    nativeName: "ਪੰਜਾਬੀ (ਭਾਰਤ ਨੂੰ)",
+                    englishName: "Punjabi (India)"
+                },
+                'pl': {
+                    nativeName: "Polski",
+                    englishName: "Polish"
+                },
+                // 'pl-PL': {
+                //     nativeName: "Polski",
+                //     englishName: "Polish"
+                // },
+                'ps-AF': {
+                    nativeName: "پښتو",
+                    englishName: "Pashto"
+                },
+                'pt': {
+                    nativeName: "Português",
+                    englishName: "Portuguese"
+                },
+                'pt-BR': {
+                    nativeName: "Português (Brasil)",
+                    englishName: "Portuguese (Brazil)"
+                },
+                'pt-PT': {
+                    nativeName: "Português (Portugal)",
+                    englishName: "Portuguese (Portugal)"
+                },
+                'qu-PE': {
+                    nativeName: "Qhichwa",
+                    englishName: "Quechua"
+                },
+                'rm-CH': {
+                    nativeName: "Rumantsch",
+                    englishName: "Romansh"
+                },
+                'ro': {
+                    nativeName: "Română",
+                    englishName: "Romanian"
+                },
+                // 'ro-RO': {
+                //     nativeName: "Română",
+                //     englishName: "Romanian"
+                // },
+                'ru': {
+                    nativeName: "Русский",
+                    englishName: "Russian"
+                },
+                // 'ru-RU': {
+                //     nativeName: "Русский",
+                //     englishName: "Russian"
+                // },
+                'sa-IN': {
+                    nativeName: "संस्कृतम्",
+                    englishName: "Sanskrit"
+                },
+                'se-NO': {
+                    nativeName: "Davvisámegiella",
+                    englishName: "Northern Sámi"
+                },
+                'si-LK': {
+                    nativeName: "පළාත",
+                    englishName: "Sinhala (Sri Lanka)"
+                },
+                'sk': {
+                    nativeName: "Slovenčina",
+                    englishName: "Slovak"
+                },
+                'sk-SK': {
+                    nativeName: "Slovenčina (Slovakia)",
+                    englishName: "Slovak (Slovakia)"
+                },
+                'sl': {
+                    nativeName: "Slovenščina",
+                    englishName: "Slovenian"
+                },
+                // 'sl-SI': {
+                //     nativeName: "Slovenščina",
+                //     englishName: "Slovenian"
+                // },
+                'so-SO': {
+                    nativeName: "Soomaaliga",
+                    englishName: "Somali"
+                },
+                'sq': {
+                    nativeName: "Shqip",
+                    englishName: "Albanian"
+                },
+                // 'sq-AL': {
+                //     nativeName: "Shqip",
+                //     englishName: "Albanian"
+                // },
+                'sr': {
+                    nativeName: "Српски",
+                    englishName: "Serbian"
+                },
+                'sr-RS': {
+                    nativeName: "Српски (Serbia)",
+                    englishName: "Serbian (Serbia)"
+                },
+                'su': {
+                    nativeName: "Basa Sunda",
+                    englishName: "Sundanese"
+                },
+                'sv': {
+                    nativeName: "Svenska",
+                    englishName: "Swedish"
+                },
+                // 'sv-SE': {
+                //     nativeName: "Svenska",
+                //     englishName: "Swedish"
+                // },
+                'sw': {
+                    nativeName: "Kiswahili",
+                    englishName: "Swahili"
+                },
+                'sw-KE': {
+                    nativeName: "Kiswahili",
+                    englishName: "Swahili (Kenya)"
+                },
+                'ta': {
+                    nativeName: "தமிழ்",
+                    englishName: "Tamil"
+                },
+                // 'ta-IN': {
+                //     nativeName: "தமிழ்",
+                //     englishName: "Tamil"
+                // },
+                'te': {
+                    nativeName: "తెలుగు",
+                    englishName: "Telugu"
+                },
+                // 'te-IN': {
+                //     nativeName: "తెలుగు",
+                //     englishName: "Telugu"
+                // },
+                'tg': {
+                    nativeName: "забо́ни тоҷикӣ́",
+                    englishName: "Tajik"
+                },
+                // 'tg-TJ': {
+                //     nativeName: "тоҷикӣ",
+                //     englishName: "Tajik"
+                // },
+                'th': {
+                    nativeName: "ภาษาไทย",
+                    englishName: "Thai"
+                },
+                'th-TH': {
+                    nativeName: "ภาษาไทย (ประเทศไทย)",
+                    englishName: "Thai (Thailand)"
+                },
+                'tl': {
+                    nativeName: "Filipino",
+                    englishName: "Filipino"
+                },
+                // 'tl-PH': {
+                //     nativeName: "Filipino",
+                //     englishName: "Filipino"
+                // },
+                'tlh': {
+                    nativeName: "tlhIngan-Hol",
+                    englishName: "Klingon"
+                },
+                'tr': {
+                    nativeName: "Türkçe",
+                    englishName: "Turkish"
+                },
+                // 'tr-TR': {
+                //     nativeName: "Türkçe",
+                //     englishName: "Turkish"
+                // },
+                'tt-RU': {
+                    nativeName: "татарча",
+                    englishName: "Tatar"
+                },
+                'uk': {
+                    nativeName: "Українська",
+                    englishName: "Ukrainian"
+                },
+                // 'uk-UA': {
+                //     nativeName: "Українська",
+                //     englishName: "Ukrainian"
+                // },
+                'ur': {
+                    nativeName: "اردو",
+                    englishName: "Urdu"
+                },
+                // 'ur-PK': {
+                //     nativeName: "اردو",
+                //     englishName: "Urdu"
+                // },
+                'uz': {
+                    nativeName: "O'zbek",
+                    englishName: "Uzbek"
+                },
+                // 'uz-UZ': {
+                //     nativeName: "O'zbek",
+                //     englishName: "Uzbek"
+                // },
+                'vi': {
+                    nativeName: "Tiếng Việt",
+                    englishName: "Vietnamese"
+                },
+                // 'vi-VN': {
+                //     nativeName: "Tiếng Việt",
+                //     englishName: "Vietnamese"
+                // },
+                'xh-ZA': {
+                    nativeName: "isiXhosa",
+                    englishName: "Xhosa"
+                },
+                'yi': {
+                    nativeName: "ייִדיש",
+                    englishName: "Yiddish"
+                },
+                'yi-DE': {
+                    nativeName: "ייִדיש (German)",
+                    englishName: "Yiddish (German)"
+                },
+                'zh': {
+                    nativeName: "中文",
+                    englishName: "Chinese"
+                },
+                'zh-Hans': {
+                    nativeName: "中文简体",
+                    englishName: "Chinese Simplified"
+                },
+                'zh-Hant': {
+                    nativeName: "中文繁體",
+                    englishName: "Chinese Traditional"
+                },
+                'zh-CN': {
+                    nativeName: "中文（中国）",
+                    englishName: "Chinese Simplified (China)"
+                },
+                'zh-HK': {
+                    nativeName: "中文（香港）",
+                    englishName: "Chinese Traditional (Hong Kong)"
+                },
+                'zh-SG': {
+                    nativeName: "中文（新加坡）",
+                    englishName: "Chinese Simplified (Singapore)"
+                },
+                'zh-TW': {
+                    nativeName: "中文（台灣）",
+                    englishName: "Chinese Traditional (Taiwan)"
+                },
+                'zu-ZA': {
+                    nativeName: "isiZulu",
+                    englishName: "Zulu"
+                }
+            };
+            let lang_arrays_str = "{{ $data->additional->languages }}";
+            let lang_arrays = lang_arrays_str.split(",");
+            for (r in languages)
+            {
+                if (lang_arrays.includes(languages[r].englishName))
+                {
+                    $('#language').append($("<option selected></option>").text(languages[r].englishName).attr("value", languages[r].englishName));
+                } else {
+                    $('#language').append($("<option></option>").text(languages[r].englishName).attr("value", languages[r].englishName));
+                }
+            }
+            $("#language").select2({
+                allowClear: false,
+                dropdownAutoWidth: true,
+                width: 'element',
+                minimumResultsForSearch: 20, //prevent filter input
+                maximumSelectionSize: 20 // prevent scrollbar
+            });
+
+            $('#national_team').select2({
+                ajax: {
+                    type: "GET",
+                    url: "{{ route('user.getteams') }}",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        let result = {"name":params.term};
+                        return result;
+                    },
+                    processResults: function (data, params) {
+                        return {
+                            results:data
+                        };
+                    },
+                    cache: true
+                },
+                dropdownParent: $("#additional-info"),
+                tags: false,
+                placeholder: 'Search for a team',
+                minimumInputLength: 3,
+                templateResult: formatRepo,
+                templateSelection: formatRepoSelection
+            }).on('select2:select', function (e) {
+                let data = e.params.data;
+                $(this).children('[value="'+data.id+'"]').attr(
+                    {
+                        'team_link':data.team_link, //dynamic value from data array
+                        'team_name':data.team_name // fixed value
+                    }
+                );
+            });
+            $('#first_appearance_team').select2({
+                ajax: {
+                    type: "GET",
+                    url: "{{ route('user.getteams') }}",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        let result = {"name":params.term};
+                        return result;
+                    },
+                    processResults: function (data, params) {
+                        return {
+                            results:data
+                        };
+                    },
+                    cache: true
+                },
+                dropdownParent: $("#additional-info"),
+                tags: false,
+                placeholder: 'Search for a team',
+                minimumInputLength: 3,
+                templateResult: formatRepo,
+                templateSelection: formatRepoSelection
+            }).on('select2:select', function (e) {
+                let data = e.params.data;
+                $(this).children('[value="'+data.id+'"]').attr(
+                    {
+                        'team_link':data.team_link, //dynamic value from data array
+                        'team_name':data.team_name // fixed value
+                    }
+                );
+            });
+            $("#first_appearance_date").flatpickr();
+            $("#first_appearance_division").flatpickr();
+            $("#contact_expires").flatpickr();
             var options =  {
                 field: {
                     width: "200px",
@@ -768,7 +1822,6 @@
                 @if ($position->specify == "Right Centre forward") data.push({name: ' ', position: 'RC_F'}); @endif
             @endforeach
             $("#soccerfield").soccerfield(data,options);
-            console.log(data);
             Chart.defaults.global.defaultFontColor = "rgba(255,255,255,0.5)";
             Chart.defaults.scale.gridLines.color = "rgba(255,255,255,0.05)";
             let general_radar_data = ['{{ $data->latestParam->marking }}', '{{ $data->latestParam->passing }}', '{{ $data->latestParam->technique }}', '{{ $data->latestParam->vision }}', '{{ $data->latestParam->tackling }}'];
@@ -1036,5 +2089,108 @@
             let general_avg = (general_sum / (technical_radar_data.length + mental_radar_data.length + physical_radar_data.length)).toFixed(1);
             $("#general_average").text(general_avg);
         });
+        function saveAdditional() {
+            let languages = $("#language").val().join(',');
+            let national_team = $("#national_team").val();
+            let first_appearance_date = $("#first_appearance_date").val();
+            let first_appearance_team = $("#first_appearance_team").val();
+            let first_appearance_division = $("#first_appearance_division").val();
+            let contact_expires = $("#contact_expires").val();
+            let market_value = $("#market_value").val();
+            if (languages == "" || languages == null)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type Languages.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            if (national_team == null || national_team == "")
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type National Team.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            if (first_appearance_date == "" || first_appearance_date == null)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type First appearance in National team.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            if (first_appearance_team == "" || first_appearance_team == null)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type First appearance in first division (Team).",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            if (first_appearance_division == "" || first_appearance_division == null)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type First appearance in First Division.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            if (contact_expires == "" || contact_expires == null)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type Contact Expires.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            if (market_value == "" || market_value == null)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type Market Value.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            $.ajax({
+                url: "{{ route('user.save_additional', $data->id) }}",
+                data: {languages: languages, national_team: national_team, first_appearance_date: first_appearance_date
+                    , first_appearance_team: first_appearance_team, first_appearance_division: first_appearance_division, contact_expires: contact_expires, market_value: market_value},
+                type: 'GET',
+                dataType: 'text', // added data type
+                success: function(res) {
+                    $.NotificationApp.send(
+                        "Notification",
+                        "Additional Information was saved successfully.",
+                        "top-right",
+                        "#da8609",
+                        "success");
+                    $("#additional-info").modal('hide');
+                },
+                error: function (jqXHR, exception) {
+                    $.NotificationApp.send(
+                        "Warning",
+                        "Additional Information was not saved.",
+                        "top-right",
+                        "#da8609",
+                        "warning");
+                }
+            });
+        }
     </script>
 @endsection
