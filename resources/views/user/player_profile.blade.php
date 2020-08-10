@@ -89,7 +89,7 @@
                 <button class="col-md-auto btn btn-link text-white waves-effect ml-5" onclick="openAdditional()">Additional Information</button>
                 <button class="col-md-auto btn btn-link text-white waves-effect" onclick="openScout_Report()">Scout Report</button>
                 <button class="col-md-auto btn btn-link text-white waves-effect" onclick="openInjury();">Injuries</button>
-                <button class="col-md-auto btn btn-link text-white waves-effect">Add Video</button>
+                <button class="col-md-auto btn btn-link text-white waves-effect" onclick="openVideo();">Add Video</button>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -863,6 +863,32 @@
         </div>
     </div>
 </div><!-- /.modal -->
+<div id="video-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Video</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="main_video" class="control-label">Add link to main video<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" value="{{ $data->video->main_video ?? '' }}" id="main_video">
+                            <label for="another_video" class="control-label mt-1">Add another video<span class="text-danger">*</span></label>
+                            <input type="text" required class="form-control" value="{{ $data->video->another_video ?? '' }}" id="another_video">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info waves-effect waves-light" onclick="saveVideo()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div><!-- /.modal -->
 @endsection
 @section('scripts')
 @parent
@@ -905,6 +931,11 @@
         }
         function openInjury(){
             $("#injuries-modal").modal({
+                backdrop:'static',keyboard:false, show:true
+            });
+        }
+        function openVideo(){
+            $("#video-modal").modal({
                 backdrop:'static',keyboard:false, show:true
             });
         }
@@ -2531,6 +2562,43 @@
         function deleteInjury(obj){
             if(!confirm("are you really?")) return;
             $(obj).parent().remove();
+        }
+        function saveVideo() {
+            let main_video = $("#main_video").val();
+            let another_video = $("#another_video").val();
+            if (main_video == "" || main_video == null)
+            {
+                $.NotificationApp.send(
+                    "Warning",
+                    "You must type Main Video link.",
+                    "top-right",
+                    "#da8609",
+                    "warning");
+                return;
+            }
+            $.ajax({
+                url: "{{ route('user.save_video', $data->id) }}",
+                data: {main_video: main_video, another_video: another_video},
+                type: 'GET',
+                dataType: 'text', // added data type
+                success: function(res) {
+                    $.NotificationApp.send(
+                        "Notification",
+                        "Video was saved successfully.",
+                        "top-right",
+                        "#da8609",
+                        "success");
+                    $("#video-modal").modal('hide');
+                },
+                error: function (jqXHR, exception) {
+                    $.NotificationApp.send(
+                        "Warning",
+                        "Video was not saved.",
+                        "top-right",
+                        "#da8609",
+                        "warning");
+                }
+            });
         }
     </script>
 @endsection.
