@@ -54,4 +54,9 @@ class Player extends Model
 
         $this->parameters()->save($parameter);
     }
+
+    public function scout_report()
+    {
+        return $this->hasOne('\App\Models\User\Scout_Report');
+    }
 }
