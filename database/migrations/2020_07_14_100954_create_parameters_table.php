@@ -31,7 +31,7 @@ class CreateParametersTable extends Migration
             $table->double('tackling')->default(0);
             $table->double('technique')->default(0);
             $table->double('aggression')->default(0);
-            $table->double('articipation')->default(0);
+            $table->double('anticipation')->default(0);
             $table->double('bravery')->default(0);
             $table->double('composure')->default(0);
             $table->double('concentration')->default(0);
@@ -59,7 +59,7 @@ class CreateParametersTable extends Migration
             $table->double('aerial_duels')->default(0);
             $table->double('reaction')->default(0);
             $table->double('sprint_speed')->default(0);
-            $table->double('areial_reach')->default(0);
+            $table->double('aerial_reach')->default(0);
             $table->double('command_of_area')->default(0);
             $table->double('communication')->default(0);
             $table->double('eccentricity')->default(0);

@@ -45,7 +45,7 @@ class SettingsController extends Controller
         $paramsetting->tackling = $request->tackling;
         $paramsetting->technique = $request->technique;
         $paramsetting->aggression = $request->aggression;
-        $paramsetting->articipation = $request->articipation;
+        $paramsetting->anticipation = $request->anticipation;
         $paramsetting->bravery = $request->bravery;
         $paramsetting->composure = $request->composure;
         $paramsetting->concentration = $request->concentration;
