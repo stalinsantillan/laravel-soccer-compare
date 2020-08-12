@@ -656,14 +656,16 @@
                                 <p class="font-17 col-md-6 text-dark offset-3 pl-3 pr-3 pt-1">{{ $data->scout_report->cons ?? '' }}</p>
                                 <p class="font-19 col-md-6 bg-success text-dark offset-3 mb-0 mt-3 text-center">
                                     Conclusion :
-                                    @if (intval($data->scout_report->conclusion) == 1)
-                                    Discard player
-                                    @elseif (intval($data->scout_report->conclusion) == 2)
-                                    Continue watching
-                                    @elseif (intval($data->scout_report->conclusion) == 3)
-                                    Sign the player
-                                    @else
-                                    No selected
+                                    @if (isset($data->scout_report->conclusion))
+                                        @if (intval($data->scout_report->conclusion) == 1)
+                                            Discard player
+                                        @elseif (intval($data->scout_report->conclusion) == 2)
+                                            Continue watching
+                                        @elseif (intval($data->scout_report->conclusion) == 3)
+                                            Sign the player
+                                        @else
+                                            No selected
+                                        @endif
                                     @endif
                                 </p>
                                 <p class="font-17 col-md-6 text-dark offset-3 pl-3 pr-3 pt-1">{{ $data->scout_report->other ?? '' }}</p>
