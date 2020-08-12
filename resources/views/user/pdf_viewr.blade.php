@@ -637,18 +637,23 @@
                             </div>
                             <div class="row mt-2">
                                 <p class="font-24 font-weight-bold text-center col-md-12">Injuires</p>
+                                @php $i = 0; @endphp
                                 @foreach($data->injury as $injury)
                                     <div class="col-md-12 text-center">
                                         <span class="font-19 text-center">{{ $injury->injury }}</span>
                                         <span class="font-13 text-center ml-3">{{ $injury->injury_date }}</span>
                                     </div>
                                     <p class="font-19 font-weight-bold col-md-4 offset-4">{{ $injury->description }}</p>
+                                    @php ++$i; @endphp
                                 @endforeach
+                                @if ($i == 0)
+                                    <p class="font-19 font-weight-bold col-md-4 offset-4">The Player doesn't show injuries</p>
+                                @endif
                                 <p class="font-24 font-weight-bold text-center col-md-12 mt-3">Report</p>
                                 <p class="font-19 col-md-6 bg-success text-dark offset-3 mb-0">Pros</p>
-                                <p class="font-17 col-md-6 text-dark offset-3 pl-3 pr-3 pt-1">{{ $data->scout_report->pros }}</p>
+                                <p class="font-17 col-md-6 text-dark offset-3 pl-3 pr-3 pt-1">{{ $data->scout_report->pros ?? '' }}</p>
                                 <p class="font-19 col-md-6 bg-danger text-dark offset-3 mb-0 mt-3">Cons</p>
-                                <p class="font-17 col-md-6 text-dark offset-3 pl-3 pr-3 pt-1">{{ $data->scout_report->cons }}</p>
+                                <p class="font-17 col-md-6 text-dark offset-3 pl-3 pr-3 pt-1">{{ $data->scout_report->cons ?? '' }}</p>
                                 <p class="font-19 col-md-6 bg-success text-dark offset-3 mb-0 mt-3 text-center">
                                     Conclusion :
                                     @if (intval($data->scout_report->conclusion) == 1)
@@ -661,7 +666,7 @@
                                     No selected
                                     @endif
                                 </p>
-                                <p class="font-17 col-md-6 text-dark offset-3 pl-3 pr-3 pt-1">{{ $data->scout_report->other }}</p>
+                                <p class="font-17 col-md-6 text-dark offset-3 pl-3 pr-3 pt-1">{{ $data->scout_report->other ?? '' }}</p>
                             </div>
                         </div>
                     </div>
