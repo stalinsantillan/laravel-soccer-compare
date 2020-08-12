@@ -650,11 +650,21 @@
                                     <p class="font-19 font-weight-bold col-md-4 offset-4">The Player doesn't show injuries</p>
                                 @endif
                                 <p class="font-24 font-weight-bold text-center col-md-12 mt-3">Report</p>
-                                <p class="font-19 col-md-6 bg-success text-dark offset-3 mb-0">Pros</p>
-                                <p class="font-17 col-md-6 text-dark offset-3 pl-3 pr-3 pt-1">{{ $data->scout_report->pros ?? '' }}</p>
-                                <p class="font-19 col-md-6 bg-danger text-dark offset-3 mb-0 mt-3">Cons</p>
-                                <p class="font-17 col-md-6 text-dark offset-3 pl-3 pr-3 pt-1">{{ $data->scout_report->cons ?? '' }}</p>
-                                <p class="font-19 col-md-6 bg-success text-dark offset-3 mb-0 mt-3 text-center">
+                                <p class="font-19 col-md-6 bg-success text-dark offset-3 mb-1">Pros</p>
+                                @php
+                                    $pros = $data->scout_report->pros ?? '';
+                                    $pros_replace = str_replace("\n","</p>\n<p class='font-17 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>",$pros);
+                                    $pros = "<p class='font-17 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>" . $pros_replace . "</p>";
+                                    echo $pros;
+                                @endphp
+                                <p class="font-19 col-md-6 bg-danger text-dark offset-3 mb-1 mt-3">Cons</p>
+                                @php
+                                    $cons = $data->scout_report->cons ?? '';
+                                    $cons_replace = str_replace("\n","</p>\n<p class='font-17 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>",$cons);
+                                    $cons = "<p class='font-17 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>" . $cons_replace . "</p>";
+                                    echo $cons;
+                                @endphp
+                                <p class="font-19 col-md-6 bg-success text-dark offset-3 mb-1 mt-3 text-center">
                                     Conclusion :
                                     @if (isset($data->scout_report->conclusion))
                                         @if (intval($data->scout_report->conclusion) == 1)
@@ -668,7 +678,12 @@
                                         @endif
                                     @endif
                                 </p>
-                                <p class="font-17 col-md-6 text-dark offset-3 pl-3 pr-3 pt-1">{{ $data->scout_report->other ?? '' }}</p>
+                                @php
+                                    $other = $data->scout_report->other ?? '';
+                                    $other_replace = str_replace("\n","</p>\n<p class='font-17 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>",$other);
+                                    $other = "<p class='font-17 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>" . $other_replace . "</p>";
+                                    echo $other;
+                                @endphp
                             </div>
                         </div>
                     </div>
