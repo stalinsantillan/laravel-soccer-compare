@@ -161,7 +161,7 @@
                                          style="position: absolute; width: 200px; height: 50px;
                                             border: 2px solid #00AF80; padding-top: 10px; cursor: pointer;
                                             right: 50px; top: -50px;">
-                                        <a href="{{ $data->video->main_video }}" style="color: #00AF80;">
+                                        <a href="{{ $data->video->main_video ?? '' }}" style="color: #00AF80;">
                                             Watch Video
                                         </a>
                                     </div>
