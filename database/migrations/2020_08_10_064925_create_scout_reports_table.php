@@ -19,9 +19,9 @@ class CreateScoutReportsTable extends Migration
             $table->string('general_info')->nullable();
             $table->string('strengths')->nullable();
             $table->string('weaknesses')->nullable();
-            $table->string('pros')->nullable();
-            $table->string('cons')->nullable();
-            $table->integer('conslusion')->nullable()->default(0);
+            $table->text('pros')->nullable();
+            $table->text('cons')->nullable();
+            $table->integer('conclusion')->nullable()->default(0);
             $table->text('other')->nullable();
             $table->timestamps();
         });

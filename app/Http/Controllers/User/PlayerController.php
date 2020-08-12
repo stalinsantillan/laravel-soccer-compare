@@ -1234,6 +1234,31 @@ class PlayerController extends Controller
     }
 
     /**
+     * Export to pdf the player.
+     *
+     * @param  \App\Models\User\Player  $player
+     * @return \Illuminate\Http\Response
+     */
+    public function player_pdf(Player $player)
+    {
+        $paramsetting = Paramsetting::find(1);
+        $path = parse_url($player->current_team_link, PHP_URL_PATH);
+        $path_uri = explode("/", $path);
+        $url = '';
+        if (sizeof($path_uri) > 1)
+        {
+            $team_id = $path_uri[sizeof($path_uri) - 2];
+            $url = "https://secure.cache.images.core.optasports.com/soccer/teams/150x150/" . $team_id . ".png";
+            $file = $this->createFileObject($url);
+            $url = $file->store('avatars');
+        }
+        return view('user.pdf_viewr')
+            ->with('data', $player)
+            ->with('team_url', $url)
+            ->with('paramsetting', $paramsetting);
+    }
+
+    /**
      * Filter the players
      * 
      * @param Request $request
