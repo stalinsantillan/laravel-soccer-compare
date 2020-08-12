@@ -88,7 +88,7 @@
                 <button class="col-md-auto btn btn-link text-white waves-effect" onclick="openInjury();">Injuries</button>
                 <button class="col-md-auto btn btn-link text-white waves-effect" onclick="openVideo();">Add Video</button>
                 <a href="{{ route('user.edit_player', $data->id) }}" class="btn btn-outline-info waves-effect waves-light ml-2" style="height: 38px; top: 10px">Edit Player</a>
-                <button class="btn btn-primary waves-effect waves-light ml-2" onclick="download();" style="height: 38px; top: 10px">Export to PDF</button>
+                <a href="{{ route('user.player_pdf', $data->id) }}" class="btn btn-primary waves-effect waves-light ml-2" style="height: 38px; top: 10px">Export to PDF</a>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -777,32 +777,32 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="pros" class="control-label">Pros<span class="text-danger">*</span></label>
-                            <input type="text" required class="form-control" id="pros" value="{{ $data->scout_report->pros ?? '' }}" name="pros">
+                            <textarea required class="form-control" id="pros" name="pros">{{ $data->scout_report->pros ?? '' }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="cons" class="control-label">Cons<span class="text-danger">*</span></label>
-                            <input type="text" required class="form-control" id="cons" value="{{ $data->scout_report->cons ?? '' }}" name="cons">
+                            <textarea required class="form-control" id="cons" name="cons">{{ $data->scout_report->cons ?? '' }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="conslusion" class="control-label">Conslusion<span class="text-danger">*</span></label>
+                            <label for="conclusion" class="control-label">Conclusion<span class="text-danger">*</span></label>
                             <div class="radio radio-danger mb-2">
-                                <input id="discard" type="radio" value="1" name="conslusion" {{ (isset($data->scout_report->conslusion) && $data->scout_report->conslusion==1) ? 'checked' : '' }}>
+                                <input id="discard" type="radio" value="1" name="conclusion" {{ (isset($data->scout_report->conclusion) && $data->scout_report->conclusion==1) ? 'checked' : '' }}>
                                 <label for="discard">
                                     Discard player
                                 </label>
                             </div>
                             <div class="radio radio-warning mb-2">
-                                <input id="continue" type="radio" value="2" name="conslusion" {{ (isset($data->scout_report->conslusion) && $data->scout_report->conslusion==2) ? 'checked' : '' }}>
+                                <input id="continue" type="radio" value="2" name="conclusion" {{ (isset($data->scout_report->conclusion) && $data->scout_report->conclusion==2) ? 'checked' : '' }}>
                                 <label for="continue">
                                     Continue watching
                                 </label>
                             </div>
                             <div class="radio radio-success mb-2">
-                                <input id="sign" type="radio" value="3" name="conslusion" {{ (isset($data->scout_report->conslusion) && $data->scout_report->conslusion==3) ? 'checked' : '' }}>
+                                <input id="sign" type="radio" value="3" name="conclusion" {{ (isset($data->scout_report->conclusion) && $data->scout_report->conclusion==3) ? 'checked' : '' }}>
                                 <label for="sign">
                                     Sign the player
                                 </label>
@@ -811,7 +811,6 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="other" class="control-label">Other<span class="text-danger">*</span></label>
                             <textarea id="other" class="form-control">{{ $data->scout_report->other ?? '' }}</textarea>
                         </div>
                     </div>
@@ -2434,10 +2433,10 @@
             let weaknesses = $("#weaknesses").val();
             let pros = $("#pros").val();
             let cons = $("#cons").val();
-            let conslusion = 0;
-            $("input[name=conslusion]").each(function (){
+            let conclusion = 0;
+            $("input[name=conclusion]").each(function (){
                 if ($(this).prop("checked"))
-                    conslusion = $(this).val();
+                    conclusion = $(this).val();
             });
             let other = $("#other").val();
             if (general_info == "" || general_info == null)
@@ -2490,7 +2489,7 @@
                     "warning");
                 return;
             }
-            if (conslusion == "" || conslusion == null || conslusion == 0)
+            if (conclusion == "" || conclusion == null || conclusion == 0)
             {
                 $.NotificationApp.send(
                     "Warning",
@@ -2513,7 +2512,7 @@
             $.ajax({
                 url: "{{ route('user.save_scout', $data->id) }}",
                 data: {general_info: general_info, strengths: strengths, weaknesses: weaknesses
-                    , pros: pros, cons: cons, conslusion: conslusion, other: other},
+                    , pros: pros, cons: cons, conclusion: conclusion, other: other},
                 type: 'GET',
                 dataType: 'text', // added data type
                 success: function(res) {
