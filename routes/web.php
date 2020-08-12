@@ -56,6 +56,7 @@ Route::middleware(['approved'])->group(function () {
         Route::get('filter_player', 'User\PlayerController@filter_player')->name('filter_player');
         Route::get('filter_show', 'User\PlayerController@filter_show')->name('filter_show');
         Route::get('player_profile/{player}', 'User\PlayerController@player_profile')->name('player_profile');
+        Route::get('player_pdf/{player}', 'User\PlayerController@player_pdf')->name('player_pdf');
         Route::get('save_additional/{player}', 'User\PlayerController@save_additional')->name('save_additional');
         Route::get('save_scout/{player}', 'User\PlayerController@save_scout')->name('save_scout');
         Route::get('save_injury/{player}', 'User\PlayerController@save_injury')->name('save_injury');
