@@ -380,7 +380,14 @@ class PlayerController extends Controller
         $player->height = $request->height;
         $player->weight = $request->weight;
         $player->foot = $request->foot;
-        $player->current_team = $request->team_name ?? '';
+        $current_team = '';
+        if (isset($request->team_link) == true && $request->team_link != "")
+        {
+            $current_team = ApiTeam::find($request->team_id)->team_name;
+        } else {
+            $current_team = Team::find(str_replace("_db", "", $request->team_id))->name;
+        }
+        $player->current_team = $current_team;
         $player->current_team_id = str_replace("_db", "", $request->team_id) ?? '';
         $player->current_team_link = $request->team_link ?? '';
         $player->player_link = $request->player_link ?? '';
@@ -392,8 +399,14 @@ class PlayerController extends Controller
             $photo_url = $request->photo_url ?? "";
             if ($photo_url != "")
             {
-                $file = $this->createFileObject($photo_url);
-                $player->photo = $file->store('avatars');
+                if(file_exists($photo_url))
+                {
+                    // true
+                    $file = $this->createFileObject($photo_url);
+                    $player->photo = $file->store('avatars');
+                }else{
+                    // false
+                }
             }
         }
 
@@ -815,7 +828,14 @@ class PlayerController extends Controller
         $player->height = $request->height;
         $player->weight = $request->weight;
         $player->foot = $request->foot;
-        $player->current_team = $request->team_name ?? '';
+        $current_team = '';
+        if (isset($request->team_link) == true && $request->team_link != "")
+        {
+            $current_team = ApiTeam::find($request->team_id)->team_name;
+        } else {
+            $current_team = Team::find(str_replace("_db", "", $request->team_id))->name;
+        }
+        $player->current_team = $current_team;
         $player->current_team_id = str_replace("_db", "", $request->team_id) ?? '';
         $player->current_team_link = $request->team_link ?? '';
         $player->player_link = $request->player_link ?? '';
@@ -827,8 +847,15 @@ class PlayerController extends Controller
             $photo_url = $request->photo_url ?? "";
             if ($photo_url != "")
             {
-                $file = $this->createFileObject($photo_url);
-                $player->photo = $file->store('avatars');
+
+                if(file_exists($photo_url))
+                {
+                    $file = $this->createFileObject($photo_url);
+                    $player->photo = $file->store('avatars');
+                    // true
+                }else{
+                    // false
+                }
             }
         }
 
@@ -1249,8 +1276,14 @@ class PlayerController extends Controller
         {
             $team_id = $path_uri[sizeof($path_uri) - 2];
             $url = "https://secure.cache.images.core.optasports.com/soccer/teams/150x150/" . $team_id . ".png";
-            $file = $this->createFileObject($url);
-            $url = $file->store('avatars');
+            if(file_exists($url))
+            {
+                $file = $this->createFileObject($url);
+                $url = $file->store('avatars');
+                // true
+            }else{
+                $url = '';
+            }
         }
         return view('user.pdf_viewr')
             ->with('data', $player)

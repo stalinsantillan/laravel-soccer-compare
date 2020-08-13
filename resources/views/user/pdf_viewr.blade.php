@@ -100,9 +100,11 @@
                     <div class="row" id="content" style="background: #F2F5F7">
                         <div style="margin: auto;width: 1378px;" id="page1">
                             <div class="row" style="height: 70px; background: #FF4040">
-                                <div class="bg-white ml-5">
-                                    <img src="{{ asset('storage').'/'.$team_url }}" style="width: 120px; height: 120px;" />
-                                </div>
+                                @if ($team_url != "")
+                                    <div class="bg-white ml-5">
+                                        <img src="{{ asset('storage').'/'.$team_url }}" style="width: 120px; height: 120px;" />
+                                    </div>
+                                @endif
                             </div>
                             <div class="row mt-4">
                                 <div class="col-md-12 text-center">
