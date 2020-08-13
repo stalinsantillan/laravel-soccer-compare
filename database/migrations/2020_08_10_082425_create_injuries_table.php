@@ -15,10 +15,10 @@ class CreateInjuriesTable extends Migration
     {
         Schema::create('injuries', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('player_id');
-            $table->string('injury');
-            $table->date('injury_date');
-            $table->text('description');
+            $table->integer('player_id')->nullable();
+            $table->string('injury')->nullable();
+            $table->date('injury_date')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

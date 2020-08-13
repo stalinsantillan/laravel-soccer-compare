@@ -16,13 +16,13 @@ class CreateAdditionalInformationsTable extends Migration
         Schema::create('additional_information', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('player_id');
-            $table->string('languages');
-            $table->string('national_team');
-            $table->date('first_appearance_date');
-            $table->string('first_appearance_team');
-            $table->date('first_appearance_division');
-            $table->date('contact_expires');
-            $table->double('market_value');
+            $table->string('languages')->nullable();
+            $table->string('national_team')->nullable();
+            $table->date('first_appearance_date')->nullable();
+            $table->string('first_appearance_team')->nullable();
+            $table->date('first_appearance_division')->nullable();
+            $table->date('contact_expires')->nullable();
+            $table->double('market_value')->nullable();
             $table->timestamps();
         });
     }

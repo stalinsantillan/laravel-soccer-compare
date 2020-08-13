@@ -16,9 +16,9 @@ class CreateScoutReportsTable extends Migration
         Schema::create('scout_reports', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('player_id');
-            $table->string('general_info')->nullable();
-            $table->string('strengths')->nullable();
-            $table->string('weaknesses')->nullable();
+            $table->text('general_info')->nullable();
+            $table->text('strengths')->nullable();
+            $table->text('weaknesses')->nullable();
             $table->text('pros')->nullable();
             $table->text('cons')->nullable();
             $table->integer('conclusion')->nullable()->default(0);
