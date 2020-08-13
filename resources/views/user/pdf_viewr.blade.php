@@ -98,13 +98,20 @@
                         </div>
                     </div>
                     <div class="row" id="content" style="background: #F2F5F7">
-                        <div style="margin: auto;width: 1378px;" id="page1">
+                        <div style="margin: auto; width: 1378px;" id="page1">
                             <div class="row" style="height: 70px; background: #FF4040">
-                                @if ($team_url != "")
-                                    <div class="bg-white ml-5">
-                                        <img src="{{ asset('storage').'/'.$team_url }}" style="width: 120px; height: 120px;" />
-                                    </div>
-                                @endif
+                                <div class="col-md-6">
+                                    @if ($team_url != "")
+                                        <div class="bg-white ml-5" style="width: 120px;">
+                                            <img src="{{ asset('storage').'/'.$team_url }}" style="width: 120px; height: 120px;" />
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <span class="logo-lg">
+                                        <img src="{{ asset('admin_assets/images/logo-light.png') }}" alt="" height="50" style="margin-top: 10px;">
+                                    </span>
+                                </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col-md-12 text-center">
@@ -113,7 +120,7 @@
                             </div>
                             <div class="row mt-2">
                                 <div class="col-md-4 text-center">
-                                    <p class="font-weight-bold font-24">{{ $data->name }}</p>
+                                    <p class="font-weight-bold font-24">{{ $data->name }} {{ $data->surename }}</p>
                                     @if(isset($data->photo))
                                         <div style="width: 250px; height: 250px; margin: auto;
                                                 background-repeat: no-repeat;background-size: 250px 250px; background-image:
@@ -146,7 +153,7 @@
                                     <p class="font-17 mt-4 mb-0">Languages</p>
                                     <p class="font-17 font-weight-bold mb-0">{{$data->additional->languages ?? ''}}</p>
                                     <p class="font-17 mt-1 mb-0">National Team</p>
-                                    <p class="font-17 font-weight-bold mb-0">{{ isset($data->additional->first_appearance_team) ? $data->additional->getNationalTeamName() : '' }}</p>
+                                    <p class="font-17 font-weight-bold mb-0">{{ $data->additional->national_team ?? '' }}</p>
                                     <p class="font-17 mt-1 mb-0">First appearance</p>
                                     <p class="font-17 font-weight-bold mb-0">{{ $data->additional->first_appearance_date ?? '' }}</p>
                                     <p class="font-17 mt-1 mb-0">First appearance in first division</p>
@@ -666,17 +673,19 @@
                                     $cons = "<p class='font-17 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>" . $cons_replace . "</p>";
                                     echo $cons;
                                 @endphp
-                                <p class="font-19 col-md-6 bg-success text-dark offset-3 mb-1 mt-3 text-center">
-                                    Conclusion :
                                     @if (isset($data->scout_report->conclusion))
                                         @if (intval($data->scout_report->conclusion) == 1)
-                                            Discard player
+                                            <p class="font-19 col-md-6 bg-danger text-dark offset-3 mb-1 mt-3 text-center">
+                                            Conclusion : Discard player
                                         @elseif (intval($data->scout_report->conclusion) == 2)
-                                            Continue watching
+                                            <p class="font-19 col-md-6 bg-warning text-dark offset-3 mb-1 mt-3 text-center">
+                                            Conclusion : Continue watching
                                         @elseif (intval($data->scout_report->conclusion) == 3)
-                                            Sign the player
+                                            <p class="font-19 col-md-6 bg-success text-dark offset-3 mb-1 mt-3 text-center">
+                                            Conclusion : Sign the player
                                         @else
-                                            No selected
+                                            <p class="font-19 col-md-6 bg-info text-dark offset-3 mb-1 mt-3 text-center">
+                                            Conclusion : No selected
                                         @endif
                                     @endif
                                 </p>

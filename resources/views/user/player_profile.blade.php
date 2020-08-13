@@ -53,12 +53,27 @@
             background-color: #6658dd !important;
         }
         .select2-container {
-            width: 100% !important;
+            width: calc(100% - 25px) !important;
             /*min-width: 300px !important;*/
             max-width: 428px !important;
         }
         .form-control{
             background-color: #3c4853 !important;
+        }
+        [name=injury_date] {
+            width: calc(100% - 25px) !important;
+        }
+        .clear-injury:hover {
+            color: white;
+        }
+        .clear-button {
+            position: absolute;
+            cursor: pointer;
+            right: 15px;
+            top: 38px;
+        }
+        .clear-button:hover {
+            color: white;
         }
     </style>
 @endsection
@@ -88,7 +103,7 @@
                 <button class="col-md-auto btn btn-link text-white waves-effect" onclick="openInjury();">Injuries</button>
                 <button class="col-md-auto btn btn-link text-white waves-effect" onclick="openVideo();">Add Video</button>
                 <a href="{{ route('user.edit_player', $data->id) }}" class="btn btn-outline-info waves-effect waves-light ml-2" style="height: 38px; top: 10px">Edit Player</a>
-                <a href="{{ route('user.player_pdf', $data->id) }}" class="btn btn-primary waves-effect waves-light ml-2" style="height: 38px; top: 10px">Export to PDF</a>
+                <a href="{{ route('user.player_pdf', $data->id) }}" class="btn btn-outline-info waves-effect waves-light ml-2" style="height: 38px; top: 10px">Export to PDF</a>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -690,52 +705,59 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="language" class="control-label">Languages<span class="text-danger">*</span></label>
+                            <label for="language" class="control-label">Languages</label>
                             <select class="custom-select" multiple required id="language" name="language">
                             </select>
+                            <span class="text-center clear-button">X</span>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="national_team" class="control-label">National Team<span class="text-danger">*</span></label>
+                            <label for="national_team" class="control-label">National Team</label>
                             <select class="custom-select" required id="national_team" name="national_team">
                             </select>
+                            <span class="text-center clear-button">X</span>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="first_appearance_date" class="control-label">First appearance in National team<span class="text-danger">*</span></label>
-                            <input type="text" required class="form-control" id="first_appearance_date" value="{{ $data->additional->first_appearance_date ?? '' }}" name="first_appearance_date">
+                            <label for="first_appearance_date" class="control-label">First appearance in National team</label>
+                            <input type="text" required class="form-control" style="width: calc(100% - 25px) !important;" id="first_appearance_date" value="{{ $data->additional->first_appearance_date ?? '' }}" name="first_appearance_date">
+                            <span class="text-center clear-button">X</span>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="first_appearance_team" class="control-label">First appearance in first division (Team)<span class="text-danger">*</span></label>
+                            <label for="first_appearance_team" class="control-label">First appearance in first division (Team)</label>
                             <select class="custom-select" required id="first_appearance_team" name="first_appearance_team">
                             </select>
+                            <span class="text-center clear-button">X</span>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="first_appearance_division" class="control-label">First appearance in First Division<span class="text-danger">*</span></label>
-                            <input type="text" required class="form-control" id="first_appearance_division" value="{{ $data->additional->first_appearance_division ?? '' }}" name="first_appearance_division">
+                            <label for="first_appearance_division" class="control-label">First appearance in First Division</label>
+                            <input type="text" required class="form-control" style="width: calc(100% - 25px) !important;" id="first_appearance_division" value="{{ $data->additional->first_appearance_division ?? '' }}" name="first_appearance_division">
+                            <span class="text-center clear-button">X</span>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="contact_expires" class="control-label">Contract expires<span class="text-danger">*</span></label>
-                            <input type="text" required class="form-control" id="contact_expires" value="{{ $data->additional->contact_expires ?? '' }}" name="contact_expires">
+                            <label for="contact_expires" class="control-label">Contract expires</label>
+                            <input type="text" required class="form-control" style="width: calc(100% - 25px) !important;" id="contact_expires" value="{{ $data->additional->contact_expires ?? '' }}" name="contact_expires">
+                            <span class="text-center clear-button">X</span>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="market_value" class="control-label">Market Value<span class="text-danger">*</span></label>
+                            <label for="market_value" class="control-label">Market Value</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="market_value_ap" style="background-color: #3c4853">€</span>
                                 </div>
-                                <input type="text" data-parsley-type="number" required class="form-control" id="market_value" value="{{ $data->additional->market_value ?? '' }}" name="market_value">
+                                <input type="text" data-parsley-type="number" style="max-width: calc(100% - 65px) !important;" required class="form-control" id="market_value" value="{{ $data->additional->market_value ?? '' }}" name="market_value">
                             </div>
+                            <span class="text-center clear-button">X</span>
                         </div>
                     </div>
                 </div>
@@ -758,37 +780,37 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="general_info" class="control-label">General Information<span class="text-danger">*</span></label>
-                            <input type="text" required class="form-control" id="general_info" value="{{ $data->scout_report->general_info ?? '' }}" name="general_info">
+                            <label for="general_info" class="control-label">General Information</label>
+                            <textarea required class="form-control" id="general_info" name="general_info">{{ $data->scout_report->general_info ?? '' }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="strengths" class="control-label">Strengths<span class="text-danger">*</span></label>
-                            <input type="text" required class="form-control" id="strengths" value="{{ $data->scout_report->strengths ?? '' }}" name="strengths">
+                            <label for="strengths" class="control-label">Strengths</label>
+                            <textarea required class="form-control" id="strengths" name="strengths">{{ $data->scout_report->strengths ?? '' }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="weaknesses" class="control-label">Weaknesses<span class="text-danger">*</span></label>
-                            <input type="text" required class="form-control" id="weaknesses" value="{{ $data->scout_report->weaknesses ?? '' }}" name="weaknesses">
+                            <label for="weaknesses" class="control-label">Weaknesses</label>
+                            <textarea required class="form-control" id="weaknesses" name="weaknesses">{{ $data->scout_report->weaknesses ?? '' }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="pros" class="control-label">Pros<span class="text-danger">*</span></label>
+                            <label for="pros" class="control-label">Pros</label>
                             <textarea required class="form-control" id="pros" name="pros">{{ $data->scout_report->pros ?? '' }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="cons" class="control-label">Cons<span class="text-danger">*</span></label>
+                            <label for="cons" class="control-label">Cons</label>
                             <textarea required class="form-control" id="cons" name="cons">{{ $data->scout_report->cons ?? '' }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="conclusion" class="control-label">Conclusion<span class="text-danger">*</span></label>
+                            <label for="conclusion" class="control-label">Conclusion</label>
                             <div class="radio radio-danger mb-2">
                                 <input id="discard" type="radio" value="1" name="conclusion" {{ (isset($data->scout_report->conclusion) && $data->scout_report->conclusion==1) ? 'checked' : '' }}>
                                 <label for="discard">
@@ -839,23 +861,25 @@
                             @if ($i > 0)
                                 <button class="btn btn-danger btn-xs" style="margin-left: calc(100% - 60px)" onclick="deleteInjury(this)">Delete</button>
                             @endif
-                            <label for="injury" class="control-label">Injury<span class="text-danger">*</span></label>
+                                <span class="clear-injury" style="width: 25px; position: relative; top: 110px; left: calc(100% - 15px); cursor: pointer">X</span>
+                            <label for="injury" class="control-label">Injury</label>
                             <input type="text" required class="form-control" value="{{ $injury->injury ?? '' }}" name="injury">
-                            <label for="injury_date" class="control-label mt-1">Date of injury<span class="text-danger">*</span></label>
+                            <label for="injury_date" class="control-label mt-1">Date of injury</label>
                             <input type="text" required class="form-control" value="{{ $injury->injury_date ?? '' }}" name="injury_date">
-                            <label for="description" class="control-label mt-1">Description and evolution<span class="text-danger">*</span></label>
-                            <input type="text" required class="form-control" value="{{ $injury->description ?? '' }}" name="description">
+                            <label for="description" class="control-label mt-1">Description and evolution</label>
+                            <textarea name="description" class="form-control">{{ $injury->description ?? '' }}</textarea>
                         </div>
                         @php ++$i; @endphp
                     @endforeach
                     @if ($i == 0)
                         <div class="form-group" style="border: 1px solid #6f7983; padding: 15px;">
-                            <label for="injury" class="control-label">Injury<span class="text-danger">*</span></label>
+                            <span class="clear-injury" style="width: 25px; position: relative; top: 110px; left: calc(100% - 15px); cursor: pointer">X</span>
+                            <label for="injury" class="control-label">Injury</label>
                             <input type="text" required class="form-control" value="" name="injury">
-                            <label for="injury_date" class="control-label mt-1">Date of injury<span class="text-danger">*</span></label>
+                            <label for="injury_date" class="control-label mt-1">Date of injury</label>
                             <input type="text" required class="form-control" value="" name="injury_date">
-                            <label for="description" class="control-label mt-1">Description and evolution<span class="text-danger">*</span></label>
-                            <input type="text" required class="form-control" value="" name="description">
+                            <label for="description" class="control-label mt-1">Description and evolution</label>
+                            <textarea name="description" class="form-control"></textarea>
                         </div>
                     @endif
                     </div>
@@ -882,9 +906,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="main_video" class="control-label">Add link to main video<span class="text-danger">*</span></label>
+                            <label for="main_video" class="control-label">Add link to main video</label>
                             <input type="text" required class="form-control" value="{{ $data->video->main_video ?? '' }}" id="main_video">
-                            <label for="another_video" class="control-label mt-1">Add another video<span class="text-danger">*</span></label>
+                            <label for="another_video" class="control-label mt-1">Add another video</label>
                             <input type="text" required class="form-control" value="{{ $data->video->another_video ?? '' }}" id="another_video">
                         </div>
                     </div>
@@ -965,6 +989,13 @@
             return repo.team_name || repo.text;
         }
         $(document).ready(function () {
+            $(".clear-button").click(function (){
+               $(this).parent().find("input").val("");
+               $(this).parent().find("select").val("").change();
+            });
+            $(".clear-injury").click(function (){
+               $(this).parent().find("[name=injury_date]").val("");
+            });
             var languages = {
                 'ach': {
                     nativeName: "Lwo",
@@ -1837,47 +1868,33 @@
                 minimumResultsForSearch: 20, //prevent filter input
                 maximumSelectionSize: 20 // prevent scrollbar
             });
-            @if (isset($data->additional->national_team))
-                var newOption = new Option("{{ $data->additional->getNationalTeamName() }}", "{{ $data->additional->national_team }}", false, false);
-                $('#national_team').append(newOption).trigger('change');
-                $('#national_team').children('[value="{{ $data->additional->national_team }}"]').attr(
-                    {
-                        'team_link':"", //dynamic value from data array
-                        'team_name':"{{ $data->additional->getNationalTeamName() }}" // fixed value
-                    }
-                );
-            @endif
-            $('#national_team').select2({
-                ajax: {
-                    type: "GET",
-                    url: "{{ route('user.getteams') }}",
-                    dataType: 'json',
-                    delay: 250,
-                    data: function (params) {
-                        let result = {"name":params.term};
-                        return result;
-                    },
-                    processResults: function (data, params) {
-                        return {
-                            results:data
-                        };
-                    },
-                    cache: true
-                },
-                dropdownParent: $("#additional-info"),
-                tags: false,
-                placeholder: 'Search for a team',
-                minimumInputLength: 3,
-                templateResult: formatRepo,
-                templateSelection: formatRepoSelection
-            }).on('select2:select', function (e) {
-                let data = e.params.data;
-                $(this).children('[value="'+data.id+'"]').attr(
-                    {
-                        'team_link':data.team_link, //dynamic value from data array
-                        'team_name':data.team_name // fixed value
-                    }
-                );
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://ajayakv-rest-countries-v1.p.rapidapi.com/rest/v1/all",
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-host": "ajayakv-rest-countries-v1.p.rapidapi.com",
+                    "x-rapidapi-key": "596585807fmsh94116d249e0cd64p1d139cjsn6b7b5407af9b"
+                }
+            }
+            $.ajax(settings).done(function (response) {
+                $('#national_team').append($("<option></option>"));
+                for(ind in response)
+                {
+                    if("{{ $data->additional->national_team ?? '' }}" == response[ind].name)
+                        $('#national_team').append($("<option selected></option>").text(response[ind].name).attr("value", response[ind].name));
+                    else
+                        $('#national_team').append($("<option></option>").text(response[ind].name).attr("value", response[ind].name));
+                }
+                $('#national_team').select2({
+                    dropdownParent: $("#additional-info"),
+                    allowClear: false,
+                    dropdownAutoWidth: true,
+                    width: 'element',
+                    minimumResultsForSearch: 20, //prevent filter input
+                    maximumSelectionSize: 20 // prevent scrollbar
+                });
             });
             @if (isset($data->additional->first_appearance_team))
                 newOption = new Option("{{ $data->additional->getFirstAppearanceTeamName() }}", "{{ $data->additional->first_appearance_team }}", false, false);
@@ -2369,76 +2386,76 @@
             let first_appearance_division = $("#first_appearance_division").val();
             let contact_expires = $("#contact_expires").val();
             let market_value = $("#market_value").val();
-            if (languages == "" || languages == null)
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type Languages.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
-            if (national_team == null || national_team == "")
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type National Team.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
-            if (first_appearance_date == "" || first_appearance_date == null)
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type First appearance in National team.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
-            if (first_appearance_team == "" || first_appearance_team == null)
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type First appearance in first division (Team).",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
-            if (first_appearance_division == "" || first_appearance_division == null)
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type First appearance in First Division.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
-            if (contact_expires == "" || contact_expires == null)
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type Contact Expires.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
-            if (market_value == "" || market_value == null)
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type Market Value.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
+            // if (languages == "" || languages == null)
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type Languages.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
+            // if (national_team == null || national_team == "")
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type National Team.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
+            // if (first_appearance_date == "" || first_appearance_date == null)
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type First appearance in National team.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
+            // if (first_appearance_team == "" || first_appearance_team == null)
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type First appearance in first division (Team).",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
+            // if (first_appearance_division == "" || first_appearance_division == null)
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type First appearance in First Division.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
+            // if (contact_expires == "" || contact_expires == null)
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type Contact Expires.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
+            // if (market_value == "" || market_value == null)
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type Market Value.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
             $.ajax({
                 url: "{{ route('user.save_additional', $data->id) }}",
                 data: {languages: languages, national_team: national_team, first_appearance_date: first_appearance_date
@@ -2476,76 +2493,76 @@
                     conclusion = $(this).val();
             });
             let other = $("#other").val();
-            if (general_info == "" || general_info == null)
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type General Information.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
-            if (strengths == null || strengths == "")
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type Strengths.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
-            if (weaknesses == "" || weaknesses == null)
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type Weaknesses.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
-            if (pros == "" || pros == null)
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type Pros.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
-            if (cons == "" || cons == null)
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type Cons.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
-            if (conclusion == "" || conclusion == null || conclusion == 0)
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must select Conclusion.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
-            if (other == "" || other == null)
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type Other.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
+            // if (general_info == "" || general_info == null)
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type General Information.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
+            // if (strengths == null || strengths == "")
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type Strengths.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
+            // if (weaknesses == "" || weaknesses == null)
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type Weaknesses.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
+            // if (pros == "" || pros == null)
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type Pros.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
+            // if (cons == "" || cons == null)
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type Cons.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
+            // if (conclusion == "" || conclusion == null || conclusion == 0)
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must select Conclusion.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
+            // if (other == "" || other == null)
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type Other.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
             $.ajax({
                 url: "{{ route('user.save_scout', $data->id) }}",
                 data: {general_info: general_info, strengths: strengths, weaknesses: weaknesses
@@ -2572,17 +2589,23 @@
             });
         }
         function addInjury() {
+            let top = $(".clear-injury").last().css("top")
             $(".injury").append(
                 '                        <div class="form-group" index = "1" style="border: 1px solid #6f7983; padding: 15px;">\n' +
                 '                            <button class="btn btn-danger btn-xs" style="margin-left: calc(100% - 60px)" onclick="deleteInjury(this)">Delete</button>\n' +
-                '                            <label for="injury" class="control-label">Injury<span class="text-danger">*</span></label>\n' +
+                '                            <span class="clear-injury" style="width: 25px; position: relative; top: 110px; left: calc(100% - 15px); cursor: pointer">X</span>\n' +
+                '                            <label for="injury" class="control-label">Injury</label>\n' +
                 '                            <input type="text" required class="form-control" value="" name="injury">\n' +
-                '                            <label for="injury_date" class="control-label mt-1">Date of injury<span class="text-danger">*</span></label>\n' +
+                '                            <label for="injury_date" class="control-label mt-1">Date of injury</label>\n' +
                 '                            <input type="text" required class="form-control" value="" name="injury_date">\n' +
-                '                            <label for="description" class="control-label mt-1">Description and evolution<span class="text-danger">*</span></label>\n' +
-                '                            <input type="text" required class="form-control" value="" name="description">\n' +
+                '                            <label for="description" class="control-label mt-1">Description and evolution</label>\n' +
+                '                            <textarea name="description" class="form-control"></textarea>\n' +
                 '                        </div>');
             $("input[name=injury_date]").last().flatpickr();
+
+            $(".clear-injury").click(function (){
+                $(this).parent().find("[name=injury_date]").val("");
+            });
         }
         function saveInjury() {
             let injury = [];
@@ -2594,39 +2617,39 @@
                 injury_date.push($(this).val());
             })
             let description = [];
-            $("input[name=description]").each(function (){
+            $("textarea[name=description]").each(function (){
                 description.push($(this).val());
             })
-            if (injury.length == 0 || injury.includes("") == true)
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type all Injuries.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
-            if (injury_date.length == 0 || injury_date.includes("") == true)
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type all Dates of injury.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
-            if (description.length == 0 || description.includes("") == true)
-            {
-                $.NotificationApp.send(
-                    "Warning",
-                    "You must type all Description and evolutions.",
-                    "top-right",
-                    "#da8609",
-                    "warning");
-                return;
-            }
+            // if (injury.length == 0 || injury.includes("") == true)
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type all Injuries.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
+            // if (injury_date.length == 0 || injury_date.includes("") == true)
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type all Dates of injury.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
+            // if (description.length == 0 || description.includes("") == true)
+            // {
+            //     $.NotificationApp.send(
+            //         "Warning",
+            //         "You must type all Description and evolutions.",
+            //         "top-right",
+            //         "#da8609",
+            //         "warning");
+            //     return;
+            // }
             $.ajax({
                 url: "{{ route('user.save_injury', $data->id) }}",
                 data: {injury: injury, injury_date: injury_date, description: description},

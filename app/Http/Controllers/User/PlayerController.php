@@ -130,6 +130,7 @@ class PlayerController extends Controller
         $index = 0;
         foreach ($injuries as $injury)
         {
+            if ($injury == "" && $injury_dates[$index] == "" && $descriptions[$index] == "") continue;
             $injury_model = new Injury;
             $injury_model->player_id = $player_id;
             $injury_model->injury = $injury;
@@ -1276,14 +1277,16 @@ class PlayerController extends Controller
         {
             $team_id = $path_uri[sizeof($path_uri) - 2];
             $url = "https://secure.cache.images.core.optasports.com/soccer/teams/150x150/" . $team_id . ".png";
-            if(file_exists($url))
-            {
-                $file = $this->createFileObject($url);
-                $url = $file->store('avatars');
-                // true
-            }else{
-                $url = '';
-            }
+            $file = $this->createFileObject($url);
+            $url = $file->store('avatars');
+//            if(file_exists($url))
+//            {
+//                $file = $this->createFileObject($url);
+//                $url = $file->store('avatars');
+//                // true
+//            }else{
+//                $url = '';
+//            }
         }
         return view('user.pdf_viewr')
             ->with('data', $player)

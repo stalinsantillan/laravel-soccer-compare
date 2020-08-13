@@ -16,7 +16,7 @@ return [
         'existing' => "Existing",
     ],
     'filter' => [
-        'title'          => 'Filter',
+        'title'          => 'My Players',
     ],
     'userManagement' => [
         'title'          => 'User management',

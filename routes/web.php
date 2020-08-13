@@ -3,7 +3,10 @@
 Route::get('/', function(){
     if (\Auth::user() && \Auth::user()->hasRole("administrator"))
         return redirect()->to("/admin/dashboard");
-    return redirect()->to("/user/dashboard");
+    return redirect()->to("/user/filter_show");
+});
+Route::get('/user/dashboard', function(){
+    return redirect()->to("/user/filter_show");
 });
 
 Auth::routes(['register' => true]);
@@ -41,7 +44,7 @@ Route::middleware(['approved'])->group(function () {
     Route::get('/user/subscriptions', 'PaypalController@subscriptions')->name("user.subscriptions");
 
     Route::group(['middleware' => ['auth', 'subscribed'], 'prefix' => 'user', 'as' => 'user.'], function () {
-        Route::get('dashboard', 'User\DashboardController@index')->name('dashboard');
+//        Route::get('dashboard', 'User\DashboardController@index')->name('dashboard');
         // Player
         Route::get('getteams', 'User\PlayerController@getteams')->name('getteams');
         Route::get('add_player', 'User\PlayerController@add_player')->name('add_player');

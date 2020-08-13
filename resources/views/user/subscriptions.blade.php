@@ -6,6 +6,9 @@
         .switchery {
             width: 90px;
         }
+        .card-pricing-recommended {
+            background-color: #3088c7 !important;
+        }
     </style>
 @endsection
 @section('content')
@@ -15,9 +18,7 @@
         <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
+                    <li class="breadcrumb-item active">Subscriptions</li>
                 </ol>
             </div>
             <h4 class="page-title">Plans</h4>
@@ -76,12 +77,12 @@
                 @if($user->is_subscribed == 1)
                     @if($plan_id == 3)
 {{--                        <a href="{{ url('/subscribe/paypal/cancel/3') }}" class="btn btn-danger btn-block waves-effect waves-light mt-1 mb-2 width-sm">Cancel</a>--}}
-                        <button class="btn btn-primary btn-block mt-1 mb-2 width-sm" disabled="">Selected</button>
+                        <button class="btn btn-outline-info btn-block mt-1 mb-2 width-sm" disabled="">Selected</button>
                     @else
-                        <button class="btn btn-primary btn-block mt-1 mb-2 width-sm" disabled="">Other Plan Selected</button>
+                        <button class="btn btn-outline-info btn-block mt-1 mb-2 width-sm" disabled="">Other Plan Selected</button>
                     @endif
                 @else
-                    <a href="#" class="btn btn-primary btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(3)">Select</a>
+                    <a href="#" class="btn btn-outline-info btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(3)">Select</a>
                 @endif
                 <div class="dropdown-divider"></div>
                 <ul class="card-pricing-features">
@@ -148,12 +149,12 @@
                 @if($user->is_subscribed == 1)
                     @if($plan_id == 1)
 {{--                        <a href="{{ url('/subscribe/paypal/cancel/1') }}" class="btn btn-danger btn-block waves-effect waves-light mt-1 mb-2 width-sm">Cancel</a>--}}
-                        <button class="btn btn-primary btn-block mt-1 mb-2 width-sm" disabled="">Selected</button>
+                        <button class="btn btn-outline-info btn-block mt-1 mb-2 width-sm" disabled="">Selected</button>
                     @else
-                        <button class="btn btn-primary btn-block mt-1 mb-2 width-sm" disabled="">Other Plan Selected</button>
+                        <button class="btn btn-outline-info btn-block mt-1 mb-2 width-sm" disabled="">Other Plan Selected</button>
                     @endif
                 @else
-                    <a href="#" class="btn btn-primary btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(1)">Select</a>
+                    <a href="#" class="btn btn-outline-info btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(1)">Select</a>
                 @endif
                 <div class="dropdown-divider"></div>
                 <ul class="card-pricing-features">
@@ -214,7 +215,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <button type="button" class="btn btn-block btn-lg btn-primary waves-effect waves-light" onclick="gotoStripe()">
+                <button type="button" class="btn btn-block btn-lg btn-outline-info waves-effect waves-light" onclick="gotoStripe()">
                     <i class="mdi mdi-credit-card"></i> Credit Card</button>
                     
                         <form action="#" method="post" id="payment-form" class="card card-body" style="display:none;">
@@ -232,7 +233,7 @@
                             <button class="btn btn-dark width-xs waves-effect waves-light" type="submit">Pay</button>
                         </form>
                     <div class="dropdown-divider"></div>
-                    <button type="button" class="btn btn-block btn-lg btn-primary waves-effect waves-light" onclick="gotoPaypal()">
+                    <button type="button" class="btn btn-block btn-lg btn-outline-info waves-effect waves-light" onclick="gotoPaypal()">
                     <i class="mdi mdi-paypal"></i> Paypal</button>
             </div>
         </div><!-- /.modal-content -->
