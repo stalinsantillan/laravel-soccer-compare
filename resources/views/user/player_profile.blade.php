@@ -2079,7 +2079,7 @@
             } else if (attributeType == 2)
             {
                 //Defenders 2 - Midfielders 1
-                aerial = ({{ $data->latestParam->aerial_duels }} + {{ $data->latestParam->jumping_reach }}) /3;
+                aerial = ({{ $data->latestParam->aerial_duels }} + {{ $data->latestParam->jumping_reach }}) / 2;
                 defense = ({{ $data->latestParam->marking }} + {{ $data->latestParam->tackling }} + {{ $data->latestParam->deffense }}) /3;
                 general_radar_data = [pass, attack, tactical, physical, aerial, mental, technique, defense];
             } else if (attributeType == 3)
