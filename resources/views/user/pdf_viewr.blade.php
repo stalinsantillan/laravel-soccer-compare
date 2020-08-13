@@ -724,7 +724,7 @@
                     kendo.drawing.pdf.saveAs(group, "Exported.pdf")
                 });
         }
-        let isGoalkeeper = 0;
+        let attributeType = 0;
         $(document).ready(function (){
             var options =  {
                 field: {
@@ -781,6 +781,11 @@
             @if ($position->specify == "Left Centre forward") data.push({name: ' ', position: 'LC_F'}); @endif
             @if ($position->specify == "Right Centre forward") data.push({name: ' ', position: 'RC_F'}); @endif
             @endforeach
+            let arrGoalkeeper = ["C_GK"];
+            let arrDefender = ["C_SW", "C_B", "LC_B", "RC_B"];
+            let arrDefender_Midfielder = ["L_B", "R_B", "L_WB", "R_WB", "C_DM", "LC_DM", "RC_DM", "C_M", "LC_M", "RC_M"];
+            let arrMidfielder = ["L_M", "R_M", "C_AM", "LC_AM", "RC_AM"];
+            let arrForward = ["C_F", "C_S", "L_W", "R_W", "LC_S", "RC_S", "LC_F", "RC_F"];
             $("#soccerfield").soccerfield(data,options);
             let posIndex = 0;
             for (const r in data) {
@@ -790,9 +795,21 @@
                 if (posIndex == 0) {
                     $(obj).attr("style", "background: #039870; width: 20px !important; min-height: 20px !important; margin-top: 11px !important; margin-left: 2px !important;");
                 }
-                if (data[r].position == 'C_GK')
+                if (arrGoalkeeper.includes(data[r].position))
                 {
-                    isGoalkeeper = 1;
+                    attributeType = 0;
+                } else if (arrDefender.includes(data[r].position))
+                {
+                    attributeType = 1;
+                } else if (arrDefender_Midfielder.includes(data[r].position))
+                {
+                    attributeType = 2;
+                } else if (arrMidfielder.includes(data[r].position))
+                {
+                    attributeType = 3;
+                } else if (arrForward.includes(data[r].position))
+                {
+                    attributeType = 4;
                 }
                 ++posIndex;
             }
@@ -1005,31 +1022,44 @@
             let goal_keeping = ({{ $data->latestParam->command_of_area }} + {{ $data->latestParam->communication }} + {{ $data->latestParam->handling }}
                 + {{ $data->latestParam->one_on_ones }} + {{ $data->latestParam->rushing_out }}) /5;
             let general_radar_data = [pass, feet_playing, tactical, physical, aerial, mental, gk_reflexes, goal_keeping];
+
+            let attack = ({{ $data->latestParam->shots }} + {{ $data->latestParam->long_shots }}) /2;
+            let technique = ({{ $data->latestParam->first_touch }} + {{ $data->latestParam->technique }} + {{ $data->latestParam->dribbling }}) /3;
+            let defense = ({{ $data->latestParam->marking }} + {{ $data->latestParam->tackling }} + {{ $data->latestParam->deffense }}) /3;
+            pass = ({{ $data->latestParam->crossing }} + {{ $data->latestParam->passing }} + {{ $data->latestParam->long_pass }}) /3;
+            general_radar_label = ['PASS', 'ATTACK', 'TACTICAL', 'PHYSICAL', 'AERIAL', 'MENTAL', 'TECHNIQUE', 'DEFENSE'];
+            if (attributeType == 1)
+            {
+                //Defenders 1
+                aerial = ({{ $data->latestParam->heading }} + {{ $data->latestParam->aerial_duels }} + {{ $data->latestParam->jumping_reach }}) /3;
+                defense = ({{ $data->latestParam->marking }} + {{ $data->latestParam->tackling }} + {{ $data->latestParam->deffense }}) /3;
+                general_radar_data = [pass, attack, tactical, physical, aerial, mental, technique, defense];
+            } else if (attributeType == 2)
+            {
+                //Defenders 2 - Midfielders 1
+                aerial = ({{ $data->latestParam->aerial_duels }} + {{ $data->latestParam->jumping_reach }}) /3;
+                defense = ({{ $data->latestParam->marking }} + {{ $data->latestParam->tackling }} + {{ $data->latestParam->deffense }}) /3;
+                general_radar_data = [pass, attack, tactical, physical, aerial, mental, technique, defense];
+            } else if (attributeType == 3)
+            {
+                //Midfielders 2
+                aerial = ({{ $data->latestParam->aerial_duels }} + {{ $data->latestParam->jumping_reach }}) / 2;
+                defense = ({{ $data->latestParam->marking }} + {{ $data->latestParam->deffense }}) / 2;
+                general_radar_data = [pass, attack, tactical, physical, aerial, mental, technique, defense];
+            } else if (attributeType == 4)
+            {
+                //Fordwars
+                aerial = ({{ $data->latestParam->aerial_duels }} + {{ $data->latestParam->jumping_reach }}) /2;
+                defense = {{ $data->latestParam->marking }};
+                general_radar_data = [pass, attack, tactical, physical, aerial, mental, technique, defense];
+            }
             for (var i = 0; i < general_radar_label.length; i++)
             {
                 $("[type=average]").find("tr:eq(" + i + ")").each(function () {
                     $(this).find("td:eq(0)").text(general_radar_label[i]);
-                    $(this).find("td:eq(1)").text(general_radar_data[i]);
+                    let color = getColor(general_radar_data[i]);
+                    $(this).find("td:eq(1)").text(general_radar_data[i].toFixed(1).replace(".0", "")).css("background", color);
                 })
-            }
-            if (isGoalkeeper == 0)
-            {
-                //not Goalkeeper
-                general_radar_label = ['PASS', 'ATTACK', 'TACTICAL', 'PHYSICAL', 'AERIAL', 'MENTAL', 'TECHNIQUE', 'DEFENSE'];
-                pass = ({{ $data->latestParam->crossing }} + {{ $data->latestParam->passing }} + {{ $data->latestParam->long_pass }}) /3;
-                let attack = ({{ $data->latestParam->shots }} + {{ $data->latestParam->long_shots }}) /2;
-                aerial = ({{ $data->latestParam->heading }} + {{ $data->latestParam->aerial_duels }} + {{ $data->latestParam->jumping_reach }}) /3;
-                let technique = ({{ $data->latestParam->first_touch }} + {{ $data->latestParam->technique }} + {{ $data->latestParam->dribbling }}) /3;
-                let defense = ({{ $data->latestParam->marking }} + {{ $data->latestParam->tackling }} + {{ $data->latestParam->deffense }}) /3;
-                general_radar_data = [pass, attack, tactical, physical, aerial, mental, technique, defense];
-                for (var i = 0; i < general_radar_label.length; i++)
-                {
-                    $("[type=average]").find("tr:eq(" + i + ")").each(function () {
-                        $(this).find("td:eq(0)").text(general_radar_label[i]);
-                        let color = getColor(general_radar_data[i]);
-                        $(this).find("td:eq(1)").text(general_radar_data[i].toFixed(1).replace(".0", "")).css("background", color);
-                    })
-                }
             }
             new Chart(document.getElementById("general-radar").getContext("2d"), {
                 type: 'radar',
