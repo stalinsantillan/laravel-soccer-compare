@@ -14,18 +14,6 @@ class Additional extends Model
     {
         return $this->belongsTo('App\Models\User\Player');
     }
-    public function getNationalTeamName(){
-        $national_id_string = $this->national_team;
-        $national = explode("_", $national_id_string);
-        $national_id = $national[0];
-        $national_name = '';
-        if (sizeof($national) > 1) {
-            $national_name = Team::find($national_id)->name;
-        } else {
-            $national_name = ApiTeam::find($national_id)->team_name;
-        }
-        return $national_name;
-    }
     public function getFirstAppearanceTeamName(){
         $first_appearance_id_string = $this->first_appearance_team;
         $first_appearance = explode("_", $first_appearance_id_string);

@@ -63,7 +63,7 @@
                     </div>
                     <div class="col-md-auto">
                         <label for="btn_position" class="col-form-label">&nbsp;</label><br />
-                        <button type="button" class="btn btn-primary" id="btn_position">Position</button>
+                        <button type="button" class="btn btn-outline-info" id="btn_position">Position</button>
                         <!-- PopoverX content -->
                         <div id="popover_position" class="popover popover-x popover-default" style="min-width: 550px;">
                             <div class="arrow"></div>
@@ -137,14 +137,14 @@
                                 </div>
                             </div>
                             <div class="popover-footer text-center">
-                                <button type="button" class="btn btn-sm btn-primary" style="min-width: 150px" onclick="setPosition()">Set</button>
+                                <button type="button" class="btn btn-sm btn-info" style="min-width: 150px" onclick="setPosition()">Set</button>
 {{--                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="popover-x">Close</button>--}}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-auto">
                         <label for="btn_age" class="col-form-label">&nbsp;</label><br />
-                        <button type="button" class="btn btn-primary" id="btn_age">Age</button>
+                        <button type="button" class="btn btn-outline-info" id="btn_age">Age</button>
                         <!-- PopoverX content -->
                         <div id="popover_age" class="popover popover-x popover-default" style="min-width: 550px;">
                             <div class="arrow"></div>
@@ -157,14 +157,14 @@
                                 </div>
                             </div>
                             <div class="popover-footer text-center">
-                                <button type="button" class="btn btn-sm btn-primary" style="min-width: 150px" onclick="setAge()">Set</button>
+                                <button type="button" class="btn btn-sm btn-info" style="min-width: 150px" onclick="setAge()">Set</button>
 {{--                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="popover-x">Close</button>--}}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-auto">
                         <label for="btn_height" class="col-form-label">&nbsp;</label><br />
-                        <button type="button" class="btn btn-primary" id="btn_height">Height</button>
+                        <button type="button" class="btn btn-outline-info" id="btn_height">Height</button>
                         <!-- PopoverX content -->
                         <div id="popover_height" class="popover popover-x popover-default" style="min-width: 550px;">
                             <div class="arrow"></div>
@@ -178,7 +178,7 @@
                             </div>
                             <div class="popover-footer">
                                 <div class="popover-footer text-center">
-                                    <button type="button" class="btn btn-sm btn-primary" style="min-width: 150px" onclick="setHeight()">Set</button>
+                                    <button type="button" class="btn btn-sm btn-info" style="min-width: 150px" onclick="setHeight()">Set</button>
                                     {{--                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="popover-x">Close</button>--}}
                                 </div>
                             </div>
@@ -190,7 +190,7 @@
                     </div>
                     <div class="col-md-auto">
                         <label for="" class="col-form-label">&nbsp;</label><br />
-                        <button class="btn btn-primary" type="button" onclick="search()"><i class="fe-search"> Search</i></button>
+                        <button class="btn btn-outline-info" type="button" onclick="search()"><i class="fe-search"> Search</i></button>
                     </div>
                 </div>
             </div>
@@ -207,9 +207,9 @@
                     <th>Height</th>
                     <th>Nationality</th>
                     <th>League</th>
-                    <th>Tactical average</th>
-                    <th>Physical average</th>
                     <th>Technical average</th>
+                    <th>Mental average</th>
+                    <th>Physical average</th>
                     <th>Goalkeeper average</th>
                     <th></th>
                 </tr>
@@ -263,7 +263,7 @@
                                     @if($subone > 1)
                                         <br>
                                     @endif
-                                    <span class="badge badge-primary">{{ $position->specify }}</span>
+                                    <span class="badge badge-info text-dark">{{ $position->specify }}</span>
                                     @php ++$subone; @endphp
                                 @endforeach
                             </td>
@@ -284,9 +284,9 @@
                                 }
                             @endphp
                             <td>{{ $league }}</td>
+                            <td>{{ round($one->technical_average, 1) }}</td>
                             <td>{{ round($one->mental_average, 1) }}</td>
                             <td>{{ round($one->physical_average, 1) }}</td>
-                            <td>{{ round($one->technical_average, 1) }}</td>
                             <td>{{ round($one->goalkeeper_average, 1) }}</td>
                             <td>
                                 <form action="{{ route('user.delete_player', $one->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">

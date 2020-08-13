@@ -42,7 +42,7 @@
                     <input type="text" class="form-control" id="name" name="name" >
                 </div>
                 <div class="col-md-auto">
-                    <button class="btn btn-primary" type="button" onclick="showTable()" onkeydown=""><i class="fe-search"> Search</i></button>
+                    <button class="btn btn-outline-info" type="button" onclick="showTable()" onkeydown=""><i class="fe-search"> Search</i></button>
                 </div>
                 <div class="col-md-6 text-right">
                     <button type="button" id="btnPrevious" disabled class="btn btn-secondary">Previous</button>

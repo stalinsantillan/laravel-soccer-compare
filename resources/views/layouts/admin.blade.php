@@ -21,6 +21,9 @@
             .select2-selection__choice__remove {
                 color: #fffafd !important;
             }
+            .navbar-custom {
+                background-color: #38414a !important;
+            }
         </style>
     </head>
     <body>
