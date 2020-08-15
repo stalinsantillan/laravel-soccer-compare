@@ -42,19 +42,9 @@
 <!-- Plans -->
 <div class="row mb-3">
     <div class="col-md-6 offset-3 text-center">
+        <span class="font-16 font-weight-bold mr-1">Monthly</span>
         <input type="checkbox" data-plugin="switchery" data-color="#1bb99a" data-secondary-color="#1C8AB9" />
-{{--        <ul class="nav nav-pills navtab-bg nav-justified">--}}
-{{--            <li class="nav-item">--}}
-{{--                <a href="#monthly" id="monthly_tag" data-toggle="tab" aria-expanded="true" class="nav-link active" onclick="selectType()">--}}
-{{--                    Monthly--}}
-{{--                </a>--}}
-{{--            </li>--}}
-{{--            <li class="nav-item">--}}
-{{--                <a href="#yearly" id="yearly_tag" data-toggle="tab" aria-expanded="false" class="nav-link" onclick="selectType()">--}}
-{{--                    Yearly--}}
-{{--                </a>--}}
-{{--            </li>--}}
-{{--        </ul>--}}
+        <span class="font-16 font-weight-bold ml-1">Yearly</span>
     </div>
 </div>
 @php
