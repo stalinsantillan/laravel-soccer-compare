@@ -27,18 +27,10 @@
                 </div>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i class="fe-user"></i>
-                    <span>My Account</span>
-                </a>
-
-                <!-- item-->
                 <a href="{{ route('auth.change_password') }}" class="dropdown-item notify-item">
                     <i class="fas fa-key"></i>
                     <span>Password</span>
                 </a>
-
-                <div class="dropdown-divider"></div>
 
                 <!-- item-->
                 <a href="{{ route('user.subscriptions') }}" class="dropdown-item notify-item">
