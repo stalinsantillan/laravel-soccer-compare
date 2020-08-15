@@ -1352,7 +1352,7 @@ class PlayerController extends Controller
      */
     public function filter_show()
     {
-        $data = Player::query()->where("user_id", Auth::user()->id)->orderByDesc('general_average')->limit(10)->get();
+        $data = Player::query()->where("user_id", Auth::user()->id)->orderByDesc('general_average')->get();
 
         return view("user.filter")
             ->with('data', $data);
