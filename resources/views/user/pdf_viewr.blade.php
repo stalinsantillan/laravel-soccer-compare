@@ -57,27 +57,27 @@
 @php
     function getColor($val)
     {
-        $color = "#d3d3d3";
+        $color = "#F76858";
         $val = floatval($val);
-        if ($val >= 5 && $val < 6)
-        {
-            $color = "#fc3639";
-        } else if ($val >= 6 && $val < 7)
+        if ($val >= 4 && $val < 5)
         {
             $color = "#F8696B";
-        } else if ($val >= 7 && $val < 7.5)
+        } else if ($val >= 5 && $val < 6)
         {
-            $color = "#FBAA77";
-        } else if ($val >= 7.5 && $val < 8)
+            $color = "#FB9473";
+        } else if ($val >= 6 && $val < 7)
         {
-            $color = "#DAE495";
-        } else if ($val >= 8 && $val < 8.5)
+            $color = "#FBBE7B";
+        } else if ($val >= 7 && $val < 8)
         {
-            $color = "#FFEB84";
-        } else if ($val >= 8.5 && $val < 9)
+            $color = "#FEEB84";
+        } else if ($val >= 8 && $val < 9)
         {
-            $color = "#63BE7B";
+            $color = "#CDDE82";
         } else if ($val >= 9 && $val < 10)
+        {
+            $color = "#98CE80";
+        } else if ($val >= 10)
         {
             $color = "#63BE7B";
         }
@@ -1127,27 +1127,27 @@
         }
         function getColor($val)
         {
-            $color = "#d3d3d3";
+            $color = "#F76858";
             $val = parseFloat($val);
-            if ($val >= 5 && $val < 6)
-            {
-                $color = "#fc3639";
-            } else if ($val >= 6 && $val < 7)
+            if ($val >= 4 && $val < 5)
             {
                 $color = "#F8696B";
-            } else if ($val >= 7 && $val < 7.5)
+            } else if ($val >= 5 && $val < 6)
             {
-                $color = "#FBAA77";
-            } else if ($val >= 7.5 && $val < 8)
+                $color = "#FB9473";
+            } else if ($val >= 6 && $val < 7)
             {
-                $color = "#DAE495";
-            } else if ($val >= 8 && $val < 8.5)
+                $color = "#FBBE7B";
+            } else if ($val >= 7 && $val < 8)
             {
-                $color = "#FFEB84";
-            } else if ($val >= 8.5 && $val < 9)
+                $color = "#FEEB84";
+            } else if ($val >= 8 && $val < 9)
             {
-                $color = "#63BE7B";
+                $color = "#CDDE82";
             } else if ($val >= 9 && $val < 10)
+            {
+                $color = "#98CE80";
+            } else if ($val >= 10)
             {
                 $color = "#63BE7B";
             }
