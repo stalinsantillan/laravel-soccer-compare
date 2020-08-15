@@ -21,10 +21,10 @@
             </a>
 
             <!-- item-->
-            <a href="{{ route('auth.change_password') }}" class="dropdown-item notify-item">
-                <i class="fas fa-key"></i>
-                <span>Change password</span>
-            </a>
+{{--            <a href="{{ route('auth.change_password') }}" class="dropdown-item notify-item">--}}
+{{--                <i class="fas fa-key"></i>--}}
+{{--                <span>Change password</span>--}}
+{{--            </a>--}}
 
             <div class="dropdown-divider"></div>
 
