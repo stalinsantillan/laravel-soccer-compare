@@ -20,7 +20,7 @@
             padding: 0 !important;
         }
         .select2-selection__choice__remove:hover{
-            background-color: #6658dd !important;
+            background-color: #3cade1 !important;
         }
         .select2-container {
             width: auto !important;

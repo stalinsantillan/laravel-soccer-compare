@@ -19,6 +19,24 @@
           .user-photo {
             border-radius: 8px;
           }
+          .page-item.active .page-link {
+              background-color: #3cade1 !important;
+              border-color: #3cade1 !important;
+          }
+          .flatpickr-day.endRange, .flatpickr-day.endRange.inRange, .flatpickr-day.endRange.nextMonthDay, .flatpickr-day.endRange.prevMonthDay, .flatpickr-day.endRange:focus, .flatpickr-day.endRange:hover, .flatpickr-day.selected, .flatpickr-day.selected.inRange, .flatpickr-day.selected.nextMonthDay, .flatpickr-day.selected.prevMonthDay, .flatpickr-day.selected:focus, .flatpickr-day.selected:hover, .flatpickr-day.startRange, .flatpickr-day.startRange.inRange, .flatpickr-day.startRange.nextMonthDay, .flatpickr-day.startRange.prevMonthDay, .flatpickr-day.startRange:focus, .flatpickr-day.startRange:hover
+          {
+              background-color: #3cade1 !important;
+              border-color: #3cade1 !important;
+          }
+          .select2-container--default .select2-results__option[aria-selected=true]:hover
+          {
+              background-color: #3cade1 !important;
+              border-color: #3cade1 !important;
+          }
+          .select2-container .select2-selection--multiple .select2-selection__choice
+          {
+              background-color: #3cade1 !important;
+          }
         </style>
     </head>
     <body>
