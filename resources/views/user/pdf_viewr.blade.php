@@ -29,9 +29,9 @@
         }
         .soccerfield-player span {
             font-size: 8px !important;
-            width: 15px !important;
-            min-height: 15px !important;
-            max-height: 15px !important;
+            width: 12px !important;
+            min-height: 12px !important;
+            max-height: 12px !important;
             border-radius: 50%;
             margin-top: 14px !important;
             margin-left: 6px !important;
@@ -91,85 +91,91 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-5 offset-1">
-                            <a class="btn btn-primary mb-2" href="{{ route('user.player_profile', $data->id) }}"><- Go to profile</a>
+                            <a class="btn btn-link mb-2 text-dark font-13" href="{{ route('user.player_profile', $data->id) }}"><i class="fe-arrow-left mr-1"></i>Go to profile</a>
                         </div>
                         <div class="col-md-5 text-right">
-                            <button class="btn btn-success mb-2" onclick="download()">Download PDF</button>
+                            <div class="checkbox checkbox-info checkbox-circle" style="position: absolute; right: 155px; top: 15px">
+                                <input id="showteam" type="checkbox" checked="">
+                                <label for="showteam">
+                                    Show Team Logo
+                                </label>
+                            </div>
+                            <button class="btn btn-success mt-1" onclick="download()">Download PDF</button>
                         </div>
                     </div>
                     <div class="row" id="content" style="background: #F2F5F7">
-                        <div style="margin: auto; width: 1378px;" id="page1">
-                            <div class="row" style="height: 70px; background: #FF4040">
+                        <div style="margin-left: calc(50% - 397px); width: 794px; height: 1123px;" id="page1">
+                            <div class="row" style="height: 50px; background: #F2F5F7">
                                 <div class="col-md-6">
                                     @if ($team_url != "")
-                                        <div class="bg-white ml-5" style="width: 120px;">
-                                            <img src="{{ asset('storage').'/'.$team_url }}" style="width: 120px; height: 120px;" />
+                                        <div class="bg-white ml-5 team-logo" style="width: 100px;">
+                                            <img src="{{ asset('storage').'/'.$team_url }}" style="width: 100px; height: 100px;" />
                                         </div>
                                     @endif
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <span class="logo-lg">
-                                        <img src="{{ asset('admin_assets/images/logo-light.png') }}" alt="" height="50" style="margin-top: 10px;">
+                                        <img src="{{ asset('user_assets/images/logo-pdf.png') }}" alt="" height="70" style="margin-top: 10px; margin-right: 50px">
                                     </span>
                                 </div>
                             </div>
-                            <div class="row mt-4">
+                            <div class="row mt-3">
                                 <div class="col-md-12 text-center">
-                                    <h1>Scout Report</h1>
+                                    <h3>Scout Report</h3>
                                 </div>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-md-4 text-center">
-                                    <p class="font-weight-bold font-24">{{ $data->name }} {{ $data->surename }}</p>
+                                    <p class="font-weight-bold font-18">{{ $data->name }} {{ $data->surename }}</p>
                                     @if(isset($data->photo))
-                                        <div style="width: 250px; height: 250px; margin: auto;
-                                                background-repeat: no-repeat;background-size: 250px 250px; background-image:
+                                        <div style="width: 180px; height: 180px; margin: auto;
+                                                background-repeat: no-repeat;background-size: 180px 180px; background-image:
                                                 url({{ asset('storage').'/'.$data->photo }});"></div>
                                     @else
-                                        <div style="width: 250px; height: 250px; margin: auto;
-                                                background-repeat: no-repeat;background-size: 250px 250px; background-image:
+                                        <div style="width: 180px; height: 180px; margin: auto;
+                                                background-repeat: no-repeat;background-size: 180px 180px; background-image:
                                                 url({{ asset('admin_assets/images/users/standard.png') }});"></div>
                                     @endif
-                                    <p class="font-19 mt-3 mb-0">Actual Club</p>
-                                    <p class="font-weight-bold font-22">{{ $data->current_team }}</p>
+                                    <p class="font-15 mt-2 mb-0">Actual Club</p>
+                                    <p class="font-weight-bold font-18">{{ $data->current_team }}</p>
                                 </div>
                                 <div class="col-md-3">
-                                    <p class="font-17 mt-4 mb-0">Date of birth</p>
+                                    <p class="font-13 mt-4 mb-0">Date of birth</p>
                                     @php
                                         $year = date("Y", strtotime($data->birth_date));
                                         $age = (date('Y') - $year);
                                     @endphp
-                                    <p class="font-17 font-weight-bold mb-0">{{ $data->birth_date }} <span class="ml-3">{{ $age }} years</span></p>
-                                    <p class="font-17 mt-1 mb-0">Nationality</p>
-                                    <p class="font-17 font-weight-bold mb-0">{{ $data->nationality }}</p>
-                                    <p class="font-17 mt-1 mb-0">Height</p>
-                                    <p class="font-17 font-weight-bold mb-0">{{ $data->height }} cm</p>
-                                    <p class="font-17 mt-1 mb-0">Weight</p>
-                                    <p class="font-17 font-weight-bold mb-0">{{ $data->weight }} kg</p>
-                                    <p class="font-17 mt-1 mb-0">Foot</p>
-                                    <p class="font-17 font-weight-bold mb-0">{{ $data->foot }}</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ $data->birth_date }} <span class="ml-3">{{ $age }} years</span></p>
+                                    <p class="font-13 mt-1 mb-0">Nationality</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ $data->nationality }}</p>
+                                    <p class="font-13 mt-1 mb-0">Height</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ $data->height }} cm</p>
+                                    <p class="font-13 mt-1 mb-0">Weight</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ $data->weight }} kg</p>
+                                    <p class="font-13 mt-1 mb-0">Foot</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ $data->foot }}</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <p class="font-17 mt-4 mb-0">Languages</p>
-                                    <p class="font-17 font-weight-bold mb-0">{{$data->additional->languages ?? ''}}</p>
-                                    <p class="font-17 mt-1 mb-0">National Team</p>
-                                    <p class="font-17 font-weight-bold mb-0">{{ $data->additional->national_team ?? '' }}</p>
-                                    <p class="font-17 mt-1 mb-0">First appearance</p>
-                                    <p class="font-17 font-weight-bold mb-0">{{ $data->additional->first_appearance_date ?? '' }}</p>
-                                    <p class="font-17 mt-1 mb-0">First appearance in first division</p>
-                                    <p class="font-17 font-weight-bold mb-0">{{ isset($data->additional->first_appearance_team) ? $data->additional->getFirstAppearanceTeamName() : '' }}
+                                    <p class="font-13 mt-4 mb-0">Languages</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{$data->additional->languages ?? ''}}</p>
+                                    <p class="font-13 mt-1 mb-0">National Team</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ $data->additional->national_team ?? '' }}</p>
+                                    <p class="font-13 mt-1 mb-0">First appearance</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ $data->additional->first_appearance_date ?? '' }}</p>
+                                    <p class="font-13 mt-1 mb-0">First appearance in first division</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ isset($data->additional->first_appearance_team) ? $data->additional->getFirstAppearanceTeamName() : '' }}
                                         <span class="ml-3">{{ $data->additional->first_appearance_division ?? '' }}</span>
                                     </p>
-                                    <p class="font-17 mt-1 mb-0">Contract Expires</p>
-                                    <p class="font-17 font-weight-bold mb-0">{{ $data->additional->contact_expires ?? '' }}</p>
-                                    <p class="font-17 mt-1 mb-0">Market Value</p>
-                                    <p class="font-17 font-weight-bold mb-0">{{ $data->additional->market_value ?? '' }} EUR</p>
+                                    <p class="font-13 mt-1 mb-0">Contract Expires</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ $data->additional->contact_expires ?? '' }}</p>
+                                    <p class="font-13 mt-1 mb-0">Market Value</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ $data->additional->market_value ?? '' }} EUR</p>
                                 </div>
                                 <div class="col-md-1">
                                     <div class="text-center font-20"
-                                         style="position: absolute; width: 200px; height: 50px;
-                                            border: 2px solid #00AF80; padding-top: 10px; cursor: pointer;
-                                            right: 50px; top: -50px;">
+                                         style="position: absolute; width: 170px; height: 40px;
+                                            border: 2px solid #00AF80; padding-top: 4px; cursor: pointer;
+                                            right: 50px; top: -40px;">
                                         <a href="{{ $data->video->main_video ?? '' }}" style="color: #00AF80;">
                                             Watch Video
                                         </a>
@@ -184,451 +190,444 @@
                                     @php $i = 0; @endphp
                                     @foreach($data->positions as $position)
                                         @if ($i == 0)
-                                            <p class="font-17 mb-0">Main Position : </p>
+                                            <p class="font-13 mb-0">Main Position : </p>
                                         @elseif ($i == 1)
-                                            <p class="font-17 mt-2 mb-0">Other Position : </p>
+                                            <p class="font-13 mt-2 mb-0">Other Position : </p>
                                         @endif
-                                        <p class="font-17 font-weight-bold mb-0">{{ $position->specify }}</p>
+                                        <p class="font-13 font-weight-bold mb-0">{{ $position->specify }}</p>
                                         @php ++$i; @endphp
                                     @endforeach
                                 </div>
                                 <div class="col-md-4">
-                                    <p class="font-17 mb-0">General Information</p>
-                                    <p class="font-17 font-weight-bold mb-0">{{ $data->scout_report->general_info ?? '' }}</p>
-                                    <p class="font-17 mt-4 mb-0">Strengths</p>
-                                    <p class="font-17 font-weight-bold mb-0">{{ $data->scout_report->strengths ?? '' }}</p>
-                                    <p class="font-17 mt-4 mb-0">Weaknesses</p>
-                                    <p class="font-17 font-weight-bold mb-0">{{ $data->scout_report->weaknesses ?? '' }}</p>
+                                    <p class="font-13 mb-0">General Information</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ $data->scout_report->general_info ?? '' }}</p>
+                                    <p class="font-13 mt-4 mb-0">Strengths</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ $data->scout_report->strengths ?? '' }}</p>
+                                    <p class="font-13 mt-4 mb-0">Weaknesses</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ $data->scout_report->weaknesses ?? '' }}</p>
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
                         </div>
-                        <div style="margin: auto; width: 1378px;" id="page2">
-                            <div class="row" style="min-height: 70px;height: 70px; background: #FF4040">
-                                <div class="ml-5" style="width: 120px; height: 120px;">
-                                    <a href="#" style="color: #FF4040">Header Bar</a>
-                                </div>
-                            </div>
+                        <div style="margin-left: calc(50% - 397px); width: 794px; height: 1123px;" id="page2">
                             <div class="row mt-2">
-                                <div class="col-md-5 mt-4 offset-1">
+                                <div class="col-md-5 offset-1 mt-4">
+                                    <div class="card-title font-15 font-weight-bold mb-0">
+                                        Technical
+                                    </div>
                                     <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="card-title font-15 font-weight-bold mb-0">
-                                                Technical
-                                            </div>
+                                        <div class="col-md-12">
                                             <table type="technical" width="100%">
                                                 <tr>
-                                                    <td class="font-16" for="corners">Corners</td>
-                                                    <td class="font-16" width="50" align="center" style="background: {{ getColor($data->latestParam->corners) }}; color: black;">{{ $data->latestParam->corners }}</td>
+                                                    <td class="font-13" for="corners">Corners</td>
+                                                    <td class="font-13" width="50" align="center" style="background: {{ getColor($data->latestParam->corners) }}; color: black;">{{ $data->latestParam->corners }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="crossing">Crossing</td>
-                                                    <td class="font-16" width="50" align="center" style="background: {{ getColor($data->latestParam->crossing) }}; color: black;">{{ $data->latestParam->crossing }}</td>
+                                                    <td class="font-13" for="crossing">Crossing</td>
+                                                    <td class="font-13" width="50" align="center" style="background: {{ getColor($data->latestParam->crossing) }}; color: black;">{{ $data->latestParam->crossing }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="dribbling">Dribbling</td>
-                                                    <td class="font-16" width="50" align="center" style="background: {{ getColor($data->latestParam->dribbling) }}; color: black;">{{ $data->latestParam->dribbling }}</td>
+                                                    <td class="font-13" for="dribbling">Dribbling</td>
+                                                    <td class="font-13" width="50" align="center" style="background: {{ getColor($data->latestParam->dribbling) }}; color: black;">{{ $data->latestParam->dribbling }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="finishing">Finishing</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->finishing) }}; color: black;"
+                                                    <td class="font-13" for="finishing">Finishing</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->finishing) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->finishing }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="aerial_reach">Aerial Reach</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->aerial_reach) }}; color: black;"
+                                                    <td class="font-13" for="aerial_reach">Aerial Reach</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->aerial_reach) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->aerial_reach }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="command_of_area">Command Of Area</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->command_of_area) }}; color: black;"
+                                                    <td class="font-13" for="command_of_area">Command Of Area</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->command_of_area) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->command_of_area }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="communication">Communication</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->communication) }}; color: black;"
+                                                    <td class="font-13" for="communication">Communication</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->communication) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->communication }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="eccentricity">Eccentricity</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->eccentricity) }}; color: black;"
+                                                    <td class="font-13" for="eccentricity">Eccentricity</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->eccentricity) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->eccentricity }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="first_touch">First Touch</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->first_touch) }}; color: black;"
+                                                    <td class="font-13" for="first_touch">First Touch</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->first_touch) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->first_touch }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="handling">Handling</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->handling) }}; color: black;"
+                                                    <td class="font-13" for="handling">Handling</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->handling) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->handling }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="kicking">Kicking</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->kicking) }}; color: black;"
+                                                    <td class="font-13" for="kicking">Kicking</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->kicking) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->kicking }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="one_on_ones">One On Ones</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->one_on_ones) }}; color: black;"
+                                                    <td class="font-13" for="one_on_ones">One On Ones</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->one_on_ones) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->one_on_ones }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="feet_playing">Feet playing</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->feet_playing) }}; color: black;"
+                                                    <td class="font-13" for="feet_playing">Feet playing</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->feet_playing) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->feet_playing }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="free_kick">Free Kick Taking</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->free_kick) }}; color: black;"
+                                                    <td class="font-13" for="free_kick">Free Kick Taking</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->free_kick) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->free_kick }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="heading">Heading</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->heading) }}; color: black;"
+                                                    <td class="font-13" for="heading">Heading</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->heading) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->heading }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="shots">Shots</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->shots) }}; color: black;"
+                                                    <td class="font-13" for="shots">Shots</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->shots) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->shots }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="long_shots">Long Shots</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->long_shots) }}; color: black;"
+                                                    <td class="font-13" for="long_shots">Long Shots</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->long_shots) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->long_shots }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="long_throws">Long Throws</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->long_throws) }}; color: black;"
+                                                    <td class="font-13" for="long_throws">Long Throws</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->long_throws) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->long_throws }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="marking">Marking</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->marking) }}; color: black;"
+                                                    <td class="font-13" for="marking">Marking</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->marking) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->marking }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="passing">Passing</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->passing) }}; color: black;"
+                                                    <td class="font-13" for="passing">Passing</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->passing) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->passing }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="long_pass">Long Pass</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->long_pass) }}; color: black;"
+                                                    <td class="font-13" for="long_pass">Long Pass</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->long_pass) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->long_pass }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="punching">Punching</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->punching) }}; color: black;"
+                                                    <td class="font-13" for="punching">Punching</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->punching) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->punching }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="reflexes">Reflexes</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->reflexes) }}; color: black;"
+                                                    <td class="font-13" for="reflexes">Reflexes</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->reflexes) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->reflexes }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="rushing_out">Rushing Out</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->rushing_out) }}; color: black;"
+                                                    <td class="font-13" for="rushing_out">Rushing Out</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->rushing_out) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->rushing_out }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="throwing">Throwing</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->throwing) }}; color: black;"
+                                                    <td class="font-13" for="throwing">Throwing</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->throwing) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->throwing }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="penalty_taking">Penalty Taking</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->penalty_taking) }}; color: black;"
+                                                    <td class="font-13" for="penalty_taking">Penalty Taking</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->penalty_taking) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->penalty_taking }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="tackling">Tackling</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->tackling) }}; color: black;"
+                                                    <td class="font-13" for="tackling">Tackling</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->tackling) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->tackling }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="technique">Technique</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->technique) }}; color: black;"
+                                                    <td class="font-13" for="technique">Technique</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->technique) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->technique }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="offensive">1 VS 1 Offensive</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->offensive) }}; color: black;"
+                                                    <td class="font-13" for="offensive">1 VS 1 Offensive</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->offensive) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->offensive }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="deffense">1 VS 1 Deffense</td>
-                                                    <td class="font-16" style="background: {{ getColor($data->latestParam->deffense) }}; color: black;"
+                                                    <td class="font-13" for="deffense">1 VS 1 Deffense</td>
+                                                    <td class="font-13" style="background: {{ getColor($data->latestParam->deffense) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->deffense }}</td>
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div class="col-md-7">
-                                            <canvas id="technical-radar" height="200"></canvas>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-5 mt-4">
+                                    <div class="card-title font-15 font-weight-bold mb-0">
+                                        Mental
+                                    </div>
                                     <div class="row">
-                                        <div class="col-md-7">
-                                            <canvas id="mental-radar" height="200"></canvas>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="card-title font-15 font-weight-bold mb-0">
-                                                Mental
-                                            </div>
+                                        <div class="col-md-12">
                                             <table type="mental" width="100%">
-                                        <tr>
-                                            <td class="font-16" for="aggression">Aggression</td>
-                                            <td class="font-16" width="50" align="center" style="
-                                                    background: {{ getColor($data->latestParam->aggression) }}; color: black;">
-                                                {{ $data->latestParam->aggression }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-16" for="anticipation">Anticipation</td>
-                                            <td class="font-16" width="50" align="center" style="
-                                                    background: {{ getColor($data->latestParam->anticipation) }}; color: black;">
-                                                {{ $data->latestParam->anticipation }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-16" for="bravery">Bravery</td>
-                                            <td class="font-16" width="50" align="center" style="
-                                                    background: {{ getColor($data->latestParam->bravery) }}; color: black;">
-                                                {{ $data->latestParam->bravery }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-16" for="composure">Composure</td>
-                                            <td class="font-16" width="50" align="center" style="
-                                                    background: {{ getColor($data->latestParam->composure) }}; color: black;">
-                                                {{ $data->latestParam->composure }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-16" for="concentration">Concentration</td>
-                                            <td class="font-16" width="50" align="center" style="
-                                                    background: {{ getColor($data->latestParam->concentration) }}; color: black;">
-                                                {{ $data->latestParam->concentration }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-16" for="decisions">Decisions</td>
-                                            <td class="font-16" width="50" align="center" style="
-                                                    background: {{ getColor($data->latestParam->decisions) }}; color: black;">
-                                                {{ $data->latestParam->decisions }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-16" for="determination">Determination</td>
-                                            <td class="font-16" width="50" align="center" style="
-                                                    background: {{ getColor($data->latestParam->determination) }}; color: black;">
-                                                {{ $data->latestParam->determination }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-16" for="flair">Flair</td>
-                                            <td class="font-16" width="50" align="center" style="
-                                                    background: {{ getColor($data->latestParam->flair) }}; color: black;">
-                                                {{ $data->latestParam->flair }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-16" for="leadership">Leadership</td>
-                                            <td class="font-16" width="50" align="center" style="
-                                                    background: {{ getColor($data->latestParam->leadership) }}; color: black;">
-                                                {{ $data->latestParam->leadership }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-16" for="off_ball">Off The Ball</td>
-                                            <td class="font-16" width="50" align="center" style="
-                                                    background: {{ getColor($data->latestParam->off_ball) }}; color: black;">
-                                                {{ $data->latestParam->off_ball }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-16" for="positioning">Positioning</td>
-                                            <td class="font-16" width="50" align="center" style="
-                                                    background: {{ getColor($data->latestParam->positioning) }}; color: black;">
-                                                {{ $data->latestParam->positioning }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-16" for="teamwork">Teamwork</td>
-                                            <td class="font-16" width="50" align="center" style="
-                                                    background: {{ getColor($data->latestParam->teamwork) }}; color: black;">
-                                                {{ $data->latestParam->teamwork }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-16" for="vision">Vision</td>
-                                            <td class="font-16" width="50" align="center" style="
-                                                    background: {{ getColor($data->latestParam->vision) }}; color: black;">
-                                                {{ $data->latestParam->vision }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-16" for="work_rate">Work Rate</td>
-                                            <td class="font-16" width="50" align="center" style="
-                                                    background: {{ getColor($data->latestParam->work_rate) }}; color: black;">
-                                                {{ $data->latestParam->work_rate }}
-                                            </td>
-                                        </tr>
-                                    </table>
+                                                <tr>
+                                                    <td class="font-13" for="aggression">Aggression</td>
+                                                    <td class="font-13" width="50" align="center" style="
+                                                            background: {{ getColor($data->latestParam->aggression) }}; color: black;">
+                                                        {{ $data->latestParam->aggression }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-13" for="anticipation">Anticipation</td>
+                                                    <td class="font-13" width="50" align="center" style="
+                                                            background: {{ getColor($data->latestParam->anticipation) }}; color: black;">
+                                                        {{ $data->latestParam->anticipation }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-13" for="bravery">Bravery</td>
+                                                    <td class="font-13" width="50" align="center" style="
+                                                            background: {{ getColor($data->latestParam->bravery) }}; color: black;">
+                                                        {{ $data->latestParam->bravery }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-13" for="composure">Composure</td>
+                                                    <td class="font-13" width="50" align="center" style="
+                                                            background: {{ getColor($data->latestParam->composure) }}; color: black;">
+                                                        {{ $data->latestParam->composure }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-13" for="concentration">Concentration</td>
+                                                    <td class="font-13" width="50" align="center" style="
+                                                            background: {{ getColor($data->latestParam->concentration) }}; color: black;">
+                                                        {{ $data->latestParam->concentration }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-13" for="decisions">Decisions</td>
+                                                    <td class="font-13" width="50" align="center" style="
+                                                            background: {{ getColor($data->latestParam->decisions) }}; color: black;">
+                                                        {{ $data->latestParam->decisions }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-13" for="determination">Determination</td>
+                                                    <td class="font-13" width="50" align="center" style="
+                                                            background: {{ getColor($data->latestParam->determination) }}; color: black;">
+                                                        {{ $data->latestParam->determination }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-13" for="flair">Flair</td>
+                                                    <td class="font-13" width="50" align="center" style="
+                                                            background: {{ getColor($data->latestParam->flair) }}; color: black;">
+                                                        {{ $data->latestParam->flair }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-13" for="leadership">Leadership</td>
+                                                    <td class="font-13" width="50" align="center" style="
+                                                            background: {{ getColor($data->latestParam->leadership) }}; color: black;">
+                                                        {{ $data->latestParam->leadership }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-13" for="off_ball">Off The Ball</td>
+                                                    <td class="font-13" width="50" align="center" style="
+                                                            background: {{ getColor($data->latestParam->off_ball) }}; color: black;">
+                                                        {{ $data->latestParam->off_ball }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-13" for="positioning">Positioning</td>
+                                                    <td class="font-13" width="50" align="center" style="
+                                                            background: {{ getColor($data->latestParam->positioning) }}; color: black;">
+                                                        {{ $data->latestParam->positioning }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-13" for="teamwork">Teamwork</td>
+                                                    <td class="font-13" width="50" align="center" style="
+                                                            background: {{ getColor($data->latestParam->teamwork) }}; color: black;">
+                                                        {{ $data->latestParam->teamwork }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-13" for="vision">Vision</td>
+                                                    <td class="font-13" width="50" align="center" style="
+                                                            background: {{ getColor($data->latestParam->vision) }}; color: black;">
+                                                        {{ $data->latestParam->vision }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-13" for="work_rate">Work Rate</td>
+                                                    <td class="font-13" width="50" align="center" style="
+                                                            background: {{ getColor($data->latestParam->work_rate) }}; color: black;">
+                                                        {{ $data->latestParam->work_rate }}
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-5 offset-1">
+                                    <canvas id="technical-radar" style="margin:auto;" height="150"></canvas>
+                                </div>
+                                <div class="col-md-5">
+                                    <canvas id="mental-radar" style="margin:auto;" height="150"></canvas>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
                                 <div class="col-md-5 mt-4 offset-1">
+                                    <div class="card-title font-15 font-weight-bold mb-0">
+                                        Physical
+                                    </div>
                                     <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="card-title font-15 font-weight-bold mb-0">
-                                                Physical
-                                            </div>
+                                        <div class="col-md-12">
                                             <table type="physical" width="100%">
                                                 <tr>
-                                                    <td class="font-16" for="acceleration">Acceleration</td>
-                                                    <td class="font-16" width="50" align="center" style="
+                                                    <td class="font-13" for="acceleration">Acceleration</td>
+                                                    <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->acceleration) }}; color: black;">
                                                         {{ $data->latestParam->acceleration }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="aerial_duels">Aerial Duels</td>
-                                                    <td class="font-16" width="50" align="center" style="
+                                                    <td class="font-13" for="aerial_duels">Aerial Duels</td>
+                                                    <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->aerial_duels) }}; color: black;">
                                                         {{ $data->latestParam->aerial_duels }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="agility">Agility</td>
-                                                    <td class="font-16" width="50" align="center" style="
+                                                    <td class="font-13" for="agility">Agility</td>
+                                                    <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->agility) }}; color: black;">
                                                         {{ $data->latestParam->agility }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="balance">Balance</td>
-                                                    <td class="font-16" width="50" align="center" style="
+                                                    <td class="font-13" for="balance">Balance</td>
+                                                    <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->balance) }}; color: black;">
                                                         {{ $data->latestParam->balance }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="jumping_reach">Jumping Reach</td>
-                                                    <td class="font-16" width="50" align="center" style="
+                                                    <td class="font-13" for="jumping_reach">Jumping Reach</td>
+                                                    <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->jumping_reach) }}; color: black;">
                                                         {{ $data->latestParam->jumping_reach }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="natural_fitness">Natural Fitness</td>
-                                                    <td class="font-16" width="50" align="center" style="
+                                                    <td class="font-13" for="natural_fitness">Natural Fitness</td>
+                                                    <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->natural_fitness) }}; color: black;">
                                                         {{ $data->latestParam->natural_fitness }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="pace">Pace</td>
-                                                    <td class="font-16" width="50" align="center" style="
+                                                    <td class="font-13" for="pace">Pace</td>
+                                                    <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->pace) }}; color: black;">
                                                         {{ $data->latestParam->pace }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="reaction">Reaction</td>
-                                                    <td class="font-16" width="50" align="center" style="
+                                                    <td class="font-13" for="reaction">Reaction</td>
+                                                    <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->reaction) }}; color: black;">
                                                         {{ $data->latestParam->reaction }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="sprint_speed">Sprint Speed</td>
-                                                    <td class="font-16" width="50" align="center" style="
+                                                    <td class="font-13" for="sprint_speed">Sprint Speed</td>
+                                                    <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->sprint_speed) }}; color: black;">
                                                         {{ $data->latestParam->sprint_speed }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="stamina">Stamina</td>
-                                                    <td class="font-16" width="50" align="center" style="
+                                                    <td class="font-13" for="stamina">Stamina</td>
+                                                    <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->stamina) }}; color: black;">
                                                         {{ $data->latestParam->stamina }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="strength">Strength</td>
-                                                    <td class="font-16" width="50" align="center" style="
+                                                    <td class="font-13" for="strength">Strength</td>
+                                                    <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->strength) }}; color: black;">
                                                         {{ $data->latestParam->strength }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="injury_resistance">Injury resistance</td>
-                                                    <td class="font-16" width="50" align="center" style="
+                                                    <td class="font-13" for="injury_resistance">Injury resistance</td>
+                                                    <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->injury_resistance) }}; color: black;">
                                                         {{ $data->latestParam->injury_resistance }}
                                                     </td>
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div class="col-md-7">
-                                            <canvas id="physical-radar" height="200"></canvas>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-5 mt-4">
+                                    <div class="card-title font-15 font-weight-bold mb-0">
+                                        Average
+                                    </div>
                                     <div class="row">
-                                        <div class="col-md-7">
-                                            <canvas id="general-radar" height="200"></canvas>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="card-title font-15 font-weight-bold mb-0">
-                                                Average
-                                            </div>
+                                        <div class="col-md-12">
                                             <table type="average" width="100%">
                                                 <tr>
-                                                    <td class="font-16" for="acceleration">Acceleration</td>
-                                                    <td class="font-16" width="50" align="center" style="color: black;">
+                                                    <td class="font-13" for="acceleration">Acceleration</td>
+                                                    <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="aerial_duels">Aerial Duels</td>
-                                                    <td class="font-16" width="50" align="center" style="color: black;">
+                                                    <td class="font-13" for="aerial_duels">Aerial Duels</td>
+                                                    <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="agility">Agility</td>
-                                                    <td class="font-16" width="50" align="center" style="color: black;">
+                                                    <td class="font-13" for="agility">Agility</td>
+                                                    <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="balance">Balance</td>
-                                                    <td class="font-16" width="50" align="center" style="color: black;">
+                                                    <td class="font-13" for="balance">Balance</td>
+                                                    <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="jumping_reach">Jumping Reach</td>
-                                                    <td class="font-16" width="50" align="center" style="color: black;">
+                                                    <td class="font-13" for="jumping_reach">Jumping Reach</td>
+                                                    <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="natural_fitness">Natural Fitness</td>
-                                                    <td class="font-16" width="50" align="center" style="color: black;">
+                                                    <td class="font-13" for="natural_fitness">Natural Fitness</td>
+                                                    <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="pace">Pace</td>
-                                                    <td class="font-16" width="50" align="center" style="color: black;">
+                                                    <td class="font-13" for="pace">Pace</td>
+                                                    <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-16" for="reaction">Reaction</td>
-                                                    <td class="font-16" width="50" align="center" style="color: black;">
+                                                    <td class="font-13" for="reaction">Reaction</td>
+                                                    <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
                                             </table>
@@ -636,63 +635,68 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div style="margin: auto; width: 1378px;" id="page3">
-                            <div class="row" style="min-height: 70px;height: 70px; background: #FF4040">
-                                <div class="ml-5" style="width: 120px; height: 120px;">
-                                    <a href="#" style="color: #FF4040">Header Bar</a>
+                            <div class="row mt-3">
+                                <div class="col-md-5 offset-1">
+                                    <canvas id="physical-radar" style="margin:auto;" height="150"></canvas>
+                                </div>
+                                <div class="col-md-5">
+                                    <canvas id="general-radar" style="margin:auto;" height="150"></canvas>
                                 </div>
                             </div>
-                            <div class="row mt-2">
-                                <p class="font-24 font-weight-bold text-center col-md-12">Injuires</p>
+                        </div>
+                        <div style="margin-left: calc(50% - 397px); width: 794px; height: 1123px;" id="page3">
+                            <div class="row mt-4">
+                                <p class="font-20 font-weight-bold text-center col-md-12">Injuires</p>
                                 @php $i = 0; @endphp
                                 @foreach($data->injury as $injury)
                                     <div class="col-md-12 text-center">
-                                        <span class="font-19 text-center">{{ $injury->injury }}</span>
+                                        <span class="font-15 text-center">{{ $injury->injury }}</span>
                                         <span class="font-13 text-center ml-3">{{ $injury->injury_date }}</span>
                                     </div>
-                                    <p class="font-19 font-weight-bold col-md-4 offset-4">{{ $injury->description }}</p>
+                                    <p class="font-15 font-weight-bold col-md-4 offset-4">{{ $injury->description }}</p>
                                     @php ++$i; @endphp
                                 @endforeach
                                 @if ($i == 0)
-                                    <p class="font-19 font-weight-bold col-md-4 offset-4">The Player doesn't show injuries</p>
+                                    <p class="font-15 font-weight-bold col-md-4 offset-4">The Player doesn't show injuries</p>
                                 @endif
-                                <p class="font-24 font-weight-bold text-center col-md-12 mt-3">Report</p>
-                                <p class="font-19 col-md-6 bg-success text-dark offset-3 mb-1">Pros</p>
+                                <p class="font-20 font-weight-bold text-center col-md-12 mt-2">Report</p>
+                                <p class="font-15 col-md-6 bg-success text-dark offset-3 mb-1">Pros</p>
                                 @php
                                     $pros = $data->scout_report->pros ?? '';
-                                    $pros_replace = str_replace("\n","</p>\n<p class='font-17 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>",$pros);
-                                    $pros = "<p class='font-17 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>" . $pros_replace . "</p>";
+                                    $pros_replace = str_replace("\n","</p>\n<p class='font-13 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>",$pros);
+                                    $pros = "<p class='font-13 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>" . $pros_replace . "</p>";
                                     echo $pros;
                                 @endphp
-                                <p class="font-19 col-md-6 bg-danger text-dark offset-3 mb-1 mt-3">Cons</p>
+                                <p class="font-15 col-md-6 bg-danger text-dark offset-3 mb-1 mt-3">Cons</p>
                                 @php
                                     $cons = $data->scout_report->cons ?? '';
-                                    $cons_replace = str_replace("\n","</p>\n<p class='font-17 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>",$cons);
-                                    $cons = "<p class='font-17 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>" . $cons_replace . "</p>";
+                                    $cons_replace = str_replace("\n","</p>\n<p class='font-13 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>",$cons);
+                                    $cons = "<p class='font-13 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>" . $cons_replace . "</p>";
                                     echo $cons;
                                 @endphp
                                     @if (isset($data->scout_report->conclusion))
                                         @if (intval($data->scout_report->conclusion) == 1)
-                                            <p class="font-19 col-md-6 bg-danger text-dark offset-3 mb-1 mt-3 text-center">
+                                            <p class="font-15 col-md-6 bg-danger text-dark offset-3 mb-1 mt-3 text-center">
                                             Conclusion : Discard player
                                         @elseif (intval($data->scout_report->conclusion) == 2)
-                                            <p class="font-19 col-md-6 bg-warning text-dark offset-3 mb-1 mt-3 text-center">
+                                            <p class="font-15 col-md-6 bg-warning text-dark offset-3 mb-1 mt-3 text-center">
                                             Conclusion : Continue watching
                                         @elseif (intval($data->scout_report->conclusion) == 3)
-                                            <p class="font-19 col-md-6 bg-success text-dark offset-3 mb-1 mt-3 text-center">
+                                            <p class="font-15 col-md-6 bg-success text-dark offset-3 mb-1 mt-3 text-center">
                                             Conclusion : Sign the player
                                         @else
-                                            <p class="font-19 col-md-6 bg-info text-dark offset-3 mb-1 mt-3 text-center">
+                                            <p class="font-15 col-md-6 bg-info text-light offset-3 mb-1 mt-3 text-center">
                                             Conclusion : No selected
                                         @endif
+                                    @else
+                                        <p class="font-15 col-md-6 bg-info text-light offset-3 mb-1 mt-3 text-center">
+                                        Conclusion : No selected
                                     @endif
                                 </p>
                                 @php
                                     $other = $data->scout_report->other ?? '';
-                                    $other_replace = str_replace("\n","</p>\n<p class='font-17 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>",$other);
-                                    $other = "<p class='font-17 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>" . $other_replace . "</p>";
+                                    $other_replace = str_replace("\n","</p>\n<p class='font-13 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>",$other);
+                                    $other = "<p class='font-13 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>" . $other_replace . "</p>";
                                     echo $other;
                                 @endphp
                             </div>
@@ -725,7 +729,7 @@
             kendo.drawing
                 .drawDOM("#content",
                     {
-                        paperSize: [width + 'cm', height + 'cm'],
+                        paperSize: "A4",//[width + 'cm', height + 'cm'],
                         margin: { top: 0, bottom: 0, left: 0, right: 0 },
                         scale: 0.75
                         // width: 1000,
@@ -737,10 +741,16 @@
         }
         let attributeType = 0;
         $(document).ready(function (){
+            $("#showteam").change(function (){
+                if($(this).prop("checked"))
+                    $(".team-logo").css("display", "");
+                else
+                    $(".team-logo").css("display", "none");
+            });
             var options =  {
                 field: {
-                    width: "250px",
-                    height: "400px",
+                    width: "220px",
+                    height: "352px",
                     img: "{{ asset('soccer_field/img/soccerfield_green4.png') }} ",
                     startHidden: true,
                     animate: true,
@@ -804,7 +814,7 @@
                 let after = data[r].position.split("_")[1];
                 let obj = $(".posY-" + before + '.posX-' + after).find(".soccerfield-player-name");
                 if (posIndex == 0) {
-                    $(obj).attr("style", "background: #039870; width: 20px !important; min-height: 20px !important; margin-top: 11px !important; margin-left: 2px !important;");
+                    $(obj).attr("style", "background: #039870; width: 17px !important; min-height: 17px !important; margin-top: 11px !important; margin-left: 3px !important;");
                 }
                 if (arrGoalkeeper.includes(data[r].position))
                 {
@@ -824,8 +834,16 @@
                 }
                 ++posIndex;
             }
-            $("#page2").css("height", $("#page1").css("height"));
-            $("#page3").css("height", $("#page1").css("height"));
+            let maxHeight = 0;
+            for (var i = 1; i < 4; i++)
+            {
+                let height = $("#page" + i).css("height").replace("px", "");
+                if (maxHeight <= parseFloat(height) && i != 2)
+                    maxHeight = parseFloat(height);
+            }
+            $("#page1").css("height", maxHeight + "px");
+            $("#page2").css("height", maxHeight + "px");
+            $("#page3").css("height", maxHeight + "px");
             initAttributes();
         });
         function initAttributes(){

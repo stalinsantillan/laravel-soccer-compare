@@ -211,7 +211,7 @@
                     <th>Mental average</th>
                     <th>Physical average</th>
                     <th>Goalkeeper average</th>
-                    <th></th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>

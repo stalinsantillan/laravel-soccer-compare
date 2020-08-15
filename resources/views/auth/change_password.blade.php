@@ -1,6 +1,6 @@
 
 
-@extends('layouts.admin')
+@extends('layouts.user')
 @section('content')
 <!-- start page title -->
 <div class="row">
