@@ -1263,8 +1263,20 @@ class PlayerController extends Controller
     public function player_profile(Player $player)
     {
         $paramsetting = Paramsetting::find(1);
+
+        $rows = PDFCount::query()->where("user_id", Auth::user()->id)->get()->toArray();
+        $pdfCound = null;
+        $count = 0;
+        if (sizeof($rows) > 0)
+        {
+            $id = $rows[0]['id'];
+            $pdfCound = PDFCount::find($id);
+            $count = $pdfCound->count ?? 0;
+        }
+
         return view('user.player_profile')
             ->with('data', $player)
+            ->with('downloaded_count', $count)
             ->with('paramsetting', $paramsetting);
     }
 
@@ -1298,6 +1310,7 @@ class PlayerController extends Controller
 //            }
         }
         PDFCount::addTrack(Auth::user()->id);
+
         return view('user.pdf_viewr')
             ->with('data', $player)
             ->with('team_url', $url)
