@@ -37,7 +37,7 @@ class PDFCount extends Model
                 $pdfCound = self::find($id);
                 $count = $pdfCound->count ?? 0;
             }
-            if ($count > 5)
+            if ($count > Auth::user()->limit_count)
                 return false;
         }
         return true;
