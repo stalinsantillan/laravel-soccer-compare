@@ -6,6 +6,7 @@ use App\Models\User\Additional;
 use App\Models\User\Injury;
 use App\Models\User\Scout_Report;
 use App\Models\User\Video;
+use App\Models\User\PDFCount;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -71,6 +72,8 @@ class PlayerController extends Controller
             CURLOPT_TIMEOUT => 0,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_CUSTOMREQUEST => "GET"
         ));
         $result = curl_exec($curl);
@@ -161,6 +164,8 @@ class PlayerController extends Controller
             CURLOPT_TIMEOUT => 0,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_CUSTOMREQUEST => "GET"
         ));
         $result = curl_exec($curl);
@@ -244,6 +249,8 @@ class PlayerController extends Controller
                 CURLOPT_TIMEOUT => 0,
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_SSL_VERIFYHOST => 0,
+                CURLOPT_SSL_VERIFYPEER => 0,
                 CURLOPT_CUSTOMREQUEST => "GET"
             ));
 
@@ -1269,6 +1276,8 @@ class PlayerController extends Controller
      */
     public function player_pdf(Player $player)
     {
+        if (!PDFCount::isPossible())
+            return redirect("user/player_profile/".$player->id);
         $paramsetting = Paramsetting::find(1);
         $path = parse_url($player->current_team_link, PHP_URL_PATH);
         $path_uri = explode("/", $path);
@@ -1288,6 +1297,7 @@ class PlayerController extends Controller
 //                $url = '';
 //            }
         }
+        PDFCount::addTrack(Auth::user()->id);
         return view('user.pdf_viewr')
             ->with('data', $player)
             ->with('team_url', $url)
