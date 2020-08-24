@@ -102,6 +102,15 @@
                             </div>
                         @endif
                     </div>
+                    <div class="form-group {{ $errors->has('limit_count') ? 'has-error' : '' }}">
+                        <label for="limit_count">{{ trans('cruds.user.fields.limit_count') }}*</label>
+                        <input type="text" id="limit_count" name="limit_count" class="form-control" value="{{ old('limit_count', isset($user) ? $user->limit_count : '5') }}" required>
+                        @if($errors->has('limit_count'))
+                            <div class="mt-1" style="color: #e6334d; font-weight: 500;">
+                                {{ $errors->first('limit_count') }}
+                            </div>
+                        @endif
+                    </div>
                     <div>
                         <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
                     </div>

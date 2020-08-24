@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->date('trial_start')->nullable();
             $table->date('trial_end')->nullable();
             $table->string('remember_token')->nullable();
+            $table->integer('limit_count')->nullable()->default(5);
 
             $table->timestamps();
 
