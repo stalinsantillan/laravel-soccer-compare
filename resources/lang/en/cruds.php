@@ -114,6 +114,8 @@ return [
             'trial_start_helper'       => '',
             'trial_end'                => 'Trial End',
             'trial_end_helper'         => '',
+            'limit_count'              => 'Download PDF limit count',
+            'limit_count_helper'       => '',
             'remember_token'           => 'Remember Token',
             'remember_token_helper'    => '',
             'created_at'               => 'Created at',
