@@ -103,7 +103,11 @@
                 <button class="col-md-auto btn btn-link text-white waves-effect" onclick="openInjury();">Injuries</button>
                 <button class="col-md-auto btn btn-link text-white waves-effect" onclick="openVideo();">Add Video</button>
                 <a href="{{ route('user.edit_player', $data->id) }}" class="btn btn-outline-info waves-effect waves-light ml-2" style="height: 38px; top: 10px">Edit Player</a>
-                <a href="{{ route('user.player_pdf', $data->id) }}" class="btn btn-outline-info waves-effect waves-light ml-2" style="height: 38px; top: 10px">Export to PDF</a>
+                @if(\App\Models\User\PDFCount::isPossible())
+                    <a href="{{ route('user.player_pdf', $data->id) }}" class="btn btn-outline-info waves-effect waves-light ml-2" style="height: 38px; top: 10px">Export to PDF</a>
+                @else
+                    <a href="javascript:limitPDF();" class="btn btn-outline-info waves-effect waves-light ml-2" style="height: 38px; top: 10px">Export to PDF</a>
+                @endif
             </div>
             <div class="card-body">
                 <div class="row">
@@ -2480,6 +2484,14 @@
                         "warning");
                 }
             });
+        }
+        function limitPDF() {
+            $.NotificationApp.send(
+                "Notification",
+                "You have to purchase the memebership",
+                "top-right",
+                "#da8609",
+                "warning");
         }
         function saveScout() {
             let general_info = $("#general_info").val();
