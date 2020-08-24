@@ -2486,12 +2486,13 @@
             });
         }
         function limitPDF() {
+            let message = "The trial version allows {{ \Illuminate\Support\Facades\Auth::user()->limit_count }} PDF downloads. You have downloaded {{ \Illuminate\Support\Facades\Auth::user()->limit_count }}/{{ \Illuminate\Support\Facades\Auth::user()->limit_count }} PDF reports";
             $.NotificationApp.send(
                 "Notification",
-                "You have to purchase the memebership",
+                message,
                 "top-right",
                 "#da8609",
-                "warning");
+                "warning", 3000);
         }
         function saveScout() {
             let general_info = $("#general_info").val();
