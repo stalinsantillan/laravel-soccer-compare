@@ -9,8 +9,6 @@ Attribute add per position, perfect position map.
 ![ScreenShot](/screenshots/screenshot2.png)
 ![ScreenShot](/screenshots/screenshot3.png)
 ![ScreenShot](/screenshots/screenshot4.png)
-![ScreenShot](/screenshots/screenshot5.png)
-![ScreenShot](/screenshots/screenshot6.png)
 
 ## Get Started
 env setting
