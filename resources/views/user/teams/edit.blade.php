@@ -43,12 +43,12 @@
                     {!! Form::select('league_id', $leagues
                         , old('league_id') ? old('league_id') : $team->league->id
                         , ['class' => 'form-control', 'data-toggle'=>'select2']) !!}
+                    @if($errors->has('league_id'))
+                        <div class="mt-1" style="color: #e6334d; font-weight: 500;">
+                            {{ $errors->first('league_id') }}
+                        </div>
+                    @endif
                 </div>
-                @if($errors->has('league_id'))
-                    <div class="mt-1" style="color: #e6334d; font-weight: 500;">
-                        {{ $errors->first('league_id') }}
-                    </div>
-                @endif
             </div>
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
