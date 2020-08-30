@@ -46,12 +46,12 @@
                         {!! Form::label('league_id', trans('cruds.league.title_singular'), ['class' => 'col-md-12']) !!}
                         <div class="col-md-12">
                             {!! Form::select('league_id', $leagues, old('league_id'), ['class' => 'form-control', 'data-toggle'=>'select2']) !!}
+                            @if($errors->has('league_id'))
+                                <div class="mt-1" style="color: #e6334d; font-weight: 500;">
+                                    {{ $errors->first('league_id') }}
+                                </div>
+                            @endif
                         </div>
-                        @if($errors->has('league_id'))
-                            <div class="mt-1" style="color: #e6334d; font-weight: 500;">
-                                {{ $errors->first('league_id') }}
-                            </div>
-                        @endif
                     </div>
                     <div class="col-md-12">
                         <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User\Team;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class TeamController extends Controller
 {
@@ -42,6 +44,18 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
+//        $validator = Validator::make($request->all(), [
+//            'name' => 'required',
+//            'league_id' => 'required',
+//        ]);
+//
+//        if ($validator->fails()) {
+//
+//        }
+        $request->validate([
+            'name' => 'required',
+            'league_id' => 'required',
+        ]);
         //
         $request->request->add(['user_id' => Auth::user()->id]);
         Team::create($request->all());
@@ -82,6 +96,10 @@ class TeamController extends Controller
      */
     public function update(Request $request, Team $team)
     {
+        $request->validate([
+            'name' => 'required',
+            'league_id' => 'required',
+        ]);
         $request->request->add(['user_id' => Auth::user()->id]);
         $team->update($request->all());
 
