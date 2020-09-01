@@ -142,11 +142,13 @@
                                             $league = '';
                                             if ($data->current_team_link == "")
                                             {
-                                                $league = App\Models\User\Team::findOrFail($data->current_team_id)->league->name;
+                                                $team_model = App\Models\User\Team::find($data->current_team_id) ?? null;
+                                                if ($team_model)
+                                                    $league = $team_model->league->name;
                                             }
                                             else
                                             {
-                                                $leagues = App\Models\User\ApiTeam::findOrFail($data->current_team_id);
+                                                $leagues = App\Models\User\ApiTeam::find($data->current_team_id);
                                                 $league = $leagues->competition_name ?? '';
                                             }
                                         @endphp
