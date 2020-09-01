@@ -841,10 +841,14 @@ class PlayerController extends Controller
         {
             $current_team = ApiTeam::find($request->team_id)->team_name;
         } else {
-            $current_team = Team::find(str_replace("_db", "", $request->team_id))->name;
+            $current_team = Team::find(str_replace("_db", "", $request->team_id))->name ?? '';
         }
         $player->current_team = $current_team;
         $player->current_team_id = str_replace("_db", "", $request->team_id) ?? '';
+        if ($current_team == '')
+        {
+            $player->current_team_id = 0;
+        }
         $player->current_team_link = $request->team_link ?? '';
         $player->player_link = $request->player_link ?? '';
         // Photo
