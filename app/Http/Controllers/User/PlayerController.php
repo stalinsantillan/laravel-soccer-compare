@@ -297,7 +297,7 @@ class PlayerController extends Controller
                             $a = $td->firstChild;
                             $player_link = $a->getAttribute("href");
                             $flag = $a->getAttribute("class");
-                            $player_rows = Player::query()->where("player_link", "https://int.soccerway.com".$player_link)->get()->toArray();
+                            $player_rows = Player::query()->where('user_id', Auth::user()->id)->where("player_link", "https://int.soccerway.com".$player_link)->get()->toArray();
                             if (sizeof($player_rows) > 0)
                             {
                                 $player_link = "";
@@ -407,14 +407,8 @@ class PlayerController extends Controller
             $photo_url = $request->photo_url ?? "";
             if ($photo_url != "")
             {
-                if(file_exists($photo_url))
-                {
-                    // true
-                    $file = $this->createFileObject($photo_url);
-                    $player->photo = $file->store('avatars');
-                }else{
-                    // false
-                }
+                $file = $this->createFileObject($photo_url);
+                $player->photo = $file->store('avatars');
             }
         }
 
