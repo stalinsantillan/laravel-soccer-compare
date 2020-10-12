@@ -5,6 +5,10 @@ Route::get('/', function(){
         return redirect()->to("/admin/dashboard");
     return redirect()->to("/user/filter_show");
 });
+Route::get('lang/{locale}',function ($locale){
+    session(['locale' => $locale]);
+    return redirect()->back();
+});
 Route::get('/user/dashboard', function(){
     return redirect()->to("/user/filter_show");
 });

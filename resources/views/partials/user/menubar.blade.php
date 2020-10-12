@@ -4,26 +4,26 @@
         <ul class="navigation-menu">
             <li class="has-submenu">
                 <a href="#">
-                    {{ trans('global.add') }} {{ trans('cruds.player.title') }} <div class="arrow-down"></div>
+                    @lang(trans('global.add')) @lang(trans('cruds.player.title')) <div class="arrow-down"></div>
                 </a>
                 <ul class="submenu">
                     <li>
                         <a href="{{ route('user.add_player') }}">
-                            {{ trans('cruds.player.new') }}
+                            @lang(trans('cruds.player.new'))
                         </a>
                     </li>
                         @if (Auth::user()->is_subscribed == 1)
                             @if(Auth::user()->subscribe_id == 2 || Auth::user()->subscribe_id == 4)
                                 <li>
                                     <a href="{{ route('user.get_player_list_api') }}">
-                                        {{ trans('cruds.player.existing') }}
+                                        @lang(trans('cruds.player.existing'))
                                     </a>
                                 </li>
                             @endif
                         @elseif (Auth::user()->trial_end >= date('Y-m-d') && Auth::user()->trial_type == 1)
                             <li>
                                 <a href="{{ route('user.get_player_list_api') }}">
-                                    {{ trans('cruds.player.existing') }}
+                                    @lang(trans('cruds.player.existing'))
                                 </a>
                             </li>
                         @endif
@@ -36,22 +36,22 @@
             </li>
             <li>
                 <a href="{{ route('user.filter_show') }}">
-                    {{ trans('cruds.filter.title') }}
+                    @lang(trans('cruds.filter.title'))
                 </a>
             </li>
             <li class="has-submenu">
                 <a href="#">
-                    {{ trans('cruds.menuGroup.my_team') }} <div class="arrow-down"></div>
+                    @lang(trans('cruds.menuGroup.my_team')) <div class="arrow-down"></div>
                 </a>
                 <ul class="submenu">
                     <li>
                         <a href="{{ route('user.leagues.index') }}">
-                            {{ trans('cruds.league.title_singular') }}
+                            @lang(trans('cruds.league.title_singular'))
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('user.teams.index') }}">
-                            {{ trans('cruds.team.title_singular') }}
+                            @lang(trans('cruds.team.title_singular'))
                         </a>
                     </li>
                 </ul>

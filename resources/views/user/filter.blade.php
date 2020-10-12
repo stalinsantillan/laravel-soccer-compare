@@ -36,11 +36,11 @@
         <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="/">Soccer</a></li>
-                    <li class="breadcrumb-item active">{{ trans('cruds.filter.title') }}</li>
+                    <li class="breadcrumb-item"><a href="/">@lang('soccer')</a></li>
+                    <li class="breadcrumb-item active">@lang(trans('cruds.filter.title'))</li>
                 </ol>
             </div>
-            <h4 class="page-title">{{ trans('cruds.filter.title') }}</h4>
+            <h4 class="page-title">@lang(trans('cruds.filter.title'))</h4>
         </div>
     </div>
 </div>     
@@ -58,16 +58,16 @@
             <div class="col-md-auto">
                 <div class="row">
                     <div class="col-md-auto">
-                        <label for="name" class="col-form-label">Player name</label>
+                        <label for="name" class="col-form-label">@lang('player_name')</label>
                         <input type="text" class="form-control" id="name" name="name" value="{{ $filter['name'] ?? '' }}">
                     </div>
                     <div class="col-md-auto">
                         <label for="btn_position" class="col-form-label">&nbsp;</label><br />
-                        <button type="button" class="btn btn-outline-info" id="btn_position">Position</button>
+                        <button type="button" class="btn btn-outline-info" id="btn_position">@lang('position')</button>
                         <!-- PopoverX content -->
                         <div id="popover_position" class="popover popover-x popover-default" style="min-width: 550px;">
                             <div class="arrow"></div>
-                            <h3 class="popover-header popover-title">Select Position</h3>
+                            <h3 class="popover-header popover-title">@lang('select_position')</h3>
                             <div class="popover-body popover-content">
                                 @php
                                     $arrDefender = array("Centre-back", "Sweeper", "Left Full-back", "Right Full-back", "Left Wing-back", "Right Wing-back");
@@ -76,7 +76,7 @@
                                     $arrGoalkeeper = array("Goalkeeper");
                                 @endphp
                                 <div class="card-title font-15 font-weight-bold">
-                                    Defender
+                                    @lang('defender')
                                 </div>
                                 <div class="row">
                                     <div class="col-md-10 offset-md-1 row">
@@ -84,14 +84,14 @@
                                             <div class="checkbox checkbox-primary mb-2 col-md-6">
                                                 <input id="{{ $defender }}" name="position[]" type="checkbox" {{ in_array($defender, $filter['position'] ?? array())==true?"checked":"" }}>
                                                 <label for="{{ $defender }}">
-                                                    {{ $defender }}
+                                                    @lang($defender)
                                                 </label>
                                             </div>
                                         @endforeach
                                     </div>
                                 </div>
                                 <div class="card-title font-15 font-weight-bold">
-                                    Midfielder
+                                    @lang('midfielder')
                                 </div>
                                 <div class="row">
                                     <div class="col-md-10 offset-md-1 row">
@@ -99,14 +99,14 @@
                                             <div class="checkbox checkbox-primary mb-2 col-md-6">
                                                 <input id="{{ $midfielder }}" name="position[]" type="checkbox" {{ in_array($midfielder, $filter['position'] ?? array())==true?"checked":"" }}>
                                                 <label for="{{ $midfielder }}">
-                                                    {{ $midfielder }}
+                                                    @lang($midfielder)
                                                 </label>
                                             </div>
                                         @endforeach
                                     </div>
                                 </div>
                                 <div class="card-title font-15 font-weight-bold">
-                                    Forward
+                                    @lang('forward')
                                 </div>
                                 <div class="row">
                                     <div class="col-md-10 offset-md-1 row">
@@ -114,14 +114,14 @@
                                             <div class="checkbox checkbox-primary mb-2 col-md-6">
                                                 <input id="{{ $forward }}" name="position[]" type="checkbox" {{ in_array($forward, $filter['position'] ?? array())==true?"checked":"" }}>
                                                 <label for="{{ $forward }}">
-                                                    {{ $forward }}
+                                                    @lang($forward)
                                                 </label>
                                             </div>
                                         @endforeach
                                     </div>
                                 </div>
                                 <div class="card-title font-15 font-weight-bold">
-                                    Goalkeeper
+                                    @lang('Goalkeeper')
                                 </div>
                                 <div class="row">
                                     <div class="col-md-10 offset-md-1 row">
@@ -129,7 +129,7 @@
                                             <div class="checkbox checkbox-primary mb-2 col-md-6">
                                                 <input id="{{ $goalkeeper }}" name="position[]" type="checkbox" {{ in_array($goalkeeper, $filter['position'] ?? array())==true?"checked":"" }}>
                                                 <label for="{{ $goalkeeper }}">
-                                                    {{ $goalkeeper }}
+                                                    @lang($goalkeeper)
                                                 </label>
                                             </div>
                                         @endforeach
@@ -137,18 +137,18 @@
                                 </div>
                             </div>
                             <div class="popover-footer text-center">
-                                <button type="button" class="btn btn-sm btn-info" style="min-width: 150px" onclick="setPosition()">Set</button>
+                                <button type="button" class="btn btn-sm btn-info" style="min-width: 150px" onclick="setPosition()">@lang('set')</button>
 {{--                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="popover-x">Close</button>--}}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-auto">
                         <label for="btn_age" class="col-form-label">&nbsp;</label><br />
-                        <button type="button" class="btn btn-outline-info" id="btn_age">Age</button>
+                        <button type="button" class="btn btn-outline-info" id="btn_age">@lang('age')</button>
                         <!-- PopoverX content -->
                         <div id="popover_age" class="popover popover-x popover-default" style="min-width: 550px;">
                             <div class="arrow"></div>
-                            <h3 class="popover-header popover-title">Age</h3>
+                            <h3 class="popover-header popover-title">@lang('age')</h3>
                             <div class="popover-body popover-content">
                                 <div class="row mb-5 mt-5">
                                     <div class="col-md-10 offset-md-1">
@@ -157,18 +157,18 @@
                                 </div>
                             </div>
                             <div class="popover-footer text-center">
-                                <button type="button" class="btn btn-sm btn-info" style="min-width: 150px" onclick="setAge()">Set</button>
+                                <button type="button" class="btn btn-sm btn-info" style="min-width: 150px" onclick="setAge()">@lang('set')</button>
 {{--                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="popover-x">Close</button>--}}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-auto">
                         <label for="btn_height" class="col-form-label">&nbsp;</label><br />
-                        <button type="button" class="btn btn-outline-info" id="btn_height">Height</button>
+                        <button type="button" class="btn btn-outline-info" id="btn_height">@lang('height')</button>
                         <!-- PopoverX content -->
                         <div id="popover_height" class="popover popover-x popover-default" style="min-width: 550px;">
                             <div class="arrow"></div>
-                            <h3 class="popover-header popover-title">Height</h3>
+                            <h3 class="popover-header popover-title">@lang('height')</h3>
                             <div class="popover-body popover-content">
                                 <div class="row mb-5 mt-5">
                                     <div class="col-md-10 offset-md-1">
@@ -178,19 +178,19 @@
                             </div>
                             <div class="popover-footer">
                                 <div class="popover-footer text-center">
-                                    <button type="button" class="btn btn-sm btn-info" style="min-width: 150px" onclick="setHeight()">Set</button>
+                                    <button type="button" class="btn btn-sm btn-info" style="min-width: 150px" onclick="setHeight()">@lang('set')</button>
                                     {{--                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="popover-x">Close</button>--}}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-auto">
-                        <label for="nationality" class="col-form-label">Nationality</label><br />
+                        <label for="nationality" class="col-form-label">@lang('nationality')</label><br />
                         <select class="js-states form-control" id="nationality" style="min-width: 300px;" multiple="multiple"></select>
                     </div>
                     <div class="col-md-auto">
                         <label for="" class="col-form-label">&nbsp;</label><br />
-                        <button class="btn btn-outline-info" type="button" onclick="search()"><i class="fe-search"> Search</i></button>
+                        <button class="btn btn-outline-info" type="button" onclick="search()"><i class="fe-search"> @lang('search')</i></button>
                     </div>
                 </div>
             </div>
@@ -200,18 +200,18 @@
                 <tr>
                     <th>#</th>
                     <th></th>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th style="background-color: #3f4a56">General average</th>
-                    <th>Age</th>
-                    <th>Height</th>
-                    <th>Nationality</th>
-                    <th>League</th>
-                    <th>Technical average</th>
-                    <th>Mental average</th>
-                    <th>Physical average</th>
-                    <th>Goalkeeper average</th>
-                    <th>Action</th>
+                    <th>@lang('Name')</th>
+                    <th>@lang('position')</th>
+                    <th style="background-color: #3f4a56">@lang('general_average')</th>
+                    <th>@lang('age')</th>
+                    <th>@lang('height')</th>
+                    <th>@lang('nationality')</th>
+                    <th>@lang('league')</th>
+                    <th>@lang('technical_average')</th>
+                    <th>@lang('mental_average')</th>
+                    <th>@lang('physical_average')</th>
+                    <th>@lang('goalkeeper_average')</th>
+                    <th>@lang('action')</th>
                 </tr>
             </thead>
             <tbody>
