@@ -25,11 +25,11 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="/">Soccer</a></li>
-                        <li class="breadcrumb-item active">{{ trans('cruds.filter.title') }}</li>
+                        <li class="breadcrumb-item"><a href="/">@lang('soccer')Soccer</a></li>
+                        <li class="breadcrumb-item active">@lang(trans('cruds.filter.title'))</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{ trans('global.add') }} {{ trans('cruds.player.existing') }} {{ trans('cruds.player.title') }}</h4>
+                <h4 class="page-title">@lang(trans('global.add')) @lang(trans('cruds.player.existing')) @lang(trans('cruds.player.title'))</h4>
             </div>
         </div>
     </div>
@@ -37,32 +37,32 @@
     <div class="card">
         <div class="card-body">
             <div class="row form-group">
-                <label class="col-md-auto col-form-label" for="name">Player name</label>
+                <label class="col-md-auto col-form-label" for="name">@lang('player_name')</label>
                 <div class="col-md-auto">
                     <input type="text" class="form-control" id="name" name="name" >
                 </div>
                 <div class="col-md-auto">
-                    <button class="btn btn-outline-info" type="button" onclick="showTable()" onkeydown=""><i class="fe-search"> Search</i></button>
+                    <button class="btn btn-outline-info" type="button" onclick="showTable()" onkeydown=""><i class="fe-search"> @lang('search')</i></button>
                 </div>
                 <div class="col-md-6 text-right">
-                    <button type="button" id="btnPrevious" disabled class="btn btn-secondary">Previous</button>
-                    <button type="button" id="btnNext" disabled class="btn btn-secondary ml-1">Next</button>
+                    <button type="button" id="btnPrevious" disabled class="btn btn-secondary">@lang('Previous')</button>
+                    <button type="button" id="btnNext" disabled class="btn btn-secondary ml-1">@lang('Next')</button>
                 </div>
             </div>
             <table class="table nowrap" id="player_table">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Team</th>
-                    <th>Position</th>
-                    <th>Age</th>
-                    <th>Height</th>
-                    <th>Weight</th>
+                    <th>@lang('name')</th>
+                    <th>@lang('Team')</th>
+                    <th>@lang('position')</th>
+                    <th>@lang('age')</th>
+                    <th>@lang('height')</th>
+                    <th>@lang('weight')</th>
                 </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="text-center" colspan='6'>No data available in table
+                        <td class="text-center" colspan='6'>@lang('no_data_table')
                         </td>
                     </tr>
                 </tbody>

@@ -45,5 +45,9 @@
   "mental_average": "Promedio Mental",
   "physical_average": "Promedio Físico",
   "goalkeeper_average": "Promedio Portero",
-  "action": "Acción"
+  "action": "Acción",
+
+
+  "Existing": "Existing",
+  "Name": "Nombre"
 }

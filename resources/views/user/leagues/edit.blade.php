@@ -7,13 +7,13 @@
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item">
                         <a href="{{ route('user.leagues.index') }}">
-                            {{ trans('cruds.league.title_singular') }}
+                            @lang(trans('cruds.league.title_singular'))
                         </a>
                     </li>
-                    <li class="breadcrumb-item active">{{ trans('global.edit') }}</li>
+                    <li class="breadcrumb-item active">@lang(trans('global.edit'))</li>
                 </ol>
             </div>
-            <h4 class="page-title">{{ trans('global.edit') }} {{ trans('cruds.league.title_singular') }}</h4>
+            <h4 class="page-title">@lang(trans('global.edit')) @lang(trans('cruds.league.title_singular'))</h4>
         </div>
     </div>
 </div>
@@ -24,7 +24,7 @@
             @csrf
             @method('PUT')
             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                <label for="name">{{ trans('cruds.league.fields.title') }}*</label>
+                <label for="name">@lang(trans('cruds.league.fields.title'))</label>
                 <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($league) ? $league->name : '') }}" required>
                 @if($errors->has('name'))
                     <div class="mt-1" style="color: #e6334d; font-weight: 500;">
@@ -33,7 +33,7 @@
                 @endif
             </div>
             <div>
-                <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
+                <input class="btn btn-danger" type="submit" value="@lang(trans('global.save'))">
             </div>
         </form>
     </div>

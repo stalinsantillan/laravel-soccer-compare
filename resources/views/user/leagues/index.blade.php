@@ -15,10 +15,10 @@
         <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item active">{{ trans('cruds.league.title_singular') }}</li>
+                    <li class="breadcrumb-item active">@lang(trans('cruds.league.title_singular'))</li>
                 </ol>
             </div>
-            <h4 class="page-title">{{ trans('cruds.league.title_singular') }}</h4>
+            <h4 class="page-title">@lang(trans('cruds.league.title_singular'))</h4>
         </div>
     </div>
 </div>
@@ -29,13 +29,13 @@
         <div class="card">
             <div class="card-body">
                 <a class="btn btn-success mb-3" href="{{ route('user.leagues.create') }}">
-                    {{ trans('global.add') }} {{ trans('cruds.league.title_singular') }}
+                    @lang(trans('global.add')) @lang(trans('cruds.league.title_singular'))
                 </a>
                 <table id="tblLeague" class="table dt-responsive nowrap">
                     <thead>
                         <tr>
-                            <th>{{ trans('cruds.league.fields.id') }}</th>
-                            <th>{{ trans('cruds.league.fields.title') }}</th>
+                            <th>@lang(trans('cruds.league.fields.id'))</th>
+                            <th>@lang(trans('cruds.league.fields.title'))</th>
                             <th>#</th>
                         </tr>
                     </thead>
@@ -50,12 +50,12 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-xs btn-info" href="{{ route('user.leagues.edit', $league->id) }}">
-                                        {{ trans('global.edit') }}
+                                        @lang(trans('global.edit'))
                                     </a>
-                                    <form action="{{ route('user.leagues.destroy', $league->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <form action="{{ route('user.leagues.destroy', $league->id) }}" method="POST" onsubmit="return confirm('@lang(trans('global.areYouSure'))');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        <input type="submit" class="btn btn-xs btn-danger" value="@lang(trans('global.delete'))">
                                     </form>
                                 </td>
 

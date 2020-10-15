@@ -14,13 +14,13 @@
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item">
                         <a href="{{ route('user.teams.index') }}">
-                            {{ trans('cruds.team.title_singular') }}
+                            @lang(trans('cruds.team.title_singular'))
                         </a>
                     </li>
-                    <li class="breadcrumb-item active">{{ trans('global.create') }}</li>
+                    <li class="breadcrumb-item active">@lang(trans('global.create'))</li>
                 </ol>
             </div>
-            <h4 class="page-title">{{ trans('global.create') }} {{ trans('cruds.team.title_singular') }}</h4>
+            <h4 class="page-title">@lang(trans('global.create')) @lang(trans('cruds.team.title_singular'))</h4>
         </div>
     </div>
 </div>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
+                        <input class="btn btn-danger" type="submit" value="@lang(trans('global.save'))">
                     </div>
                 </form>
             </div>
