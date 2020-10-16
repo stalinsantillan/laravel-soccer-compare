@@ -46,7 +46,6 @@
   "physical_average": "Physical average",
   "goalkeeper_average": "Goalkeeper average",
   "action": "Action",
-
   "Existing": "Existing",
   "Name": "Name",
   "profile": "Profile",
@@ -167,7 +166,17 @@
   "add_injury": "Add Injury",
   "date_injury": "Date of injury",
   "desc_and_evolution": "Description and evolution",
-  "add_video": "Add Video",
   "add_link2video": "Add link to main video",
-  "add_another_video": "Add another video"
+  "add_another_video": "Add another video",
+  "go_profile": "Go to profile",
+  "show_team_logo": "Show Team Logo",
+  "download_pdf": "Download PDF",
+  "actual_club": "Actual Club",
+  "first_appearance": "First appearance",
+  "watch_video": "Watch Video",
+  "Average": "Average",
+  "Injuires": "Injuires",
+  "player_not_injuries": "The Player doesn't show injuries",
+  "Report": "Injury",
+  "no_selected": "No selected"
 }

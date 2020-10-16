@@ -46,7 +46,6 @@
   "physical_average": "Promedio Físico",
   "goalkeeper_average": "Promedio Portero",
   "action": "Acción",
-
   "Existing": "Existente",
   "Name": "Nombre",
   "profile": "Perfil",
@@ -167,7 +166,6 @@
   "add_injury": "Añadir lesión",
   "date_injury": "Fecha de la lesión",
   "desc_and_evolution": "Descripción y evolución",
-  "add_video": "Añadir Vídeo",
   "add_link2video": "Añadir enlace al vídeo principal",
   "add_another_video": "Añadir otro vídeo"
   }

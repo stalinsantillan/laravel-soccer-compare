@@ -91,16 +91,16 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-5 offset-1">
-                            <a class="btn btn-link mb-2 text-dark font-13" href="{{ route('user.player_profile', $data->id) }}"><i class="fe-arrow-left mr-1"></i>Go to profile</a>
+                            <a class="btn btn-link mb-2 text-dark font-13" href="{{ route('user.player_profile', $data->id) }}"><i class="fe-arrow-left mr-1"></i>@lang('go_profile')</a>
                         </div>
                         <div class="col-md-5 text-right">
                             <div class="checkbox checkbox-info checkbox-circle" style="position: absolute; right: 155px; top: 15px">
                                 <input id="showteam" type="checkbox" checked="">
                                 <label for="showteam">
-                                    Show Team Logo
+                                    @lang('show_team_logo')
                                 </label>
                             </div>
-                            <button class="btn btn-success mt-1" onclick="download()">Download PDF</button>
+                            <button class="btn btn-success mt-1" onclick="download()">@lang('download_pdf')</button>
                         </div>
                     </div>
                     <div class="row" id="content" style="background: #F2F5F7">
@@ -121,7 +121,7 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-12 text-center">
-                                    <h3>Scout Report</h3>
+                                    <h3>@lang('scout_report')</h3>
                                 </div>
                             </div>
                             <div class="row mt-2">
@@ -136,39 +136,39 @@
                                                 background-repeat: no-repeat;background-size: 180px 180px; background-image:
                                                 url({{ asset('admin_assets/images/users/standard.png') }});"></div>
                                     @endif
-                                    <p class="font-15 mt-2 mb-0">Actual Club</p>
+                                    <p class="font-15 mt-2 mb-0">@lang('actual_club')</p>
                                     <p class="font-weight-bold font-18">{{ $data->current_team }}</p>
                                 </div>
                                 <div class="col-md-3">
-                                    <p class="font-13 mt-4 mb-0">Date of birth</p>
+                                    <p class="font-13 mt-4 mb-0">@lang('dob')</p>
                                     @php
                                         $year = date("Y", strtotime($data->birth_date));
                                         $age = (date('Y') - $year);
                                     @endphp
                                     <p class="font-13 font-weight-bold mb-0">{{ $data->birth_date }} <span class="ml-3">{{ $age }} years</span></p>
-                                    <p class="font-13 mt-1 mb-0">Nationality</p>
+                                    <p class="font-13 mt-1 mb-0">@lang('nationality')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{ $data->nationality }}</p>
-                                    <p class="font-13 mt-1 mb-0">Height</p>
+                                    <p class="font-13 mt-1 mb-0">@lang('height')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{ $data->height }} cm</p>
-                                    <p class="font-13 mt-1 mb-0">Weight</p>
+                                    <p class="font-13 mt-1 mb-0">@lang('weight')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{ $data->weight }} kg</p>
-                                    <p class="font-13 mt-1 mb-0">Foot</p>
+                                    <p class="font-13 mt-1 mb-0">@lang('foot')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{ $data->foot }}</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <p class="font-13 mt-4 mb-0">Languages</p>
+                                    <p class="font-13 mt-4 mb-0">@lang('Languages')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{$data->additional->languages ?? ''}}</p>
-                                    <p class="font-13 mt-1 mb-0">National Team</p>
+                                    <p class="font-13 mt-1 mb-0">@lang('national_team')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{ $data->additional->national_team ?? '' }}</p>
-                                    <p class="font-13 mt-1 mb-0">First appearance</p>
+                                    <p class="font-13 mt-1 mb-0">@lang('first_appearance')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{ $data->additional->first_appearance_date ?? '' }}</p>
-                                    <p class="font-13 mt-1 mb-0">First appearance in first division</p>
+                                    <p class="font-13 mt-1 mb-0">@lang('first_appear_fir_devision')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{ isset($data->additional->first_appearance_team) ? $data->additional->getFirstAppearanceTeamName() : '' }}
                                         <span class="ml-3">{{ $data->additional->first_appearance_division ?? '' }}</span>
                                     </p>
-                                    <p class="font-13 mt-1 mb-0">Contract Expires</p>
+                                    <p class="font-13 mt-1 mb-0">@lang('contract_expires')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{ $data->additional->contact_expires ?? '' }}</p>
-                                    <p class="font-13 mt-1 mb-0">Market Value</p>
+                                    <p class="font-13 mt-1 mb-0">@lang('market_value')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{ $data->additional->market_value ?? '' }} EUR</p>
                                 </div>
                                 <div class="col-md-1">
@@ -177,7 +177,7 @@
                                             border: 2px solid #00AF80; padding-top: 4px; cursor: pointer;
                                             right: 50px; top: -40px;">
                                         <a href="{{ $data->video->main_video ?? '' }}" style="color: #00AF80;">
-                                            Watch Video
+                                            @lang('watch_video')
                                         </a>
                                     </div>
                                 </div>
@@ -190,20 +190,20 @@
                                     @php $i = 0; @endphp
                                     @foreach($data->positions as $position)
                                         @if ($i == 0)
-                                            <p class="font-13 mb-0">Main Position : </p>
+                                            <p class="font-13 mb-0">@lang('main_position') : </p>
                                         @elseif ($i == 1)
-                                            <p class="font-13 mt-2 mb-0">Other Position : </p>
+                                            <p class="font-13 mt-2 mb-0">@lang('other_position') : </p>
                                         @endif
                                         <p class="font-13 font-weight-bold mb-0">{{ $position->specify }}</p>
                                         @php ++$i; @endphp
                                     @endforeach
                                 </div>
                                 <div class="col-md-4">
-                                    <p class="font-13 mb-0">General Information</p>
+                                    <p class="font-13 mb-0">@lang('general_information')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{ $data->scout_report->general_info ?? '' }}</p>
-                                    <p class="font-13 mt-4 mb-0">Strengths</p>
+                                    <p class="font-13 mt-4 mb-0">@lang('Strengths')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{ $data->scout_report->strengths ?? '' }}</p>
-                                    <p class="font-13 mt-4 mb-0">Weaknesses</p>
+                                    <p class="font-13 mt-4 mb-0">@lang('Weaknesses')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{ $data->scout_report->weaknesses ?? '' }}</p>
                                 </div>
                                 <div class="col-md-1"></div>
@@ -213,155 +213,155 @@
                             <div class="row mt-2">
                                 <div class="col-md-5 offset-1 mt-4">
                                     <div class="card-title font-15 font-weight-bold mb-0">
-                                        Technical
+                                        @lang('technical')
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <table type="technical" width="100%">
                                                 <tr>
-                                                    <td class="font-13" for="corners">Corners</td>
+                                                    <td class="font-13" for="corners">@lang('corners')</td>
                                                     <td class="font-13" width="50" align="center" style="background: {{ getColor($data->latestParam->corners) }}; color: black;">{{ $data->latestParam->corners }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="crossing">Crossing</td>
+                                                    <td class="font-13" for="crossing">@lang('crossing')</td>
                                                     <td class="font-13" width="50" align="center" style="background: {{ getColor($data->latestParam->crossing) }}; color: black;">{{ $data->latestParam->crossing }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="dribbling">Dribbling</td>
+                                                    <td class="font-13" for="dribbling">@lang('dribbling')</td>
                                                     <td class="font-13" width="50" align="center" style="background: {{ getColor($data->latestParam->dribbling) }}; color: black;">{{ $data->latestParam->dribbling }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="finishing">Finishing</td>
+                                                    <td class="font-13" for="finishing">@lang('finishing')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->finishing) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->finishing }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="aerial_reach">Aerial Reach</td>
+                                                    <td class="font-13" for="aerial_reach">@lang('aerial_reach')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->aerial_reach) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->aerial_reach }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="command_of_area">Command Of Area</td>
+                                                    <td class="font-13" for="command_of_area">@lang('command_area')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->command_of_area) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->command_of_area }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="communication">Communication</td>
+                                                    <td class="font-13" for="communication">@lang('communication')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->communication) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->communication }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="eccentricity">Eccentricity</td>
+                                                    <td class="font-13" for="eccentricity">@lang('eccentricity')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->eccentricity) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->eccentricity }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="first_touch">First Touch</td>
+                                                    <td class="font-13" for="first_touch">@lang('first_touch')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->first_touch) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->first_touch }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="handling">Handling</td>
+                                                    <td class="font-13" for="handling">@lang('handling')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->handling) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->handling }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="kicking">Kicking</td>
+                                                    <td class="font-13" for="kicking">@lang('kicking')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->kicking) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->kicking }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="one_on_ones">One On Ones</td>
+                                                    <td class="font-13" for="one_on_ones">@lang('one_ones')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->one_on_ones) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->one_on_ones }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="feet_playing">Feet playing</td>
+                                                    <td class="font-13" for="feet_playing">@lang('feet_playing')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->feet_playing) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->feet_playing }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="free_kick">Free Kick Taking</td>
+                                                    <td class="font-13" for="free_kick">@lang('free_kick_taking')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->free_kick) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->free_kick }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="heading">Heading</td>
+                                                    <td class="font-13" for="heading">@lang('Heading')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->heading) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->heading }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="shots">Shots</td>
+                                                    <td class="font-13" for="shots">@lang('Shots')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->shots) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->shots }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="long_shots">Long Shots</td>
+                                                    <td class="font-13" for="long_shots">@lang('long_shots')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->long_shots) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->long_shots }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="long_throws">Long Throws</td>
+                                                    <td class="font-13" for="long_throws">@lang('long_throws')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->long_throws) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->long_throws }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="marking">Marking</td>
+                                                    <td class="font-13" for="marking">@lang('Marking')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->marking) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->marking }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="passing">Passing</td>
+                                                    <td class="font-13" for="passing">@lang('Passing')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->passing) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->passing }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="long_pass">Long Pass</td>
+                                                    <td class="font-13" for="long_pass">@lang('long_pass')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->long_pass) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->long_pass }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="punching">Punching</td>
+                                                    <td class="font-13" for="punching">@lang('Punching')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->punching) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->punching }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="reflexes">Reflexes</td>
+                                                    <td class="font-13" for="reflexes">@lang('Reflexes')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->reflexes) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->reflexes }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="rushing_out">Rushing Out</td>
+                                                    <td class="font-13" for="rushing_out">@lang('rushing_out')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->rushing_out) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->rushing_out }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="throwing">Throwing</td>
+                                                    <td class="font-13" for="throwing">@lang('Throwing')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->throwing) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->throwing }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="penalty_taking">Penalty Taking</td>
+                                                    <td class="font-13" for="penalty_taking">@lang('penalty_taking')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->penalty_taking) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->penalty_taking }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="tackling">Tackling</td>
+                                                    <td class="font-13" for="tackling">@lang('Tackling')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->tackling) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->tackling }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="technique">Technique</td>
+                                                    <td class="font-13" for="technique">@lang('Technique')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->technique) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->technique }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="offensive">1 VS 1 Offensive</td>
+                                                    <td class="font-13" for="offensive">@lang('1_1_offensive')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->offensive) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->offensive }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="deffense">1 VS 1 Deffense</td>
+                                                    <td class="font-13" for="deffense">@lang('1_1_deffense')</td>
                                                     <td class="font-13" style="background: {{ getColor($data->latestParam->deffense) }}; color: black;"
                                                         width="50" align="center">{{ $data->latestParam->deffense }}</td>
                                                 </tr>
@@ -371,104 +371,104 @@
                                 </div>
                                 <div class="col-md-5 mt-4">
                                     <div class="card-title font-15 font-weight-bold mb-0">
-                                        Mental
+                                        @lang('mental')
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <table type="mental" width="100%">
                                                 <tr>
-                                                    <td class="font-13" for="aggression">Aggression</td>
+                                                    <td class="font-13" for="aggression">@lang('Aggression')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->aggression) }}; color: black;">
                                                         {{ $data->latestParam->aggression }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="anticipation">Anticipation</td>
+                                                    <td class="font-13" for="anticipation">@lang('Anticipation')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->anticipation) }}; color: black;">
                                                         {{ $data->latestParam->anticipation }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="bravery">Bravery</td>
+                                                    <td class="font-13" for="bravery">@lang('Bravery')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->bravery) }}; color: black;">
                                                         {{ $data->latestParam->bravery }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="composure">Composure</td>
+                                                    <td class="font-13" for="composure">@lang('Composure')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->composure) }}; color: black;">
                                                         {{ $data->latestParam->composure }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="concentration">Concentration</td>
+                                                    <td class="font-13" for="concentration">@lang('Concentration')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->concentration) }}; color: black;">
                                                         {{ $data->latestParam->concentration }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="decisions">Decisions</td>
+                                                    <td class="font-13" for="decisions">@lang('Decisions')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->decisions) }}; color: black;">
                                                         {{ $data->latestParam->decisions }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="determination">Determination</td>
+                                                    <td class="font-13" for="determination">@lang('Determination')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->determination) }}; color: black;">
                                                         {{ $data->latestParam->determination }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="flair">Flair</td>
+                                                    <td class="font-13" for="flair">@lang('Flair')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->flair) }}; color: black;">
                                                         {{ $data->latestParam->flair }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="leadership">Leadership</td>
+                                                    <td class="font-13" for="leadership">@lang('Leadership')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->leadership) }}; color: black;">
                                                         {{ $data->latestParam->leadership }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="off_ball">Off The Ball</td>
+                                                    <td class="font-13" for="off_ball">@lang('off_ball')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->off_ball) }}; color: black;">
                                                         {{ $data->latestParam->off_ball }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="positioning">Positioning</td>
+                                                    <td class="font-13" for="positioning">@lang('Positioning')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->positioning) }}; color: black;">
                                                         {{ $data->latestParam->positioning }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="teamwork">Teamwork</td>
+                                                    <td class="font-13" for="teamwork">@lang('Teamwork')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->teamwork) }}; color: black;">
                                                         {{ $data->latestParam->teamwork }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="vision">Vision</td>
+                                                    <td class="font-13" for="vision">@lang('Vision')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->vision) }}; color: black;">
                                                         {{ $data->latestParam->vision }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="work_rate">Work Rate</td>
+                                                    <td class="font-13" for="work_rate">@lang('work_rate')@lang('')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->work_rate) }}; color: black;">
                                                         {{ $data->latestParam->work_rate }}
@@ -490,90 +490,90 @@
                             <div class="row mt-2">
                                 <div class="col-md-5 mt-4 offset-1">
                                     <div class="card-title font-15 font-weight-bold mb-0">
-                                        Physical
+                                        @lang('Physical')
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <table type="physical" width="100%">
                                                 <tr>
-                                                    <td class="font-13" for="acceleration">Acceleration</td>
+                                                    <td class="font-13" for="acceleration">@lang('Acceleration')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->acceleration) }}; color: black;">
                                                         {{ $data->latestParam->acceleration }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="aerial_duels">Aerial Duels</td>
+                                                    <td class="font-13" for="aerial_duels">@lang('aerial_dules')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->aerial_duels) }}; color: black;">
                                                         {{ $data->latestParam->aerial_duels }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="agility">Agility</td>
+                                                    <td class="font-13" for="agility">@lang('Agility')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->agility) }}; color: black;">
                                                         {{ $data->latestParam->agility }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="balance">Balance</td>
+                                                    <td class="font-13" for="balance">@lang('Balance')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->balance) }}; color: black;">
                                                         {{ $data->latestParam->balance }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="jumping_reach">Jumping Reach</td>
+                                                    <td class="font-13" for="jumping_reach">@lang('jumping_reach')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->jumping_reach) }}; color: black;">
                                                         {{ $data->latestParam->jumping_reach }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="natural_fitness">Natural Fitness</td>
+                                                    <td class="font-13" for="natural_fitness">@lang('natural_fitness')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->natural_fitness) }}; color: black;">
                                                         {{ $data->latestParam->natural_fitness }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="pace">Pace</td>
+                                                    <td class="font-13" for="pace">@lang('Pace')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->pace) }}; color: black;">
                                                         {{ $data->latestParam->pace }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="reaction">Reaction</td>
+                                                    <td class="font-13" for="reaction">@lang('Reaction')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->reaction) }}; color: black;">
                                                         {{ $data->latestParam->reaction }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="sprint_speed">Sprint Speed</td>
+                                                    <td class="font-13" for="sprint_speed">@lang('sprint_speed')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->sprint_speed) }}; color: black;">
                                                         {{ $data->latestParam->sprint_speed }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="stamina">Stamina</td>
+                                                    <td class="font-13" for="stamina">@lang('Stamina')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->stamina) }}; color: black;">
                                                         {{ $data->latestParam->stamina }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="strength">Strength</td>
+                                                    <td class="font-13" for="strength">@lang('Strength')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->strength) }}; color: black;">
                                                         {{ $data->latestParam->strength }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="injury_resistance">Injury resistance</td>
+                                                    <td class="font-13" for="injury_resistance">@lang('injury_resistance')</td>
                                                     <td class="font-13" width="50" align="center" style="
                                                             background: {{ getColor($data->latestParam->injury_resistance) }}; color: black;">
                                                         {{ $data->latestParam->injury_resistance }}
@@ -585,48 +585,48 @@
                                 </div>
                                 <div class="col-md-5 mt-4">
                                     <div class="card-title font-15 font-weight-bold mb-0">
-                                        Average
+                                        @lang('Average')
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <table type="average" width="100%">
                                                 <tr>
-                                                    <td class="font-13" for="acceleration">Acceleration</td>
+                                                    <td class="font-13" for="acceleration">@lang('Acceleration')</td>
                                                     <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="aerial_duels">Aerial Duels</td>
+                                                    <td class="font-13" for="aerial_duels">@lang('aerial_dules')</td>
                                                     <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="agility">Agility</td>
+                                                    <td class="font-13" for="agility">@lang('Agility')</td>
                                                     <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="balance">Balance</td>
+                                                    <td class="font-13" for="balance">@lang('Balance')</td>
                                                     <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="jumping_reach">Jumping Reach</td>
+                                                    <td class="font-13" for="jumping_reach">@lang('jumping_reach')</td>
                                                     <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="natural_fitness">Natural Fitness</td>
+                                                    <td class="font-13" for="natural_fitness">@lang('natural_fitness')</td>
                                                     <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="pace">Pace</td>
+                                                    <td class="font-13" for="pace">@lang('Pace')</td>
                                                     <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-13" for="reaction">Reaction</td>
+                                                    <td class="font-13" for="reaction">@lang('Reaction')</td>
                                                     <td class="font-13" width="50" align="center" style="color: black;">
                                                     </td>
                                                 </tr>
@@ -646,7 +646,7 @@
                         </div>
                         <div style="margin-left: calc(50% - 397px); width: 794px; height: 1123px;" id="page3">
                             <div class="row mt-4">
-                                <p class="font-20 font-weight-bold text-center col-md-12">Injuires</p>
+                                <p class="font-20 font-weight-bold text-center col-md-12">@lang('Injuires')</p>
                                 @php $i = 0; @endphp
                                 @foreach($data->injury as $injury)
                                     <div class="col-md-12 text-center">
@@ -657,17 +657,17 @@
                                     @php ++$i; @endphp
                                 @endforeach
                                 @if ($i == 0)
-                                    <p class="font-15 font-weight-bold col-md-4 offset-4">The Player doesn't show injuries</p>
+                                    <p class="font-15 font-weight-bold col-md-4 offset-4">@lang('player_not_injuries')</p>
                                 @endif
-                                <p class="font-20 font-weight-bold text-center col-md-12 mt-2">Report</p>
-                                <p class="font-15 col-md-6 bg-success text-dark offset-3 mb-1">Pros</p>
+                                <p class="font-20 font-weight-bold text-center col-md-12 mt-2">@lang('Report')</p>
+                                <p class="font-15 col-md-6 bg-success text-dark offset-3 mb-1">@lang('Pros')</p>
                                 @php
                                     $pros = $data->scout_report->pros ?? '';
                                     $pros_replace = str_replace("\n","</p>\n<p class='font-13 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>",$pros);
                                     $pros = "<p class='font-13 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>" . $pros_replace . "</p>";
                                     echo $pros;
                                 @endphp
-                                <p class="font-15 col-md-6 bg-danger text-dark offset-3 mb-1 mt-3">Cons</p>
+                                <p class="font-15 col-md-6 bg-danger text-dark offset-3 mb-1 mt-3">@lang('Cons')@lang('')</p>
                                 @php
                                     $cons = $data->scout_report->cons ?? '';
                                     $cons_replace = str_replace("\n","</p>\n<p class='font-13 col-md-6 text-dark offset-3 pl-3 pr-3 mb-0'>",$cons);
@@ -677,20 +677,20 @@
                                     @if (isset($data->scout_report->conclusion))
                                         @if (intval($data->scout_report->conclusion) == 1)
                                             <p class="font-15 col-md-6 bg-danger text-dark offset-3 mb-1 mt-3 text-center">
-                                            Conclusion : Discard player
+                                            @lang('Conclusion') : @lang('discard_player')
                                         @elseif (intval($data->scout_report->conclusion) == 2)
                                             <p class="font-15 col-md-6 bg-warning text-dark offset-3 mb-1 mt-3 text-center">
-                                            Conclusion : Continue watching
+                                            @lang('Conclusion') : @lang('continue_watching')
                                         @elseif (intval($data->scout_report->conclusion) == 3)
                                             <p class="font-15 col-md-6 bg-success text-dark offset-3 mb-1 mt-3 text-center">
-                                            Conclusion : Sign the player
+                                            @lang('Conclusion') : @lang('sign_player')
                                         @else
                                             <p class="font-15 col-md-6 bg-info text-light offset-3 mb-1 mt-3 text-center">
-                                            Conclusion : No selected
+                                            @lang('Conclusion') : @lang('no_selected')
                                         @endif
                                     @else
                                         <p class="font-15 col-md-6 bg-info text-light offset-3 mb-1 mt-3 text-center">
-                                        Conclusion : No selected
+                                            @lang('Conclusion') : @lang('no_selected')
                                     @endif
                                 </p>
                                 @php
