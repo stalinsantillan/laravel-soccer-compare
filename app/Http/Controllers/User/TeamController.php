@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\User\League;
 use App\Models\User\Team;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -52,13 +53,26 @@ class TeamController extends Controller
 //        if ($validator->fails()) {
 //
 //        }
-        $request->validate([
-            'name' => 'required',
-            'league_id' => 'required',
-        ]);
-        //
-        $request->request->add(['user_id' => Auth::user()->id]);
-        Team::create($request->all());
+        $league_name = $request->league;
+        $logo = null;
+        if($request->hasFile('logo')){
+            $logo = $request->logo->store('logos');
+        }
+        if($league_name==null){
+            $request->validate([
+                'name' => 'required',
+                'league_id' => 'required',
+            ]);
+            $request->request->add(['user_id' => Auth::user()->id]);
+            $request->request->add(['img_logo' => $logo]);
+            Team::create($request->all());
+        }
+        else{
+            //create league first
+            $user_id = Auth::user()->id;
+            $league = League::create(['name'=>$league_name,'user_id'=>$user_id]);
+            Team::create(['name'=>$request->name,'user_id'=>$user_id,'league_id'=>$league->id,'img_logo'=>$logo]);
+        }
 
         return redirect()->route('user.teams.index');
     }

@@ -2,7 +2,14 @@
 @section('styles')
     <!-- third party css -->
     <link href="{{ asset('admin_assets/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('user_assets/libs/dropzone/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('user_assets/libs/dropify/dropify.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- third party css end -->
+    <style>
+        .btn-add-league i{
+            font-size: 12px;
+        }
+    </style>
 @endsection
 @section('content')
 
@@ -42,6 +49,12 @@
                             @endif
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="logo" class="col-md-12">Logo</label>
+                        <div class="col-md-7">
+                            <input type="file" id="logo" name="logo" class="dropify" data-max-file-size="1M" accept="Image/*"/>
+                        </div>
+                    </div>
                     <div class="form-group {{ $errors->has('league_id') ? 'has-error' : '' }}">
                         {!! Form::label('league_id', trans('cruds.league.title_singular'), ['class' => 'col-md-12']) !!}
                         <div class="col-md-12">
@@ -53,7 +66,15 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 mb-2">
+                        <button class="btn btn-info btn-add-league" type="button" onclick="showLeague()">@lang(trans('global.add')) @lang(trans('cruds.league.title_singular')) <i id="i-league" class="icon-plus"></i></button>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control d-none" name="league" id="league">
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-right">
                         <input class="btn btn-danger" type="submit" value="@lang(trans('global.save'))">
                     </div>
                 </form>
@@ -65,9 +86,36 @@
 @section('scripts')
     @parent
     <script src="{{ asset('user_assets/libs/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('user_assets/libs/dropify/dropify.min.js') }}"></script>
     <script>
+        let addLeague = false;
         $(document).ready(function(){
-            $('[data-toggle="select2"]').select2()
+            $('[data-toggle="select2"]').select2();
+            $(".dropify").dropify({
+                messages: {
+                    default: "Logo",
+                    replace: "Drag and drop or click to replace",
+                    remove: "Remove",
+                    error: "Ooops, something wrong appended."
+                },
+                error: {
+                    fileSize: "The file size is too big (1M max)."
+                }
+            });
         });
+
+        function showLeague() {
+            addLeague = !addLeague;
+            if(addLeague){
+                $('#i-league').removeClass('icon-plus');
+                $('#i-league').addClass('icon-arrow-up');
+                $('#league').removeClass('d-none');
+            }else{
+                $('#i-league').removeClass('icon-arrow-up');
+                $('#i-league').addClass('icon-plus');
+                $('#league').addClass('d-none');
+                $('#league').val('');
+            }
+        }
     </script>
 @endsection

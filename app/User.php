@@ -22,7 +22,7 @@ class User extends Authenticatable
     use HasRoles;
     use Billable;
 
-    protected $fillable = ['name', 'email', 'password', 'remember_token', 'status', 'limit_count'];
+    protected $fillable = ['name', 'email', 'password', 'remember_token', 'status', 'limit_count','occupation','country','team_or_academy'];
     
     
     /**

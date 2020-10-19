@@ -1,6 +1,10 @@
 <div class="container-fluid">
     <div id="navigation">
         <!-- Navigation Menu-->
+        <?php
+            $segment = Request::segment(2);
+            $sub_segment = Request::segment(3);
+        ?>
         <ul class="navigation-menu">
             <li class="has-submenu">
                 <a href="#">
@@ -34,10 +38,22 @@
 {{--                    </li>--}}
                 </ul>
             </li>
-            <li>
-                <a href="{{ route('user.filter_show') }}">
-                    @lang(trans('cruds.filter.title'))
+            <li class="has-submenu {{$segment=='compare'?'active':''}}">
+                <a href="#">
+                    @lang(trans('cruds.filter.title')) <div class="arrow-down"></div>
                 </a>
+                <ul class="submenu">
+                    <li>
+                        <a href="{{ route('user.filter_show') }}">
+                            @lang(trans('cruds.filter.title'))
+                        </a>
+                    </li>
+                    <li class="{{($segment=='compare'&&$sub_segment=='add')?'active':''}}">
+                        <a href="{{ route('user.add_compare',0) }}">
+                            @lang('Compare')
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="has-submenu">
                 <a href="#">

@@ -162,6 +162,30 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="form-group col-md-6 row">
+                    <label for="current_evaluation" class="col-md-3 col-form-label text-right">
+                        @lang('current_evaluation')
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="current_evaluation" name="current_evaluation">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="0" max="{{ $paramsetting->current_evaluation }}" step="0.1"  match="current_evaluation" data-rangeslider>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                    <label for="potential_evaluation" class="col-md-3 col-form-label text-right">
+                        @lang('potential_evaluation')
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" attrtype="range_input" class="form-control" id="potential_evaluation" name="potential_evaluation">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="range" min="0" value="0" max="{{ $paramsetting->potential_evaluation }}" step="0.1"  match="potential_evaluation" data-rangeslider>
+                    </div>
+                </div>
+            </div>
         </div>
     </div> <!-- end card-box-->
     <div class="card">
@@ -896,6 +920,8 @@
             , "aggression", "anticipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
             , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
 
+        let evaluation = ["current_evaluation","potential_evaluation"]
+
         function formatRepo (repo) {
             if (repo.loading) {
                 return repo.text;
@@ -1110,6 +1136,8 @@
         function changeAttributes() {
             $spec_pos = $("#position2").val();
             $("[attrtype=range_input]").parent().parent().css("display", "none");
+            $("#current_evaluation").parent().parent().css("display","");
+            $("#potential_evaluation").parent().parent().css("display","");
 
             if (arrGoalkeeperPos.includes($spec_pos))
             {

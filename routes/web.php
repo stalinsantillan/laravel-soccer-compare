@@ -75,5 +75,10 @@ Route::middleware(['approved'])->group(function () {
 
         Route::resource('leagues', 'User\LeagueController');
         Route::resource('teams', 'User\TeamController');
+
+        Route::get('compare/add/{player}','User\PlayerController@add_compare')->name('add_compare');
+        Route::post('compare/view','User\PlayerController@compare')->name('compare');
+        Route::post('compare/list','User\PlayerController@compareList')->name('compare_list');
+        Route::post('compare/get_detail','User\PlayerController@getDetails')->name('compare_detail');
     });
 });

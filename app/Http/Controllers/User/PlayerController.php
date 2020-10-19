@@ -388,6 +388,9 @@ class PlayerController extends Controller
         $player->height = $request->height;
         $player->weight = $request->weight;
         $player->foot = $request->foot;
+        $player->foot = $request->foot;
+        $player->current_evaluation = $request->current_evaluation;
+        $player->potential_evaluation = $request->potential_evaluation;
         $current_team = '';
         if (isset($request->team_link) == true && $request->team_link != "")
         {
@@ -830,6 +833,8 @@ class PlayerController extends Controller
         $player->height = $request->height;
         $player->weight = $request->weight;
         $player->foot = $request->foot;
+        $player->current_evaluation = $request->current_evaluation;
+        $player->potential_evaluation = $request->potential_evaluation;
         $current_team = '';
         if (isset($request->team_link) == true && $request->team_link != "")
         {
@@ -1391,5 +1396,114 @@ class PlayerController extends Controller
         $cur_year = date('Y');
 
         return $cur_year - $birth_year;
+    }
+
+    public function add_compare($player)
+    {
+        $data = Player::query()->where("user_id", Auth::user()->id)->orderByDesc('general_average')->get();
+
+        return view("user.add_compare")
+            ->with('data', $data)
+            ->with('first',$player);
+    }
+
+    public function compare(Request $request){
+        $data = $request->all();
+        $ids = array();
+        for ($i=1;$i<5;$i++){
+            if($data['player'.$i]!=null && !in_array($data['player'.$i],$ids))
+                $ids[] = $data['player'.$i];
+        }
+        $ids_ordered = implode(',', $ids);
+        $players = Player::whereIn('id',$ids)->orderByRaw("FIELD(id, $ids_ordered)")->get();
+        $count = count($players);
+
+        return view('user.compare')
+            ->with('ids',json_encode($ids))
+            ->with('players',$players)
+            ->with('t_count',$count);
+    }
+
+    public function compareList(Request $request){
+        $ids = json_decode($request->ids);
+        $sort = $request->sort;
+        $players = Player::whereIn('id',$ids);
+        if($sort==0)
+        {
+            $ids_ordered = implode(',', $ids);
+            $players = $players->orderByRaw("FIELD(id, $ids_ordered)");
+        }
+        elseif($sort==1)
+            $players = $players->orderBy('general_average','desc');
+        elseif ($sort==2)
+            $players = $players->orderBy('technical_average','desc');
+        elseif ($sort==3)
+            $players = $players->orderBy('mental_average','desc');
+        elseif($sort==4)
+            $players = $players->orderBy('physical_average','desc');
+        $players = $players->get();
+
+        $count = count($players);
+        $result = array();
+        $result['draw'] = isset($_REQUEST['draw']) ? $_REQUEST['draw'] : 1;
+        $result['recordsTotal'] = 5;
+        $result['recordsFiltered'] = 5;
+
+        $data = array();
+        $obj[0] = '';
+        for($i=0;$i<$count;$i++)
+        {
+            $error = asset('user_assets/images/users/standard.png');
+            $obj[$i+1] = "<div><img class='round' src='".asset('storage').'/'.$players[$i]->photo."' width='50' onerror='src=".'"'.$error.'"'."'><h5>".$players[$i]->name."</h5><h5>".$players[$i]->current_team."</h5></div>";
+        }
+        $data[] = $obj;
+        $obj[0] = __("general_average");
+        for($i=0;$i<$count;$i++)
+            $obj[$i+1] = $players[$i]->general_average!=0?number_format($players[$i]->general_average,1):0;
+        $data[] = $obj;
+        $obj[0] = "<div class='d-flex align-items-center justify-content-center'><span class='details-icon icon-plus mr-1' id='icon_0' data-value='0'></span>".__('technical_average')."</div>";
+        for($i=0;$i<$count;$i++)
+            $obj[$i+1] = $players[$i]->technical_average!=0?number_format($players[$i]->technical_average,1):0;
+        $data[] = $obj;
+        $obj[0] = "<div class='d-flex align-items-center justify-content-center'><span class='details-icon icon-plus mr-2' id='icon_1' data-value='1'></span>".__('mental_average')."</div>";
+        for($i=0;$i<$count;$i++)
+            $obj[$i+1] = $players[$i]->mental_average!=0?number_format($players[$i]->mental_average,1):0;
+        $data[] = $obj;
+        $obj[0] = "<div class='d-flex align-items-center justify-content-center'><span class='details-icon icon-plus mr-1' id='icon_2' data-value='2'></span>".__('physical_average')."</div>";
+        for($i=0;$i<$count;$i++)
+            $obj[$i+1] = $players[$i]->physical_average!=0?number_format($players[$i]->physical_average,1):0;
+        $data[] = $obj;
+
+        $result['data'] = $data;
+        return response()->json($result);
+    }
+
+    public function getDetails(Request $request){
+        $ids = json_decode($request->ids);
+        $sort = $request->sort;
+        $players = Player::with(['latestParam'])->whereIn('id',$ids);
+        if($sort==0)
+        {
+            $ids_ordered = implode(',', $ids);
+            $players = $players->orderByRaw("FIELD(id, $ids_ordered)");
+        }
+        elseif($sort==1)
+            $players = $players->orderBy('general_average','desc');
+        elseif ($sort==2)
+            $players = $players->orderBy('technical_average','desc');
+        elseif ($sort==3)
+            $players = $players->orderBy('mental_average','desc');
+        elseif($sort==4)
+            $players = $players->orderBy('physical_average','desc');
+        $players = $players->get();
+        $technical = [__('crossing'),__('dribbling'),__('finishing'),__('first_touch'),__('Heading'),__('Shots'),__('long_shots'),__('Marking'),__('Passing'),__('long_pass'),__('Technique'),__('1_1_offensive')];
+        $mental = [__('Aggression'),__('Anticipation'),__('Composure'),__('Concentration'),__('Decisions'),__('Determination'),__('Flair'),__('Leadership'),__('off_ball'),__('Positioning'),__('Teamwork'),__('Vision')];
+        $physical = [__('Acceleration'),__('aerial_duels'),__('Agility'),__('Balance'),__('jumping_reach'),__('natural_fitness'),__('Pace'),__('Reaction'),__('sprint_speed'),__('Stamina'),__('Strength'),__('injury_resistance')];
+        $label = array();
+        $label[] = $technical;
+        $label[] = $mental;
+        $label[] = $physical;
+
+        return response()->json(['players'=>$players,'label'=>$label]);
     }
 }

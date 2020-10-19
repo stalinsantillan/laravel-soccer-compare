@@ -108,6 +108,7 @@
                 @else
                     <a href="javascript:limitPDF();" class="btn btn-outline-info waves-effect waves-light ml-2" style="height: 38px; top: 10px">@lang('export_pdf')</a>
                 @endif
+                <a href="{{ route('user.add_compare', $data->id) }}" class="btn btn-outline-info waves-effect waves-light ml-2" style="height: 38px; top: 10px">@lang('Compare')</a>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -167,7 +168,7 @@
                                         <td>@lang('weight')</td><td>{{ $data->weight }}</td>
                                         </tr>
                                         <tr>
-                                        <td>@lang('prefered_foot')</td><td>{{ $data->foot }}</td>
+                                        <td>@lang('prefered_foot')</td><td>{{ __($data->foot) }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -184,7 +185,7 @@
                                 @elseif ($i == 1)
                                     <p class="font-14 text-white mt-2 mb-0">@lang('other_position') : </p>
                                 @endif
-                                <p class="font-14 mb-0">{{ $position->specify }}</p>
+                                <p class="font-14 mb-0">{{ __($position->specify) }}</p>
                                 @php ++$i; @endphp
                             @endforeach
                         </div>
@@ -2285,7 +2286,6 @@
                 mental_sum += parseFloat(mental_radar_data[i]==''?0:mental_radar_data[i]);
             }
             let mental_avg = (mental_sum / mental_radar_data.length).toFixed(1);
-            $("#mental_average").text(mental_avg);
             new Chart(document.getElementById("mental-radar").getContext("2d"), {
                 type: 'radar',
                 data: {

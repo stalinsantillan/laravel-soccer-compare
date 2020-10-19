@@ -11,7 +11,11 @@
 
                     <div class="card-body">
                         @if(Auth::user()->status == "Pending")
-                            Your account is waiting for our administrator approval.
+{{--                            Your account is waiting for our administrator approval.--}}
+                            Thanks for your registration, we will process it as soon as possible.<br/>
+                            You will receive an email when your trial access is ready. Please, don´t forget to check also your spam email folder.<br/>
+                            This message should stay there so the user could read all and understand that he has to wait a confirmation.<br/>
+                            This is because now are some people registering 2-3 times thinking that there was some mistake.
                         @else
                             Your account is rejected by administrator.
                         @endif

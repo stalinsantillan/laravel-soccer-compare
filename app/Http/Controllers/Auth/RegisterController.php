@@ -53,6 +53,8 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'occupation' => 'required',
+            'country' => 'required|string',
         ]);
     }
 
@@ -64,11 +66,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $occupation = $data['occupation'];
+        if($occupation=="Other"){
+            $occupation = $data['other_occupation'];
+        }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'status' => $data['status'],
             'password' => bcrypt($data['password']),
+            'occupation' => $occupation,
+            'country' => $data['country'],
+            'team_or_academy' => $data['team_or_academy'],
         ]);
     }
     /**

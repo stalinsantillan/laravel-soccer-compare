@@ -177,6 +177,12 @@
   "Average": "Average",
   "Injuires": "Injuires",
   "player_not_injuries": "The Player doesn't show injuries",
-  "Report": "Injury",
-  "no_selected": "No selected"
+  "Report": "Report",
+  "no_selected": "No selected",
+  "current_evaluation": "Current evaluation",
+  "potential_evaluation": "Potential evaluation",
+  "Compare": "Compare",
+  "add2compare": "Add to Compare",
+  "select_player": "Select Player",
+  "aerial_duels": "Aerial Duels"
 }

@@ -157,7 +157,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <p class="font-13 mt-4 mb-0">@lang('Languages')</p>
-                                    <p class="font-13 font-weight-bold mb-0">{{$data->additional->languages ?? ''}}</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ $data->additional->languages ?? ''}}</p>
                                     <p class="font-13 mt-1 mb-0">@lang('national_team')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{ $data->additional->national_team ?? '' }}</p>
                                     <p class="font-13 mt-1 mb-0">@lang('first_appearance')</p>
@@ -194,7 +194,7 @@
                                         @elseif ($i == 1)
                                             <p class="font-13 mt-2 mb-0">@lang('other_position') : </p>
                                         @endif
-                                        <p class="font-13 font-weight-bold mb-0">{{ $position->specify }}</p>
+                                        <p class="font-13 font-weight-bold mb-0">{{ __($position->specify) }}</p>
                                         @php ++$i; @endphp
                                     @endforeach
                                 </div>
