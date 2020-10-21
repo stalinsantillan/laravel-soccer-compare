@@ -184,5 +184,20 @@
   "Compare": "Compare",
   "add2compare": "Add to Compare",
   "select_player": "Select Player",
-  "aerial_duels": "Aerial Duels"
+  "aerial_duels": "Aerial Duels",
+  "Left Centre-back": "Left Centre-back",
+  "Right Centre-back": "Right Centre-back",
+  "Left Defensive midfield": "Left Defensive midfield",
+  "Right Defensive midfield": "Right Defensive midfield",
+  "Left Centre midfield": "Left Centre midfield",
+  "Right Centre midfield": "Right Centre midfield",
+  "Left Attacking midfield": "Left Attacking midfield",
+  "Right Attacking midfield": "Right Attacking midfield",
+  "Left striker": "Left striker",
+  "Right striker": "Right striker",
+  "Left Centre forward": "Left Centre forward",
+  "Right Centre forward": "Right Centre forward",
+  "Defender": "Defender",
+  "Midfielder": "Midfielder",
+  "Forward": "Forward"
 }

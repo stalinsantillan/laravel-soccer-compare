@@ -45,12 +45,12 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="/">Soccer</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">{{ trans('cruds.player.title') }}</a></li>
-                        <li class="breadcrumb-item active">{{ trans('global.add') }}</li>
+                        <li class="breadcrumb-item"><a href="/">@lang('soccer')</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@lang(trans('cruds.player.title'))</a></li>
+                        <li class="breadcrumb-item active">@lang(trans('global.add'))</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{ trans('global.add') }} {{ trans('cruds.player.existing') }} {{ trans('cruds.player.title') }}</h4>
+                <h4 class="page-title">@lang(trans('global.add')) @lang(trans('cruds.player.existing')) @lang(trans('cruds.player.title'))</h4>
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
         @csrf
         <div class="card">
             <div class="card-header font-16">
-                Profile
+                @lang('profile')
             </div>
             <div class="card-body">
                 <div class="row">
@@ -67,7 +67,7 @@
                         <div class="row">
                             <div class="form-group row col-md-6">
                                 <label for="name" class="col-md-4 col-form-label text-right">
-                                    Name<span class="text-danger">*</span>
+                                    @lang('Name')<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7">
                                     <input type="text" required class="form-control" id="name" name="name" value="{{ $data['first_name'] }}">
@@ -75,7 +75,7 @@
                             </div>
                             <div class="form-group row col-md-6">
                                 <label for="surname" class="col-md-4 col-form-label text-right">
-                                    Surname<span class="text-danger">*</span>
+                                    @lang('surname')<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7">
                                     <input type="text" required class="form-control" id="surname" name="surname" value="{{ $data['last_name'] }}">
@@ -86,7 +86,7 @@
                         <div class="row">
                             <div class="form-group row col-md-6">
                                 <label for="nationality" class="col-md-4 col-form-label text-right">
-                                    Nationality<span class="text-danger">*</span>
+                                    @lang('nationality')<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7">
                                     <select class="custom-select mr-sm-2" id="nationality" name="nationality">
@@ -95,7 +95,7 @@
                             </div>
                             <div class="form-group row col-md-6">
                                 <label for="birthdate" class="col-md-4 col-form-label text-right">
-                                    Date of birth<span class="text-danger">*</span>
+                                    @lang('dob')<span class="text-danger">*</span>
                                 </label>
                                 @php
                                     $time = strtotime($data['date_of_birth']);
@@ -109,7 +109,7 @@
                         <div class="row">
                             <div class="form-group row col-md-6">
                                 <label for="height" class="col-md-4 col-form-label text-right">
-                                    Height<span class="text-danger">*</span>
+                                    @lang('height')<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7">
                                     <select class="custom-select mr-sm-2" required id="height" name="height">
@@ -118,7 +118,7 @@
                             </div>
                             <div class="form-group row col-md-6">
                                 <label for="weight" class="col-md-4 col-form-label text-right">
-                                    Weight<span class="text-danger">*</span>
+                                    @lang('weight')<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7">
                                     <select class="custom-select mr-sm-2" required id="weight" name="weight">
@@ -129,19 +129,19 @@
                         <div class="row">
                             <div class="form-group row col-md-6">
                                 <label for="foot" class="col-md-4 col-form-label text-right">
-                                    Foot<span class="text-danger">*</span>
+                                    @lang('foot')<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7">
                                     <select class="custom-select mr-sm-2" required id="foot" name="foot">
-                                        <option value="left">Left</option>
-                                        <option value="right">Right</option>
-                                        <option value="both">Both</option>
+                                        <option value="left">@lang('left')</option>
+                                        <option value="right">@lang('right')</option>
+                                        <option value="both">@lang('both')</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row col-md-6">
                                 <label for="cur_team" class="col-md-4 col-form-label text-right">
-                                    Current Team<span class="text-danger">*</span>
+                                    @lang('current_team')<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7">
                                     <select class="custom-select mr-sm-2" required id="cur_team" name="cur_team">
@@ -158,7 +158,7 @@
                     <div class="col-md-3">
                         <div class="form-group row">
                             <label for="photo1" class="col-md-3 col-form-label text-right">
-                                Photo
+                                @lang('photo')
                             </label>
                             <div class="col-md-7">
                                 @if(isset($data['photo']))
@@ -177,21 +177,21 @@
         </div> <!-- end card-box-->
         <div class="card">
             <div class="card-header font-16">
-                Technical features
+                @lang('technical_features')
             </div>
             <div class="card-body">
                 <div class="row position-panel">
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label for="main_pos" class="col-md-4 col-form-label text-right">
-                                Main Position<span class="text-danger">*</span>
+                                @lang('main_position')<span class="text-danger">*</span>
                             </label>
                             <div class="col-md-7">
                                 <select class="custom-select mr-sm-2" required id="main_pos" name="main_position[]">
-                                    <option>Defender</option>
-                                    <option>Midfielder</option>
-                                    <option>Forward</option>
-                                    <option>Goalkeeper</option>
+                                    <option>@lang('Defender')</option>
+                                    <option>@lang('Midfielder')</option>
+                                    <option>@lang('Forward')</option>
+                                    <option>@lang('Goalkeeper')</option>
                                 </select>
                                 <a href="javascript:addnewposition()" class="text-white-50" style="line-height: 30px">Add new position</a>
                             </div>
@@ -200,7 +200,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label for="position2" class="col-md-4 col-form-label text-right">
-                                Specify Position
+                                @lang('specify_position')
                             </label>
                             <div class="col-md-7">
                                 <select class="custom-select mr-sm-2" required id="position2" name="spec_position[]">
@@ -213,16 +213,16 @@
         </div> <!-- end card-box-->
         <div class="card">
             <div class="card-header font-16">
-                Attribute
+                @lang('attribute')
             </div>
             <div class="card-body">
                 <div class="card-title font-15 font-weight-bold">
-                    Technical
+                    @lang('technical')
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 row">
                         <label for="corners" class="col-md-3 col-form-label text-right">
-                            Corners
+                            @lang('corners')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="corners" name="corners">
@@ -233,7 +233,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="crossing" class="col-md-3 col-form-label text-right">
-                            Crossing
+                            @lang('crossing')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="crossing" name="crossing">
@@ -244,7 +244,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="dribbling" class="col-md-3 col-form-label text-right">
-                            Dribbling
+                        @lang('dribbling')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="dribbling" name="dribbling">
@@ -255,7 +255,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="finishing" class="col-md-3 col-form-label text-right">
-                            Finishing
+                        @lang('finishing')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="finishing" name="finishing">
@@ -266,7 +266,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="aerial_reach" class="col-md-3 col-form-label text-right">
-                            Aerial Reach
+                        @lang('aerial_reach')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="aerial_reach" name="aerial_reach">
@@ -277,7 +277,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="command_of_area" class="col-md-3 col-form-label text-right">
-                            Command Of Area
+                        @lang('command_area')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="command_of_area" name="command_of_area">
@@ -288,7 +288,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="communication" class="col-md-3 col-form-label text-right">
-                            Communication
+                        @lang('communication')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="communication" name="communication">
@@ -299,7 +299,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="eccentricity" class="col-md-3 col-form-label text-right">
-                            Eccentricity
+                        @lang('eccentricity')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="eccentricity" name="eccentricity">
@@ -310,7 +310,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="first_touch" class="col-md-3 col-form-label text-right">
-                            First Touch
+                        @lang('first_touch')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="first_touch" name="first_touch">
@@ -321,7 +321,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="handling" class="col-md-3 col-form-label text-right">
-                            Handling
+                        @lang('handling')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="handling" name="handling">
@@ -332,7 +332,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="kicking" class="col-md-3 col-form-label text-right">
-                            Kicking
+                        @lang('kicking')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="kicking" name="kicking">
@@ -343,7 +343,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="one_on_ones" class="col-md-3 col-form-label text-right">
-                            One On Ones
+                        @lang('one_ones')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="one_on_ones" name="one_on_ones">
@@ -354,7 +354,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="feet_playing" class="col-md-3 col-form-label text-right">
-                            Feet playing
+                        @lang('feet_playing')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="feet_playing" name="feet_playing">
@@ -365,7 +365,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="free_kick" class="col-md-3 col-form-label text-right">
-                            Free Kick Taking
+                        @lang('free_kick_taking')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="free_kick" name="free_kick">
@@ -376,7 +376,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="heading" class="col-md-3 col-form-label text-right">
-                            Heading
+                        @lang('Heading')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="heading" name="heading">
@@ -387,7 +387,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="shots" class="col-md-3 col-form-label text-right">
-                            Shots
+                        @lang('Shots')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="shots" name="shots">
@@ -398,7 +398,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="long_shots" class="col-md-3 col-form-label text-right">
-                            Long Shots
+                        @lang('long_shots')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="long_shots" name="long_shots">
@@ -409,7 +409,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="long_throws" class="col-md-3 col-form-label text-right">
-                            Long Throws
+                        @lang('long_throws')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="long_throws" name="long_throws">
@@ -420,7 +420,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="marking" class="col-md-3 col-form-label text-right">
-                            Marking
+                        @lang('Marking')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="marking" name="marking">
@@ -431,7 +431,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="passing" class="col-md-3 col-form-label text-right">
-                            Passing
+                        @lang('Passing')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="passing" name="passing">
@@ -442,7 +442,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="long_pass" class="col-md-3 col-form-label text-right">
-                            Long Pass
+                        @lang('long_pass')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="long_pass" name="long_pass">
@@ -453,7 +453,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="punching" class="col-md-3 col-form-label text-right">
-                            Punching
+                        @lang('Punching')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="punching" name="punching">
@@ -464,7 +464,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="reflexes" class="col-md-3 col-form-label text-right">
-                            Reflexes
+                        @lang('Reflexes')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="reflexes" name="reflexes">
@@ -475,7 +475,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="rushing_out" class="col-md-3 col-form-label text-right">
-                            Rushing Out
+                        @lang('rushing_out')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="rushing_out" name="rushing_out">
@@ -486,7 +486,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="throwing" class="col-md-3 col-form-label text-right">
-                            Throwing
+                        @lang('Throwing')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="throwing" name="throwing">
@@ -497,7 +497,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="penalty_taking" class="col-md-3 col-form-label text-right">
-                            Penalty Taking
+                        @lang('penalty_taking')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="penalty_taking" name="penalty_taking">
@@ -508,7 +508,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="tackling" class="col-md-3 col-form-label text-right">
-                            Tackling
+                        @lang('Tackling')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="tackling" name="tackling">
@@ -519,7 +519,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="technique" class="col-md-3 col-form-label text-right">
-                            Technique
+                        @lang('Technique')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="technique" name="technique">
@@ -530,7 +530,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="offensive" class="col-md-3 col-form-label text-right">
-                            1 VS 1 Offensive
+                        @lang('1_1_offensive')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="offensive" name="offensive">
@@ -541,7 +541,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="deffense" class="col-md-3 col-form-label text-right">
-                            1 VS 1 Deffense
+                        @lang('1_1_deffense')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="deffense" name="deffense">
@@ -553,12 +553,12 @@
                 </div>
 
                 <div class="card-title font-15 font-weight-bold">
-                    Mental
+                @lang('mental')
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 row">
                         <label for="aggression" class="col-md-3 col-form-label text-right">
-                            Aggression
+                        @lang('Aggression')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="aggression" name="aggression">
@@ -569,7 +569,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="anticipation" class="col-md-3 col-form-label text-right">
-                            Anticipation
+                        @lang('Anticipation')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="anticipation" name="anticipation">
@@ -580,7 +580,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="bravery" class="col-md-3 col-form-label text-right">
-                            Bravery
+                        @lang('Bravery')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="bravery" name="bravery">
@@ -591,7 +591,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="composure" class="col-md-3 col-form-label text-right">
-                            Composure
+                        @lang('Composure')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="composure" name="composure">
@@ -602,7 +602,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="concentration" class="col-md-3 col-form-label text-right">
-                            Concentration
+                        @lang('Concentration')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="concentration" name="concentration">
@@ -613,7 +613,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="decisions" class="col-md-3 col-form-label text-right">
-                            Decisions
+                        @lang('Decisions')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="decisions" name="decisions">
@@ -624,7 +624,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="determination" class="col-md-3 col-form-label text-right">
-                            Determination
+                        @lang('Determination')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="determination" name="determination">
@@ -635,7 +635,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="flair" class="col-md-3 col-form-label text-right">
-                            Flair
+                        @lang('Flair')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="flair" name="flair">
@@ -646,7 +646,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="leadership" class="col-md-3 col-form-label text-right">
-                            Leadership
+                        @lang('Leadership')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="leadership" name="leadership">
@@ -657,7 +657,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="off_ball" class="col-md-3 col-form-label text-right">
-                            Off The Ball
+                        @lang('off_ball')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="off_ball" name="off_ball">
@@ -668,7 +668,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="positioning" class="col-md-3 col-form-label text-right">
-                            Positioning
+                        @lang('Positioning')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="positioning" name="positioning">
@@ -679,7 +679,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="teamwork" class="col-md-3 col-form-label text-right">
-                            Teamwork
+                        @lang('Teamwork')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="teamwork" name="teamwork">
@@ -690,7 +690,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="vision" class="col-md-3 col-form-label text-right">
-                            Vision
+                        @lang('Vision')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="vision" name="vision">
@@ -701,7 +701,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="work_rate" class="col-md-3 col-form-label text-right">
-                            Work Rate
+                        @lang('work_rate')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="work_rate" name="work_rate">
@@ -712,12 +712,12 @@
                     </div>
                 </div>
                 <div class="card-title font-15 font-weight-bold">
-                    Physical
+                @lang('Physical')
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 row">
                         <label for="acceleration" class="col-md-3 col-form-label text-right">
-                            Acceleration
+                        @lang('Acceleration')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="acceleration" name="acceleration">
@@ -728,7 +728,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="aerial_duels" class="col-md-3 col-form-label text-right">
-                            Aerial Duels
+                        @lang('aerial_dules')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="aerial_duels" name="aerial_duels">
@@ -739,7 +739,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="agility" class="col-md-3 col-form-label text-right">
-                            Agility
+                        @lang('Agility')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="agility" name="agility">
@@ -750,7 +750,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="balance" class="col-md-3 col-form-label text-right">
-                            Balance
+                        @lang('Balance')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="balance" name="balance">
@@ -761,7 +761,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="jumping_reach" class="col-md-3 col-form-label text-right">
-                            Jumping Reach
+                        @lang('jumping_reach')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="jumping_reach" name="jumping_reach">
@@ -772,7 +772,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="natural_fitness" class="col-md-3 col-form-label text-right">
-                            Natural Fitness
+                        @lang('natural_fitness')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="natural_fitness" name="natural_fitness">
@@ -783,7 +783,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="pace" class="col-md-3 col-form-label text-right">
-                            Pace
+                        @lang('Pace')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="pace" name="pace">
@@ -794,7 +794,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="reaction" class="col-md-3 col-form-label text-right">
-                            Reaction
+                        @lang('Reaction')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="reaction" name="reaction">
@@ -805,7 +805,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="sprint_speed" class="col-md-3 col-form-label text-right">
-                            Sprint Speed
+                        @lang('sprint_speed')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="sprint_speed" name="sprint_speed">
@@ -816,7 +816,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="stamina" class="col-md-3 col-form-label text-right">
-                            Stamina
+                        @lang('Stamina')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="stamina" name="stamina">
@@ -827,7 +827,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="strength" class="col-md-3 col-form-label text-right">
-                            Strength
+                        @lang('Strength')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="strength" name="strength">
@@ -838,7 +838,7 @@
                     </div>
                     <div class="form-group col-md-6 row">
                         <label for="injury_resistance" class="col-md-3 col-form-label text-right">
-                            Injury resistance
+                        @lang('injury_resistance')
                         </label>
                         <div class="col-md-4">
                             <input type="text" attrtype="range_input" class="form-control" id="injury_resistance" name="injury_resistance">
@@ -853,7 +853,7 @@
     </form>
     <div class="row">
         <div class="col-md-6 offset-3">
-            <button type="button" onclick="submitForm()" class="btn btn-block btn-danger waves-effect waves-light">Save</button>
+            <button type="button" onclick="submitForm()" class="btn btn-block btn-danger waves-effect waves-light">@lang('Save')</button>
         </div>
     </div>
 
@@ -907,6 +907,15 @@
         let arrForwardAttr = ["crossing", "dribbling", "first_touch", "shots", "long_shots", "passing", "long_pass", "finishing", "marking", "technique", "offensive", "heading"
             , "aggression", "anticipation", "composure", "concentration", "decisions", "determination", "flair", "leadership", "off_ball", "positioning", "teamwork", "vision"
             , "acceleration", "aerial_duels", "agility", "balance", "jumping_reach", "natural_fitness", "pace", "reaction", "sprint_speed", "stamina", "strength", "injury_resistance"];
+
+        let l_arrGoalkeeper = ["@lang('Goalkeeper')"];
+        let l_arrDefender = ["@lang('Sweeper')", "@lang('Centre-back')", "@lang('Left Centre-back')", "@lang('Right Centre-back')", "@lang('Left Full-back')", "@lang('Right Full-back')", "@lang('Left Wing-back')", "@lang('Right Wing-back')"];
+        let l_arrMidfielder = ["@lang('Defensive midfield')", "@lang('Left Defensive midfield')", "@lang('Right Defensive midfield')"
+            , "@lang('Centre midfield')", "@lang('Left Centre midfield')", "@lang('Right Centre midfield')"
+            , "@lang('Attacking midfield')", "@lang('Left Attacking midfield')", "@lang('Right Attacking midfield')"
+            , "@lang('Left Wide midfield')", "@lang('Right Wide midfield')"];
+        let l_arrForward = ["@lang('Centre forward')", "@lang('Second striker')", "@lang('Left Winger')", "@lang('Right Winger')", "@lang('Left striker')", "@lang('Right striker')"
+            , "@lang('Left Centre forward')", "@lang('Right Centre forward')"];
 
         function formatRepo (repo) {
             if (repo.loading) {
@@ -1084,8 +1093,8 @@
                     maximumSelectionSize: 20 // prevent scrollbar
                 });
             });
-            let pos = "{{ $data['position'] }}";
-            if (pos == "Attacker") pos = "Forward";
+            let pos = "{{ __($data['position']) }}";
+            if (pos == "@lang('Attacker')") pos = "@lang('Forward')";
             $("#main_pos").val(pos);
             $("#main_pos").select2({
                 allowClear: false,
@@ -1106,29 +1115,29 @@
                 $("#position2 option").remove();
                 $('#position2').append($("<option></option>").text("Select Specify Position").attr("value", "0"));
                 $('#position2').select2('val', null);
-                if (main_pos == "Defender")
+                if (main_pos == "@lang('Defender')")
                 {
                     for (let i = 0; i < arrDefender.length; i++)
                     {
-                        $('#position2').append($("<option></option>").text(arrDefender[i]).attr("value", arrDefender[i]));
+                        $('#position2').append($("<option></option>").text(l_arrDefender[i]).attr("value", arrDefender[i]));
                     }
-                } else if (main_pos == "Midfielder")
+                } else if (main_pos == "@lang('Midfielder')")
                 {
                     for (let i = 0; i < arrMidfielder.length; i++)
                     {
-                        $('#position2').append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
+                        $('#position2').append($("<option></option>").text(l_arrMidfielder[i]).attr("value", arrMidfielder[i]));
                     }
-                } else if (main_pos == "Forward")
+                } else if (main_pos == "@lang('Forward')")
                 {
                     for (let i = 0; i < arrForward.length; i++)
                     {
-                        $('#position2').append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
+                        $('#position2').append($("<option></option>").text(l_arrForward[i]).attr("value", arrForward[i]));
                     }
                 } else
                 {
                     for (let i = 0; i < arrGoalkeeper.length; i++)
                     {
-                        $('#position2').append($("<option></option>").text(arrGoalkeeper[i]).attr("value", arrGoalkeeper[i]));
+                        $('#position2').append($("<option></option>").text(l_arrGoalkeeper[i]).attr("value", arrGoalkeeper[i]));
                     }
                 }
                 $("#position2").change(function (e) {

@@ -201,9 +201,9 @@
                         </label>
                         <div class="col-md-7">
                             <select class="custom-select mr-sm-2" required id="main_pos" name="main_position[]">
-                                <option>@lang('defender')</option>
-                                <option>@lang('midfielder')</option>
-                                <option>@lang('forward')</option>
+                                <option>@lang('Defender')</option>
+                                <option>@lang('Midfielder')</option>
+                                <option>@lang('Forward')</option>
                                 <option>@lang('Goalkeeper')</option>
                             </select>
                             <a href="javascript:addnewposition()" class="text-white-50" style="line-height: 30px">@lang('add_new_position')</a>
@@ -922,6 +922,15 @@
 
         let evaluation = ["current_evaluation","potential_evaluation"]
 
+        let l_arrGoalkeeper = ["@lang('Goalkeeper')"];
+        let l_arrDefender = ["@lang('Sweeper')", "@lang('Centre-back')", "@lang('Left Centre-back')", "@lang('Right Centre-back')", "@lang('Left Full-back')", "@lang('Right Full-back')", "@lang('Left Wing-back')", "@lang('Right Wing-back')"];
+        let l_arrMidfielder = ["@lang('Defensive midfield')", "@lang('Left Defensive midfield')", "@lang('Right Defensive midfield')"
+            , "@lang('Centre midfield')", "@lang('Left Centre midfield')", "@lang('Right Centre midfield')"
+            , "@lang('Attacking midfield')", "@lang('Left Attacking midfield')", "@lang('Right Attacking midfield')"
+            , "@lang('Left Wide midfield')", "@lang('Right Wide midfield')"];
+        let l_arrForward = ["@lang('Centre forward')", "@lang('Second striker')", "@lang('Left Winger')", "@lang('Right Winger')", "@lang('Left striker')", "@lang('Right striker')"
+            , "@lang('Left Centre forward')", "@lang('Right Centre forward')"];
+
         function formatRepo (repo) {
             if (repo.loading) {
                 return repo.text;
@@ -1101,29 +1110,29 @@
                 let main_pos = $( "#main_pos option:selected" ).text();
                 $("#position2 option").remove();
                 $('#position2').select2('val', null);
-                if (main_pos == "Defender")
+                if (main_pos == "@lang('Defender')")
                 {
                     for (let i = 0; i < arrDefender.length; i++)
                     {
-                        $('#position2').append($("<option></option>").text(arrDefender[i]).attr("value", arrDefender[i]));
+                        $('#position2').append($("<option></option>").text(l_arrDefender[i]).attr("value", arrDefender[i]));
                     }
-                } else if (main_pos == "Midfielder")
+                } else if (main_pos == "@lang('Midfielder')")
                 {
                     for (let i = 0; i < arrMidfielder.length; i++)
                     {
-                        $('#position2').append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
+                        $('#position2').append($("<option></option>").text(l_arrMidfielder[i]).attr("value", arrMidfielder[i]));
                     }
-                } else if (main_pos == "Forward")
+                } else if (main_pos == "@lang('Forward')")
                 {
                     for (let i = 0; i < arrForward.length; i++)
                     {
-                        $('#position2').append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
+                        $('#position2').append($("<option></option>").text(l_arrForward[i]).attr("value", arrForward[i]));
                     }
                 } else
                 {
                     for (let i = 0; i < arrGoalkeeper.length; i++)
                     {
-                        $('#position2').append($("<option></option>").text(arrGoalkeeper[i]).attr("value", arrGoalkeeper[i]));
+                        $('#position2').append($("<option></option>").text(l_arrGoalkeeper[i]).attr("value", arrGoalkeeper[i]));
                     }
                 }
                 $("#position2").change(function (e) {
