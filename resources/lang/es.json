@@ -179,4 +179,10 @@
   "player_not_injuries": "El jugador no presenta lesiones",
   "Report": "Reporte",
   "no_selected": "No seleccionado"
+  "current_evaluation": "Evaluación actual",
+  "potential_evaluation": "Evaluación potencial",
+  "Compare": "Comparar",
+  "add2compare": "Añadir a comparar",
+  "select_player": "Seleccionar jugador",
+  "aerial_duels": "Duelos aéreos"
   }
