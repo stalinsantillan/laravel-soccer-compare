@@ -184,5 +184,20 @@
   "Compare": "Comparar",
   "add2compare": "Añadir a comparar",
   "select_player": "Seleccionar jugador",
-  "aerial_duels": "Duelos aéreos"
+  "aerial_duels": "Duelos aéreos",
+  "Left Centre-back": "Defensa Central izquierdo",
+  "Right Centre-back": "Defensa Central derecho",
+  "Left Defensive midfield": "Mediocampista Defensivo Izquierdo",
+  "Right Defensive midfield": "Mediocampista Defensivo Derecho",
+  "Left Centre midfield": "Mediocampista central izquierdo",
+  "Right Centre midfield": "Mediocampista central derecho",
+  "Left Attacking midfield": "Mediocampista Ofensivo Iquierdo",
+  "Right Attacking midfield": "Mediocampista Ofensivo Derecho",
+  "Left striker": "Delantero izquierdo",
+  "Right striker": "Delantero derechor",
+  "Left Centre forward": "Celantero Central izquierdo",
+  "Right Centre forward": "Delantero Central derecho",
+  "Defender": "Defensor",
+  "Midfielder": "Mediocampista",
+  "Forward": "Delantero"
   }
