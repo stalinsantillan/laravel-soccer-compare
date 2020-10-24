@@ -201,10 +201,10 @@
                         </label>
                         <div class="col-md-7">
                             <select class="custom-select mr-sm-2" required id="main_pos" name="main_position[]">
-                                <option>@lang('Defender')</option>
-                                <option>@lang('Midfielder')</option>
-                                <option>@lang('Forward')</option>
-                                <option>@lang('Goalkeeper')</option>
+                                <option value="Defender">@lang('Defender')</option>
+                                <option value="Midfielder">@lang('Midfielder')</option>
+                                <option value="Forward">@lang('Forward')</option>
+                                <option value="Goalkeeper">@lang('Goalkeeper')</option>
                             </select>
                             <a href="javascript:addnewposition()" class="text-white-50" style="line-height: 30px">@lang('add_new_position')</a>
                         </div>
@@ -1223,14 +1223,14 @@
             $element_main = '<div class="col-md-6">\n' +
                 '                    <div class="form-group row">\n' +
                 '                        <label for="position' + (curCounter + 1) + '" class="col-md-4 col-form-label text-right">\n' +
-                '                            Other Position\n' +
+                '                            @lang('other_position')\n' +
                 '                        </label>\n' +
                 '                        <div class="col-md-7">\n' +
                 '                            <select class="custom-select mr-sm-2" required id="main_position' + (curCounter + 1) + '" counter = "' + (curCounter + 1) + '" identi="main_position" name="main_position[]">\n' +
-                '                                <option>Defender</option>\n' +
-                '                                <option>Midfielder</option>\n' +
-                '                                <option>Forward</option>\n' +
-                '                                <option>Goalkeeper</option>\n' +
+                '                                <option value="Defender">@lang('Defender')</option>\n' +
+                '                                <option value="Midfielder">@lang('Midfielder')</option>\n' +
+                '                                <option value="Forward">@lang('Forward')</option>\n' +
+                '                                <option value="Goalkeeper">@lang('Goalkeeper')</option>\n' +
                 '                            </select>\n' +
                 '                        </div>\n' +
                 '                    </div>\n' +
@@ -1238,7 +1238,7 @@
             $element_spec = '<div class="col-md-6">\n' +
                 '                    <div class="form-group row">\n' +
                 '                        <label for="position' + (curCounter + 1) + '" class="col-md-4 col-form-label text-right">\n' +
-                '                            Specify Position\n' +
+                '                            @lang('specify_position')\n' +
                 '                        </label>\n' +
                 '                        <div class="col-md-7">\n' +
                 '                            <select class="custom-select mr-sm-2" required id="spec_position' + (curCounter + 1) + '" counter = "' + (curCounter + 1) + '" identi="spec_position" name="spec_position[]">\n' +
@@ -1263,25 +1263,25 @@
                 {
                     for (let i = 0; i < arrDefender.length; i++)
                     {
-                        $('#spec_position' + ($curCounter)).append($("<option></option>").text(arrDefender[i]).attr("value", arrDefender[i]));
+                        $('#spec_position' + ($curCounter)).append($("<option></option>").text(l_arrDefender[i]).attr("value", arrDefender[i]));
                     }
                 } else if (cur_main_pos == "Midfielder")
                 {
                     for (let i = 0; i < arrMidfielder.length; i++)
                     {
-                        $('#spec_position' + ($curCounter)).append($("<option></option>").text(arrMidfielder[i]).attr("value", arrMidfielder[i]));
+                        $('#spec_position' + ($curCounter)).append($("<option></option>").text(l_arrMidfielder[i]).attr("value", arrMidfielder[i]));
                     }
                 } else if (cur_main_pos == "Forward")
                 {
                     for (let i = 0; i < arrForward.length; i++)
                     {
-                        $('#spec_position' + ($curCounter)).append($("<option></option>").text(arrForward[i]).attr("value", arrForward[i]));
+                        $('#spec_position' + ($curCounter)).append($("<option></option>").text(l_arrForward[i]).attr("value", arrForward[i]));
                     }
                 } else
                 {
                     for (let i = 0; i < arrGoalkeeper.length; i++)
                     {
-                        $('#spec_position' + ($curCounter)).append($("<option></option>").text(arrGoalkeeper[i]).attr("value", arrGoalkeeper[i]));
+                        $('#spec_position' + ($curCounter)).append($("<option></option>").text(l_arrGoalkeeper[i]).attr("value", arrGoalkeeper[i]));
                     }
                 }
                 $('#spec_position' + ($curCounter)).trigger('change');
