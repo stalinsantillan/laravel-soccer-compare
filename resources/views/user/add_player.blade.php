@@ -866,7 +866,7 @@
 </form>
 <div class="row">
     <div class="col-md-6 offset-3">
-        <button type="button" onclick="submitForm()" class="btn btn-block btn-danger waves-effect waves-light">Save</button>
+        <button type="button" onclick="submitForm()" class="btn btn-block btn-danger waves-effect waves-light">@lang('Save')</button>
     </div>
 </div>
 
