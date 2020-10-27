@@ -270,7 +270,7 @@
                             <td style="background-color: #3f4a56">{{ round($one->general_average, 1) }}</td>
                             <td>{{ date('Y') - date('Y', strtotime($one->birth_date)) }}</td>
                             <td>{{ $one->height }}cm</td>
-                            <td>{{ $one->nationality }}</td>
+                            <td>{{ __($one->nationality) }}</td>
                             @php
                                 $league = '';
                                 if ($one->current_team_link == "")
