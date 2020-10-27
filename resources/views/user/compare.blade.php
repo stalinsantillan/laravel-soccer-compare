@@ -122,7 +122,7 @@
         $(document).ready(function () {
             refreshTable();
 
-            let data_value = ['{{$players[0]->general_average}}','{{$players[0]->technical_average}}','{{$players[0]->mental_average}}','{{$players[0]->physical_average}}'];
+            let data_value = ['{{$chart_data[0][0]}}','{{$chart_data[0][1]}}','{{$chart_data[0][2]}}','{{$chart_data[0][3]}}','{{$chart_data[0][4]}}','{{$chart_data[0][5]}}','{{$chart_data[0][6]}}','{{$chart_data[0][7]}}'];
             let chart_data = [];
             chart_data.push({
                 label: "",
@@ -134,7 +134,7 @@
                 pointHoverBorderColor: "#4fc6e1",
                 data: data_value
             })
-            data_value = ['{{$players[1]->general_average}}','{{$players[1]->technical_average}}','{{$players[1]->mental_average}}','{{$players[1]->physical_average}}'];
+            data_value = ['{{$chart_data[1][0]}}','{{$chart_data[1][1]}}','{{$chart_data[1][2]}}','{{$chart_data[1][3]}}','{{$chart_data[1][4]}}','{{$chart_data[1][5]}}','{{$chart_data[1][6]}}','{{$chart_data[1][7]}}'];
             chart_data.push({
                 label: "",
                 backgroundColor: "rgba(209,57,92,0.2)",
@@ -145,8 +145,8 @@
                 pointHoverBorderColor: "#f1556c",
                 data: data_value
             },)
-            if(t_count>2){
-                data_value = ['{{isset($players[2])?$players[2]->general_average:''}}','{{isset($players[2])?$players[2]->technical_average:''}}','{{isset($players[2])?$players[2]->mental_average:''}}','{{isset($players[2])?$players[2]->physical_average:''}}'];
+            @if(isset($chart_data[2]))
+                data_value = ['{{$chart_data[2][0]}}','{{$chart_data[2][1]}}','{{$chart_data[2][2]}}','{{$chart_data[2][3]}}','{{$chart_data[2][4]}}','{{$chart_data[2][5]}}','{{$chart_data[2][6]}}','{{$chart_data[2][7]}}'];
                 chart_data.push({
                     label: "",
                     backgroundColor: "rgba(116,220,70,0.2)",
@@ -157,9 +157,9 @@
                     pointHoverBorderColor: "#10ea15",
                     data: data_value
                 })
-            }
-            if(t_count>3){
-                data_value = ['{{isset($players[3])?$players[3]->general_average:''}}','{{isset($players[3])?$players[3]->technical_average:''}}','{{isset($players[3])?$players[3]->mental_average:''}}','{{isset($players[3])?$players[3]->physical_average:''}}'];
+            @endif
+            @if(isset($chart_data[3]))
+                data_value = ['{{$chart_data[3][0]}}','{{$chart_data[3][1]}}','{{$chart_data[3][2]}}','{{$chart_data[3][3]}}','{{$chart_data[3][4]}}','{{$chart_data[3][5]}}','{{$chart_data[3][6]}}','{{$chart_data[3][7]}}'];
                 chart_data.push({
                     label: "",
                     backgroundColor: "rgba(226,195,91,0.2)",
@@ -170,8 +170,8 @@
                     pointHoverBorderColor: "#fcde22",
                     data: data_value
                 })
-            }
-            let data_label = ['{{__("general_average")}}','{{__("technical_average")}}','{{__("mental_average")}}','{{__("physical_average")}}']
+            @endif
+            let data_label = ['{{__('PASS')}}', '{{__('ATTACK')}}', '{{__('TACTICAL')}}', '{{__('PHYSICAL')}}', '{{__('AERIAL')}}', '{{__('MENTAL')}}', '{{__('TECHNIQUE')}}', '{{__('DEFENSE')}}'];
 
             new Chart(document.getElementById("total-radar").getContext("2d"), {
                 type: 'radar',

@@ -90,6 +90,9 @@
                             </label>
                             <div class="col-md-7">
                                 <select class="custom-select mr-sm-2" id="nationality" name="nationality">
+                                    @foreach($countries as $country)
+                                        <option value="{{$country->name}}">{{__($country->name)}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -1112,19 +1115,27 @@
                 minimumResultsForSearch: 20, //prevent filter input
                 maximumSelectionSize: 20 // prevent scrollbar
             });
-            $.ajax(settings).done(function (response) {
-                for(ind in response)
-                {
-                    $('#nationality').append($("<option></option>").text(response[ind].name).attr("value", response[ind].name));
-                }
-                $("#nationality").val("{{ $data->nationality }}");
-                $('#nationality').select2({
-                    allowClear: false,
-                    dropdownAutoWidth: true,
-                    width: 'element',
-                    minimumResultsForSearch: 20, //prevent filter input
-                    maximumSelectionSize: 20 // prevent scrollbar
-                });
+            {{--$.ajax(settings).done(function (response) {--}}
+            {{--    for(ind in response)--}}
+            {{--    {--}}
+            {{--        $('#nationality').append($("<option></option>").text(response[ind].name).attr("value", response[ind].name));--}}
+            {{--    }--}}
+            {{--    $("#nationality").val("{{ $data->nationality }}");--}}
+            {{--    $('#nationality').select2({--}}
+            {{--        allowClear: false,--}}
+            {{--        dropdownAutoWidth: true,--}}
+            {{--        width: 'element',--}}
+            {{--        minimumResultsForSearch: 20, //prevent filter input--}}
+            {{--        maximumSelectionSize: 20 // prevent scrollbar--}}
+            {{--    });--}}
+            {{--});--}}
+            $("#nationality").val("{{ $data->nationality }}");
+            $('#nationality').select2({
+                allowClear: false,
+                dropdownAutoWidth: true,
+                width: 'element',
+                minimumResultsForSearch: 20, //prevent filter input
+                maximumSelectionSize: 20 // prevent scrollbar
             });
             $("#main_pos").select2({
                 allowClear: false,

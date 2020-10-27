@@ -18,10 +18,10 @@
         <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item active">Subscriptions</li>
+                    <li class="breadcrumb-item active">@lang('subscriptions')</li>
                 </ol>
             </div>
-            <h4 class="page-title">Plans</h4>
+            <h4 class="page-title">@lang('Plans')</h4>
         </div>
     </div>
 </div>
@@ -42,9 +42,9 @@
 <!-- Plans -->
 <div class="row mb-3">
     <div class="col-md-6 offset-3 text-center">
-        <span class="font-16 font-weight-bold mr-1">Monthly</span>
+        <span class="font-16 font-weight-bold mr-1">@lang('Monthly')</span>
         <input type="checkbox" data-plugin="switchery" data-color="#1bb99a" data-secondary-color="#1C8AB9" />
-        <span class="font-16 font-weight-bold ml-1">Yearly</span>
+        <span class="font-16 font-weight-bold ml-1">@lang('Yearly')</span>
     </div>
 </div>
 @php
@@ -55,31 +55,31 @@
     <div class="col-md-3 offset-3">
         <div class="card card-pricing">
             <div class="card-body text-center">
-                <p class="card-pricing-plan-name font-weight-bold text-uppercase pb-0">Basic Plan</p>
-                <h2 class="card-pricing-price pt-0 mb-0"><sup>€</sup>&nbsp;220 <span>/ Year</span></h2>
+                <p class="card-pricing-plan-name font-weight-bold text-uppercase pb-0">@lang('Basic Plan')</p>
+                <h2 class="card-pricing-price pt-0 mb-0"><sup>€</sup>&nbsp;220 <span>/ @lang('Year')</span></h2>
                 <ul class="card-pricing-features pt-0 pb-0">
-                    <li>Scout young players and academies</li>
+                    <li>@lang('Scout young players and academies')</li>
                 </ul>
                 <ul class="card-pricing-features pt-0">
-                    <li>Free Trial</li>
-                    <li>(save 20 €)</li>
+                    <li>@lang('Free Trial')</li>
+                    <li>(@lang('Save') 20 €)</li>
                 </ul>
                 @if($user->is_subscribed == 1)
                     @if($plan_id == 3)
 {{--                        <a href="{{ url('/subscribe/paypal/cancel/3') }}" class="btn btn-danger btn-block waves-effect waves-light mt-1 mb-2 width-sm">Cancel</a>--}}
-                        <button class="btn btn-outline-info btn-block mt-1 mb-2 width-sm" disabled="">Selected</button>
+                        <button class="btn btn-outline-info btn-block mt-1 mb-2 width-sm" disabled="">@lang('Selected')</button>
                     @else
-                        <button class="btn btn-outline-info btn-block mt-1 mb-2 width-sm" disabled="">Other Plan Selected</button>
+                        <button class="btn btn-outline-info btn-block mt-1 mb-2 width-sm" disabled="">@lang('Other Plan Selected')</button>
                     @endif
                 @else
-                    <a href="#" class="btn btn-outline-info btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(3)">Select</a>
+                    <a href="#" class="btn btn-outline-info btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(3)">@lang('Select')</a>
                 @endif
                 <div class="dropdown-divider"></div>
                 <ul class="card-pricing-features">
-                    <li>Add and follow your own players</li>
-                    <li>Create new teams and tournaments</li>
-                    <li>Create and export PDF reports</li>
-                    <li>Find your players with smart filters</li>
+                    <li>@lang('Add and follow your own players')</li>
+                    <li>@lang('Create new teams and tournaments')</li>
+                    <li>@lang('Create and export PDF reports')</li>
+                    <li>@lang('Find your players with smart filters')</li>
                 </ul>
             </div>
         </div> <!-- end Pricing_card -->
@@ -88,35 +88,35 @@
     <div class="col-md-3">
         <div class="card card-pricing card-pricing-recommended">
             <div class="card-body text-center">
-                <p class="card-pricing-plan-name font-weight-bold text-uppercase pb-0">Plan Pro</p>
+                <p class="card-pricing-plan-name font-weight-bold text-uppercase pb-0">@lang('Plan Pro')</p>
                 <img src="{{ asset('user_assets/images/pro_logo.png') }}" width="100px" height="40px" style="top: 13px; right: 5px; position: absolute;" />
-                <h2 class="card-pricing-price pt-0 mb-0"><sup>€</sup>&nbsp;290 <span>/ Year</span></h2>
+                <h2 class="card-pricing-price pt-0 mb-0"><sup>€</sup>&nbsp;290 <span>/ @lang('Year')</span></h2>
                 <ul class="card-pricing-features pt-0 pb-0">
-                    <li>Scout young and professional players</li>
+                    <li>@lang('Scout young and professional players')</li>
                 </ul>
                 <ul class="card-pricing-features pt-0">
-                    <li>Free Trial</li>
-                    <li>(save 70 €)</li>
+                    <li>@lang('Free Trial')</li>
+                    <li>(@lang('Save') 70 €)</li>
                 </ul>
                 @if($user->is_subscribed == 1)
                     @if($plan_id == 4)
 {{--                        <a href="{{ url('/subscribe/paypal/cancel/4') }}" class="btn btn-danger btn-block waves-effect waves-light mt-1 mb-2 width-sm">Cancel</a>--}}
-                        <button class="btn btn-light btn-block mt-1 mb-2 width-sm" disabled="">Selected</button>
+                        <button class="btn btn-light btn-block mt-1 mb-2 width-sm" disabled="">@lang('Selected')</button>
                     @else
-                        <button class="btn btn-light btn-block mt-1 mb-2 width-sm" disabled="">Other Plan Selected</button>
+                        <button class="btn btn-light btn-block mt-1 mb-2 width-sm" disabled="">@lang('Other Plan Selected')</button>
                     @endif
                 @else
-                    <a href="#" class="btn btn-light btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(4)">Select</a>
+                    <a href="#" class="btn btn-light btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(4)">@lang('Select')</a>
                 @endif
                 <div class="dropdown-divider"></div>
                 <ul class="card-pricing-features">
-                    <li>Add and follow your own players + pre-loaded players</li>
-                    <li>Create new teams and tournaments</li>
-                    <li>Create and export PDF reports</li>
-                    <li>Find your players with smart filters</li>
-                    <li>+250 competitions, +170000 players, +75 teams</li>
-                    <li>Compare players</li>
-                    <li>Add more users or collaborators</li>
+                    <li>@lang('Add and follow your own players + pre-loaded players')</li>
+                    <li>@lang('Create new teams and tournaments')</li>
+                    <li>@lang('Create and export PDF reports')</li>
+                    <li>@lang('Find your players with smart filters')</li>
+                    <li>@lang('+250 competitions, +170000 players, +75 teams')</li>
+                    <li>@lang('Compare players')</li>
+                    <li>@lang('Add more users or collaborators')</li>
                 </ul>
             </div>
         </div> <!-- end Pricing_card -->
@@ -127,31 +127,31 @@
     <div class="col-md-3 offset-3">
         <div class="card card-pricing">
             <div class="card-body text-center">
-                <p class="card-pricing-plan-name font-weight-bold text-uppercase pb-0">Basic Plan</p>
-                <h2 class="card-pricing-price pt-0 mb-0"><sup>€</sup>&nbsp;20 <span>/ Month</span></h2>
+                <p class="card-pricing-plan-name font-weight-bold text-uppercase pb-0">@lang('Basic Plan')</p>
+                <h2 class="card-pricing-price pt-0 mb-0"><sup>€</sup>&nbsp;20 <span>/ @lang('Month')</span></h2>
                 <ul class="card-pricing-features pt-0 pb-0">
-                    <li>Scout young players and academies</li>
+                    <li>@lang('Scout young players and academies')</li>
                 </ul>
                 <ul class="card-pricing-features pt-0">
-                    <li>Free Trial</li>
-                    <li>(240 € per year)</li>
+                    <li>@lang('Free Trial')</li>
+                    <li>(240 € @lang('per year'))</li>
                 </ul>
                 @if($user->is_subscribed == 1)
                     @if($plan_id == 1)
 {{--                        <a href="{{ url('/subscribe/paypal/cancel/1') }}" class="btn btn-danger btn-block waves-effect waves-light mt-1 mb-2 width-sm">Cancel</a>--}}
-                        <button class="btn btn-outline-info btn-block mt-1 mb-2 width-sm" disabled="">Selected</button>
+                        <button class="btn btn-outline-info btn-block mt-1 mb-2 width-sm" disabled="">@lang('Selected')</button>
                     @else
-                        <button class="btn btn-outline-info btn-block mt-1 mb-2 width-sm" disabled="">Other Plan Selected</button>
+                        <button class="btn btn-outline-info btn-block mt-1 mb-2 width-sm" disabled="">@lang('Other Plan Selected')</button>
                     @endif
                 @else
-                    <a href="#" class="btn btn-outline-info btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(1)">Select</a>
+                    <a href="#" class="btn btn-outline-info btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(1)">@lang('Select')</a>
                 @endif
                 <div class="dropdown-divider"></div>
                 <ul class="card-pricing-features">
-                    <li>Add and follow your own players</li>
-                    <li>Create new teams and tournaments</li>
-                    <li>Create and export PDF reports</li>
-                    <li>Find your players with smart filters</li>
+                    <li>@lang('Add and follow your own players')</li>
+                    <li>@lang('Create new teams and tournaments')</li>
+                    <li>@lang('Create and export PDF reports')</li>
+                    <li>@lang('Find your players with smart filters')</li>
                 </ul>
             </div>
         </div> <!-- end Pricing_card -->
@@ -160,35 +160,35 @@
     <div class="col-md-3">
         <div class="card card-pricing card-pricing-recommended">
             <div class="card-body text-center">
-                <p class="card-pricing-plan-name font-weight-bold text-uppercase pb-0">Plan Pro</p>
+                <p class="card-pricing-plan-name font-weight-bold text-uppercase pb-0">@lang('Plan Pro')</p>
                 <img src="{{ asset('user_assets/images/pro_logo.png') }}" width="100px" height="40px" style="top: 13px; right: 5px; position: absolute;" />
-                <h2 class="card-pricing-price pt-0 mb-0"><sup>€</sup>&nbsp;30 <span>/ Month</span></h2>
+                <h2 class="card-pricing-price pt-0 mb-0"><sup>€</sup>&nbsp;30 <span>/ @lang('Month')</span></h2>
                 <ul class="card-pricing-features pt-0 pb-0">
-                    <li>Scout young and professional players</li>
+                    <li>@lang('Scout young and professional players')</li>
                 </ul>
                 <ul class="card-pricing-features pt-0">
-                    <li>Free Trial</li>
-                    <li>(360 € per year)</li>
+                    <li>@lang('Free Trial')</li>
+                    <li>(360 € @lang('per year'))</li>
                 </ul>
                 @if($user->is_subscribed == 1)
                     @if($plan_id == 2)
 {{--                        <a href="{{ url('/subscribe/paypal/cancel/2') }}" class="btn btn-danger btn-block waves-effect waves-light mt-1 mb-2 width-sm">Cancel</a>--}}
-                        <button class="btn btn-light btn-block mt-1 mb-2 width-sm" disabled="">Selected</button>
+                        <button class="btn btn-light btn-block mt-1 mb-2 width-sm" disabled="">@lang('Selected')</button>
                     @else
-                        <button class="btn btn-light btn-block mt-1 mb-2 width-sm" disabled="">Other Plan Selected</button>
+                        <button class="btn btn-light btn-block mt-1 mb-2 width-sm" disabled="">@lang('Other Plan Selected')</button>
                     @endif
                 @else
-                    <a href="#" class="btn btn-light btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(2)">Select</a>
+                    <a href="#" class="btn btn-light btn-block waves-effect waves-light mt-1 mb-2 width-sm" onclick="paymentMethod(2)">@lang('Select')</a>
                 @endif
                 <div class="dropdown-divider"></div>
                 <ul class="card-pricing-features">
-                    <li>Add and follow your own players + pre-loaded players</li>
-                    <li>Create new teams and tournaments</li>
-                    <li>Create and export PDF reports</li>
-                    <li>Find your players with smart filters</li>
-                    <li>+250 competitions, +170000 players, +75 teams</li>
-                    <li>Compare players</li>
-                    <li>Add more users or collaborators</li>
+                    <li>@lang('Add and follow your own players + pre-loaded players')</li>
+                    <li>@lang('Create new teams and tournaments')</li>
+                    <li>@lang('Create and export PDF reports')</li>
+                    <li>@lang('Find your players with smart filters')</li>
+                    <li>@lang('+250 competitions, +170000 players, +75 teams')</li>
+                    <li>@lang('Compare players')</li>
+                    <li>@lang('Add more users or collaborators')</li>
                 </ul>
             </div>
         </div> <!-- end Pricing_card -->
@@ -201,12 +201,12 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myCenterModalLabel">Payment Method</h4>
+                <h4 class="modal-title" id="myCenterModalLabel">@lang('Payment Method')</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 <button type="button" class="btn btn-block btn-lg btn-outline-info waves-effect waves-light" onclick="gotoStripe()">
-                    <i class="mdi mdi-credit-card"></i> Credit Card</button>
+                    <i class="mdi mdi-credit-card"></i> @lang('Credit Card')</button>
                     
                         <form action="#" method="post" id="payment-form" class="card card-body" style="display:none;">
                             @csrf                    
@@ -220,11 +220,11 @@
                                     <input type="hidden" name="plan" id="plan_id"/>
                                 </div>
                             </div>
-                            <button class="btn btn-dark width-xs waves-effect waves-light" type="submit">Pay</button>
+                            <button class="btn btn-dark width-xs waves-effect waves-light" type="submit">@lang('Pay')</button>
                         </form>
                     <div class="dropdown-divider"></div>
                     <button type="button" class="btn btn-block btn-lg btn-outline-info waves-effect waves-light" onclick="gotoPaypal()">
-                    <i class="mdi mdi-paypal"></i> Paypal</button>
+                    <i class="mdi mdi-paypal"></i> @lang('Paypal')</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

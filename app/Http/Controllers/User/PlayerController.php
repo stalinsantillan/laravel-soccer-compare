@@ -7,6 +7,7 @@ use App\Models\User\Injury;
 use App\Models\User\Scout_Report;
 use App\Models\User\Video;
 use App\Models\User\PDFCount;
+use App\User\Country;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -40,8 +41,10 @@ class PlayerController extends Controller
     public function add_player()
     {
         $paramsetting = Paramsetting::find(1);
+        $countries = Country::all();
         return view('user.add_player')
-            ->with('paramsetting', $paramsetting);
+            ->with('paramsetting', $paramsetting)
+            ->with('countries',$countries);
     }
 
     /**
@@ -209,9 +212,11 @@ class PlayerController extends Controller
         $data['team'] = $team;
         $data['league'] = $league;
         $data['team_id'] = $team_id;
+        $countries = Country::all();
         return view('user.add_player_api')
             ->with('data', $data)
-            ->with('paramsetting', $paramsetting);
+            ->with('paramsetting', $paramsetting)
+            ->with('countries',$countries);
     }
 
     /**
@@ -335,9 +340,11 @@ class PlayerController extends Controller
     public function edit_player(Player $player)
     {
         $paramsetting = Paramsetting::find(1);
+        $countries = Country::all();
         return view('user.edit_player')
             ->with('data', $player)
-            ->with('paramsetting', $paramsetting);
+            ->with('paramsetting', $paramsetting)
+            ->with('countries',$countries);
     }
 
     /**
@@ -1276,11 +1283,12 @@ class PlayerController extends Controller
             $pdfCound = PDFCount::find($id);
             $count = $pdfCound->count ?? 0;
         }
-
+        $countries = Country::all();
         return view('user.player_profile')
             ->with('data', $player)
             ->with('downloaded_count', $count)
-            ->with('paramsetting', $paramsetting);
+            ->with('paramsetting', $paramsetting)
+            ->with('countries',$countries);
     }
 
     /**
@@ -1415,13 +1423,93 @@ class PlayerController extends Controller
                 $ids[] = $data['player'.$i];
         }
         $ids_ordered = implode(',', $ids);
-        $players = Player::whereIn('id',$ids)->orderByRaw("FIELD(id, $ids_ordered)")->get();
+        $players = Player::with('latestParam','positions')->whereIn('id',$ids)->orderByRaw("FIELD(id, $ids_ordered)")->get();
         $count = count($players);
+        $chart = [];
+        
+        for($i=0;$i<$count;$i++){
+            $parameter = $players[$i]->latestParam;
+            $pass = $parameter->passing;
+            $feet_playing = ($parameter->first_touch+$parameter->feet_playing)/2;
+            $tactical = ($parameter->anticipation+$parameter->off_ball+$parameter->positioning+$parameter->vision)/4;
+            $physical = ($parameter->acceleration+$parameter->agility+$parameter->balance
+                +$parameter->natural_fitness+$parameter->pace+$parameter->reaction+$parameter->sprint_speed
+                +$parameter->stamina+$parameter->strength+$parameter->injury_resistance)/10;
+            $aerial = ($parameter->aerial_reach+$parameter->aerial_duels+$parameter->jumping_reach) /3;
+            $mental = ($parameter->aggression+$parameter->composure+$parameter->concentration
+                +$parameter->decisions+$parameter->determination+$parameter->flair+$parameter->leadership
+                +$parameter->teamwork) / 8;
+            $gk_reflexes = ($parameter->reaction+$parameter->reflexes) /2;
+            $goal_keeping = ($parameter->command_of_area+$parameter->communication+$parameter->handling
+                +$parameter->one_on_ones+$parameter->rushing_out) /5;
+            $general_radar_data = [
+                number_format($pass,2),
+                number_format($feet_playing, 2),
+                number_format($tactical,2),
+                number_format($physical,2),
+                number_format($aerial,2),
+                number_format($mental,2),
+                number_format($gk_reflexes,2),
+                number_format($goal_keeping,2)
+            ];
+
+            $attack = ($parameter->shots+ $parameter->long_shots) /2;
+            $technique = ($parameter->first_touch+ $parameter->technique+ $parameter->dribbling) /3;
+            $defense = ($parameter->marking+ $parameter->tackling+ $parameter->deffense) /3;
+            $pass = ($parameter->crossing+ $parameter->passing+ $parameter->long_pass) /3;
+
+            $attributeType = 0;
+            $arrDefender = ["Sweeper","Centre-back","Left Wing-back","Left Centre-back","Right Centre-back"];
+            $arrDefender_Midfielder = ["Left Full-back","Right Full-back","Right Wing-back","Defensive midfield","Centre midfield","Left Defensive midfield","Right Defensive midfield"];
+            $arrMidfielder = ["Left Wide midfield","Right Wide midfield","Attacking midfield","Left Centre midfield","Right Centre midfield","Left Attacking midfield","Right Attacking midfield"];
+            $arrForward = ["Left Winger","Second striker","Right Winger","Centre forward","Left striker","Right striker","Left Centre forward","Right Centre forward"];
+            foreach ($players[$i]->positions as $position){
+                $specify = $position->specify;
+                if(in_array($specify,$arrDefender))
+                    $attributeType = 1;
+                elseif(in_array($specify,$arrDefender_Midfielder))
+                    $attributeType = 2;
+                elseif(in_array($specify,$arrMidfielder))
+                    $attributeType = 3;
+                elseif(in_array($specify,$arrForward))
+                    $attributeType = 4;
+            }
+            
+            if($attributeType == 1){
+                $aerial = ( $parameter->heading  +  $parameter->aerial_duels  +  $parameter->jumping_reach ) /3;
+                $defense = ( $parameter->marking  +  $parameter->tackling  +  $parameter->deffense ) /3;
+            }
+            elseif($attributeType == 2){
+                $aerial = ( $parameter->aerial_duels  +  $parameter->jumping_reach ) / 2;
+                $defense = ( $parameter->marking  +  $parameter->tackling  +  $parameter->deffense ) /3;
+            }
+            elseif($attributeType == 3){
+                $aerial = ( $parameter->aerial_duels  +  $parameter->jumping_reach ) / 2;
+                $defense = ( $parameter->marking  +  $parameter->deffense ) / 2;
+            }
+            elseif($attributeType==4){
+                $aerial = ( $parameter->aerial_duels  +  $parameter->jumping_reach ) /2;
+                $defense =  $parameter->marking ;
+            }
+            if($attributeType!=0)
+                $general_radar_data = [
+                    number_format($pass,2),
+                    number_format($attack, 2),
+                    number_format($tactical,2),
+                    number_format($physical,2),
+                    number_format($aerial,2),
+                    number_format($mental,2),
+                    number_format($technique,2),
+                    number_format($defense,2)
+                ];
+            $chart[] = $general_radar_data;
+        }
 
         return view('user.compare')
             ->with('ids',json_encode($ids))
             ->with('players',$players)
-            ->with('t_count',$count);
+            ->with('t_count',$count)
+            ->with('chart_data',$chart);
     }
 
     public function compareList(Request $request){

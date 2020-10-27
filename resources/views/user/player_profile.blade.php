@@ -136,7 +136,7 @@
                                             $age = (date('Y') - $year);
                                         @endphp
                                         <tr>
-                                            <td>@lang('Nation')</td><td>{{ $data->nationality }}</td>
+                                            <td>@lang('Nation')</td><td>{{ __($data->nationality) }}</td>
                                         </tr>
                                         <tr>
                                         @php
@@ -2044,6 +2044,7 @@
             $("#soccerfield").soccerfield(data,options);
             let posIndex = 0;
             let attributeType = 0;
+            console.log(data);
             for (const r in data) {
                 let before = data[r].position.split("_")[0];
                 let after = data[r].position.split("_")[1];
@@ -2093,7 +2094,7 @@
             let technique = ({{ $data->latestParam->first_touch }} + {{ $data->latestParam->technique }} + {{ $data->latestParam->dribbling }}) /3;
             let defense = ({{ $data->latestParam->marking }} + {{ $data->latestParam->tackling }} + {{ $data->latestParam->deffense }}) /3;
             pass = ({{ $data->latestParam->crossing }} + {{ $data->latestParam->passing }} + {{ $data->latestParam->long_pass }}) /3;
-            general_radar_label = ['PASS', 'ATTACK', 'TACTICAL', 'PHYSICAL', 'AERIAL', 'MENTAL', 'TECHNIQUE', 'DEFENSE'];
+            general_radar_label = ['{{__('PASS')}}', '{{__('ATTACK')}}', '{{__('TACTICAL')}}', '{{__('PHYSICAL')}}', '{{__('AERIAL')}}', '{{__('MENTAL')}}', '{{__('TECHNIQUE')}}', '{{__('DEFENSE')}}'];
             if (attributeType == 1)
             {
                 //Defenders 1
