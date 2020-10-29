@@ -36,6 +36,9 @@
         .text-yellow{
             color: #fcde22;
         }
+        .language-mark{
+            display: none;
+        }
     </style>
 @endsection
 @section('content')

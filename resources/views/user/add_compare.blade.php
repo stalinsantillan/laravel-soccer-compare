@@ -573,8 +573,8 @@
             if(lists.length<4){
                 if(lists.includes(id)){
                     $.toast({
-                        heading: 'Warning',
-                        text: 'The player is already selected.',
+                        heading: '@lang('Warning')',
+                        text: '@lang('This player is already selected.')',
                         showHideTransition: 'slide',
                         position: 'top-right',
                         icon: 'warning',
@@ -587,8 +587,8 @@
             }
             else
                 $.toast({
-                    heading: 'Warning',
-                    text: 'You cannot add anymore.',
+                    heading: '@lang('Warning')',
+                    text: '@lang('You cannot add anymore.')',
                     showHideTransition: 'slide',
                     position: 'top-right',
                     icon: 'warning',
@@ -604,8 +604,8 @@
             }
             if(c_count<2){
                 $.toast({
-                    heading: 'Warning',
-                    text: 'You should select at least 2 players.',
+                    heading: '@lang('Warning')',
+                    text: '@lang('You should select at least 2 players.')',
                     showHideTransition: 'slide',
                     position: 'top-right',
                     icon: 'warning',

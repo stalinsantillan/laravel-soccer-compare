@@ -12,7 +12,7 @@
             </a>
             <!-- End mobile menu toggle-->
         </li>
-        <li class="dropdown notification-list">
+        <li class="dropdown notification-list language-mark">
             <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-toggle="dropdown">
                 <img src="{{asset('/common_assets/flags')}}/{{App::getLocale()}}.png" class="mr-1" alt="img">
                 <span class="text-uppercase">{{App::getLocale()}}</span>

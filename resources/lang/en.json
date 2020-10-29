@@ -58,6 +58,10 @@
   "both": "Both",
   "current_team": "Current Team",
   "photo": "Photo",
+  "Drag and drop or click to replace": "Drag and drop or click to replace",
+  "Remove":"Remove",
+  "The file size is too big (1M max).":"The file size is too big (1M max).",
+  "Ooops, something wrong appended.":"Ooops, something wrong appended.",
   "technical_features": "Technical features",
   "main_position": "Main Position",
   "add_new_position": "Add new position",
@@ -230,6 +234,7 @@
   "years old": "years old",
   "years": "years",
   "Other": "Other",
+  "Search for a team": "Search for a team",
   "Payment Method": "Payment Method",
   "Credit Card": "Credit Card",
   "Pay": "Pay",
@@ -494,5 +499,9 @@
   "Western Sahara":"Western Sahara",
   "Yemen":"Yemen",
   "Zambia":"Zambia",
-  "Zimbabwe":"Zimbabwe"
+  "Zimbabwe":"Zimbabwe",
+  "Warning": "Warning",
+  "This player is already selected.": "This player is already selected.",
+  "You cannot add anymore.": "You cannot add anymore.",
+  "You should select at least 2 players.": "You should select at least 2 players."
 }

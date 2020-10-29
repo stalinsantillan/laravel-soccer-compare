@@ -58,6 +58,10 @@
   "both": "Ambos",
   "current_team": "Equipo actual",
   "photo": "Foto",
+  "Drag and drop or click to replace": "Arrastra y suelta o haz clic para reemplazar",
+  "Remove":"Eliminar",
+  "The file size is too big (1M max).":"El tamaño del archivo es demasiado grande (1M máx.).",
+  "Ooops, something wrong appended.":"Ooops, algo mal agregado.",
   "technical_features": "Características técnicas",
   "main_position": "Posición principal",
   "add_new_position": "Añadir otra posición",
@@ -230,6 +234,7 @@
   "years old": "años",
   "years": "años",
   "Other": "Otro",
+  "Search for a team": "Buscar un equipo",
   "Payment Method": "Método de Pago",
   "Credit Card": "Tarjeta de Débito/Crédito",
   "Pay": "Pagar",
@@ -494,5 +499,9 @@
   "Western Sahara":"Sahara del Este",
   "Yemen":"Yemen",
   "Zambia":"Zambia",
-  "Zimbabwe":"Zimbabwe"
-  }
+  "Zimbabwe":"Zimbabwe",
+  "Warning": "Advertencia",
+  "This player is already selected.": "Este jugador ya está seleccionado.",
+  "You cannot add anymore.": "No puedes agregar más.",
+  "You should select at least 2 players.": "Debes seleccionar al menos 2 jugadores."
+}

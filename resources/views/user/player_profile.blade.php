@@ -1933,7 +1933,7 @@
                 },
                 dropdownParent: $("#additional-info"),
                 tags: false,
-                placeholder: 'Search for a team',
+                placeholder: '@lang('Search for a team')',
                 minimumInputLength: 3,
                 templateResult: formatRepo,
                 templateSelection: formatRepoSelection

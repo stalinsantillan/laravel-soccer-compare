@@ -1033,13 +1033,13 @@
 
             $(".dropify").dropify({
                 messages: {
-                    default: "Photo",
-                    replace: "Drag and drop or click to replace",
-                    remove: "Remove",
-                    error: "Ooops, something wrong appended."
+                    default: '@lang('photo')',
+                    replace: '@lang("Drag and drop or click to replace")',
+                    remove: '@lang("Remove")',
+                    error: '@lang("Ooops, something wrong appended.")'
                 },
                 error: {
-                    fileSize: "The file size is too big (1M max)."
+                    fileSize: '@lang("The file size is too big (1M max).")'
                 }
             });
 
