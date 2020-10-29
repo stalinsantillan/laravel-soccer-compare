@@ -145,15 +145,15 @@
                                         $year = date("Y", strtotime($data->birth_date));
                                         $age = (date('Y') - $year);
                                     @endphp
-                                    <p class="font-13 font-weight-bold mb-0">{{ $data->birth_date }} <span class="ml-3">{{ $age }} years</span></p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ $data->birth_date }} <span class="ml-3">{{ $age }} @lang('years')</span></p>
                                     <p class="font-13 mt-1 mb-0">@lang('nationality')</p>
-                                    <p class="font-13 font-weight-bold mb-0">{{ $data->nationality }}</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ __($data->nationality) }}</p>
                                     <p class="font-13 mt-1 mb-0">@lang('height')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{ $data->height }} cm</p>
                                     <p class="font-13 mt-1 mb-0">@lang('weight')</p>
                                     <p class="font-13 font-weight-bold mb-0">{{ $data->weight }} kg</p>
                                     <p class="font-13 mt-1 mb-0">@lang('foot')</p>
-                                    <p class="font-13 font-weight-bold mb-0">{{ $data->foot }}</p>
+                                    <p class="font-13 font-weight-bold mb-0">{{ __($data->foot) }}</p>
                                 </div>
                                 <div class="col-md-4">
                                     <p class="font-13 mt-4 mb-0">@lang('Languages')</p>
@@ -1035,7 +1035,7 @@
             });
 
             //Goalkeeper
-            let general_radar_label = ['PASS', 'FEET PLAYING', 'TACTICAL', 'PHYSICAL', 'AERIAL', 'MENTAL', 'GK REFLEXES', 'GOAL KEEPING'];
+            let general_radar_label = ['@lang('PASS')', '@lang('FEET PLAYING')', '@lang('TACTICAL')', '@lang('PHYSICAL')', '@lang('AERIAL')', '@lang('MENTAL')', '@lang('GK REFLEXES')', '@lang('GOAL KEEPING')'];
             let pass = {{ $data->latestParam->passing }};
             let feet_playing =  ({{ $data->latestParam->first_touch }} + {{ $data->latestParam->feet_playing }}) /2;
             let tactical = ({{ $data->latestParam->anticipation }} + {{ $data->latestParam->off_ball }} + {{ $data->latestParam->positioning }}
@@ -1056,7 +1056,7 @@
             let technique = ({{ $data->latestParam->first_touch }} + {{ $data->latestParam->technique }} + {{ $data->latestParam->dribbling }}) /3;
             let defense = ({{ $data->latestParam->marking }} + {{ $data->latestParam->tackling }} + {{ $data->latestParam->deffense }}) /3;
             pass = ({{ $data->latestParam->crossing }} + {{ $data->latestParam->passing }} + {{ $data->latestParam->long_pass }}) /3;
-            general_radar_label = ['PASS', 'ATTACK', 'TACTICAL', 'PHYSICAL', 'AERIAL', 'MENTAL', 'TECHNIQUE', 'DEFENSE'];
+            general_radar_label = ['@lang('PASS')', '@lang('ATTACK')', '@lang('TACTICAL')', '@lang('PHYSICAL')', '@lang('AERIAL')', '@lang('MENTAL')', '@lang('TECHNIQUE')', '@lang('DEFENSE')'];
             if (attributeType == 1)
             {
                 //Defenders 1

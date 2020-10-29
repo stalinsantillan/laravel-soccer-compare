@@ -159,7 +159,7 @@
                                         <td>@lang('current_team')</td><td>{{ $data->current_team }}</td>
                                         </tr>
                                         <tr>
-                                        <td>@lang('age')</td><td>{{ $data->birth_date }} ({{ $age }} years old)</td>
+                                        <td>@lang('age')</td><td>{{ $data->birth_date }} ({{ $age }} @lang('years old'))</td>
                                         </tr>
                                         <tr>
                                         <td>@lang('height')</td><td>{{ $data->height }}</td>

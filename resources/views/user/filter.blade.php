@@ -263,7 +263,7 @@
                                     @if($subone > 1)
                                         <br>
                                     @endif
-                                    <span class="badge badge-info text-dark">{{ $position->specify }}</span>
+                                    <span class="badge badge-info text-dark">{{ __($position->specify) }}</span>
                                     @php ++$subone; @endphp
                                 @endforeach
                             </td>
