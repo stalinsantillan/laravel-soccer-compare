@@ -56,7 +56,7 @@
                         <select id="player1" name="player1" class="form-control player-list">
                             <option value="">@lang('select_player')1</option>
                             @foreach($data as $one)
-                                <option value="{{$one->id}}" {{$first==$one->id?'selected':''}}>{{$one->name}}</option>
+                                <option value="{{$one->id}}" {{$first==$one->id?'selected':''}}>{{$one->name}}({{$one->surename}})</option>
                             @endforeach
                         </select>
                     </div>
@@ -64,7 +64,7 @@
                         <select id="player2" name="player2" class="form-control player-list">
                             <option value="">@lang('select_player')2</option>
                             @foreach($data as $one)
-                                <option value="{{$one->id}}">{{$one->name}}</option>
+                                <option value="{{$one->id}}">{{$one->name}}({{$one->surename}})</option>
                             @endforeach
                         </select>
                     </div>
@@ -72,7 +72,7 @@
                         <select id="player3" name="player3" class="form-control player-list">
                             <option value="">@lang('select_player')3</option>
                             @foreach($data as $one)
-                                <option value="{{$one->id}}">{{$one->name}}</option>
+                                <option value="{{$one->id}}">{{$one->name}}({{$one->surename}})</option>
                             @endforeach
                         </select>
                     </div>
@@ -80,7 +80,7 @@
                         <select id="player4" name="player4" class="form-control player-list">
                             <option value="">@lang('select_player')4</option>
                             @foreach($data as $one)
-                                <option value="{{$one->id}}">{{$one->name}}</option>
+                                <option value="{{$one->id}}">{{$one->name}}({{$one->surename}})</option>
                             @endforeach
                         </select>
                     </div>
