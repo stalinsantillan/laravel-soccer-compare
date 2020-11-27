@@ -57,7 +57,10 @@ class UsersController extends Controller
         if (! Gate::allows('users_manage')) {
             return abort(401);
         }
-        $user = User::create($request->all());
+        $data = $request->all();
+        $data['occupation'] = "other";
+        $data['country'] = "Russia";
+        $user = User::create($data);
         $roles = $request->input('roles') ? $request->input('roles') : [];
         $user->assignRole($roles);
         if (isset($request->trial_start) && isset($request->trial_end))

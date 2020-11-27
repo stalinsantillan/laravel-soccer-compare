@@ -18,6 +18,7 @@ File: Main Js File
         $.fn.tooltip && $('[data-toggle="tooltip"]').tooltip()
     },
 
+
     //initializing popover
     Components.prototype.initPopoverPlugin = function () {
         $.fn.popover && $('[data-toggle="popover"]').popover()
@@ -268,7 +269,7 @@ function ($) {
         // activate the menu in left side bar based on url
         $(".navigation-menu a").each(function () {
             var pageUrl = window.location.href.split(/[?#]/)[0];
-            if (this.href == pageUrl) {  
+            if (this.href == pageUrl) {
                 $(this).addClass("active");
                 $(this).parent().addClass("active"); // add active to li of the current link
                 $(this).parent().parent().addClass("in");
